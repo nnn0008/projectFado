@@ -23,14 +23,13 @@ public class MemberDaoImpl implements MemberDao{
 	public void insert(MemberDto memberDto) {
 		String sql = "insert into member("
 				+ "member_id, member_pw, member_nickname, member_birth, "
-				+ "member_contact, member_email, member_point, member_level"
-				+ ") values (?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "member_contact, member_email"
+				+ ") values (?, ?, ?, ?, ?, ?)";
 		
 		Object[] data = {
 				memberDto.getMemberId(), memberDto.getMemberPw(),
 				memberDto.getMemberNickname(), memberDto.getMemberBirth(),
 				memberDto.getMemberContact(), memberDto.getMemberEmail(),
-				memberDto.getMemberPoint(), memberDto.getMemberLevel()
 		};
 		jdbcTemplate.update(sql, data);
 	}

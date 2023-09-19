@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>FADO</title>
 
+<link rel="shortcut icon" href="/images/favicon.ico">
 <!-- css 파일을 불러오는 코드 -->
 <!-- 아이콘 사용을 위한 Font Awesome 6 CDN -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">

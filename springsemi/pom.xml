@@ -22,6 +22,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jdbc</artifactId>
@@ -30,6 +31,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
+		
+				
+		
+		<dependency>
+  	 	 <groupId>org.apache.tomcat.embed</groupId>
+   		 <artifactId>tomcat-embed-jasper</artifactId>
+		 </dependency>
+		
+		
+		
+		
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -42,6 +55,10 @@
 			<artifactId>ojdbc8</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
+		
+		
+		
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

@@ -54,6 +54,7 @@ public class MemberController {
 		return "/WEB-INF/views/member/password.jsp";
 	}
 	
+	@PostMapping("/password")
 	public String password(HttpSession session, 
 			@RequestParam String originPw,
 			@RequestParam String changePw) {

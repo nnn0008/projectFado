@@ -62,19 +62,6 @@
         <hr>
         
         
-        
-       <%--  <ul class="menu left">
-        
-        <i class="fa-solid fa-bars" style="color: #2c8de0;" ></i>
-        <li><a href="#">인기+</a></li>
-		<c:when test="${sessionScope.name != null}">
-					<li><a href="/member/mypage">회원상세</a></li>
-		    		<li><a href="/member/change">회원정보수정</a></li>
-		    		<!-- <li><a href="/member/logout">로그아웃</a></li> -->
-		    	</ul>
-		    	</c:when>
-        
-        <!-- </div> --> --%>
 		</header>
 	<nav>
 	
@@ -86,7 +73,7 @@
     		<!-- <li><a href="/member/logout">로그아웃</a></li> -->
     	</ul>
     	
-    	관리자인 경우 추가 메뉴 출력 
+    
     	<c:if test="${session.Scope.level == '관리자'  }">
     		<li><a href="/admin/home">관리자메뉴 </a></li>
     		</c:if>

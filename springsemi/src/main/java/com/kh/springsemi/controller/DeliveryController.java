@@ -1,5 +1,7 @@
 package com.kh.springsemi.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.springsemi.dao.DeliveryDao;
 import com.kh.springsemi.dto.DeliveryDto;
+import com.kh.springsemi.error.NoTargetException;
 
 @Controller
 @RequestMapping("/delivery")
@@ -36,25 +39,22 @@ public class DeliveryController {
 		return "redirect:mydelivery"; 
 	}
 	
-	//배송지 상세
+	//배송지 목록
 	@RequestMapping("/mydelivery")
-	public String myDelivery(@RequestParam int deliveryNo, Model model, HttpSession session) {
-		DeliveryDto deliveryDto = deliveryDao.selectOne(deliveryNo); 
-		model.addAttribute("deliveryDto", deliveryDto);
+	public String myDelivery(@RequestParam String deliveryMember, Model model, HttpSession session) {
+		List<DeliveryDto> deliveryDto = deliveryDao.selectList(deliveryMember);
+		model.addAttribute("deliveryDto",deliveryDto);
 		
-		String deliveryMember = (String) session.getAttribute("name"); //세션에 있는 멤버 가져오기
-		deliveryDto.setDeliveryMember(deliveryMember);
-		
-		return  "/WEB-INF/views/delivery/mydelivery.jsp";
+		return "/WEB-INF/views/delivery/mydelivery.jsp";
 	}
 	
-	//배송지 수정
-	@GetMapping("/change")
-	public String change(@RequestParam int deliveryNo, Model model) {
-		DeliveryDto deliveryDto = deliveryDao.selectOne(deliveryNo);
-		model.addAttribute("deliveryDto", deliveryDto);
-		return "/WEB-INF/views/delivery/change.jsp";
-	}
+//	//배송지 수정
+//	@GetMapping("/change")
+//	public String change(@RequestParam String deliveryMember, Model model) {
+//		List<DeliveryDto> deliveryDto = deliveryDao.selectList(deliveryMember);
+//		model.addAttribute("deliveryDto", deliveryDto);
+//		return "/WEB-INF/views/delivery/change.jsp";
+//	}
 	
 //	@PostMapping("/change")
 //	public String change(@ModelAttribute DeliveryDto deliveryDto) {
@@ -63,8 +63,19 @@ public class DeliveryController {
 //			return "redirect:mydelivery?deliveryNo="+deliveryDto.getDeliveryMember();
 //		}
 //		else {
-////			throw new NoTargetException("존재하지 않는 주소");
-//		
+//			throw new NoTargetException("존재하지 않는 주소입니다.");
 //		}
 //	}
+	
+	//배송지 삭제
+	@RequestMapping("/delete")
+	public String delete(@RequestParam int deliveryNo) {
+		boolean result = deliveryDao.delete(deliveryNo);
+		if(result) {
+			return "redirect:list";
+		}
+		else {
+			throw new NoTargetException("존재하지 않는 배송지입니다.");
+		}
+	}
 }

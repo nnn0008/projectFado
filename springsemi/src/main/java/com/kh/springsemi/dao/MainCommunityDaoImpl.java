@@ -97,10 +97,4 @@ public class MainCommunityDaoImpl implements MainCommunityDao{
 		return 0;
 	}
 
-
-
-
-
-
-	
 }

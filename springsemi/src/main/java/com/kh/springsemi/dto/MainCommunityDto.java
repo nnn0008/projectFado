@@ -13,4 +13,6 @@ public class MainCommunityDto {
 	private Date mainCommunityRegDate;
 	private String mainCommunityType;
 	private String mainCommunityReply;
+	
+	//이미지 private boolean image 추가해야 뜸
 }

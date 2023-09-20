@@ -1,5 +1,8 @@
 package com.kh.springsemi.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,10 +52,15 @@ public class ProjectController {
 	}
 	
 	@RequestMapping("/detail")
-	public String detail(Model model, @RequestParam int projectNo, HttpSession session) {
+	public String detail(Model model, @RequestParam int projectNo) {
 		ProjectDto projectDto = projectDao.selectOne(projectNo);
 		model.addAttribute("projectDto", projectDto);
-		
+		Date currentTime = new Date();
+		Date endTime = projectDto.getProjectEndDate();
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
+		long difference = endTime.getTime() - currentTime.getTime();
+		model.addAttribute("difference", difference);
+//		model.addAttribute("endTime", fmt.format(endTime));
 		return "/WEB-INF/views/project/detail.jsp";
 	}
 	

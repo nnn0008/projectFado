@@ -43,12 +43,14 @@ $(function () {
 		<div class="row">
 			희망날짜 선택
 			<input type="date" name="projectStartDate" class="form-input w-100">
+<!-- 					<label for="project_start_date">시작일자:</label> -->
+<!-- 		        	<input type="date" id="project_start_date" name="project_start_date"> -->
 		</div>
 		<div class="row">
 			프로젝트 기간
-			<select name="projectEndDate" class="form-input">
-				<option value="${projectStartDate}+15">15일</option>
-				<option value="${projectStartDate}+30">30일</option>
+			<select name="projectPeriod" class="form-input">
+				<option value="15">15일</option>
+				<option value="30">30일</option>
 			</select>
 		</div>
 		<div class="row">

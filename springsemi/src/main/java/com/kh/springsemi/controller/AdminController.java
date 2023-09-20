@@ -40,7 +40,19 @@ public class AdminController {
 		
 		return "/WEB-INF/views/admin/member/list.jsp";
 		
-		}
+		
 	}
 
 
+		
+//		
+//	@RequestMapping("/member/list")
+//	public String memberList() {
+//		
+//		return "/WEB-INF/views/admin/member/list.jsp";
+//		
+//	}
+		
+		
+	
+}

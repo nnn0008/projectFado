@@ -19,7 +19,7 @@
 	<input type="text" name="deliveryAddr2" ><br><br>
 		
 	<label>받는 사람 휴대폰 번호</label>
-    <input type="text" name="deliverContact"><br><br>
+    <input type="text" name="deliveryContact"><br><br>
     
 	<button type="submit">
 	등록하기

@@ -38,6 +38,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
 				deliveryDto.getDeliveryPost(), deliveryDto.getDeliveryAddr1(), deliveryDto.getDeliveryAddr2(),
 				deliveryDto.getDeliveryContact()
 		};
+		jdbcTemplate.update(sql, data);
 	}
 
 //	//배송지 수정
@@ -56,8 +57,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
 	//배송지 목록
 	@Override
 	public List<DeliveryDto> selectList(@RequestParam String deliveryMember) {
-		String sql = "select * from delivery where delivery_member = ? "
-				+ "order by delivery_no desc";
+		String sql = "select * from delivery where delivery_member = ? ";
 		Object[] data = {deliveryMember};
 		return jdbcTemplate.query(sql, deliveryMapper, data);
 	}

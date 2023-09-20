@@ -16,7 +16,6 @@ public class RewardMapper implements RowMapper<RewardDto> {
 		rewardDto.setRewardName(rs.getString("reward_name"));
 		rewardDto.setRewardType(rs.getInt("reward_type"));
 		rewardDto.setRewardPrice(rs.getInt("reward_price"));
-		rewardDto.setRewardContent(rs.getString("reward_content"));
-		return null;
+		return rewardDto;
 	}
 }

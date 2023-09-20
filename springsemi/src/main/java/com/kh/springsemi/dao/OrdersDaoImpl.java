@@ -26,8 +26,12 @@ public class OrdersDaoImpl implements OrdersDao{
 
 	@Override
 	public void createOrders(OrdersDto ordersDto) {
-		String sql = "insert into orders(orders_no, orders_person, orders_reward, orders_price, orders_date, orders_status) values(?, ?, ?, ?, ?, ?)";
-		Object[] data = {ordersDto.getOrdersNo(), ordersDto.getOrdersPerson(), ordersDto.getOrdersReward(), ordersDto.getOrdersPrice(), ordersDto.getOrdersDate(), ordersDto.getOrdersStatus()};
+		String sql = "insert into orders"
+				+ "(orders_no, orders_person, orders_reward, orders_price, orders_date, orders_status)"
+				+ " values(?, ?, ?, ?, ?, ?)";
+		Object[] data = {ordersDto.getOrdersNo(), ordersDto.getOrdersPerson(), 
+								ordersDto.getOrdersReward(), ordersDto.getOrdersPrice(), 
+								ordersDto.getOrdersDate(), ordersDto.getOrdersStatus()};
 		jdbcTemplate.update(sql, data);
 	}
 

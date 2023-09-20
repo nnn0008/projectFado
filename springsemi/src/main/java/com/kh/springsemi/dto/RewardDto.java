@@ -9,5 +9,4 @@ public class RewardDto {
 	private String rewardName;
 	private int rewardType;
 	private int rewardPrice;
-	private String rewardContent;
 }

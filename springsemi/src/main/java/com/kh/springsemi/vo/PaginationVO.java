@@ -49,7 +49,7 @@ public class PaginationVO {
 	
 	
 	public boolean isLast() {
-		return getEnd() > getPageCount();
+		return getEnd() >= getPageCount();
 	}
 	
 	

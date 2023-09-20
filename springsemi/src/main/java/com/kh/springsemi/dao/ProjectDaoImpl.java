@@ -27,10 +27,10 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public void insert(ProjectDto projectDto) {
 		String sql = "insert into project(project_no, project_title, project_goal_price, project_total_price, project_start_date, "
-				+ "project_end_date, project_category, project_content, project_owner) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "project_end_date, project_period, project_category, project_content, project_owner) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] data = {projectDto.getProjectNo(), projectDto.getProjectTitle(), projectDto.getProjectGoalPrice(),
 				projectDto.getProjectTotalPrice(), projectDto.getProjectStartDate(), projectDto.getProjectEndDate(),
-				projectDto.getProjectCategory(), projectDto.getProjectContent(), projectDto.getProjectOwner()};
+				projectDto.getProjectPeriod(), projectDto.getProjectCategory(), projectDto.getProjectContent(), projectDto.getProjectOwner()};
 		
 		jdbcTemplate.update(sql, data);
 	}

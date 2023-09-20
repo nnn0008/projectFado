@@ -32,8 +32,11 @@ public class DeliveryController {
 
 	@PostMapping("/join") 
 	public String join(@ModelAttribute DeliveryDto deliveryDto, HttpSession session) {
-		String deliveryMember = (String) session.getAttribute("name"); //세션에 있는 멤버 가져오기
-		deliveryDto.setDeliveryMember(deliveryMember);
+		String findMember = (String) session.getAttribute("name"); //세션에 있는 멤버 가져오기
+		deliveryDto.setDeliveryMember(findMember); 
+		
+		int deliveryNo = deliveryDao.sequence(); //시퀀스 번호 가져옴
+		deliveryDto.setDeliveryNo(deliveryNo); //시퀀스로 번호 넣기
 		
 		deliveryDao.insert(deliveryDto);
 		return "redirect:mydelivery"; 
@@ -41,8 +44,11 @@ public class DeliveryController {
 	
 	//배송지 목록
 	@RequestMapping("/mydelivery")
-	public String myDelivery(@RequestParam String deliveryMember, Model model, HttpSession session) {
-		List<DeliveryDto> deliveryDto = deliveryDao.selectList(deliveryMember);
+	public String myDelivery(Model model, HttpSession session) {
+		
+		String deliveryMember = (String)session.getAttribute("name");
+		
+		DeliveryDto deliveryDto = deliveryDao.selectList(deliveryMember);
 		model.addAttribute("deliveryDto",deliveryDto);
 		
 		return "/WEB-INF/views/delivery/mydelivery.jsp";

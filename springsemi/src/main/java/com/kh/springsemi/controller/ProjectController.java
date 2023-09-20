@@ -1,7 +1,5 @@
 package com.kh.springsemi.controller;
 
-import java.time.LocalDate;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,12 +44,16 @@ public class ProjectController {
 		String memberId = (String)session.getAttribute("name");
 		projectDto.setProjectOwner(memberId);
 		projectDao.insert(projectDto);
-//		LocalDate start = LocalDate.parse(projectStartDate);
-//        LocalDate endDate = start.plusDays(30); 
-//        model.addAttribute("project_start_date", start);
-//        model.addAttribute("project_end_date", endDate);
 		
 		return "redirect:writeFinish";
+	}
+	
+	@RequestMapping("/detail")
+	public String detail(Model model, @RequestParam int projectNo, HttpSession session) {
+		ProjectDto projectDto = projectDao.selectOne(projectNo);
+		model.addAttribute("projectDto", projectDto);
+		
+		return "/WEB-INF/views/project/detail.jsp";
 	}
 	
 }

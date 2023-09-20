@@ -41,14 +41,14 @@ public class MainCommunityController {
 		return "/WEB-INF/views/helper/community/write";
 	}
 	
-//	@PostMapping("/write")  //메인 커뮤니티 글작성-post
-//	public String insert(@ModelAttribute MainCommunityDto mainCommunityDto,
-//						@RequestParam MultipartFile attach) {
-//		//커뮤니티 글 등록
-//		int mainCommunityNo = mainCommunityDao.sequence();
-//		mainCommunityDto.setMainCommunityNo(mainCommunityNo);
-//		mainCommunityDao.insert(mainCommunityDto);
-//		
+	@PostMapping("/write")  //메인 커뮤니티 글작성-post
+	public String insert(@ModelAttribute MainCommunityDto mainCommunityDto,
+						@RequestParam MultipartFile attach) {
+		//커뮤니티 글 등록
+		int mainCommunityNo = mainCommunityDao.sequence();
+		mainCommunityDto.setMainCommunityNo(mainCommunityNo);
+		mainCommunityDao.insert(mainCommunityDto);
+		
 //		//첨부파일 등록
 //		if(!attach.isEmpty()) {
 			//파일 있음
@@ -57,7 +57,7 @@ public class MainCommunityController {
 //		}
 		
 		
-//	}
+	}
 	
 	@GetMapping("/edit")  //메인 커뮤니티 글수정-get
 	public String edit(@RequestParam int mainCommunityNo, Model model) {

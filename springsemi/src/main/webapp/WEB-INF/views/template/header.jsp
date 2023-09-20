@@ -28,17 +28,60 @@
 <body>
 	<main>
         <header>
-<h1>FADO</h1>
+        
+        <div class="logo">
+        	<a href="/">
+        	<img src="/images/fado.jpg" width="200" height="180" >
+        	</a>
+        </div>
+         
+        <div class="login right">
+        <c:choose>
+		<c:when test="${sessionScope.name != null}">
+			<li><a href="/member/mypage">회원상세</a></li>
+    		<li><a href="/member/change">회원정보수정</a></li>
+    		 <li><a href="/member/logout">로그아웃</a></li>
+    	
+    	
+    	<%-- 관리자인 경우 추가 메뉴 출력  --%>
+    	<c:if test="${session.Scope.level == '관리자'  }">
+    		<li><a href="/admin/home">관리자메뉴 </a></li>
+    		</c:if>
+    		
+    	
+	</c:when>
+	<c:otherwise>
+		<!-- <li><a href="/">Home</a></li> -->
+		<li><a href="/member/login">로그인</a></li>
+		<li><a href="/member/join">회원가입</a></li>
+	</c:otherwise>
+</c:choose>
+        
+        </div>
+        
+        <hr>
+        
+        
 		</header>
 	<nav>
 	
-<c:choose>
-	<c:when test="${sessionScope.name != null}">
-		<li><a href="/member/mypage">회원상세</a></li>
-    	<li><a href="/member/change">회원정보수정</a></li>
-    	<li><a href="/member/logout">로그아웃</a></li>
+	 <ul class="menu left">
+	<c:choose>
+		<c:when test="${sessionScope.name != null}">
+			<li><a href="/member/mypage">회원상세</a></li>
+    		<li><a href="/member/change">회원정보수정</a></li>
+    		<!-- <li><a href="/member/logout">로그아웃</a></li> -->
+    	</ul>
+    	
+    
+    	<c:if test="${session.Scope.level == '관리자'  }">
+    		<li><a href="/admin/home">관리자메뉴 </a></li>
+    		</c:if>
+    		
+    	
 	</c:when>
 	<c:otherwise>
+		<i class="fa-solid fa-bars" style="color: #black;" ></i>
 		<li><a href="/">Home</a></li>
 		<li><a href="/member/login">로그인</a></li>
 		<li><a href="/member/join">회원가입</a></li>

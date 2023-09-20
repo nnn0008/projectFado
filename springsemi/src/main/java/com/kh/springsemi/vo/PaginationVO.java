@@ -49,7 +49,7 @@ public class PaginationVO {
 	
 	
 	public boolean isLast() {
-		return getEnd() > getPageCount();
+		return getEnd() >= getPageCount();
 	}
 	
 	
@@ -78,4 +78,6 @@ public class PaginationVO {
 	public int getFinishRow() {
 		return page * size;
 	}
+	
+	
 }

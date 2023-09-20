@@ -77,20 +77,20 @@ window.addEventListener("load", function(){
 
 <form action="write" method="post">
 
-		<input type="hidden" name="projectOwner" value="${sessionScope.name}">
-	<div class="container w-600">
-		<div class="row">
-			<h1>fado 프로젝트 등록하기</h1>				
-		</div>
-		<div class="row">
-			제목
-			<input type="text" name="projectTitle" class="form-input w-100" placeholder="제목을 입력하세요">
-		</div>
-		<div class="row">
-			목표 금액
-			<input type="number" name="projectGoalPrice" class="form-input w-100" placeholder="목표로 하는 금액을 입력하세요">
-		</div>
-		<div class="row left">
+      <input type="hidden" name="projectOwner" value="${sessionScope.name}">
+   <div class="container w-600">
+      <div class="row">
+         <h1>fado 프로젝트 등록하기</h1>            
+      </div>
+      <div class="row">
+         제목
+         <input type="text" name="projectTitle" class="form-input w-100" placeholder="제목을 입력하세요">
+      </div>
+      <div class="row">
+         목표 금액
+         <input type="number" name="projectGoalPrice" class="form-input w-100" placeholder="목표로 하는 금액을 입력하세요">
+      </div>
+      <div class="row left">
             희망날짜 선택(심사에는 평균적으로 5영업일이 소모됩니다)
             <input type="date" name="projectStartDate" id="projectStartDate" class="form-input w-100">
         </div>
@@ -101,22 +101,22 @@ window.addEventListener("load", function(){
                 <option value="15">15일</option>
                 <option value="30">30일</option>
             </select>
-		</div>
-		<div class="row left">
-			카테고리 선택
-			<select name="projectCategory" class="form-input w-100">
-				<option value="project_category">의류(추가해야함)</option>
-				<option value="project_category">게임</option>
-			</select>
-		</div>
-		<div class="row">
-			<textarea name="projectContent" placeholder="내용을 작성하세요"></textarea>
-		</div>
-		<div class="row">
-			<button type="submit" class="btn btn-positive w-100">작성하기</button>
-		</div>
-			
-	</div>
+      </div>
+      <div class="row left">
+         카테고리 선택
+         <select name="projectCategory" class="form-input w-100">
+            <option value="project_category">의류(추가해야함)</option>
+            <option value="project_category">게임</option>
+         </select>
+      </div>
+      <div class="row">
+         <textarea name="projectContent" placeholder="내용을 작성하세요"></textarea>
+      </div>
+      <div class="row">
+         <button type="submit" class="btn btn-positive w-100">작성하기</button>
+      </div>
+         
+   </div>
 </form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>      

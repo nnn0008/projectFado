@@ -40,7 +40,6 @@ public class ProjectController {
 //	}
 	@PostMapping("/write")
 	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session
-									,@RequestParam int projectPeriod
 									,Model model ) {
 		int projectNo = projectDao.sequence();
 		projectDto.setProjectNo(projectNo);

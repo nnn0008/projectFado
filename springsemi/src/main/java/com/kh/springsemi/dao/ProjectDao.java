@@ -8,6 +8,7 @@ public interface ProjectDao {
 	int sequence();
 	void insert(ProjectDto projectDto);
 	
+	
 	//삭제
 	boolean delete(int projectNo);
 	

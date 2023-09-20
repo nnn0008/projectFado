@@ -12,7 +12,7 @@ public class ProjectDto {
 	private int projectTotalPrice;
 	private Date projectStartDate;
 	private Date projectEndDate;
-	private int projectPeriod;
+	//private int projectPeriod;
 	private String projectCategory;
 	private Date projectRegDate;
 	private String projectContent;

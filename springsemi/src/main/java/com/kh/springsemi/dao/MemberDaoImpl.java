@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.springsemi.dto.DeliveryDto;
 import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.mapper.MemberMapper;
 
@@ -73,5 +74,37 @@ public class MemberDaoImpl implements MemberDao{
 		String sql = "delete member where member_id=?";
 		Object[] data = {memberId};
 		return jdbcTemplate.update(sql,data) > 0;
+	}
+
+	//배송지
+	//배송지번호 시퀀스
+	@Override
+	public int sequence() {
+		String sql = "select delivery_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+
+	@Override
+	public void insert(DeliveryDto deliveryDto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public DeliveryDto selectOne(int deliveryNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean updateAddress(DeliveryDto deliveryDto) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean delete(int deliveryNo) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

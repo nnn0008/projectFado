@@ -14,14 +14,4 @@ public interface MemberDao {
 	//D - 회원 삭제
 	boolean delete(String memberId);
 	
-	//배송지번호 시퀀스
-	int sequence();
-	//C - 배송지 등록
-	void insert(DeliveryDto deliveryDto);
-	//R - 배송지 상세
-	DeliveryDto selectOne(int deliveryNo);
-	//U - 배송지 수정
-	boolean updateAddress(DeliveryDto deliveryDto);
-	//D - 배송지 삭제
-	boolean delete(int deliveryNo);
 }

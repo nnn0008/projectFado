@@ -42,9 +42,9 @@ public class MemberController {
 	@RequestMapping("/mypage")
 	public String mypage(HttpSession session, Model model) {
 		
-		String memberId = (String) session.getAttribute("name");
-		MemberDto memberDto = memberDao.selectOne(memberId);
-		model.addAttribute("memberDto",memberDto);
+		String memberId = (String) session.getAttribute("name"); //세션으로 사용자 아이디 꺼내옴
+		MemberDto memberDto = memberDao.selectOne(memberId); //회원정보 조회
+		model.addAttribute("memberDto",memberDto); 
 		return "/WEB-INF/views/member/mypage.jsp";
 	}	
 	
@@ -150,4 +150,5 @@ public class MemberController {
 		} 
 		return "redirect:exit?error";
 	}
+	
 }

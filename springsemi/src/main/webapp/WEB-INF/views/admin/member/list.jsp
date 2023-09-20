@@ -13,6 +13,7 @@
     
     <div class="row">
     <form action="list" method="post" >
+    
    
     <select name="type" class="form-input" height="300" >
 	<option value="member_id">아이디 </option>
@@ -20,10 +21,12 @@
 	<option value="member_contact">연락처 </option>
 	<option value="member_email">이메일  </option>
 	<option value="member_birth">생년월일 </option>
-	</div>
     </select>
+  
     
-    <input class="form-input w-300" type="search" name="keyword" placeholder="검색어" required>
+    
+    <input class="form-input w-300" type="search" name="keyword" placeholder="검색어" 
+    vlaue="${vo.keyword }" required>
     <button class="btn btn-positive" width="50" >검색 </button>
     </form>
     
@@ -59,28 +62,21 @@
 	<br>
 	
 	<h4>
-	<c:if test="${vo.first }">
+	<c:if test="${!vo.first }">
 		<a href="list?${vo.prevQueryString }">&lt;</a>
 	</c:if>
 	
 	<c:forEach var="i" begin="${vo.begin }" end="${vo.end }" step="1">
-		<c:choose>
-			<c:when test="${i == vo.page }">
-				<a class="on">${i }</a>
-			</c:when>
-			<c:otherwise>
-				<a href="list?${vo.getQueryString(i)}"${i }></a>
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
-	
-		<c:if test="${!vo.last }">
+		<a href="list?${vo.getQueryString(i)}">${i }</a>
+		</c:forEach>
+		
+		
+		
+			<c:if test="${!vo.last }">
 			<a href="list?${vo.nextQueryString }">&gt;</a>
-		</c:if>
+			</c:if>
 			
-	 
-	  
-	
+		
 	</h4>
-    
+    </div>
     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

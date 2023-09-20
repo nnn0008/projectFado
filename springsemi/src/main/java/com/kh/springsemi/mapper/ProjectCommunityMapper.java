@@ -14,11 +14,13 @@ public class ProjectCommunityMapper implements RowMapper<ProjectCommunityDto> {
 	@Override
 	public ProjectCommunityDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		ProjectCommunityDto projectCommunityDto = new ProjectCommunityDto();
-		projectCommunityDto.setProjectCommunityTitle(rs.getString("ProjectCommunity_title"));
-		projectCommunityDto.setProjectCommunityContent(rs.getString("ProjectCommunity_content"));
-		projectCommunityDto.setProjectCommunityType(rs.getString("ProjectCommunity_type"));
-		projectCommunityDto.setProjectCommunityReply(rs.getString("ProjectCommunity_reply"));
-		projectCommunityDto.setProjectCommunityRegDate(rs.getDate("ProjectCommunity_regdate"));
+		projectCommunityDto.setProjectCommunityNo(rs.getInt("project_community_no"));
+		projectCommunityDto.setProjectCommunityWriter(rs.getString("project_community_writer"));
+		projectCommunityDto.setProjectCommunityTitle(rs.getString("Project_community_title"));
+		projectCommunityDto.setProjectCommunityContent(rs.getString("Project_community_content"));
+		projectCommunityDto.setProjectCommunityRegDate(rs.getDate("Project_community_reg_date"));
+		projectCommunityDto.setProjectCommunityType(rs.getString("Project_community_type"));
+		projectCommunityDto.setProjectCommunityReply(rs.getString("Project_community_reply"));
 		return projectCommunityDto;
 	}
 }

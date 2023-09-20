@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
-	@RequestMapping("/")
-	public String home() {
-		return "/WEB-INF/views/admin/home.jsp";
+//	@RequestMapping("/")
+//	public String home() {
+//		return "/WEB-INF/views/admin/home.jsp";
+//		
+//		
+//	@RequestMapping("/member/list")
+//	public String memberList() {
+//		
+//		return "/WEB-INF/views/admin/member/list.jsp";
+//		
+//	}
 		
 		
-	@RequestMapping("/member/list")
-	public String memberList() {
-		
-		return "/WEB-INF/views/admin/member/list.jsp";
-		
-	}
-		
-		
-	}
+//	}
 }

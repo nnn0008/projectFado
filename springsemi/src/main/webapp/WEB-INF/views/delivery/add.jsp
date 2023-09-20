@@ -5,7 +5,7 @@
 
 <h1>배송지 등록</h1>
 
-<form action="join" method="post"  align="center">
+<form action="add" method="post"  align="center">
 	<label>받는 사람</label>
 	<input type="text" name="deliveryReceiver" placeholder="받는 분 성함을 입력해주세요."><br><br>
 	

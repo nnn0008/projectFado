@@ -19,7 +19,7 @@
     			<div class="w-100 left">
     				모인금액<br>
     				<fmt:formatNumber value="${projectDto.projectTotalPrice }" pattern="#,###"/>원<br>
-    				남은시간
+    				남은시간: <fmt:formatDate value="${projectDto.projectEndDate}" pattern="yyyy-MM-dd HH:mm:ss" var="formattedEndDate" />
     				<br>
     				후원자
     				X명<br>

@@ -4,7 +4,7 @@
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container w-500">
+<div class="container w-500"> 
 
 <c:choose>
 	<c:when test="${empty deliveryDto}">

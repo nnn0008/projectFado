@@ -4,9 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import com.kh.springsemi.dto.RewardDto;
-
+@Component
 public class RewardMapper implements RowMapper<RewardDto> {
 	@Override
 	public RewardDto mapRow(ResultSet rs, int rowNum) throws SQLException {

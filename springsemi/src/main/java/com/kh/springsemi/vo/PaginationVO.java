@@ -78,4 +78,6 @@ public class PaginationVO {
 	public int getFinishRow() {
 		return page * size;
 	}
+	
+	
 }

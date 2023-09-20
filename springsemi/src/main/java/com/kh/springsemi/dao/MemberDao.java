@@ -1,7 +1,10 @@
 package com.kh.springsemi.dao;
 
+import java.util.List;
+
 import com.kh.springsemi.dto.DeliveryDto;
 import com.kh.springsemi.dto.MemberDto;
+import com.kh.springsemi.vo.PaginationVO;
 
 public interface MemberDao {
 	//C - 회원 등록
@@ -24,4 +27,9 @@ public interface MemberDao {
 	boolean updateAddress(DeliveryDto deliveryDto);
 	//D - 배송지 삭제
 	boolean delete(int deliveryNo);
+	
+	int countList(PaginationVO vo);
+	List<MemberDto> selectListByPage(PaginationVO vo);
+//	List<MemberListDto> selectListByPage2(PaginationVO vo);
+	
 }

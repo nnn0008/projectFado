@@ -6,13 +6,16 @@
 
 <form action="login" method="post" autocomplete="off">
 
-	<h1>로그인</h1>
+<div class="row">
+	<h3>로그인 </h3>
 	
-	<input type="text" name="memberId" placeholder="아이디" required><br><br>
+	<hr class="w-500">
+	<br>
+	<input class="form-input w-400" type="text" name="memberId" placeholder="아이디" required><br><br>
 	
-	<input type="password" name="memberPw"  placeholder="비밀번호" required><br><br>
+	<input class="form-input w-400" type="password" name="memberPw"  placeholder="비밀번호" required><br><br>
 	
-	<button type="submit" class="btn btn-positive w-100">Login</button><br><br>
+	<button type="submit" class="btn btn-positive w-400">Login</button><br><br>
 	
 	<a href="findPw" class="link">비밀번호 찾기</a><br><br>
 	
@@ -21,4 +24,5 @@
 	</c:if>
 	
 </form>
+</div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -17,6 +17,7 @@ public interface MemberDao {
 	//D - 회원 삭제
 	boolean delete(String memberId);
 	
+
 	//배송지번호 시퀀스
 	int sequence();
 	//C - 배송지 등록
@@ -32,4 +33,5 @@ public interface MemberDao {
 	List<MemberDto> selectListByPage(PaginationVO vo);
 //	List<MemberListDto> selectListByPage2(PaginationVO vo);
 	
+
 }

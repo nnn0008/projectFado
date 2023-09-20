@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.springsemi.dto.DeliveryDto;
 import com.kh.springsemi.dto.MemberDto;
+import com.kh.springsemi.mapper.DeliveryMapper;
 import com.kh.springsemi.mapper.MemberMapper;
 import com.kh.springsemi.vo.PaginationVO;
 
@@ -19,6 +20,8 @@ public class MemberDaoImpl implements MemberDao{
 	
 	@Autowired
 	private MemberMapper memberMapper;
+	
+	// 회원
 	
 	//회원가입
 	@Override
@@ -76,6 +79,7 @@ public class MemberDaoImpl implements MemberDao{
 		Object[] data = {memberId};
 		return jdbcTemplate.update(sql,data) > 0;
 	}
+
 
 	//배송지
 	//배송지번호 시퀀스

@@ -16,9 +16,11 @@ public class DeliveryMapper implements RowMapper<DeliveryDto> {
 		DeliveryDto deliveryDto = new DeliveryDto();
 		deliveryDto.setDeliveryNo(rs.getInt("delivery_no"));
 		deliveryDto.setDeliveryMember(rs.getString("delivery_member"));
+		deliveryDto.setDeliveryReceiver(rs.getString("delivery_receiver"));
 		deliveryDto.setDeliveryPost(rs.getString("delivery_post"));
 		deliveryDto.setDeliveryAddr1(rs.getString("delivery_addr1"));
 		deliveryDto.setDeliveryAddr2(rs.getString("delivery_addr2"));
+		deliveryDto.setDeliveryContact(rs.getString("delivery_contact"));
 		return deliveryDto;
 	}
 

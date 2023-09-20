@@ -33,11 +33,11 @@ public class MainCommunityDaoImpl implements MainCommunityDao{
 	
 
 	@Override
-	public void insert(MainCommunityDto mainCommunityDto) {
+	public void insert(MainCommunityDto mainCommunityDto) {  //메인 커뮤니티 등록
 		String sql = "insert into main_community("
 				+ "main_community_no, main_community_writer, main_community_title, "
 				+ "main_community_content, main_community_type) "
-				+ "values(?,?,?,?,?)";
+				+ "values(?, ?, ?, ?, ?)";
 		Object[] data = {
 				mainCommunityDto.getMainCommunityNo(), mainCommunityDto.getMainCommunityWriter(),
 				mainCommunityDto.getMainCommunityTitle(), mainCommunityDto.getMainCommunityContent(),
@@ -48,16 +48,19 @@ public class MainCommunityDaoImpl implements MainCommunityDao{
 
 
 	@Override
-	public List<MainCommunityDto> selectList(PaginationVO vo) {  //목록 페이지(페이지 구현)
+	public List<MainCommunityDto> selectList(PaginationVO vo) {  //메인 커뮤니티 목록 페이지
 		if(vo.isSearch()) {
 			String sql = "select * from(select rownum rn, TMP.* from ("
-					+ "select * from main_community where instr("+vo.getType()+", ?) > 0 "
+					+ "select * from main_community_list where instr("+vo.getType()+", ?) > 0 "
 							+ "order by " +vo.getType()+" asc)TMP) where rn between ? and ?)";
 			Object[] data = {vo.getKeyword(), vo.getStartRow(), vo.getFinishRow()};
-			return jdbcTemplate.query(sql, mainCommunityMapper, data);
+			return jdbcTemplate.query(sql, mainCommunityListMapper, data);
 		}
 		else {
-			String sql = "select * from(select rownum rn, TMP.* from (select * from main_community order by main_community_no asc)TMP) where rn between ? and ?";
+			String sql = "select * from(select rownum rn, TMP.* from ("
+					+ "select * from main_community_list "
+					+ "order by main_community_no asc)TMP) "
+					+ "where rn between ? and ?";
 			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
 			return jdbcTemplate.query(sql, mainCommunityListMapper, data);
 		}
@@ -74,7 +77,8 @@ public class MainCommunityDaoImpl implements MainCommunityDao{
 
 	@Override
 	public boolean update(MainCommunityDto mainCommunityDto) {  //메인 커뮤니티 수정
-		String sql = "update main_community set main_community_title=?, main_community_content=? where board_no=?";
+		String sql = "update main_community set main_community_title=?,"
+				+ " main_community_content=? where board_no=?";
 		Object[] data = {mainCommunityDto.getMainCommunityTitle(), mainCommunityDto.getMainCommunityContent()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
@@ -84,6 +88,13 @@ public class MainCommunityDaoImpl implements MainCommunityDao{
 		String sql = "delete main_community where main_community_no=?";
 		Object[] data = {mainCommunityNo};
 		return jdbcTemplate.update(sql, data) > 0;
+	}
+
+
+	@Override
+	public int countList(PaginationVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

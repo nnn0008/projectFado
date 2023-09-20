@@ -13,7 +13,7 @@ public class ProjectMapper implements RowMapper<ProjectDto> {
 	public ProjectDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		ProjectDto projectDto = new ProjectDto();
 		projectDto.setProjectNo(rs.getInt("project_no"));
-		projectDto.setProjectTitle(rs.getString("projectTitle"));
+		projectDto.setProjectTitle(rs.getString("project_Title"));
 		projectDto.setProjectGoalPrice(rs.getInt("project_goal_price"));
 		projectDto.setProjectTotalPrice(rs.getInt("project_total_price"));
 		projectDto.setProjectStartDate(rs.getDate("project_start_date"));

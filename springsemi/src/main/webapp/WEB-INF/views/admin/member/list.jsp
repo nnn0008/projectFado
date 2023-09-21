@@ -12,7 +12,7 @@
     </div>
     
     <div class="row">
-    <form action="list" method="post" >
+    <form action="list" method="get" >
     
    
     <select name="type" class="form-input" height="300" >

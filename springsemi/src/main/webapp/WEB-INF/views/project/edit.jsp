@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <!-- summernote cdn -->
@@ -75,27 +76,27 @@ window.addEventListener("load", function(){
     });
 </script>
 
-<form action="write" method="post">
-
+<form action="edit" method="post">
+		<input type="hidden" name="projectNo" value="${projectDto.projectNo}">
       <input type="hidden" name="projectOwner" value="${sessionScope.name}">
    <div class="container w-600">
       <div class="row">
-         <h1>fado 프로젝트 등록하기</h1>            
+         <h1>fado 프로젝트 수정하기</h1>            
       </div>
       <div class="row">
          제목
-         <input type="text" name="projectTitle" class="form-input w-100" placeholder="제목을 입력하세요">
+         <input type="text" name="projectTitle" class="form-input w-100" value="${projectDto.projectTitle}">
       </div>
       <div class="row">
          목표 금액
-         <input type="number" name="projectGoalPrice" class="form-input w-100" placeholder="목표로 하는 금액을 입력하세요">
+         <input type="number" name="projectGoalPrice" class="form-input w-100" value="${projectDto.projectGoalPrice}">
       </div>
       <div class="row left">
             희망날짜 선택 (심사에는 평균적으로 5영업일이 소모됩니다)
-            <input type="date" name="projectStartDate" id="projectStartDate" class="form-input w-100">
+            <input type="date" name="projectStartDate" id="projectStartDate" class="form-input w-100" value="${projectDto.projectStartDate}">
         </div>
         <div class="row left">
-            프로젝트 마감날짜 (15일 후 또는 30일 후로 선택이 가능합니다)
+            프로젝트 마감날짜 15일 후 또는 30일 후로 선택이 가능합니다)
             <select name="projectEndDate" id="projectEndDate" class="form-input w-100">
                 <option value="">선택하세요</option>
                 <option value="15">15일</option>
@@ -103,17 +104,33 @@ window.addEventListener("load", function(){
             </select>
       </div>
       <div class="row left">
-         카테고리 선택
-         <select name="projectCategory" class="form-input w-100">
-            <option value="project_category">의류(추가해야함)</option>
-            <option value="project_category">게임</option>
-         </select>
+         카테고리 선택 (테이블 추가해야될듯; 추가하면 select 늘려야함)
+         <c:choose>
+         	<c:when test="${projectDto.projectCategory == 'category_clothes'}">
+		         <select name="projectCategory" class="form-input w-100">
+		            <option value="category_clothes" selected>의류</option>
+		            <option value="category_electronic">전자</option>
+		         </select>
+	         </c:when>
+         	<c:when test="${projectDto.projectCategory == 'category_electronic'}">
+		         <select name="projectCategory" class="form-input w-100">
+		            <option value="category_clothes">의류</option>
+		            <option value="category_electronic" selected>전자</option>
+		         </select>
+	         </c:when>
+	         <c:otherwise>
+	         	<select name="projectCategory" class="form-input w-100">
+		            <option value="category_clothes">의류</option>
+		            <option value="category_electronic">전자</option>
+		         </select>
+		      </c:otherwise>
+         </c:choose>
       </div>
       <div class="row">
-         <textarea name="projectContent" placeholder="내용을 작성하세요"></textarea>
+         <textarea name="projectContent">${projectDto.projectContent}</textarea>
       </div>
       <div class="row">
-         <button type="submit" class="btn btn-positive w-100">작성하기</button>
+         <button type="submit" class="btn btn-positive w-100">수정하기</button>
       </div>
          
    </div>

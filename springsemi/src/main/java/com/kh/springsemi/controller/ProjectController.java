@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.springsemi.dao.ProjectDao;
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ProjectListDto;
+import com.kh.springsemi.error.AuthorityException;
+import com.kh.springsemi.error.NoTargetException;
 
 @Controller
 @RequestMapping("/project")
@@ -75,4 +77,32 @@ public class ProjectController {
 		return "/WEB-INF/views/project/list.jsp";
 	}
 	
+	@GetMapping("/edit")
+	public String edit(@RequestParam int projectNo, Model model) {
+		ProjectDto projectDto = projectDao.selectOne(projectNo);
+		model.addAttribute("projectDto", projectDto);
+		return "/WEB-INF/views/project/edit.jsp";
+	}
+	
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute ProjectDto projectDto) {
+		if(projectDao.update(projectDto)) {
+			return "redirect:detail?projectNo=" + projectDto.getProjectNo();
+		}
+		else throw new NoTargetException("존재하지 않는 프로젝트 번호");
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(@RequestParam int projectNo, HttpSession session) {
+		ProjectDto projectDto = projectDao.selectOne(projectNo);
+		String memberId = (String) session.getAttribute("name");
+		String projectOwner = projectDto.getProjectOwner();
+		if(memberId.equals(projectOwner)) {
+			projectDao.delete(projectNo);
+			return "redirect:list";
+		}
+		else { 
+			throw new AuthorityException("프로젝트 소유자가 아닙니다");
+		}
+	}
 }

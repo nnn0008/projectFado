@@ -42,7 +42,11 @@ public class DeliveryController {
 		return "redirect:mydelivery"; 
 	}
 	
+
+	//배송지 목록
+
 //	//배송지 목록
+
 //	@RequestMapping("/mydelivery")
 //	public String myDelivery(Model model, HttpSession session) {
 //		

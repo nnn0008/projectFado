@@ -50,6 +50,7 @@ public class ProjectDaoImpl implements ProjectDao{
 				projectDto.getProjectCategory(), projectDto.getProjectContent(), projectDto.getProjectNo()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
 	//프로젝트 상세(모든 회원, 비회원)
 	@Override
 	public ProjectDto selectOne(int projectNo) {

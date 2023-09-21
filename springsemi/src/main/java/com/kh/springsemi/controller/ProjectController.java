@@ -1,6 +1,7 @@
 package com.kh.springsemi.controller;
 
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -46,12 +47,21 @@ public class ProjectController {
 		String memberId = (String)session.getAttribute("name");
 		projectDto.setProjectOwner(memberId);
 		projectDao.insert(projectDto);
-//		LocalDate start = LocalDate.parse(projectStartDate);
-//        LocalDate endDate = start.plusDays(30); 
-//        model.addAttribute("project_start_date", start);
-//        model.addAttribute("project_end_date", endDate);
 		
 		return "redirect:writeFinish";
+	}
+	
+	@RequestMapping("/detail")
+	public String detail(Model model, @RequestParam int projectNo) {
+		ProjectDto projectDto = projectDao.selectOne(projectNo);
+		model.addAttribute("projectDto", projectDto);
+		Date currentTime = new Date();
+		Date endTime = projectDto.getProjectEndDate();
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
+		long difference = endTime.getTime() - currentTime.getTime();
+		model.addAttribute("difference", difference);
+		
+		return "/WEB-INF/views/project/detail.jsp";
 	}
 	
 }

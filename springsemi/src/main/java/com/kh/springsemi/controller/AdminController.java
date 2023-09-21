@@ -24,7 +24,6 @@ public class AdminController {
 	private MemberDao memberDao;
 	
 	
-	
 	@RequestMapping("/")
 	public String home() {
 		return "/WEB-INF/views/admin/home.jsp";
@@ -43,6 +42,7 @@ public class AdminController {
 	}
 //		차단+해제 기능 
 		
+
 		@RequestMapping("/member/block")
 		public String memberBlock(@RequestParam String memberId) {
 			memberDao.insertBlock(memberId);
@@ -53,7 +53,20 @@ public class AdminController {
 		
 //		@RequestMapping("/member/cacel");
 		
+
 		
 	}
 
+
+		
+//		
+//	@RequestMapping("/member/list")
+//	public String memberList() {
+//		
+//		return "/WEB-INF/views/admin/member/list.jsp";
+//		
+//	}
+		
+		
+	
 

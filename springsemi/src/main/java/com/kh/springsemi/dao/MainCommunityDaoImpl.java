@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.springsemi.dto.MainCommunityDto;
+import com.kh.springsemi.dto.MainCommunityListDto;
 import com.kh.springsemi.mapper.MainCommunityListMapper;
 import com.kh.springsemi.mapper.MainCommunityMapper;
 import com.kh.springsemi.vo.PaginationVO;
@@ -48,11 +49,11 @@ public class MainCommunityDaoImpl implements MainCommunityDao{
 
 
 	@Override
-	public List<MainCommunityDto> selectList(PaginationVO vo) {  //메인 커뮤니티 목록 페이지
+	public List<MainCommunityListDto> selectList(PaginationVO vo) {  //메인 커뮤니티 목록 페이지
 		if(vo.isSearch()) {
 			String sql = "select * from(select rownum rn, TMP.* from ("
 					+ "select * from main_community_list where instr("+vo.getType()+", ?) > 0 "
-							+ "order by " +vo.getType()+" asc)TMP) where rn between ? and ?)";
+							+ "order by " +vo.getType()+ " asc)TMP) where rn between ? and ?";
 			Object[] data = {vo.getKeyword(), vo.getStartRow(), vo.getFinishRow()};
 			return jdbcTemplate.query(sql, mainCommunityListMapper, data);
 		}

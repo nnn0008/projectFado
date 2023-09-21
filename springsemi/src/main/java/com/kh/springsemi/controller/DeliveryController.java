@@ -25,13 +25,13 @@ public class DeliveryController {
 	DeliveryDao deliveryDao;
 	
 	//배송지 등록
-	@GetMapping("/join")
-	public String join() {
-		return "/WEB-INF/views/delivery/join.jsp";
+	@GetMapping("/add")
+	public String add() {
+		return "/WEB-INF/views/delivery/add.jsp";
 	}
 
-	@PostMapping("/join") 
-	public String join(@ModelAttribute DeliveryDto deliveryDto, HttpSession session) {
+	@PostMapping("/add") 
+	public String add(@ModelAttribute DeliveryDto deliveryDto, HttpSession session) {
 		String findMember = (String) session.getAttribute("name"); //세션에 있는 멤버 가져오기
 		deliveryDto.setDeliveryMember(findMember); 
 		
@@ -78,7 +78,7 @@ public class DeliveryController {
 	public String delete(@RequestParam int deliveryNo) {
 		boolean result = deliveryDao.delete(deliveryNo);
 		if(result) {
-			return "redirect:list";
+			return "redirect:mydelivery";
 		}
 		else {
 			throw new NoTargetException("존재하지 않는 배송지입니다.");

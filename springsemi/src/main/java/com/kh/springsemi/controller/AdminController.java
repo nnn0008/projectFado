@@ -23,7 +23,6 @@ public class AdminController {
 	private MemberDao memberDao;
 	
 	
-	
 	@RequestMapping("/")
 	public String home() {
 		return "/WEB-INF/views/admin/home.jsp";
@@ -40,7 +39,19 @@ public class AdminController {
 		
 		return "/WEB-INF/views/admin/member/list.jsp";
 		
-		}
+		
 	}
 
 
+		
+//		
+//	@RequestMapping("/member/list")
+//	public String memberList() {
+//		
+//		return "/WEB-INF/views/admin/member/list.jsp";
+//		
+//	}
+		
+		
+	
+}

@@ -33,5 +33,10 @@ public interface MemberDao {
 	List<MemberDto> selectListByPage(PaginationVO vo);
 //	List<MemberListDto> selectListByPage2(PaginationVO vo);
 	
+	
+//	차단+해제 기능 
+	void insertBlock(String memberId);
+	boolean deleteBlock(String memberId);
+	
 
 }

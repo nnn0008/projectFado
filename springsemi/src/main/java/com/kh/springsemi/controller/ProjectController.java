@@ -2,6 +2,7 @@ package com.kh.springsemi.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.springsemi.dao.ProjectDao;
 import com.kh.springsemi.dto.ProjectDto;
+import com.kh.springsemi.dto.ProjectListDto;
 
 @Controller
 @RequestMapping("/project")
@@ -59,9 +61,18 @@ public class ProjectController {
 		Date endTime = projectDto.getProjectEndDate();
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
 		long difference = endTime.getTime() - currentTime.getTime();
+		String d = fmt.format(difference);
 		model.addAttribute("difference", difference);
 		
 		return "/WEB-INF/views/project/detail.jsp";
+	}
+	
+	@RequestMapping("/list")
+	public String list(Model model) {
+		List<ProjectListDto> list = projectDao.selectList();
+		model.addAttribute("list", list);
+		
+		return "/WEB-INF/views/project/list.jsp";
 	}
 	
 }

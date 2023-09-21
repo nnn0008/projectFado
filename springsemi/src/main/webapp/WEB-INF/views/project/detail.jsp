@@ -3,10 +3,53 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<!-- 타이머를 생성 및 카운트다운 -->
+<script>
+$(function(){
+	//최초 시간 찍어주고
+	displayText(formatTime);
 	
+	//타이머 생성
+	var timer = new easytimer.Timer();
+	
+	//타이머가 1초씩 지날때마다
+	timer.addEventListener('secondsUpdated', function (e) {
+		console.log(timer.getTotalTimeValues());
+	    formatTime = convert2text(timer.getTotalTimeValues().seconds);
+	    displayText(formatTime);
+	});
+	
+	//타이머가 종료시
+	timer.addEventListener('targetAchieved', function (e) {
+	    displayText('펀딩이 종료되었습니다');
+	});
+	
+	//타이머 실행
+	timer.start({countdown: true, startValues: {seconds:${difference / 1000}}, target:{days:0, seconds:0}});
+	
+	var formatTime = convert2text(timer.getTotalTimeValues().seconds);
+	
+	//momentjs+date-format라이브러리
+	function convert2text(seconds){
+		var duration = moment.duration(seconds, 'seconds');
+		var format = duration.format('d일 h시 m분 s초 남았습니다');
+		
+		return format;
+	}
+	
+	//글자 출력 함수
+	function displayText(text){
+		$(".timer").html(text);
+	}
+
+});	
+
+</script>
+
     <div class="container w-900">
     	<div class="row">
-    		<h5>${projectDto.projectCategory }</h5>
+    		<h5>${projectDto.projectCategory}</h5>
     	</div>
     	<div class="row">
     		<h1>${projectDto.projectTitle}</h1>
@@ -20,7 +63,7 @@
     				모인금액<br>
     				<fmt:formatNumber value="${projectDto.projectTotalPrice }" pattern="#,###"/>원<br>
     				남은시간
-    				${difference / 1000} 초
+    				<label class="timer"></label>
     				<br>
     				후원자
     				X명<br>

@@ -1,6 +1,9 @@
 package com.kh.springsemi.dao;
 
+import java.util.List;
+
 import com.kh.springsemi.dto.ProjectDto;
+import com.kh.springsemi.dto.ProjectListDto;
 
 public interface ProjectDao {
 	//CRUD
@@ -17,4 +20,7 @@ public interface ProjectDao {
 	
 	//상세
 	ProjectDto selectOne(int projectNo);
+	
+	//목록
+	List<ProjectListDto> selectList();
 }

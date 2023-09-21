@@ -23,6 +23,7 @@ public class ProjectMapper implements RowMapper<ProjectDto> {
 		projectDto.setProjectRegDate(rs.getDate("project_reg_date"));
 		projectDto.setProjectContent(rs.getString("project_content"));
 		projectDto.setProjectOwner(rs.getString("project_owner"));
+		projectDto.setProjectReadcount(rs.getLong("project_readcount"));
 		return projectDto;
 	}
 }

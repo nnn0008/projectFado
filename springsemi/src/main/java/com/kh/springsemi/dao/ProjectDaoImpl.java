@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.springsemi.dto.ProjectDto;
+import com.kh.springsemi.dto.ProjectListDto;
+import com.kh.springsemi.mapper.ProjectListMapper;
 import com.kh.springsemi.mapper.ProjectMapper;
 
 @Repository
@@ -17,6 +19,9 @@ public class ProjectDaoImpl implements ProjectDao{
 	
 	@Autowired
 	private ProjectMapper projectMapper;
+	
+	@Autowired
+	private ProjectListMapper projectListMapper;
 	
 	//프로젝트 등록(판매자가)
 	@Override
@@ -60,6 +65,14 @@ public class ProjectDaoImpl implements ProjectDao{
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+
+	//프로젝트 리스트보기(관리자)
+	@Override
+	public List<ProjectListDto> selectList() {
+		String sql = "select * from project order by project_no desc";
+		return jdbcTemplate.query(sql, projectListMapper);
+	}
+
 	@Override
 	public boolean updateProjectReadcount(int projectNo) {
 		String sql = "update project set project_readcount = project_readcount + 1 where project_no=?";

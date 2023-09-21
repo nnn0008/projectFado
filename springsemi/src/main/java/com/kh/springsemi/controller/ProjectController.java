@@ -60,7 +60,7 @@ public class ProjectController {
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
 		long difference = endTime.getTime() - currentTime.getTime();
 		model.addAttribute("difference", difference);
-//		model.addAttribute("endTime", fmt.format(endTime));
+		
 		return "/WEB-INF/views/project/detail.jsp";
 	}
 	

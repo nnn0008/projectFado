@@ -42,17 +42,17 @@ public class DeliveryController {
 		return "redirect:mydelivery"; 
 	}
 	
-	//배송지 목록
-	@RequestMapping("/mydelivery")
-	public String myDelivery(Model model, HttpSession session) {
-		
-		String deliveryMember = (String)session.getAttribute("name");
-		
-		DeliveryDto deliveryDto = deliveryDao.selectList(deliveryMember);
-		model.addAttribute("deliveryDto",deliveryDto);
-		
-		return "/WEB-INF/views/delivery/mydelivery.jsp";
-	}
+//	//배송지 목록
+//	@RequestMapping("/mydelivery")
+//	public String myDelivery(Model model, HttpSession session) {
+//		
+//		String deliveryMember = (String)session.getAttribute("name");
+//		
+//		DeliveryDto deliveryDto = deliveryDao.selectList(deliveryMember);
+//		model.addAttribute("deliveryDto",deliveryDto);
+//		
+//		return "/WEB-INF/views/delivery/mydelivery.jsp";
+//	}
 	
 //	//배송지 수정
 //	@GetMapping("/change")

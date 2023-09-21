@@ -21,8 +21,12 @@
 
 <style></style>
 
+<!-- easytimer.js라이브러리 -->
+<script src="/js/easytimer.min.js"></script>
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment-duration-format@2.3.2/lib/moment-duration-format.min.js"></script>
 
 </head>
 <body>

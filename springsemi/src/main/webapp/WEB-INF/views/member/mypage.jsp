@@ -42,6 +42,8 @@ pageEncoding="UTF-8"%>
 	</tr>
 </table>
 
+	<a href="/delivery/mydelivery">배송지</a><br><br>
+
 	<a href="password">
 			<i class="fa-solid fa-key"></i>
 			비밀번호 변경

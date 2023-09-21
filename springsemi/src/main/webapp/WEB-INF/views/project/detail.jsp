@@ -21,6 +21,7 @@
     				<fmt:formatNumber value="${projectDto.projectTotalPrice }" pattern="#,###"/>원<br>
     				남은시간
     				${difference / 1000} 초
+    				남은시간: ${projectDto.projectEndDate}
     				<br>
     				후원자
     				X명<br>

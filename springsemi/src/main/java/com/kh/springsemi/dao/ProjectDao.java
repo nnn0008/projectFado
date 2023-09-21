@@ -13,6 +13,7 @@ public interface ProjectDao {
 	
 	//수정
 	boolean update(ProjectDto projectDto);
+	boolean updateProjectReadcount(int projectNo);
 	
 	//상세
 	ProjectDto selectOne(int projectNo);

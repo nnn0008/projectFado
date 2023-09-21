@@ -38,17 +38,17 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 				.addPathPatterns(
 						"/member/**",
 						"/funding/**")
-				.excludePathPatterns(""
-						 + "/member/join*"
-						+ "/member/login*"
-						+ "/member/exitFinish*"
-						+ "/funding/list*"
-						+ "/funding/list/like*"
-						+ "/funding/list/lank*"
-						+ "/funding/list/category*"
-						+ "/funding/list/period*"
-						+ "/funding/list/detail*"
-						+ "/funding/list/");
+				.excludePathPatterns(
+						  "/member/join*",
+						  "/member/login*",
+						 "/member/exitFinish*",
+						 "/funding/list*",
+						 "/funding/list/like*",
+						 "/funding/list/lank*",
+						 "/funding/list/category*",
+						 "/funding/list/period*",
+						 "/funding/list/detail*",
+						 "/funding/list/");
 				
 				
 	}

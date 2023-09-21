@@ -3,9 +3,11 @@ package com.kh.springsemi.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+@Component
 public class TestInterceptor implements HandlerInterceptor {
 /*
  *		컨트롤러가 실행되기 직전 시점을 간섭하는 메소드 

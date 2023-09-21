@@ -53,14 +53,14 @@ public class MainCommunityDaoImpl implements MainCommunityDao{
 		if(vo.isSearch()) {
 			String sql = "select * from(select rownum rn, TMP.* from ("
 					+ "select * from main_community_list where instr("+vo.getType()+", ?) > 0 "
-							+ "order by " +vo.getType()+ " asc)TMP) where rn between ? and ?";
+							+ "order by " +vo.getType()+ " desc)TMP) where rn between ? and ?";
 			Object[] data = {vo.getKeyword(), vo.getStartRow(), vo.getFinishRow()};
 			return jdbcTemplate.query(sql, mainCommunityListMapper, data);
 		}
 		else {
 			String sql = "select * from(select rownum rn, TMP.* from ("
 					+ "select * from main_community_list "
-					+ "order by main_community_no asc)TMP) "
+					+ "order by main_community_no desc)TMP) "
 					+ "where rn between ? and ?";
 			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
 			return jdbcTemplate.query(sql, mainCommunityListMapper, data);

@@ -15,7 +15,8 @@
 	</div>
 	
 	<div>
-	<button class="btn">공지사항</button>
+		<button class="btn">공지사항</button>
+		<button class="btn">Q & A</button>
 	</div>
 	<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
 	<c:if test="${sessionScope.name != null}">

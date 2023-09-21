@@ -12,7 +12,7 @@ public class TestInterceptor implements HandlerInterceptor {
 /*
  *		컨트롤러가 실행되기 직전 시점을 간섭하는 메소드 
  * 		- true를 반환 하면 요청에 대한 작업을 진행하겠다 
- * 		- false를 반환 하면 요청에 대한 작업을 차단하겠다
+ * 		- false를 반환 하면 요청에 대한 작업을 차단하겠다 
  * 		- handler에는 이 요청을 처리할 대상 컨트롤러/메소드 정보가 있다  
  * */	
 	

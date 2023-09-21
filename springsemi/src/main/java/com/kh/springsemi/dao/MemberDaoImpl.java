@@ -154,4 +154,20 @@ public class MemberDaoImpl implements MemberDao{
 			return jdbcTemplate.query(sql, memberMapper, data);			
 		}
 	}
+	
+//	차단+해제 기능 
+	@Override
+	public void insertBlock(String memberId) {
+		String sql = "insert into member_block (member_id) values(?)";
+		Object[] data = {memberId};
+		jdbcTemplate.update(sql,data);
+	}
+	
+	@Override
+	public boolean deleteBlock(String memberId) {
+		String sql = "delete member_block where member_id =?";
+		Object[] data = {memberId};
+		return jdbcTemplate.update(sql,data) > 0;
+		
+	}
 }

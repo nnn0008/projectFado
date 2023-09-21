@@ -463,17 +463,18 @@ ul.menu,
 ul.menu ul
 {
     font-size: 24px;
-    background-color: #2c8de0;
+    background-color: #4EB9CD;
 }
 ul.menu li {
     color: white;
-    background-color: #2c8de0;
+    background-color: #4EB9CD;
     width: 150px;
 }
 
 /* 메뉴에 마우스가 올라가면 하이라이트 효과 (수정함)*/
 ul.menu li:hover {
-    background-color: #2c8ce0a8;
+    background-color: #28ABC3;
+    color : #FFBE2F;
 }
 
 /* 

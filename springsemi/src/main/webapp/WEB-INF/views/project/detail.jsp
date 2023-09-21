@@ -20,6 +20,8 @@
     				모인금액<br>
     				<fmt:formatNumber value="${projectDto.projectTotalPrice }" pattern="#,###"/>원<br>
     				남은시간
+    				${difference / 1000} 초
+    				남은시간: ${projectDto.projectEndDate}
     				<br>
     				후원자
     				X명<br>
@@ -30,7 +32,7 @@
     				${projectDto.projectStartDate} ~ ${projectDto.projectEndDate}<br>
     				결제
     				목표금액 달성시 ${projectDto.projectEndDate}에 결제 진행
-    				<i class="fa-solid fa-heart red"></i><br>
+    				<i class="fa-solid fa-heart"></i><br>
     				<button class="btn btn-positive">이 프로젝트 후원하기</button>
     			</div>
     		</div>

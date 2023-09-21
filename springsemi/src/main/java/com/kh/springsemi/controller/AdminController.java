@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dto.MemberDto;
@@ -21,7 +22,6 @@ public class AdminController {
 
 	@Autowired
 	private MemberDao memberDao;
-	
 	
 	
 	@RequestMapping("/")
@@ -39,8 +39,34 @@ public class AdminController {
 		model.addAttribute("list", list);
 		
 		return "/WEB-INF/views/admin/member/list.jsp";
+	}
+//		차단+해제 기능 
 		
+
+		@RequestMapping("/member/block")
+		public String memberBlock(@RequestParam String memberId) {
+			memberDao.insertBlock(memberId);
+			return "redirect:list";
 		}
+		
+		
+		
+//		@RequestMapping("/member/cacel");
+		
+
+		
 	}
 
+
+		
+//		
+//	@RequestMapping("/member/list")
+//	public String memberList() {
+//		
+//		return "/WEB-INF/views/admin/member/list.jsp";
+//		
+//	}
+		
+		
+	
 

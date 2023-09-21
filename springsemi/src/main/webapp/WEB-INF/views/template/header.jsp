@@ -21,12 +21,9 @@
 
 <style></style>
 
-<!-- easytimer.js라이브러리 -->
-<script src="/js/easytimer.min.js"></script>
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment-duration-format@2.3.2/lib/moment-duration-format.min.js"></script>
+
 </head>
 <body>
 	<main>
@@ -43,40 +40,6 @@
          
    
         
-<<<<<<< HEAD
-        </div>
-        
-        <hr>
-        
-        
-		</header>
-	<nav>
-	
-	 <ul class="menu left">
-	<c:choose>
-		<c:when test="${sessionScope.name != null}">
-			<li><a href="/member/mypage">회원상세</a></li>
-    		<li><a href="/member/change">회원정보수정</a></li>
-    		<li><a href="/helperCommunity/list">커뮤니티</a></li>
-    		<!-- <li><a href="/member/logout">로그아웃</a></li> -->
-    	</ul>
-    	
-    
-    	<c:if test="${session.Scope.level == '관리자'  }">
-    		<li><a href="/admin/home">관리자메뉴 </a></li>
-    		</c:if>
-    		
-    	
-	</c:when>
-	<c:otherwise>
-		<i class="fa-solid fa-bars" style="color: #black;" ></i>
-		<li><a href="/">Home</a></li>
-		<li><a href="/member/login">로그인</a></li>
-		<li><a href="/member/join">회원가입</a></li>
-	</c:otherwise>
-</c:choose>
-            		            	
-=======
 				 <ul class="menu">
 				 <c:choose>
 				<c:when test="${sessionScope.name != null}"> 
@@ -126,6 +89,5 @@
     </c:choose>
     </ul>
     	  	
->>>>>>> refs/remotes/origin/main
   </nav>
         <section>

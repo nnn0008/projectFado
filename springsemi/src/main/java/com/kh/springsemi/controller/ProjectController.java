@@ -33,16 +33,7 @@ public class ProjectController {
 	public String write() {
 		return "/WEB-INF/views/project/write.jsp";
 	}
-//	@PostMapping("/write")
-//	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session) {
-//		int projectNo = projectDao.sequence();
-//		projectDto.setProjectNo(projectNo);
-//		String memberId = (String)session.getAttribute("name");
-//		projectDto.setProjectOwner(memberId);
-//		projectDao.insert(projectDto);
-//		
-//		return "redirect:writeFinish";
-//	}
+
 	@PostMapping("/write")
 	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session
 									,Model model ) {
@@ -52,8 +43,9 @@ public class ProjectController {
 		projectDto.setProjectOwner(memberId);
 		projectDao.insert(projectDto);
 		
-		return "redirect:writeFinish";
+		return "redirect:detail?projectNo="+projectNo;
 	}
+	
 	
 	@RequestMapping("/detail")
 	public String detail(Model model, @RequestParam int projectNo) {

@@ -1,5 +1,6 @@
 package com.kh.springsemi.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +32,17 @@ public class ProjectDaoImpl implements ProjectDao{
 	}
 	@Override
 	public void insert(ProjectDto projectDto) {
+		Date endDate = projectDto.getCalculateEndDate();
+		projectDto.setProjectEndDate(endDate);
 		String sql = "insert into project(project_no, project_title, project_goal_price, project_start_date, "
-				+ "project_end_date, project_category, project_content, project_owner) values(?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "project_duration, project_category, project_content, project_owner, project_end_date) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] data = {projectDto.getProjectNo(), projectDto.getProjectTitle(), projectDto.getProjectGoalPrice(),
-				projectDto.getProjectStartDate(), projectDto.getProjectEndDate(),
-				projectDto.getProjectCategory(), projectDto.getProjectContent(), projectDto.getProjectOwner()};
-		
+				projectDto.getProjectStartDate(), projectDto.getProjectDuration(),
+				projectDto.getProjectCategory(), projectDto.getProjectContent(), projectDto.getProjectOwner(), endDate};
+		 
 		jdbcTemplate.update(sql, data);
 	}
+	
 	//프로젝트 삭제(판매자가)
 	@Override
 	public boolean delete(int projectNo) {

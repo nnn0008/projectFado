@@ -94,6 +94,7 @@ $(function(){
     				창작자 소개<br>
     				리워드1<br>
     				리워드2<br>
+    				조회수 : ${projectDto.projectReadcount}<br>
     			</div>
     		</div>
     	</div>

@@ -76,7 +76,7 @@
 	</c:otherwise>
 </c:choose>
             		            	
-=======
+
 				 <ul class="menu">
 				 <c:choose>
 				<c:when test="${sessionScope.name != null}"> 
@@ -126,6 +126,6 @@
     </c:choose>
     </ul>
     	  	
->>>>>>> refs/remotes/origin/main
+
   </nav>
         <section>

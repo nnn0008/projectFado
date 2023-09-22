@@ -120,27 +120,28 @@
 				<c:choose>
 					<c:when test="${sessionScope.name != null}">
 						<li><a href="#">카테고리 </a>
+						<ul>
 						<li><a href="">전체</a></li>
 						<li><a href="">가전</a></li>
 						<li><a href="">의류</a></li>
 						<li><a href="">푸드</a></li>
+						</ul>
 
-
+						<ul>
 						<li class="menu-right"><a href="member/mypage">마이페이지</a></li>
 						<li><a href="/member/logout">로그아웃</a></li>
 						<c:if test="${sessionScope.level == '관리자' }">
 							<li><a href="/admin/home">관리자메뉴</a></li>
 						</c:if>
-
-
-
+						</ul>
 
 
 
 					</c:when>
+					
 					<c:otherwise>
 						<li><a href="#">카테고리 </a>
-							<ul>
+						 	<ul>
 
 								<li><a href="">전체</a></li>
 								<li><a href="">가전</a></li>

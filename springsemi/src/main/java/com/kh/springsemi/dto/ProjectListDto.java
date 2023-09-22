@@ -12,7 +12,6 @@ public class ProjectListDto {
 	private int projectTotalPrice;
 	private Date projectStartDate;
 	private Date projectEndDate;
-	private String projectCategory;
 	private Date projectRegDate;
 //	private String projectContent;
 	private String projectOwner;

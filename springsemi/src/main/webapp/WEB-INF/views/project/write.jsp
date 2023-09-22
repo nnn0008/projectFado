@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <!-- summernote cdn -->
@@ -55,7 +56,15 @@ $(function () {
 		minDate: new Date(), //오늘 이전의 날짜를 선택하지 못하게 설정	
 	});
 
-    
+    $(".minor").hide();
+    $("[name=majorCategoryNo]").change(function(){
+    	if($("[name=majorCategoryNo]").val() === ""){
+    		$(".minor").hide();		
+    	}
+    	else{
+	    	$(".minor").show();	
+    	}		
+    });
   });
 </script>
 
@@ -91,18 +100,33 @@ $(function () {
       </div>
       <div class="row left">
          카테고리 선택
-         <select name="projectCategory" class="form-input w-100">
-            <option value="project_category">의류(추가해야함)</option>
-            <option value="project_category">게임</option>
-         </select>
-      </div>
+         <div class="flex-container">
+         	<div class="w-50">
+	         	대분류
+	         <select name="majorCategoryNo" class="form-input w-100">
+					<option value="">분류를 고르세요</option>
+				<c:forEach var="majorCategoryDto" items="${majorList}">
+			     	<option value="${majorCategoryDto.majorCategoryNo}">${majorCategoryDto.majorCategoryType}</option>
+				</c:forEach>
+	         </select>
+			</div>
+			<div class="w-50 minor">
+				소분류
+				<select name="minorCategoryNo" class="form-input w-100">
+					<option value="">분류를 고르세요</option>
+				<c:forEach var="minorCategoryDto" items="${minorList}">
+			     	<option value="${minorCategoryDto.minorCategoryNo}">${minorCategoryDto.minorCategoryType}</option>
+				</c:forEach>
+				</select>
+			</div>
+         </div>
       <div class="row">
          <textarea name="projectContent" placeholder="내용을 작성하세요"></textarea>
       </div>
       <div class="row">
          <button type="submit" class="btn btn-positive w-100">작성하기</button>
       </div>
-         
+      </div>
    </div>
 </form>
 

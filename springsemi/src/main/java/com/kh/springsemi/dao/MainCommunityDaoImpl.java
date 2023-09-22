@@ -10,6 +10,7 @@ import com.kh.springsemi.dto.MainCommunityDto;
 import com.kh.springsemi.dto.MainCommunityListDto;
 import com.kh.springsemi.mapper.MainCommunityListMapper;
 import com.kh.springsemi.mapper.MainCommunityMapper;
+import com.kh.springsemi.vo.CommunityPaginationVO;
 import com.kh.springsemi.vo.PaginationVO;
 
 @Repository
@@ -49,23 +50,58 @@ public class MainCommunityDaoImpl implements MainCommunityDao{
 
 
 	@Override
-	public List<MainCommunityListDto> selectList(PaginationVO vo) {  //메인 커뮤니티 목록 페이지
-		if(vo.isSearch()) {
-			String sql = "select * from(select rownum rn, TMP.* from ("
-					+ "select * from main_community_list where instr("+vo.getType()+", ?) > 0 "
-							+ "order by " +vo.getType()+ " desc)TMP) where rn between ? and ?";
+	public List<MainCommunityListDto> selectNoticeList(CommunityPaginationVO vo) {  //메인 커뮤니티 목록 페이지
+		if(vo.isSearch()) {  //검색할때
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+					+ "select * from main_community_list "
+						+ "where instr(main_community_title, ?) > 0 "
+						+ "and main_community_type = '공지사항' "
+					+ "order by main_community_no asc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
 			Object[] data = {vo.getKeyword(), vo.getStartRow(), vo.getFinishRow()};
 			return jdbcTemplate.query(sql, mainCommunityListMapper, data);
 		}
-		else {
-			String sql = "select * from(select rownum rn, TMP.* from ("
-					+ "select * from main_community_list "
-					+ "order by main_community_no desc)TMP) "
-					+ "where rn between ? and ?";
+		else {  //검색 없이 목록
+			String sql = "select * from (select rownum rn, TMP.* from ("
+		            + "select * from main_community_list "
+		            + "where main_community_type = '공지사항' " // 여기에 조건 추가
+		            + "order by main_community_no desc) TMP) "
+		            + "where rn between ? and ?";
 			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
 			return jdbcTemplate.query(sql, mainCommunityListMapper, data);
 		}
 	}
+	
+	
+	@Override
+	public List<MainCommunityListDto> selectQnAList(CommunityPaginationVO vo) {  //메인 커뮤니티 목록 페이지 qna
+		if(vo.isSearch()) {  //검색할때
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+					+ "select * from main_community_list "
+						+ "where instr(main_community_title, ?) > 0 "
+						+ "and main_community_type = 'Q&A' "
+					+ "order by main_community_no asc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+			Object[] data = {vo.getKeyword(), vo.getStartRow(), vo.getFinishRow()};
+			return jdbcTemplate.query(sql, mainCommunityListMapper, data);
+		}
+		else {  //검색 없이 목록
+			String sql = "select * from (select rownum rn, TMP.* from ("
+		            + "select * from main_community_list "
+		            + "where main_community_type = 'Q&A' " // 여기에 조건 추가
+		            + "order by main_community_no desc) TMP) "
+		            + "where rn between ? and ?";
+			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+			return jdbcTemplate.query(sql, mainCommunityListMapper, data);
+		}
+	}
+	
+	
+	
 	
 	
 	@Override
@@ -93,15 +129,31 @@ public class MainCommunityDaoImpl implements MainCommunityDao{
 	}
 
 
+
+
 	@Override
-	public int countList(PaginationVO vo) {
+	public int countNoticeList(CommunityPaginationVO vo) {
 		if(vo.isSearch()) {
-			String sql = "select count(*) from main_community where instr("+vo.getType()+", ?) > 0";
+			String sql = "select count(*) from main_community where instr(main_community_title, ?) > 0";
 			Object[] data = {vo.getKeyword()};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		else {
-			String sql = "select count(*) from main_community";
+			String sql = "select count(*) from main_community where main_community_type = '공지사항'";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+
+
+	@Override
+	public int countQnAList(CommunityPaginationVO vo) {
+		if(vo.isSearch()) {
+			String sql = "select count(*) from main_community where instr(main_community_title, ?) > 0";
+			Object[] data = {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		} 
+		else {
+			String sql = "select count(*) from main_community where main_community_type = 'Q&A'";
 			return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}

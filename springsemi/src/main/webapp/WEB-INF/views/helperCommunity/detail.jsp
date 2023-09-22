@@ -42,10 +42,18 @@
 		</a>
 		</c:if>
 		</c:if>
-		<a class="btn" href="list">
-			<i class="fa-solid fa-list"></i>
-			목록
-		</a>
+		<c:choose>
+			<c:when test="${mainCommunityDto.mainCommunityType == '공지사항'}">
+				<a href="noticeList" class="btn">
+					<i class="fa-solid fa-list"></i>목록
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="qnaList" class="btn">
+					<i class="fa-solid fa-list"></i>목록
+				</a>
+			</c:otherwise>
+		</c:choose>
 		</div>
 
 

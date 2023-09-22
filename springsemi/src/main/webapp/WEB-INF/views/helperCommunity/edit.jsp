@@ -16,7 +16,7 @@
 
 <script>
 	$(function(){
-	    $('[name=boardContent]').summernote({
+	    $('[name=mainCommunityContent]').summernote({
 	        placeholder: '내용을 작성하세요',
 	        tabsize: 2,
 	        height: 300, //에디터 높이
@@ -55,10 +55,19 @@
 	</div>
 	
 	<div class="row right">
-		<a href="list" class="btn">
-			<i class="fa-solid fa-list"></i>
-			목록
-		</a>
+		<c:choose>
+			<c:when test="${mainCommunityDto.mainCommunityType == '공지사항'}">
+				<a href="noticeList" class="btn">
+					<i class="fa-solid fa-list"></i>목록
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="qnaList" class="btn">
+					<i class="fa-solid fa-list"></i>목록
+				</a>
+			</c:otherwise>
+		</c:choose>
+		
 		<button type="submit" class="btn btn-positive">
 			<i class="fa-solid fa-edit"></i>
 			수정

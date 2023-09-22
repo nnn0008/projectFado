@@ -7,6 +7,10 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
+<!-- Lightpick  CDN -->
+<link rel="stylesheet" href="/css/lightpick.css">
+<script src="/js/lightpick.js"></script>
+
 <script>
 $(function () {
     $('[name=projectContent]').summernote({
@@ -24,6 +28,7 @@ $(function () {
         ['insert', ['link']],
       ],
     });  
+    
     //마감일자는 모든 정보를 입력하기 전까지 보여주지 않는다
     $('.end').hide();
     $("[name=projectStartDate], [name=projectDuration]").on("input", function(){
@@ -39,6 +44,15 @@ $(function () {
     	var future = moment(startDate, 'YYYY-MM-DD').add(parseInt(duration) - 1, 'days'); //따라서 숫자로 바꿔줘야 한다
     	$(".future").text(future.format('YYYY-MM-DD'));
     });
+    
+
+	var picker = new Lightpick({
+		field: document.querySelector("[name=projectStartDate]"), //타겟찾아서
+		singleDate: true, //단일 날짜를 선택(true)
+		format: 'YYYY-MM-DD', //날짜형식 설정
+		minDate: new Date(), //오늘 이전의 날짜를 선택하지 못하게 설정	
+	});
+
     
   });
 </script>
@@ -60,12 +74,12 @@ $(function () {
       </div>
       <div class="row left">
             시작날짜 선택
-            <input type="date" name="projectStartDate"  class="form-input w-100">
+            <input type="text" name="projectStartDate"  class="form-input w-100" placeholder="프로젝트 시작날짜를 선택하세요">
         </div>
         <div class="row left">
             프로젝트 마감날짜 선택
             <select name="projectDuration"  class="form-input w-100">
-                <option value="">선택하세요</option>
+                <option value="">프로젝트 마감 날짜를 고르세요</option>
                 <option value="15">15일</option>
                 <option value="30">30일</option>
             </select>

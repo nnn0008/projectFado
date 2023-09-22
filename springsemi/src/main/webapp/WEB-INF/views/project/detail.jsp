@@ -63,12 +63,9 @@ $(function(){
     				모인금액<br>
     				<fmt:formatNumber value="${projectDto.projectTotalPrice }" pattern="#,###"/>원<br>
     				남은시간
-<<<<<<< HEAD
     				<label class="timer"></label>
-=======
     				${difference / 1000} 초
-    				남은시간: ${projectDto.projectEndDate}
->>>>>>> refs/remotes/origin/main
+    				<label class="timer">0일 0시 0분 0초 남았습니다</label>
     				<br>
     				후원자
     				X명<br>
@@ -94,6 +91,7 @@ $(function(){
     				창작자 소개<br>
     				리워드1<br>
     				리워드2<br>
+    				조회수 : ${projectDto.projectReadcount}<br>
     			</div>
     		</div>
     	</div>

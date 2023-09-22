@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.ProjectDao;
+import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ProjectListDto;
 import com.kh.springsemi.error.AuthorityException;
@@ -28,21 +30,15 @@ public class ProjectController {
 	@Autowired
 	ProjectDao projectDao;
 	
+	@Autowired
+	private MemberDao memberDao;
+	
 	//프로젝트 등록
 	@GetMapping("/write")
 	public String write() {
 		return "/WEB-INF/views/project/write.jsp";
 	}
-//	@PostMapping("/write")
-//	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session) {
-//		int projectNo = projectDao.sequence();
-//		projectDto.setProjectNo(projectNo);
-//		String memberId = (String)session.getAttribute("name");
-//		projectDto.setProjectOwner(memberId);
-//		projectDao.insert(projectDto);
-//		
-//		return "redirect:writeFinish";
-//	}
+
 	@PostMapping("/write")
 	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session
 									,Model model ) {
@@ -52,19 +48,27 @@ public class ProjectController {
 		projectDto.setProjectOwner(memberId);
 		projectDao.insert(projectDto);
 		
-		return "redirect:writeFinish";
+		return "redirect:detail?projectNo="+projectNo;
 	}
+	
 	
 	@RequestMapping("/detail")
 	public String detail(Model model, @RequestParam int projectNo) {
 		ProjectDto projectDto = projectDao.selectOne(projectNo);
 		model.addAttribute("projectDto", projectDto);
+		
 		Date currentTime = new Date();
 		Date endTime = projectDto.getProjectEndDate();
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
 		long difference = endTime.getTime() - currentTime.getTime();
 		String d = fmt.format(difference);
 		model.addAttribute("difference", difference);
+		
+		String projectOwner = projectDto.getProjectOwner();
+		if(projectOwner != null) {
+			MemberDto memberDto = memberDao.selectOne(projectOwner);
+			model.addAttribute("OwnerDto", memberDto);
+		}
 		
 		return "/WEB-INF/views/project/detail.jsp";
 	}

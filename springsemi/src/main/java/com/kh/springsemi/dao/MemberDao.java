@@ -31,6 +31,7 @@ public interface MemberDao {
 	//D - 배송지 삭제
 	boolean delete(int deliveryNo);
 	
+	
 	int countList(PaginationVO vo);
 	List<MemberDto> selectListByPage(PaginationVO vo);
 	List<MemberListDto> selectListByPage2(PaginationVO vo);
@@ -40,5 +41,11 @@ public interface MemberDao {
 	void insertBlock(String memberId);
 	boolean deleteBlock(String memberId);
 	
+	
+// 회원 프로필 관련 기능
+	void insertProfile(String memberId, int attachNo);
+	boolean deleteProfile(String memberId);
+	Integer findProfile(String memberId);
+	MemberDto selectOneByMemberNickname(String memberNickname);
 
 }

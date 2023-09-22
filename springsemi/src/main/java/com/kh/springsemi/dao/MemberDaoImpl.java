@@ -175,6 +175,7 @@ public class MemberDaoImpl implements MemberDao{
 		
 	}
 	
+
 //	관리자 회원수정  
 	@Override
 	public boolean updateMemberInfoByAdmin(MemberDto memberDto) {
@@ -218,7 +219,45 @@ public class MemberDaoImpl implements MemberDao{
 					+ ")TMP"
 					+ ") where rn between ? and ?";
 			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
-			return jdbcTemplate.query(sql, memberListMapper, data);			
+			return jdbcTemplate.query(sql, memberListMapper, data);
+			}
+		
 		}
+	
+	//회원 프로필 관련 기능
+	//프로필 등록
+	@Override
+	public void insertProfile(String memberId, int attachNo) {
+		String sql = "insert into member_profile values(?, ?)";
+		Object[] data = {memberId, attachNo};
+		jdbcTemplate.update(sql,data);
+	}
+
+	@Override
+	public boolean deleteProfile(String memberId) {
+		String sql = "delete member_profile where member_id=?";
+		Object[] data = {memberId};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+
+	@Override
+	public Integer findProfile(String memberId) {
+		String sql = "select attach_no from member_profile "
+				+ "where member_id=?";
+		Object[] data = {memberId};
+		try {
+			return jdbcTemplate.queryForObject(sql, Integer.class, data);
+		} 
+		catch(Exception e) {
+			return null; //예외 발생 시 null로 대체하여 반환
+		}
+	}
+
+	@Override
+	public MemberDto selectOneByMemberNickname(String memberNickname) {
+		String sql = "select * from member where member_nickname = ?";
+		Object[] data = {memberNickname};
+		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
 }

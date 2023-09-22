@@ -58,7 +58,7 @@ public class DeliveryController {
 //		return "/WEB-INF/views/delivery/mydelivery.jsp";
 //	}
 	@RequestMapping("/mydelivery")
-	public String myDelivery(Model model, HttpSession session , @RequestParam int deliveryNo) {
+	public String myDelivery(Model model, HttpSession session, @RequestParam int deliveryNo) {
 		DeliveryDto deliveryDto = deliveryDao.selectOne(deliveryNo);
 		model.addAttribute("deliveryDto",deliveryDto);
 		return "/WEB-INF/views/delivery/mydelivery.jsp";

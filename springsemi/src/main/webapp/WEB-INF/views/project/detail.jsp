@@ -71,7 +71,7 @@ $(function(){
     				X명<br>
     				<hr>
     				목표금액
-    				<fmt:formatNumber value="${projectDto.projectGoalPrice }" pattern="#,###"/>원<br>
+    				<fmt:formatNumber value="${projectDto.projectGoalPrice}" pattern="#,###"/>원<br>
     				펀딩기간
     				${projectDto.projectStartDate} ~ ${projectDto.projectEndDate}<br>
     				결제
@@ -85,7 +85,7 @@ $(function(){
     		</div>
     		<div class="flex-container">
     			<div class="w-100 left">
-    				${projectDto.projectContent }
+    				${projectDto.projectContent}
     			</div>
     			<div class="w-100">
     				창작자 소개<br>

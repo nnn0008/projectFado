@@ -1,5 +1,6 @@
 package com.kh.springsemi.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -22,7 +23,7 @@ import com.kh.springsemi.error.NoTargetException;
 import com.kh.springsemi.vo.PaginationVO;
 
 @Controller
-@RequestMapping("/helperCommunity")
+@RequestMapping("/helper_community")
 public class MainCommunityController {
 
 	@Autowired
@@ -47,10 +48,10 @@ public class MainCommunityController {
 		//커뮤니티 글 등록
 		int mainCommunityNo = mainCommunityDao.sequence();
 		mainCommunityDto.setMainCommunityNo(mainCommunityNo);
-		mainCommunityDao.insert(mainCommunityDto);
 		
 		String memberId = (String) session.getAttribute("name");
 		mainCommunityDto.setMainCommunityWriter(memberId);
+		mainCommunityDao.insert(mainCommunityDto);
 
 		return "redirect:detail?mainCommunityNo="+mainCommunityNo;
 	}
@@ -71,18 +72,62 @@ public class MainCommunityController {
 	}
 	
 	
-	@RequestMapping("/list")  //메인 커뮤니티 글 목록
-	public String list(@ModelAttribute(name = "vo") PaginationVO vo, Model model) {
+	@RequestMapping("/notice_list")  //메인 커뮤니티 글 목록
+	public String noticeList(@ModelAttribute(name = "vo") PaginationVO vo, Model model,
+							HttpSession session, @ModelAttribute MainCommunityDto inputDto) {
+		
 		int count = mainCommunityDao.countList(vo);  //페이지 네이션 카운트 메소드
+		
 		model.addAttribute("vo", vo);
 		vo.setCount(count);
 		
-		List<MainCommunityListDto> list = mainCommunityDao.selectList(vo);
-		model.addAttribute("list", list);
 		
-		return "/WEB-INF/views/helperCommunity/list.jsp";
+		
+		List<MainCommunityListDto> list = mainCommunityDao.selectList(vo);
+		List<MainCommunityListDto> noticeList = new ArrayList<>();
+		
+		for(MainCommunityListDto mainComunityListDto : list) {
+			if("공지사항".equals(mainComunityListDto.getMainCommunityType())) {
+				noticeList.add(mainComunityListDto);
+			}
+			
+		}
+		model.addAttribute("noticeList", noticeList);
+		
+		
+		return "/WEB-INF/views/helperCommunity/noticeList.jsp";
+	}
+
+		
+	
+	@RequestMapping("/qna_list")  //메인 커뮤니티 글 목록
+	public String qnaList(@ModelAttribute(name = "vo") PaginationVO vo, Model model,
+						HttpSession session, @ModelAttribute MainCommunityDto inputDto) {
+		
+		int count = mainCommunityDao.countList(vo);  //페이지 네이션 카운트 메소드
+		
+		model.addAttribute("vo", vo);
+		vo.setCount(count);
+		
+		
+		
+		List<MainCommunityListDto> list = mainCommunityDao.selectList(vo);
+		List<MainCommunityListDto> qnaList = new ArrayList<>();
+		
+		for(MainCommunityListDto mainComunityListDto : list) {
+			if("Q&A".equals(mainComunityListDto.getMainCommunityType())) {
+				qnaList.add(mainComunityListDto);
+			}
+			
+		}
+		model.addAttribute("qnaList", qnaList);
+		
+		
+		return "/WEB-INF/views/helperCommunity/qnaList.jsp";
 		
 	}
+	
+	
 	
 	
 	@RequestMapping("/detail")  //메인 커뮤니티 글 상세

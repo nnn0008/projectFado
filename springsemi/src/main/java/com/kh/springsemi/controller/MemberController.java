@@ -49,8 +49,13 @@ public class MemberController {
 		
 		String memberId = (String) session.getAttribute("name"); //세션으로 사용자 아이디 꺼내옴
 		MemberDto memberDto = memberDao.selectOne(memberId); //회원정보 조회
+		
+		//조회한 정보를 모델에 첨부
 		model.addAttribute("memberDto",memberDto); 
 		model.addAttribute("memberFollowList", memberFollowDao.findByFollowerId(memberId));
+		//회원의 프로필 이미지 번호를 모델에 첨부
+		model.addAttribute("profile", memberDao.findProfile(memberId)); 
+		
 		return "/WEB-INF/views/member/mypage.jsp";
 	}	
 	

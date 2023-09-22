@@ -146,7 +146,7 @@ $(function(){
 									.hide()
 									.after(editHtmlTemplate)
 					});
-					$(".reply-list").append(htmlTemplate);
+					$(".delivery-list").append(htmlTemplate);
 				}
 			},
 		});
@@ -222,42 +222,37 @@ $(function(){
 			</div>
 		</form>
 	</script>
-			<div class="row container w-600">
 				<div class="row left">
 				<form class="delivery-insert-form">
 				<input type="hidden" name="deliveryNo" value="${deliveryDto.deliveryNo}">
-					<div class="row">
-						<h2>배송지</h2>
-						<div class= "row">
-						<input type="text" name="deliveryReceiver" class="form-input w-100"
+				
+						<div class="row">
+							<input type="text" name="deliveryReceiver" class="form-input w-100"
 						placeholder="받는사람">
 						</div>
 						<div class= "row">
-						<input type="text" name="deliveryPost" class="form-input w-100"
+							<input type="text" name="deliveryPost" class="form-input w-100"
 						placeholder="우편번호">
 						</div>
 						<div class= "row">
-						<input type="text" name="deliveryAddr1" class="form-input w-100" 
+							<input type="text" name="deliveryAddr1" class="form-input w-100" 
 						placeholder="기본주소">
 						</div>
 						<div class= "row">
-						<input type="text" name="deliveryAddr2" class="form-input w-100" 
+							<input type="text" name="deliveryAddr2" class="form-input w-100" 
 						placeholder="상세주소">
 						</div>
 						<div class= "row">
-						<input type="text" name="deliveryContact" class="form-input w-100" 
+							<input type="text" name="deliveryContact" class="form-input w-100" 
 						placeholder="받는사람 전화번호">
 						</div>
-					</div>
-				<div class="row left">
+					<div class="row">
 					<button class="btn btn-positive w-100">
 					<i class="fa-solid fa-pen"></i>
 					배송지 추가
 				</button>
 				</div>
 			</form>
-		</div>
-	</div>
 </div>
 
 <div class="row left delivery-list"></div>

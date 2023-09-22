@@ -20,7 +20,6 @@ public ProjectListDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 	projectListDto.setProjectStartDate(rs.getDate("project_start_date"));
 	projectListDto.setProjectEndDate(rs.getDate("project_end_date"));
 //	projectListDto.setProjectPeriod(rs.getInt("project_period"));
-	projectListDto.setProjectCategory(rs.getString("project_category"));
 	projectListDto.setProjectRegDate(rs.getDate("project_reg_date"));
 //	projectListDto.setProjectContent(rs.getString("project_content"));
 	projectListDto.setProjectOwner(rs.getString("project_owner"));

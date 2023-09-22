@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.springsemi.dto.DeliveryDto;
 import com.kh.springsemi.dto.MemberDto;
+import com.kh.springsemi.dto.MemberListDto;
 import com.kh.springsemi.vo.PaginationVO;
 
 public interface MemberDao {
@@ -16,7 +17,8 @@ public interface MemberDao {
 	boolean updateMemberInfo(MemberDto memberDto);
 	//D - 회원 삭제
 	boolean delete(String memberId);
-	
+	//관리자 회원 정보 수정 
+	boolean updateMemberInfoByAdmin(MemberDto memberDto);
 
 	//배송지번호 시퀀스
 	int sequence();
@@ -29,14 +31,21 @@ public interface MemberDao {
 	//D - 배송지 삭제
 	boolean delete(int deliveryNo);
 	
+	
 	int countList(PaginationVO vo);
 	List<MemberDto> selectListByPage(PaginationVO vo);
-//	List<MemberListDto> selectListByPage2(PaginationVO vo);
+	List<MemberListDto> selectListByPage2(PaginationVO vo);
 	
 	
 //	차단+해제 기능 
 	void insertBlock(String memberId);
 	boolean deleteBlock(String memberId);
 	
+	
+// 회원 프로필 관련 기능
+	void insertProfile(String memberId, int attachNo);
+	boolean deleteProfile(String memberId);
+	Integer findProfile(String memberId);
+	MemberDto selectOneByMemberNickname(String memberNickname);
 
 }

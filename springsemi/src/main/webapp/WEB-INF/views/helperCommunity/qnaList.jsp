@@ -10,13 +10,10 @@
 
 
 <div class="container w-800">
+
 	<div class="row">
-		<h1>메인 커뮤니티</h1>
-	</div>
-	
-	<div>
-		<button class="btn">공지사항</button>
-		<button class="btn">Q & A</button>
+		<a class="btn" href="/helper_community/notice_list">공지사항</a>
+		<a class="btn" style="background-color: #DEF2FF" href="/helper_community/qna_list">Q & A</a>
 	</div>
 	<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
 	<c:if test="${sessionScope.name != null}">
@@ -48,15 +45,17 @@
 			<thead>
 				<tr>
 					<th>번호</th>
+					<th>분류</th>
 					<th>작성자</th>
 					<th width="40%">제목</th>
 					<th>작성일</th>
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="mainCommunityListDto" items="${list}">
+			<c:forEach var="mainCommunityListDto" items="${qnaList}">
 				<tr>
 					<td>${mainCommunityListDto.mainCommunityNo}</td>
+					<td>${mainCommunityListDto.mainCommunityType}</td>
 					<td>${mainCommunityListDto.getMainCommunityWriterString()}</td>
 					<td align="left">
 						
@@ -73,7 +72,7 @@
 		</table>
 	</div>
 	
-	<div class="row page-navigator mv-30">
+		<div class="row page-navigator mv-30">
 		<!-- 이전 버튼 -->
 		<c:if test="${!vo.first}">
 			<a href="list?${vo.prevQueryString}">

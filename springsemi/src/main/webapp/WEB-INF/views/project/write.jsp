@@ -49,6 +49,8 @@ $(function () {
 	var picker = new Lightpick({
 		field: document.querySelector("[name=projectStartDate]"), //타겟찾아서
 		singleDate: true, //단일 날짜를 선택(true)
+		numberOfColumns: 2,
+		numberOfMonths:2,
 		format: 'YYYY-MM-DD', //날짜형식 설정
 		minDate: new Date(), //오늘 이전의 날짜를 선택하지 못하게 설정	
 	});

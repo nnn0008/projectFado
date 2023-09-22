@@ -28,7 +28,7 @@ import com.kh.springsemi.error.NoTargetException;
 public class ProjectController {
 	
 	@Autowired
-	ProjectDao projectDao;
+	private ProjectDao projectDao;
 	
 	@Autowired
 	private MemberDao memberDao;

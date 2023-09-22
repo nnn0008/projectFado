@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.springsemi.dao.MemberDao;
+import com.kh.springsemi.dao.MemberFollowDao;
 import com.kh.springsemi.dto.MemberDto;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
 
-	@Autowired MemberDao memberDao;
+	@Autowired 
+	private MemberDao memberDao;
+	
+	@Autowired
+	private MemberFollowDao memberFollowDao;
 	
 	//회원가입
 	@GetMapping("/join")
@@ -45,6 +50,7 @@ public class MemberController {
 		String memberId = (String) session.getAttribute("name"); //세션으로 사용자 아이디 꺼내옴
 		MemberDto memberDto = memberDao.selectOne(memberId); //회원정보 조회
 		model.addAttribute("memberDto",memberDto); 
+		model.addAttribute("memberFollowList", memberFollowDao.findByFollowerId(memberId));
 		return "/WEB-INF/views/member/mypage.jsp";
 	}	
 	
@@ -134,8 +140,7 @@ public class MemberController {
 	
 	//회원 탈퇴 페이지
 	@GetMapping("/exit")
-	public String exit(HttpSession session) {
-		String memberId = (String) session.getAttribute("name");
+	public String exit() {
 		return "/WEB-INF/views/member/exit.jsp";
 	}
 	
@@ -153,4 +158,6 @@ public class MemberController {
 		return "redirect:exit?error";
 	}
 	
+//	@RequestMapping("/followList")
+//	public String list(@ModelAttribute)
 }

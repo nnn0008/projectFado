@@ -41,27 +41,25 @@ public class ProjectDefenderInterceptor implements HandlerInterceptor{
 		else {
 			history = new HashSet<>();
 		}
-		System.out.println("history: " + history);
+		
+//		System.out.println("history: " + history);
+		
 		boolean isRead = history.contains(projectNo);
-		// 로그 추가
-	    System.out.println("projectNo: " + projectNo);
-	    System.out.println("isRead: " + isRead);
 		
-		if(isRead == false) {
-			history.add(projectNo);
-			session.setAttribute("history", history);
-		}
+//	    System.out.println("projectNo: " + projectNo);
+//	    System.out.println("isRead: " + isRead);
 		
-		boolean isOwner = projectDto.getProjectOwner() != null
-				&& memberId != null && projectDto.getProjectOwner().equals(memberId);
-		
-		 // 로그 추가
-	    System.out.println("isOwner: " + isOwner);
+	    boolean isOwner = projectDto.getProjectOwner() != null
+	    		&& memberId != null && projectDto.getProjectOwner().equals(memberId);
 	    
 		if(!isOwner && !isRead) {
+			history.add(projectNo);
+			session.setAttribute("history", history);
 			projectDao.updateProjectReadcount(projectNo);
 		}
 		
+//	    System.out.println("isOwner: " + isOwner);
+	    
 		return true;
 	}
 }

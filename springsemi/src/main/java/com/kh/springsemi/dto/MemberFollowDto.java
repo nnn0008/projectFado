@@ -5,7 +5,7 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class FollowDto {
+public class MemberFollowDto {
 	private String followerId;
 	private String followeeId;
 	private Date followDate;

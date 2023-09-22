@@ -43,6 +43,7 @@ pageEncoding="UTF-8"%>
 </table>
 
 	<a href="/delivery/mydelivery">배송지</a><br><br>
+	<a href="/follow/list">팔로잉</a><br><br>
 
 	<a href="password">
 			<i class="fa-solid fa-key"></i>

@@ -79,8 +79,9 @@ public class MainCommunityDaoImpl implements MainCommunityDao{
 	@Override
 	public boolean update(MainCommunityDto mainCommunityDto) {  //메인 커뮤니티 수정
 		String sql = "update main_community set main_community_title=?,"
-				+ " main_community_content=? where board_no=?";
-		Object[] data = {mainCommunityDto.getMainCommunityTitle(), mainCommunityDto.getMainCommunityContent()};
+				+ " main_community_content=? where main_community_no=?";
+		Object[] data = {mainCommunityDto.getMainCommunityTitle(), mainCommunityDto.getMainCommunityContent(),
+						mainCommunityDto.getMainCommunityNo()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 
@@ -94,8 +95,16 @@ public class MainCommunityDaoImpl implements MainCommunityDao{
 
 	@Override
 	public int countList(PaginationVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(vo.isSearch()) {
+			String sql = "select count(*) from main_community where instr("+vo.getType()+", ?) > 0";
+			Object[] data = {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else {
+			String sql = "select count(*) from main_community";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
 	}
+
 
 }

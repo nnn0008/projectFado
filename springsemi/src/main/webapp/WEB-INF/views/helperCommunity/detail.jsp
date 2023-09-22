@@ -23,6 +23,31 @@
 	</div>
 </div>
 
+	<div class="row">
+	<c:if test="${sessionScope.name != null}">
+		<a class="btn btn-positive" href="write">
+			<i class="fa-solid fa-pen"></i>
+			새글
+		</a>
+		
+		<%-- 수정/삭제는 소유자일 경우만 나와야 한다 --%>
+		<c:if test="${sessionScope.name == mainCommunityDto.mainCommunityWriter}">
+		<a class="btn btn-negative" href="edit?mainCommunityNo=${mainCommunityDto.mainCommunityNo}">
+			<i class="fa-solid fa-pen-to-square"></i>
+			수정
+		</a>
+		<a class="btn btn-negative" href="delete?boardNo=${mainCommunityDto.mainCommunityNo}">
+			<i class="fa-solid fa-trash"></i>
+			삭제
+		</a>
+		</c:if>
+		</c:if>
+		<a class="btn" href="list">
+			<i class="fa-solid fa-list"></i>
+			목록
+		</a>
+		</div>
+
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

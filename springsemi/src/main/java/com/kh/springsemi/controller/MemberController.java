@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.springsemi.dao.MemberDao;
+import com.kh.springsemi.dao.MemberFollowDao;
 import com.kh.springsemi.dto.MemberDto;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
 
-	@Autowired MemberDao memberDao;
+	@Autowired 
+	private MemberDao memberDao;
+	
+	@Autowired
+	private MemberFollowDao memberFollowDao;
 	
 	//회원가입
 	@GetMapping("/join")
@@ -47,6 +52,7 @@ public class MemberController {
 		
 		//조회한 정보를 모델에 첨부
 		model.addAttribute("memberDto",memberDto); 
+		model.addAttribute("memberFollowList", memberFollowDao.findByFollowerId(memberId));
 		//회원의 프로필 이미지 번호를 모델에 첨부
 		model.addAttribute("profile", memberDao.findProfile(memberId)); 
 		
@@ -139,8 +145,7 @@ public class MemberController {
 	
 	//회원 탈퇴 페이지
 	@GetMapping("/exit")
-	public String exit(HttpSession session) {
-		String memberId = (String) session.getAttribute("name");
+	public String exit() {
 		return "/WEB-INF/views/member/exit.jsp";
 	}
 	
@@ -158,4 +163,6 @@ public class MemberController {
 		return "redirect:exit?error";
 	}
 	
+//	@RequestMapping("/followList")
+//	public String list(@ModelAttribute)
 }

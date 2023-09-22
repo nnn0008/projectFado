@@ -20,6 +20,7 @@ public class ProjectOwnerInterceptor implements HandlerInterceptor{
 	
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("name");
 		

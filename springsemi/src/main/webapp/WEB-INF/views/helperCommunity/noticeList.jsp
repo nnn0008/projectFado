@@ -12,18 +12,18 @@
 <div class="container w-800">
 
 	<div class="row">
-		<a class="btn" style="background-color: #DEF2FF" href="/helper_community/notice_list">공지사항</a>
-		<a class="btn" href="/helper_community/qna_list">Q & A</a>
+		<a class="btn" style="background-color: #DEF2FF" href="/helperCommunity/noticeList">공지사항</a>
+		<a class="btn" href="/helperCommunity/qnaList">Q & A</a>
 	</div>
 	<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
-	<c:if test="${sessionScope.name != null}">
-	<div class="row right">
-		<a href="write" class="btn btn-positive">
-			<i class="fa-solid fa-pen"></i>
-			글쓰기
-		</a>
-	</div>
-	</c:if>
+		<c:if test="${sessionScope.name != null && sessionScope.level == '관리자'}">
+		    <div class="row right">
+		        <a href="write" class="btn btn-positive">
+		            <i class="fa-solid fa-pen"></i>
+		            글쓰기
+		        </a>
+		    </div>
+		</c:if>
 	
 	<%-- 
 		검색일 경우 검색어를 추가로 출력 
@@ -75,7 +75,8 @@
 		<div class="row page-navigator mv-30">
 		<!-- 이전 버튼 -->
 		<c:if test="${!vo.first}">
-			<a href="list?${vo.prevQueryString}">
+		
+			<a href="notictList?${vo.prevQueryString}">
 				<i class="fa-solid fa-angle-left"></i>
 			</a>
 		</c:if>
@@ -87,36 +88,22 @@
 					<a class="on">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="list?${vo.getQueryString(i)}">${i}</a> 
+					<a href="noticeList?${vo.getQueryString(i)}">${i}</a> 
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
 		<!-- 다음 버튼 -->
 		<c:if test="${!vo.last}">
-			<a href="list?${vo.nextQueryString}">
+			<a href="noticeList?${vo.nextQueryString}">
 				<i class="fa-solid fa-angle-right"></i>
 			</a>
 		</c:if>
 	</div>
 	
 	<!-- 검색창 -->
-	<form action="list" method="get">
+	<form action="noticeList" method="get">
 	<div class="row">
-		<c:choose>
-			<c:when test="${param.type == 'main_community_writer'}">
-				<select name="type" required class="form-input">
-					<option value="main_community_title">제목</option>
-					<option value="main_community_writer" selected>작성자</option>
-				</select>
-			</c:when>
-			<c:otherwise>
-				<select name="type" required class="form-input">
-					<option value="main_community_title">제목</option>
-					<option value="main_community_writer">작성자</option>
-				</select>
-			</c:otherwise>
-		</c:choose>
 		
 		<input type="search" name="keyword"  required class="form-input"
 					placeholder="검색어 입력" value="${param.keyword}">

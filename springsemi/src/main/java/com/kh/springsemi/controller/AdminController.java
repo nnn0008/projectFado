@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.vo.PaginationVO;
@@ -51,22 +52,26 @@ public class AdminController {
 		
 		
 		
-//		@RequestMapping("/member/cacel");
-		
+		@RequestMapping("/member/detail")
+		public String memberDetail(@RequestParam String memberId, Model model) {
+			
+			MemberDto memberDto = memberDao.selectOne(memberId);
+			model.addAttribute("memberDto", memberDto);
+			
+			return "/WEB-INF/views/admin/member/detail.jsp";				
+			
+			
 
+					
+			
+		}
+		
 		
 	}
 
 
 		
-//		
-//	@RequestMapping("/member/list")
-//	public String memberList() {
-//		
-//		return "/WEB-INF/views/admin/member/list.jsp";
-//		
-//	}
-		
+
 		
 	
 

@@ -21,72 +21,78 @@
 
 <style></style>
 
+
+<!-- easytimer.js라이브러리 -->
+<script src="/js/easytimer.min.js"></script>
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment-duration-format@2.3.2/lib/moment-duration-format.min.js"></script>
 
 </head>
 <body>
-   <main>
+	<main>
         <header>
-        
         <div class="logo">
-           <a href="/">
-           <img src="/images/fado.jpg" width="200" height="180" >
-           </a>
+        	<a href="/">
+        	<img src="/images/fado.jpg" width="200" height="180" >
+        	</a>
         </div>
+        
+        <!-- <li><a href="#">회원상세</a></li>
+	    			<li><a href="#">회원정보수정</a></li>
+	    		 	<li><a href="#">로그아웃</a></li> -->
          
-        <div class="login right">
-        <c:choose>
-      <c:when test="${sessionScope.name != null}">
-         <li><a href="/member/mypage">회원상세</a></li>
-          <li><a href="/member/change">회원정보수정</a></li>
-           <li><a href="/member/logout">로그아웃</a></li>
-       
-       
-       <%-- 관리자인 경우 추가 메뉴 출력  --%>
-       <c:if test="${session.Scope.level == '관리자'  }">
-          <li><a href="/admin/home">관리자메뉴 </a></li>
-          </c:if>
-          
-       
-   </c:when>
-   <c:otherwise>
-      <!-- <li><a href="/">Home</a></li> -->
-      <li><a href="/member/login">로그인</a></li>
-      <li><a href="/member/join">회원가입</a></li>
-   </c:otherwise>
-</c:choose>
-        
-        </div>
-        
-        <hr>
-        
-        
-      </header>
-   <nav>
    
-    <ul class="menu left">
-   <c:choose>
-      <c:when test="${sessionScope.name != null}">
-         <li><a href="/member/mypage">회원상세</a></li>
-          <li><a href="/member/change">회원정보수정</a></li>
-          <!-- <li><a href="/member/logout">로그아웃</a></li> -->
-       </ul>
-       
-    
-       <c:if test="${session.Scope.level == '관리자'  }">
-          <li><a href="/admin/home">관리자메뉴 </a></li>
-          </c:if>
-          
-       
-   </c:when>
-   <c:otherwise>
-      <i class="fa-solid fa-bars" style="color: #black;" ></i>
-      <li><a href="/">Home</a></li>
-      <li><a href="/member/login">로그인</a></li>
-      <li><a href="/member/join">회원가입</a></li>
-   </c:otherwise>
-</c:choose>
-                                 
+        
+				 <ul class="menu">
+				 <c:choose>
+				<c:when test="${sessionScope.name != null}"> 
+					<li>
+						<a href="#">카테고리 </a>
+					
+						
+						<li><a href="">전체</a></li>
+						<li><a href="">가전</a></li>
+						<li><a href="">의류</a></li>
+						<li><a href="">푸드</a></li>
+					
+					
+					<li class="menu-right">
+							<a href="member/mypage">마이페이지</a>
+						</li>
+						<li><a href="/member/logout">로그아웃</a></li>
+							<c:if test="${sessionScope.level == '관리자' }">
+								<li><a href="/admin/home">관리자메뉴</a></li>
+							</c:if>
+							
+					</li>
+			                
+						
+					
+					
+			</c:when>
+    			<c:otherwise>
+    				<li>
+						<a href="#">카테고리 </a>
+					<ul>
+						
+						<li><a href="">전체</a></li>
+						<li><a href="">가전</a></li>
+						<li><a href="">의류</a></li>
+						<li><a href="">푸드</a></li>
+					</ul>	
+					
+					<ul>	
+							<li class="menu-right">
+			                <a href="/member/login">로그인</a>
+			                <li><a href="/member/join">회원가입</a></li>
+					</ul>		
+				
+					
+		</c:otherwise>
+    </c:choose>
+    </ul>
+    	  	
   </nav>
         <section>

@@ -41,6 +41,7 @@
     			<th>이메일 </th>
     			<th>생년월일 </th>
     			<th>등급</th>
+    			<th>상세 </th>
     		</tr>
     		
     		<tbody>
@@ -52,7 +53,9 @@
     				<td>${memberDto.memberEmail }</td>
     				<td>${memberDto.memberBirth }</td>
     				<td>${memberDto.memberLevel }</td>
+    			<td><a href="detail?memberId=${memberDto.memberId }">상세 </a></td>	
     			</tr>
+    			
     			</c:forEach>
     		</tbody>
     		
@@ -76,6 +79,12 @@
 			<a href="list?${vo.nextQueryString }">&gt;</a>
 			</c:if>
 			
+		<%-- 
+			 내가 팔로우 하는사람 
+    			 나를 팔로우 하는사람 
+    			 내가 좋아요 누른 상품 
+    			 성공한 펀딩 
+		--%>
 		
 	</h4>
     </div>

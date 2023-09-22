@@ -1,12 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<h1>${memberDto.memberId}님의 회원 정보</h1>
 
+<div class="container w-500">
+<div class="row">
+<i class="fa-solid fa-heart" style="color: #f2829e;"></i>
+<h1>${memberDto.memberId}님의 회원 정보</h1>
+<i class="fa-solid fa-heart" style="color: #f2829e;"></i>
+</div>
 <table border="1" width="500">
 	<tr>
 		<th>닉네임</th>
@@ -56,5 +61,5 @@ pageEncoding="UTF-8"%>
 			<i class="fa-solid fa-user-xmark"></i>
 			회원 탈퇴
 		</a><br><br>
-
+</div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

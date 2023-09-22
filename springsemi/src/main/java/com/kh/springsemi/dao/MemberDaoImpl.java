@@ -200,4 +200,12 @@ public class MemberDaoImpl implements MemberDao{
 			return null; //예외 발생 시 null로 대체하여 반환
 		}
 	}
+
+	@Override
+	public MemberDto selectOneByMemberNickname(String memberNickname) {
+		String sql = "select * from member where member_nickname = ?";
+		Object[] data = {memberNickname};
+		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 }

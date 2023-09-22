@@ -24,6 +24,7 @@ import com.kh.springsemi.configuration.FileUploadProperties;
 import com.kh.springsemi.dao.AttachDao;
 import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dto.AttachDto;
+import com.kh.springsemi.dto.MemberDto;
 
 @RestController
 @RequestMapping("/rest/member")
@@ -109,5 +110,16 @@ public class MemberRestController {
 		String memberId = (String)session.getAttribute("name"); //세션으로 아이디 가져오기
 		memberDao.deleteProfile(memberId);
 	}
-
+	
+	//닉네임 중복 체크
+	@PostMapping("/nicknameCheck")
+	public String nicknameCheck(@RequestParam String memberNickname) {
+		MemberDto memberDto = memberDao.selectOneByMemberNickname(memberNickname);
+		if(memberDto == null) {
+			return "Y";
+		}
+		else {
+			return "N";
+		}
+	}
 }

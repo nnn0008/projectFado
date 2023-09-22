@@ -44,5 +44,6 @@ public interface MemberDao {
 	void insertProfile(String memberId, int attachNo);
 	boolean deleteProfile(String memberId);
 	Integer findProfile(String memberId);
+	MemberDto selectOneByMemberNickname(String memberNickname);
 
 }

@@ -15,9 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.springsemi.dao.MajorCategoryDao;
 import com.kh.springsemi.dao.MemberDao;
+import com.kh.springsemi.dao.MinorCategoryDao;
 import com.kh.springsemi.dao.ProjectDao;
+import com.kh.springsemi.dto.MajorCategoryDto;
 import com.kh.springsemi.dto.MemberDto;
+import com.kh.springsemi.dto.MinorCategoryDto;
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ProjectListDto;
 import com.kh.springsemi.error.AuthorityException;
@@ -28,20 +32,29 @@ import com.kh.springsemi.error.NoTargetException;
 public class ProjectController {
 	
 	@Autowired
-	ProjectDao projectDao;
+	private ProjectDao projectDao;
 	
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private MajorCategoryDao majorCategoryDao;
+	
+	@Autowired
+	private MinorCategoryDao minorCategoryDao;
+	
 	//프로젝트 등록
 	@GetMapping("/write")
-	public String write() {
+	public String write(Model majorModel, Model minorModel) {
+		List<MajorCategoryDto> majorList = majorCategoryDao.selectList();
+		majorModel.addAttribute("majorList", majorList);
+		List<MinorCategoryDto> minorList = minorCategoryDao.selectList();
+		minorModel.addAttribute("minorList", minorList);
 		return "/WEB-INF/views/project/write.jsp";
 	}
 
 	@PostMapping("/write")
-	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session
-									,Model model ) {
+	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session) {
 		int projectNo = projectDao.sequence();
 		projectDto.setProjectNo(projectNo);
 		String memberId = (String)session.getAttribute("name");

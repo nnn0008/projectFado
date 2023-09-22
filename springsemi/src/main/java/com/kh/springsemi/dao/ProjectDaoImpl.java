@@ -35,10 +35,10 @@ public class ProjectDaoImpl implements ProjectDao{
 		Date endDate = projectDto.getCalculateEndDate();
 		projectDto.setProjectEndDate(endDate);
 		String sql = "insert into project(project_no, project_title, project_goal_price, project_start_date, "
-				+ "project_duration, project_category, project_content, project_owner, project_end_date) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "project_duration, project_content, project_owner, project_end_date) values(?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] data = {projectDto.getProjectNo(), projectDto.getProjectTitle(), projectDto.getProjectGoalPrice(),
 				projectDto.getProjectStartDate(), projectDto.getProjectDuration(),
-				projectDto.getProjectCategory(), projectDto.getProjectContent(), projectDto.getProjectOwner(), endDate};
+				projectDto.getProjectContent(), projectDto.getProjectOwner(), endDate};
 		 
 		jdbcTemplate.update(sql, data);
 	}
@@ -50,13 +50,14 @@ public class ProjectDaoImpl implements ProjectDao{
 		Object[] data = {projectNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
 	//프로젝트 수정(관리자, 판매자)
 	@Override
 	public boolean update(ProjectDto projectDto) {
-		String sql = "update project set project_title = ?, project_goal_price = ?, project_start_date = ?, project_end_date = ?, project_category = ?, "
+		String sql = "update project set project_title = ?, project_goal_price = ?, project_start_date = ?, project_end_date = ?, "
 				+ "project_content = ? where project_no = ?";
 		Object[] data = {projectDto.getProjectTitle(), projectDto.getProjectGoalPrice(), projectDto.getProjectStartDate(), projectDto.getProjectEndDate(),
-				projectDto.getProjectCategory(), projectDto.getProjectContent(), projectDto.getProjectNo()};
+				projectDto.getProjectContent(), projectDto.getProjectNo()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	

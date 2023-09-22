@@ -19,7 +19,6 @@ public class ProjectMapper implements RowMapper<ProjectDto> {
 		projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 		projectDto.setProjectEndDate(rs.getDate("project_end_date"));
 		projectDto.setProjectDuration(rs.getInt("project_duration"));
-		projectDto.setProjectCategory(rs.getString("project_category"));
 		projectDto.setProjectRegDate(rs.getDate("project_reg_date"));
 		projectDto.setProjectContent(rs.getString("project_content"));
 		projectDto.setProjectOwner(rs.getString("project_owner"));

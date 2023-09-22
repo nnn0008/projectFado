@@ -8,7 +8,7 @@
     		<h3>${memberDto.memberId }서퍼님 회원정보 </h3>
     	</div>
     	
-    	<div class="left">
+    	<div class="row">
     		<table class="table table-border table-stripe">
 	    		<tr>
 	    			<th>닉네임 </th>
@@ -56,14 +56,24 @@
 	    				${Delivery.diliveryAddr2}
 	    				</td>
     			</tr>
-    		
+    			</div>
+    			
+    			
+    		<div class="row">
+    			<button class="btn btn-positive w-200" href="block?memberId=${memberDto.memberId }">
+    			회원차단
+    			</button>
+    			
+    			
+    			<button class="btn btn-positive w-200" href="edit?${memberDto.memberDto }">회원정보 변경</button>
+    		</div>
     			<%--
     				관리자가 일반 회원들의 어떤 정보를 더 필요로 할까? 
     			  --%>
     		
     			
     		</table>
-    	</div>
+    	
     </div>
     
     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

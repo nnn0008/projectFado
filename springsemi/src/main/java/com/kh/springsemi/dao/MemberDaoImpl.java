@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.springsemi.dto.DeliveryDto;
 import com.kh.springsemi.dto.MemberDto;
-import com.kh.springsemi.mapper.DeliveryMapper;
+import com.kh.springsemi.dto.MemberListDto;
+import com.kh.springsemi.mapper.MemberListMapper;
 import com.kh.springsemi.mapper.MemberMapper;
 import com.kh.springsemi.vo.PaginationVO;
 
@@ -20,6 +21,9 @@ public class MemberDaoImpl implements MemberDao{
 	
 	@Autowired
 	private MemberMapper memberMapper;
+	
+	@Autowired
+	private MemberListMapper memberListMapper;
 	
 	// 회원
 	
@@ -169,5 +173,52 @@ public class MemberDaoImpl implements MemberDao{
 		Object[] data = {memberId};
 		return jdbcTemplate.update(sql,data) > 0;
 		
+	}
+	
+//	관리자 회원수정  
+	@Override
+	public boolean updateMemberInfoByAdmin(MemberDto memberDto) {
+		String sql = "update member set "
+							+ "member_nickname = ?, "
+							+ "member_contact = ?,"
+							+ "member_email = ?, "
+							+ "member_birth = ?, "
+							+ "member_level = ?, "
+							+ "member_point = ? "
+						+ "where member_id = ?";
+		Object[] data = {
+			memberDto.getMemberNickname(), memberDto.getMemberContact(), 
+			memberDto.getMemberEmail(), memberDto.getMemberBirth(), 
+			memberDto.getMemberLevel(), memberDto.getMemberPoint(),
+			memberDto.getMemberId()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	@Override
+	public List<MemberListDto> selectListByPage2(PaginationVO vo) {
+		if(vo.isSearch()) {
+			String sql = "seleect * from ("
+					+ "select rownum rn, TMP.* from ("
+					+ "select * from member_list "
+					+ "where instr("+vo.getType()+", ?) > 0 "
+					+ "and member_level != '관리자' "
+					+ "order by "+vo.getType()+ "asc "
+					+ ")TMP "
+					+ ") where rn between ? and ?";
+			Object[] data = {vo.getKeyword(),vo.getStartRow(), vo.getFinishRow()};
+			return jdbcTemplate.query(sql, memberListMapper, data);
+		}
+		else {
+			String sql = "select * from ( "
+					+ "select rownum rn , TMP.* from( "
+					+ "select * from member "
+					+ "where member_level != '관리자' "
+					+ "order by member_id asc"
+					+ ")TMP"
+					+ ") where rn between ? and ?";
+			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+			return jdbcTemplate.query(sql, memberListMapper, data);			
+		}
 	}
 }

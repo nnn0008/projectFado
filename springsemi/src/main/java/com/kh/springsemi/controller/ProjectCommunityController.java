@@ -82,14 +82,14 @@ public class ProjectCommunityController {
 	@RequestMapping("/qnaList") 
 	public String qnaList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model) {
 	
-	int count = projectCommunityDao.countQnAList(vo);  //페이지 네이션 카운트 메소드
-	vo.setCount(count);
-	model.addAttribute("vo", vo);
-	
-	List<ProjectCommunityDto> qnaList = projectCommunityDao.selectQnAList(vo);
-	model.addAttribute("qnaList", qnaList);
+		int count = projectCommunityDao.countQnAList(vo);  //페이지 네이션 카운트 메소드
+		vo.setCount(count);
+		model.addAttribute("vo", vo);
 		
-	return "/WEB-INF/views/projectCommunity/qnaList.jsp";
+		List<ProjectCommunityDto> qnaList = projectCommunityDao.selectQnAList(vo);
+		model.addAttribute("qnaList", qnaList);
+			
+		return "/WEB-INF/views/projectCommunity/qnaList.jsp";
 	}
 	
 	
@@ -97,6 +97,7 @@ public class ProjectCommunityController {
 	public String detail(@RequestParam int projectCommunityNo, Model model, HttpSession session) {
 		ProjectCommunityDto projectCommunityDto = projectCommunityDao.selectOne(projectCommunityNo);
 		model.addAttribute("projectCommunityDto", projectCommunityDto);
+		
 		String projectCommunityWriter = projectCommunityDto.getProjectCommunityWriter();
 		if(projectCommunityWriter != null) {
 			MemberDto memberDto = memberDao.selectOne(projectCommunityWriter);

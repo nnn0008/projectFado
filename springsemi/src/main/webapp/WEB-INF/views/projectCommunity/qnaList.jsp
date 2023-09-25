@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
 
 
 
@@ -44,25 +44,30 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="projectCommunityListDto" items="${qnaList}">
+			<c:forEach var="projectCommunityDto" items="${qnaList}">
 				<tr>
-					<td>${projectCommunityListDto.projectCommunityNo}</td>
-					<td>${projectCommunityListDto.projectCommunityType}</td>
-					<td>${projectCommunityListDto.getProjectCommunityWriterString()}</td>
+					<td>${projectCommunityDto.projectCommunityNo}</td>
+					<td>${projectCommunityDto.projectCommunityType}</td>
+					<td>${projectCommunityDto.getProjectCommunityWriterString()}</td>
 					<td align="left">
 						
 						<!-- 제목을 누르면 상세페이지로 이동 -->
-						<a class="link" href="detail?projectCommunityNo=${projectCommunityListDto.projectCommunityNo}">
-							${projectCommunityListDto.projectCommunityTitle}
+						<a class="link" href="detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}">
+							${projectCommunityDto.projectCommunityTitle}
 						</a>
 						
 					</td>
-					<td>${projectCommunityListDto.projectCommunityRegDate}</td>
+					<td>${projectCommunityDto.projectCommunityRegDate}</td>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	
+	
+	
+	
+	
 	
 		<div class="row page-navigator mv-30">
 		<!-- 이전 버튼 -->

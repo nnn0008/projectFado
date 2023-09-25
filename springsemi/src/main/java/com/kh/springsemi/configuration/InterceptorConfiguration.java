@@ -9,6 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.kh.springsemi.interceptor.AdminInterceptor;
 import com.kh.springsemi.interceptor.MemberInterceptor;
+import com.kh.springsemi.interceptor.ProjectDefenderInterceptor;
+import com.kh.springsemi.interceptor.ProjectOwnerInterceptor;
 import com.kh.springsemi.interceptor.TestInterceptor;
 
 /**
@@ -33,6 +35,12 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 	@Autowired
 	private MemberInterceptor memberInterceptor;
 	
+	@Autowired
+	private ProjectDefenderInterceptor projectDefenderInterceptor;
+	
+	@Autowired
+	private ProjectOwnerInterceptor projectOwnerInterceptor;
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		
@@ -55,6 +63,28 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 						"/project/list/Community/review",
 						"/member/find*"
 						 );
+//	@Override
+//	public void addInterceptors(InterceptorRegistry registry) {
+//		
+//		registry.addInterceptor(memberInterceptor)
+//				.addPathPatterns(
+//						"/member/**",
+//						"/project/**"
+//						)
+////				제외시킬 주소(비회원) 
+//				.excludePathPatterns(
+//						  "/member/join*",
+//						  "/member/login*",
+//						"/project/list/like*",
+//						"/project/list/lank*",
+//						"/project/list/category*",
+//						"/project/list/period*",
+//						"/project/list/detail*",
+//						"/project/list/Community/QnA*",
+//						"/project/list/Community/notice*",
+//						"/project/list/Community/review"
+//						
+//						 );
 	
 				
 		
@@ -69,8 +99,12 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 //					"/admin/member/list*"
 //					);
 			
-	
-	
+		
+		registry.addInterceptor(projectDefenderInterceptor)
+				.addPathPatterns("/project/detail");
+		
+		registry.addInterceptor(projectOwnerInterceptor)
+		.addPathPatterns("/project/edit", "/project/delete");
 			
 	}
 }

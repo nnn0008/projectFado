@@ -73,7 +73,6 @@
         
         <hr>
         
-        
       </header>
    <nav>
    
@@ -85,12 +84,20 @@
          <li><a href="/helperCommunity/noticeList">공지사항</a></li>
          <li><a href="/projectCommunity/noticeList">공지사항</a></li>
           <!-- <li><a href="/member/logout">로그아웃</a></li> -->
+          <li>
+						<a href="#">카테고리 </a>
+						
+						<li><a href="">전체</a></li>
+						<li><a href="">가전</a></li>
+						<li><a href="">의류</a></li>
+						<li><a href="">푸드</a></li>
+						<li><a href="/project/list">펀딩 </a></li>
        </ul>
        
     
        <c:if test="${session.Scope.level == '관리자'  }">
           <li><a href="/admin/home">관리자메뉴 </a></li>
-          </c:if>
+       </c:if>
           
        
    </c:when>
@@ -104,72 +111,6 @@
                                  
   </nav>
         <section>
-	<main>
-        <header>
-        <div class="logo">
-        	<a href="/">
-        	<img src="/images/fado.jpg" width="200" height="180" >
-        	</a>
-        </div>
-        
-        <!-- <li><a href="#">회원상세</a></li>
-	    			<li><a href="#">회원정보수정</a></li>
-	    		 	<li><a href="#">로그아웃</a></li> -->
-         
-   
-        
-				<ul class="menu"> 
-				 <c:choose>
-				<c:when test="${sessionScope.name != null}"> 
-				
-				<ul>
-					<li>
-						<a href="#">카테고리 </a>
-						
-						<li><a href="">전체</a></li>
-						<li><a href="">가전</a></li>
-						<li><a href="">의류</a></li>
-						<li><a href="">푸드</a></li>
-					</ul>
-					
-					<li class="menu-right">
-							<a href="member/mypage">마이페이지</a>
-						</li>
-						<li><a href="/member/logout">로그아웃</a></li>
-						
-						
-						
-						
-							<c:if test="${sessionScope.level == '관리자' }">
-								<li><a href="/admin/home">관리자메뉴</a></li>
-							</c:if>
-						</ul>
-					</li>
-					
-			</c:when>
-    			<c:otherwise>
-    				<li>
-						<a href="#">카테고리 </a>
-					<ul>
-						
-						<li><a href="">전체</a></li>
-						<li><a href="">가전</a></li>
-						<li><a href="">의류</a></li>
-						<li><a href="">푸드</a></li>
-						<li><a href="/project/list">펀딩 </a></li>
-					</ul>	
-					
-					
-					
-					<ul>	
-							<li class="menu-right">
-			                <a href="/member/login">로그인</a>
-			                <li><a href="/member/join">회원가입</a></li>
-					</ul>		
-				</li>
-					
-		</c:otherwise>
-    </c:choose>
     </ul>
     	  	
   </nav>

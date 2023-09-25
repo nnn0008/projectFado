@@ -281,14 +281,14 @@ public class MemberDaoImpl implements MemberDao{
 	private MemberFollowMapper memberFollowMapper;
 
 	@Override
-	public void insert(MemberFollowDto memberFollowDto) {
+	public void insertFollow(MemberFollowDto memberFollowDto) {
 		String sql = "insert into follow(follower_id, followee_id) values(?, ?)";
 		Object[] data = {memberFollowDto.getFollowerId(), memberFollowDto.getFolloweeId()};
 		jdbcTemplate.update(sql, data);
 	}
 
 	@Override
-	public boolean delete(MemberFollowDto memberFollowDto) {
+	public boolean deleteFollow(MemberFollowDto memberFollowDto) {
 		String sql = "delete follow where follower_id =? and followee_id = ?";
 		Object[] data = {memberFollowDto.getFollowerId(), memberFollowDto.getFolloweeId()};
 		return jdbcTemplate.update(sql, data) > 0;
@@ -318,6 +318,14 @@ public class MemberDaoImpl implements MemberDao{
 						+ "order by member.member_id desc";
 		Object[] data = {followerId};
 		return jdbcTemplate.query(sql, memberMapper, data);
+	}
+	
+	@Override
+	public MemberFollowDto selectOneByFollowerId(String followerId) {
+		String sql ="select * from follow where followerId = ?";
+		Object[] data = {followerId};
+		List<MemberFollowDto> list = jdbcTemplate.query(sql,  memberFollowMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
 	
 	@Override

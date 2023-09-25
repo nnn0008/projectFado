@@ -130,7 +130,7 @@ public class MemberController {
 		boolean isCorrectPw = inputDto.getMemberPw().equals(findDto.getMemberPw());
 		if(isCorrectPw) {
 			session.setAttribute("name", findDto.getMemberId()); 
-//			session.setAttribute("level", findDto.getMemberLevel());//확인받아야
+			session.setAttribute("level", findDto.getMemberLevel());//확인받아야
 			memberDao.updateMemberLogin(inputDto.getMemberId());
 			return "redirect:/";
 		}
@@ -180,13 +180,13 @@ public class MemberController {
 	
 	@RequestMapping("/follow/following")
 	public String memberFollowing(@ModelAttribute MemberFollowDto memberFollowDto) {
-		memberDao.insert(memberFollowDto);
+		memberDao.insertFollow(memberFollowDto);
 		return "redirect:list";
 	}
 	
 	@RequestMapping("/follow/cancel")
 	public String memberCancel(@ModelAttribute MemberFollowDto memberFollowDto) {
-		memberDao.delete(memberFollowDto);
+		memberDao.deleteFollow(memberFollowDto);
 		return "redirect:list";
 	}
 	

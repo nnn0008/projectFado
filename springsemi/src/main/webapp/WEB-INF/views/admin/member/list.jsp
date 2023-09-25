@@ -67,7 +67,7 @@
     				</c:when>
     				<c:otherwise>
     				
-    					<a href="cancle?memberId=${memberListDto.memberId }">해제 </a>
+    					<a href="cancel?memberId=${memberListDto.memberId }">해제 </a>
     				</c:otherwise>
     			</c:choose>
     			
@@ -78,7 +78,6 @@
     			</c:forEach>
     		</tbody>
     		
-    	</thead>
     </table>
 	
 	<br>

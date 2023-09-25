@@ -18,6 +18,8 @@ public class ProjectListDto {
 	private int projectLikecount;
 	private String majorCategoryType;
 	private String minorCategoryType;
+	private String judgeStatus;
+	private Date judgeDate;
 //	private int projectPeriod;
 //	private int minorCategoryNo;
 }

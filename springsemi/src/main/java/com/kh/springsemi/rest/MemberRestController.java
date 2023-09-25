@@ -122,4 +122,16 @@ public class MemberRestController {
 			return "N";
 		}
 	}
+	
+	//아이디 중복 체크
+	@PostMapping("/idCheck")
+	public String idCheck(@RequestParam String memberId) {
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		if(memberDto == null) { //아이디가 없으면
+			return "Y";
+		}
+		else { //아이디가 없으면
+			return "N";
+		}
+	}
 }

@@ -56,20 +56,40 @@
 	    				${Delivery.diliveryAddr2}
 	    				</td>
     			</tr>
+    			
+    			<tr>
+				<th>가입일</th>
+				<td>
+					<%-- <fmt:formatDate value="${memberDto.memberJoin}" 
+									pattern="y년 M월 d일 E a h시 m분 s초"/> --%>
+				</td>
+			</tr>
+    			<tr>
+				<th>마지막로그인</th>
+				<td>
+					<%-- <fmt:formatDate value="${memberDto.memberLogin}" 
+									pattern="y년 M월 d일 E a h시 m분 s초"/> --%>
+				</td>
+			</tr>
+			<tr>
+				<th>마지막변경일</th>
+				<td>
+					<%-- <fmt:formatDate value="${memberDto.memberChange}" 
+									pattern="y년 M월 d일 E a h시 m분 s초"/> --%>
+				</td>
+			</tr>
     			</div>
     			
     			
-    		<div class="row">
+    		<%-- <div class="row">
     			<button class="btn btn-positive w-200" href="block?memberId=${memberDto.memberId }">
     			회원차단
     			</button>
     			
     			
     			<button class="btn btn-positive w-200" href="edit?${memberDto.memberDto }">회원정보 변경</button>
-    		</div>
-    			<%--
-    				관리자가 일반 회원들의 어떤 정보를 더 필요로 할까? 
-    			  --%>
+    		</div> --%>
+    			
     		
     			
     		</table>

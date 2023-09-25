@@ -46,6 +46,7 @@ $(function(){
 });	
 
 </script>
+
 <c:if test="${sessionScope.name != null}">
 
 <script>
@@ -54,12 +55,12 @@ $(function(){
 	//[2] 하트에 클릭 이벤트를 설정하여 좋아요 처리가 가능하도록 구현
 	$(function(){
 		var params = new URLSearchParams(location.search);
-		var boardNo = params.get("boardNo");
+		var projectNo = params.get("projectNo");
 	
 		$.ajax({
 			url:"/rest/like/check",
 			method:"post",
-			data:{boardNo : boardNo},
+			data:{projectNo : projectNo},
 			success:function(response) {
 				//response는 {"check":true, "count":0} 형태의 JSON이다
 			
@@ -79,7 +80,7 @@ $(function(){
 			$.ajax({
 				url:"/rest/like/action",
 				method:"post",
-				data: {boardNo : boardNo},
+				data: {projectNo : projectNo},
 				success:function(response){
 					if(response.check) {
 						$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-solid");
@@ -97,7 +98,7 @@ $(function(){
 
 </c:if>
 
-    <div class="container w-900">
+    <div class="container w-1000">
     	<div class="row">
     		<h5>${majorCategoryDto.majorCategoryType} > ${minorCategoryDto.minorCategoryType}</h5>
     	</div>
@@ -124,9 +125,10 @@ $(function(){
     				<fmt:formatNumber value="${projectDto.projectGoalPrice}" pattern="#,###"/>원<br>
     				펀딩기간
     				${projectDto.projectStartDate} ~ ${projectDto.projectEndDate}<br>
-    				결제
+    				
     				목표금액 달성시 ${projectDto.projectEndDate}에 결제 진행
-    				<i class="fa-solid fa-heart"></i><br>
+    				<i class="fa-heart fa-regular red"></i> 
+					<span>?</span>
     				<button class="btn btn-positive">이 프로젝트 후원하기</button>
     			</div>
     		</div>

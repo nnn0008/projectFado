@@ -9,6 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.kh.springsemi.interceptor.AdminInterceptor;
 import com.kh.springsemi.interceptor.MemberInterceptor;
+import com.kh.springsemi.interceptor.ProjectDefenderInterceptor;
+import com.kh.springsemi.interceptor.ProjectOwnerInterceptor;
 import com.kh.springsemi.interceptor.TestInterceptor;
 
 /**
@@ -32,6 +34,12 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 	
 	@Autowired
 	private MemberInterceptor memberInterceptor;
+	
+	@Autowired
+	private ProjectDefenderInterceptor projectDefenderInterceptor;
+	
+	@Autowired
+	private ProjectOwnerInterceptor projectOwnerInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -69,8 +77,12 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 //					"/admin/member/list*"
 //					);
 			
-	
-	
+		
+		registry.addInterceptor(projectDefenderInterceptor)
+				.addPathPatterns("/project/detail");
+		
+		registry.addInterceptor(projectOwnerInterceptor)
+		.addPathPatterns("/project/edit", "/project/delete");
 			
 	}
 }

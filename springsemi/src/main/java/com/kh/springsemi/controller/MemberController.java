@@ -176,13 +176,13 @@ public class MemberController {
 	
 	@RequestMapping("/follow/following")
 	public String memberFollowing(@ModelAttribute MemberFollowDto memberFollowDto) {
-		memberDao.insert(memberFollowDto);
+		memberDao.insertFollow(memberFollowDto);
 		return "redirect:list";
 	}
 	
 	@RequestMapping("/follow/cancel")
 	public String memberCancel(@ModelAttribute MemberFollowDto memberFollowDto) {
-		memberDao.delete(memberFollowDto);
+		memberDao.deleteFollow(memberFollowDto);
 		return "redirect:list";
 	}
 }

@@ -88,6 +88,20 @@ public class ProjectDaoImpl implements ProjectDao{
 	}	
 	
 	@Override
+	public boolean plusProjectLikecount(int projectNo) {
+		String sql = "update project set project_likecount = project_likecount + 1 where project_no=?";
+		Object[] data = {projectNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	@Override
+	public boolean minusProjectLikecount(int projectNo) {
+		String sql = "update project set project_likecount = project_likecount - 1 where project_no=?";
+		Object[] data = {projectNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	@Override
 	public List<ProjectListDto> selectListForAdmin() {
 		String sql = "select * from project order by project_no asc";
 		return null;

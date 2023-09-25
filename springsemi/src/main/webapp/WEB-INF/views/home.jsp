@@ -63,8 +63,5 @@
 	</div>
 	
 	
-		<i class="fa-regular fa-heart red"></i> 
-		<span>?</span>
-	
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 </div>

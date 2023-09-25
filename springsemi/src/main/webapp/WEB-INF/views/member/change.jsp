@@ -22,8 +22,9 @@ $(function(){
     };
 
 	$("[name=memberNickname]").blur(function(e){
-        var regex = /^[가-힣0-9]{1,10}$/;
-        var isValid = regex.test($(e.target).val());
+		var nicknameValue = $(e.target).val(); //내 닉네임 
+        var regex = /^[가-힣0-9]{1,10}$/; //정규표현식
+        var isValid = regex.test($(e.target).val()); //형식에 맞는가
         
         if(isValid) {//형식 통과
 
@@ -36,8 +37,11 @@ $(function(){
                     if(response == "Y") {//사용 가능한 닉네임
                         $(e.target).addClass("success");
                         status.memberNickname = true;
-                    }
-                    else {//이미 사용중인 닉네임
+                    } //닉네임을 변경하지 않는다면
+                    else if (nicknameValue == "${memberDto.memberNickname}") {
+                        $(e.target).removeClass("success fail fail2");
+                        status.memberNickname = true; //통과
+                    } else {//이미 사용중인 닉네임
                         $(e.target).addClass("fail2");
                         status.memberNickname = false;
                     }

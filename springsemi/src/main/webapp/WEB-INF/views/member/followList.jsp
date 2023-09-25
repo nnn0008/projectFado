@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
 $(document).ready(function () {
@@ -11,25 +10,28 @@ $(document).ready(function () {
         event.preventDefault(); // 기본 링크 동작 방지
 
         var link = $(this);
-        var row = link.closest("tr"); // 클릭된 버튼이 속한 <tr> 요소 가져오기
-        var followerId = row.data("follower");
-        var followeeId = row.data("followee");
-
+        var row = link.closest("tr"); // 클릭된 버튼이 속한 <tr> 요소 가져오기 (팔로우 버튼이 포함된 행)
+        var followerId = row.data("follower"); //팔로우한 사람
+        var followeeId = row.data("followee"); //팔로우당한 사람
+        var isFollowing = link.text() === "팔로우하기"; // 현재 상태 판단
+						//클릭한 버튼의 텍스트
         // AJAX 요청
         $.ajax({
-            url: link.attr("href"),
+            url: isFollowing ? "/member/follow/following" : "/member/follow/cancel",
             type: "POST", // 또는 "GET" 등
             data: {
                 followerId: followerId,
                 followeeId: followeeId
             },
             success: function (response) {
-                if (link.text() === "팔로우하기") {
+                if (isFollowing) {
                     link.text("팔로우해제");
                     link.attr("href", "/member/follow/cancel?followerId=" + followerId + "&followeeId=" + followeeId);
+                    $(this).removeClass("fa-plus").addClass("fa-check");
                 } else {
                     link.text("팔로우하기");
                     link.attr("href", "/member/follow/following?followerId=" + followerId + "&followeeId=" + followeeId);
+                    $(this).removeClass("fa-check").addClass("fa-plus");
                 }
             },
             error: function () {
@@ -39,7 +41,6 @@ $(document).ready(function () {
     });
 });
 </script>
-
 
 <div class="row">
 <table border="1" width="800">
@@ -58,10 +59,16 @@ $(document).ready(function () {
                 <td>
                     <c:choose>
                         <c:when test="${memberFollowDto.followYN == 'Y'}">
-                            <a class="link" href="/member/follow/cancel?followerId=${memberFollowDto.followerId}&followeeId=${memberFollowDto.followeeId}">팔로우해제</a>
+                            <a class="link" href="#">
+                            <i class="fa-solid fa-check"></i>
+                            팔로우해제
+                            </a>
                         </c:when>
                         <c:otherwise>
-                            <a class="link" href="/member/follow/following?followerId=${memberFollowDto.followerId}&followeeId=${memberFollowDto.followeeId}">팔로우하기</a>
+                            <a class="link" href="#">
+                            <i class="fa-solid fa-plus"></i>
+                            팔로우하기
+                            </a>
                         </c:otherwise>
                     </c:choose> 
                 </td>
@@ -72,34 +79,32 @@ $(document).ready(function () {
 
 </div>
 
-
-
-	<div class="row page-navigator mv-30">
-		<!-- 이전 버튼 -->
-		<c:if test="${!vo.first}">
-			<a href="list?${vo.prevQueryString}">
-				<i class="fa-solid fa-angle-left"></i>
-			</a>
-		</c:if>
-		
-		<!-- 숫자 버튼 -->
-		<c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
-			<c:choose>
-				<c:when test="${vo.page == i}">
-					<a class="on">${i}</a>
-				</c:when>
-				<c:otherwise>
-					<a href="list?${vo.getQueryString(i)}">${i}</a> 
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-		
-		<!-- 다음 버튼 -->
-		<c:if test="${!vo.last}">
-			<a href="list?${vo.nextQueryString}">
-				<i class="fa-solid fa-angle-right"></i>
-			</a>
-		</c:if>
-	</div>
+<div class="row page-navigator mv-30">
+    <!-- 이전 버튼 -->
+    <c:if test="${!vo.first}">
+        <a href="list?${vo.prevQueryString}">
+            <i class="fa-solid fa-angle-left"></i>
+        </a>
+    </c:if>
+    
+    <!-- 숫자 버튼 -->
+    <c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
+        <c:choose>
+            <c:when test="${vo.page == i}">
+                <a class="on">${i}</a>
+            </c:when>
+            <c:otherwise>
+                <a href="list?${vo.getQueryString(i)}">${i}</a> 
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+    
+    <!-- 다음 버튼 -->
+    <c:if test="${!vo.last}">
+        <a href="list?${vo.nextQueryString}">
+            <i class="fa-solid fa-angle-right"></i>
+        </a>
+    </c:if>
+</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

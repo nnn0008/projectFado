@@ -11,6 +11,7 @@ import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ProjectListDto;
 import com.kh.springsemi.mapper.ProjectListMapper;
 import com.kh.springsemi.mapper.ProjectMapper;
+import com.kh.springsemi.vo.PaginationVO;
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao{
@@ -85,5 +86,47 @@ public class ProjectDaoImpl implements ProjectDao{
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-		
+	@Override
+	public int countList(PaginationVO vo) {
+		if(vo.isSearch()) {
+			String sql = "select count(*) from project "
+					+ "where instr("+vo.getType()+",?) > 0 "
+							+ "and member_level != 관리자 ";
+			Object[] data = {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else {
+			String sql = "select count(*) from project";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+//		@Override
+//		public List<ProjectDto> selectListByPage(PaginationVO vo) {
+//		
+//			if(vo.isSearch()) {
+//				String sql = "select * from ("
+//						+ "select rownum rn, TMP.* from ("
+//							+"select * from project_list "
+//							+ "where instr("+vo.getType()+", ?) > 0 "
+//							+ "connect by prior project_no = project_owner "
+//							+ "start with project_parent is null "
+//							+ "order siblings by project_Category_no desc, project_no asc"
+//						+ ")TMP"
+//					+ ") where rn between ? and ?";
+//				Object[] data = {vo.getKeyword(), vo.getStartRow(), vo.getFinishRow()};
+//				return jdbcTemplate.query(sql, projectMapper, data);
+//			}
+//			else {
+//				String sql = "select * from ("
+//						+ "select rownum rn, TMP.* from ("
+//							+ "select * from project_list "
+//							+ "connect by prior project_no = project_owner "
+//							+ "start with project_parent is null "
+//							+ "order siblings by project_Category_no desc, project_no asc"
+//						+ ")TMP"
+//					+ ") where rn between ? and ?";
+//	Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+//					return jdbcTemplate.query(sql, projectMapper, data);	
+//		}
+//}
 }

@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.springsemi.dao.MemberDao;
+import com.kh.springsemi.dao.ProjectDao;
 import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.MemberListDto;
+import com.kh.springsemi.dto.ProjectDto;
+import com.kh.springsemi.dto.ProjectListDto;
 import com.kh.springsemi.error.NoTargetException;
 import com.kh.springsemi.vo.PaginationVO;
 
@@ -27,6 +30,8 @@ public class AdminController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private ProjectDao projectDao;
 	
 	@RequestMapping("/")
 	public String home() {
@@ -54,8 +59,8 @@ public class AdminController {
 		}
 //		차단 해제 
 		
-		@RequestMapping("/member/cancle")
-		public String memberCancle(@RequestParam String memberId) {
+		@RequestMapping("/member/cancel")
+		public String memberCancel(@RequestParam String memberId) {
 			memberDao.deleteBlock(memberId);
 			return "redirect:list";
 		}
@@ -93,6 +98,18 @@ public class AdminController {
 				throw new NoTargetException("존재하지 않는 회원ID");
 			}
 		}
+		
+//		@RequestMapping("/project/list2")
+//		public String projectList(@ModelAttribute PaginationVO vo, Model model) {
+//			int count = projectDao.countList(vo);
+//			vo.setCount(count);
+//			model.addAttribute("vo" ,vo);
+//			List<ProjectDto> list = projectDao.selectListByPage(vo);
+//			model.addAttribute("list" ,list);
+//			
+//			return "/WEB-INF/views/project/list2.jsp";
+//			
+//		}
 		}
 		
 		

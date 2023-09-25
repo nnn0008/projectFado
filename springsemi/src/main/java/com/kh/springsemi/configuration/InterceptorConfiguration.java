@@ -60,8 +60,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 						"/project/list/detail*",
 						"/project/list/Community/QnA*",
 						"/project/list/Community/notice*",
-						"/project/list/Community/review"
-						
+						"/project/list/Community/review",
+						"/member/find*"
 						 );
 //	@Override
 //	public void addInterceptors(InterceptorRegistry registry) {

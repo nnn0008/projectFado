@@ -6,23 +6,37 @@
 
 <form action="login" method="post" autocomplete="off">
 
-<div class="row">
-	<h3>로그인 </h3>
-	
-	<hr class="w-500">
-	<br>
-	<input class="form-input w-400" type="text" name="memberId" placeholder="아이디" required><br><br>
-	
-	<input class="form-input w-400" type="password" name="memberPw"  placeholder="비밀번호" required><br><br>
-	
-	<button type="submit" class="btn btn-positive w-400">Login</button><br><br>
-	
-	<a href="findPw" class="link">비밀번호 찾기</a><br><br>
-	
-	<c:if test="${param.error != null}">
-		<h3>아이디 또는 비밀번호가 일치하지 않습니다</h3> 
-	</c:if>
+	<div class="container w-400">
+		<div class="row fado">
+			<h2>로그인</h2>
+		</div>
+		
+		<hr class="hr-style">
+		
+		<div class="row">
+			<input class="form-input w-100" type="text" name="memberId" placeholder="아이디" required>
+		</div>
+		
+		<div class="row">
+			<input class="form-input w-100" type="password" name="memberPw"  placeholder="비밀번호" required>
+		</div>
+		
+		<div class="row">
+			<c:if test="${param.error != null}">
+				<h3>아이디 또는 비밀번호가 일치하지 않습니다.</h3> 
+			</c:if>
+		</div>
+		
+		<div class="row mt-30">
+			<button type="submit" class="btn btn-positive w-100">로그인</button>
+		</div>
+		
+		<div class="row">
+			<a href="findPw" class="link">비밀번호 찾기</a>
+		</div>
+		
+	</div>
 	
 </form>
-</div>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

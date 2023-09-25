@@ -22,7 +22,6 @@ public class MemberListMapper implements RowMapper<MemberListDto>{
 		memberListDto.setMemberEmail(rs.getString("member_email"));
 		memberListDto.setMemberLevel(rs.getString("member_level"));
 		memberListDto.setMemberPoint(rs.getInt("member_point"));
-		
 		memberListDto.setBlock(rs.getString("block"));
 		
 		return memberListDto;

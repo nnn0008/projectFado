@@ -11,12 +11,15 @@
 $(function(){
 	//상태 객체
 	var status = {
-			memberNickname:false,
-
-			ok:function(){
-				return this.memberNickname;
-			},
-	};
+        memberNickname:false,
+        memberEmail:false,
+        memberContact:false,
+        memberBirth:false,
+        ok:function(){
+            return this.memberNickname && this.memberEmail
+                        && this.memberContact && this.memberBirth;
+        },
+    };
 
 	$("[name=memberNickname]").blur(function(e){
         var regex = /^[가-힣0-9]{1,10}$/;
@@ -50,6 +53,42 @@ $(function(){
             $(e.target).addClass("fail");
             status.memberNickname = false;
         }
+    });
+	
+	 $("[name=memberEmail]").blur(function(){
+	        var regex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+	        var email = $(this).val();
+	        var isValid = regex.test(email);
+	        
+	        $(this).removeClass("success fail fail2");
+	        if(email.length == 0) {
+	            $(this).addClass("fail2");
+	            status.memberEmail = false;
+	        } else if (isValid) {
+	        	$(this).addClass("success");
+	            status.memberEmail = true;
+	        } else {
+	        	$(this).addClass("fail");
+	            status.memberEmail = false;
+	        }
+	    });
+	 
+	 $("[name=memberContact]").blur(function(){
+	        var regex = /^010[1-9][0-9]{7}$/;
+	        var contact = $(this).val();
+	        var isValid = contact.length == 0 || regex.test(contact);
+	        $(this).removeClass("success fail");
+	        $(this).addClass(isValid ? "success" : "fail");
+	        status.memberContact = isValid;
+	    });
+	
+	$("[name=memberBirth]").blur(function(){
+        var regex = /^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
+        var birth = $(this).val();
+        var isValid = birth.length == 0 || regex.test(birth);
+        $(this).removeClass("success fail");
+        $(this).addClass(isValid ? "success" : "fail");
+        status.memberBirth = isValid;
     });
 
 	//페이지 이탈 방지

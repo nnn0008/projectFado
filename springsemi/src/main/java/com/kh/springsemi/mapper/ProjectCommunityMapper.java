@@ -20,7 +20,6 @@ public class ProjectCommunityMapper implements RowMapper<ProjectCommunityDto> {
 		projectCommunityDto.setProjectCommunityContent(rs.getString("Project_community_content"));
 		projectCommunityDto.setProjectCommunityRegDate(rs.getDate("Project_community_reg_date"));
 		projectCommunityDto.setProjectCommunityType(rs.getString("Project_community_type"));
-		projectCommunityDto.setProjectCommunityReply(rs.getString("Project_community_reply"));
 		return projectCommunityDto;
 	}
 }

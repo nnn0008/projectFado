@@ -126,7 +126,7 @@ public class MemberController {
 		boolean isCorrectPw = inputDto.getMemberPw().equals(findDto.getMemberPw());
 		if(isCorrectPw) {
 			session.setAttribute("name", findDto.getMemberId()); 
-//			session.setAttribute("level", findDto.getMemberLevel());//확인받아야
+			session.setAttribute("level", findDto.getMemberLevel());//확인받아야
 			memberDao.updateMemberLogin(inputDto.getMemberId());
 			return "redirect:/";
 		}

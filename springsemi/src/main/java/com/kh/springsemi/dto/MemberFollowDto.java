@@ -9,4 +9,5 @@ public class MemberFollowDto {
 	private String followerId;
 	private String followeeId;
 	private Date followDate;
+	private String followYN;
 }

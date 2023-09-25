@@ -32,17 +32,17 @@ $(function () {
     
     //마감일자는 모든 정보를 입력하기 전까지 보여주지 않는다
     $('.end').hide();
-    $("[name=projectStartDate], [name=projectDuration]").on("input", function(){
+    $("[name=projectStartDate], [name=projectPeriod]").on("input", function(){
     	var startDate = $("[name=projectStartDate]").val();
-    	var duration = $("[name=projectDuration]").val(); //문자열로 값을 얻어온다
+    	var period = $("[name=projectPeriod]").val(); //문자열로 값을 얻어온다
     	
-    	if(startDate.length == 0 || duration.length == 0) {
+    	if(startDate.length == 0 || period.length == 0) {
     		$('.end').hide();
     		return;
     	}
     	
     	$('.end').show();
-    	var future = moment(startDate, 'YYYY-MM-DD').add(parseInt(duration) - 1, 'days'); //따라서 숫자로 바꿔줘야 한다
+    	var future = moment(startDate, 'YYYY-MM-DD').add(parseInt(period) - 1, 'days'); //따라서 숫자로 바꿔줘야 한다
     	$(".future").text(future.format('YYYY-MM-DD'));
     });
     
@@ -51,20 +51,52 @@ $(function () {
 		field: document.querySelector("[name=projectStartDate]"), //타겟찾아서
 		singleDate: true, //단일 날짜를 선택(true)
 		numberOfColumns: 2,
-		numberOfMonths:2,
+		numberOfMonths:2, //두 달이 보이게 설정
 		format: 'YYYY-MM-DD', //날짜형식 설정
-		minDate: new Date(), //오늘 이전의 날짜를 선택하지 못하게 설정	
+		minDate : moment().startOf(new Date()).add(7, 'day'),
+// 		minDate: new Date(), //오늘 이전의 날짜를 선택하지 못하게 설정	
 	});
 
     $(".minor").hide();
     $("[name=majorCategoryNo]").change(function(){
-    	if($("[name=majorCategoryNo]").val() === ""){
+    	if($("[name=majorCategoryNo]").val() == ""){
     		$(".minor").hide();		
     	}
     	else{
 	    	$(".minor").show();	
-    	}		
+	    	
+	    	var majorNo = $(this).val();
+	    	
+	    	$.ajax({
+	    		url:"/rest/project/classifyCheck",
+	    		method:"post",
+	    		data:{
+	    			majorCategoryNo : majorNo
+	    		},
+	    		success:function(response){
+	    			$("[name=minorCategoryNo]").empty();
+	    			$.each(response, function(minorCategoryNo, majorCategoryNo){
+		    			$("[name=minorCategoryNo]").append($('<option>',{
+		    				value: minorCategoryNo,
+		    				text: majorCategoryNo
+		    			}));
+	    			});
+	    		},
+	    	});
+    	} 	
     });
+    
+//     $("[name=projectGoalPrice]").on("input", function(){
+//     	if($(this).val < 0){
+    		
+//     	}
+//     	else{
+    		
+//     	}
+//     });
+    
+    
+    
   });
 </script>
 
@@ -83,20 +115,20 @@ $(function () {
          목표 금액
          <input type="number" name="projectGoalPrice" class="form-input w-100" placeholder="목표로 하는 금액을 입력하세요">
       </div>
-      <div class="row left">
-            시작날짜 선택
-            <input type="text" name="projectStartDate"  class="form-input w-100" placeholder="프로젝트 시작날짜를 선택하세요">
-        </div>
-        <div class="row left">
-            프로젝트 마감날짜 선택
-            <select name="projectDuration"  class="form-input w-100">
-                <option value="">프로젝트 마감 날짜를 고르세요</option>
-                <option value="15">15일</option>
-                <option value="30">30일</option>
-            </select>
-            <div class="end">
-            	예상 마감 일자는 <span class="future">YYYY-MM-DD</span>입니다
-            </div>
+     	<div class="row left">
+           시작날짜 선택
+           <input type="text" name="projectStartDate"  class="form-input w-100" placeholder="프로젝트 시작날짜를 선택하세요">
+       </div>
+       <div class="row left">
+           프로젝트 마감날짜 선택
+           <select name="projectPeriod" class="form-input w-100">
+               <option value="">프로젝트 마감 날짜를 고르세요</option>
+               <option value="15">15일</option>
+               <option value="30">30일</option>
+           </select>
+           <div class="end">
+           	예상 마감 일자는 <span class="future">YYYY-MM-DD</span>입니다
+           </div>
       </div>
       <div class="row left">
          카테고리 선택
@@ -113,7 +145,7 @@ $(function () {
 			<div class="w-50 minor">
 				소분류
 				<select name="minorCategoryNo" class="form-input w-100">
-					<option value="">분류를 고르세요</option>
+<!-- 					<option value="">분류를 고르세요</option> -->
 				<c:forEach var="minorCategoryDto" items="${minorList}">
 			     	<option value="${minorCategoryDto.minorCategoryNo}">${minorCategoryDto.minorCategoryType}</option>
 				</c:forEach>

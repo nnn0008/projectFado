@@ -4,9 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import com.kh.springsemi.dto.JudgeDto;
 
+@Component
 public class JudgeMapper implements RowMapper<JudgeDto>{
 	@Override
 	public JudgeDto mapRow(ResultSet rs, int rowNum) throws SQLException {

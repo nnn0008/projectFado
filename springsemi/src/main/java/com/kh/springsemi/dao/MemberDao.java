@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.springsemi.dto.DeliveryDto;
 import com.kh.springsemi.dto.MemberBlockDto;
 import com.kh.springsemi.dto.MemberDto;
+import com.kh.springsemi.dto.MemberFollowDto;
 import com.kh.springsemi.dto.MemberListDto;
 import com.kh.springsemi.vo.PaginationVO;
 
@@ -13,9 +14,10 @@ public interface MemberDao {
 	void insert(MemberDto memberDto);
 	//R - 회원 상세
 	MemberDto selectOne(String memberId);
-	//U - 회원 비밀번호 수정, 개인정보 수정
+	//U - 회원 비밀번호 수정, 개인정보 수정, 로그인 시간 수정
 	boolean updateMemberPw(String memberId, String changePw);
 	boolean updateMemberInfo(MemberDto memberDto);
+	boolean updateMemberLogin(String memberId);
 	//D - 회원 삭제
 	boolean delete(String memberId);
 	//관리자 회원 정보 수정 
@@ -51,5 +53,15 @@ public interface MemberDao {
 	boolean deleteProfile(String memberId);
 	Integer findProfile(String memberId);
 	MemberDto selectOneByMemberNickname(String memberNickname);
-
+	
+// 회원 팔로우 관련 기능	
+	void insertFollow(MemberFollowDto memberFollowDto);
+	boolean deleteFollow(MemberFollowDto memberFollowDto);
+	boolean check(MemberFollowDto memberFollowDto);
+	int count(String followeeId);
+	List<MemberDto> findByFollowerId(String followerId);
+	MemberFollowDto selectOneByFollowerId(String followerId);
+	
+	int countFollowList(PaginationVO vo);
+	List<MemberFollowDto> selectFollowListByPage(PaginationVO vo);
 }

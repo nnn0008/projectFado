@@ -51,13 +51,13 @@ $(function(){
 </script>
 
 <div class="container w-500">
-<div class="row">
-<i class="fa-solid fa-heart" style="color: #f2829e;"></i>
-<h1>${memberDto.memberId}님의 회원 정보</h1>
-<i class="fa-solid fa-heart" style="color: #f2829e;"></i>
-</div>
+	<div class="row">
+		<i class="fa-solid fa-heart" style="color: #f2829e;"></i>
+		<h1>${memberDto.memberId}님의 회원 정보</h1>
+		<i class="fa-solid fa-heart" style="color: #f2829e;"></i>
+	</div>
 
-<div class="row mv-30">
+	<div class="row mv-30">
 		<c:choose>
 			<c:when test= "${profile == null}">
 				<img src ="/images/user.png" width="150" height ="150" 
@@ -112,24 +112,63 @@ $(function(){
 			pattern="#,##0"></fmt:formatNumber> pt
 			</td>
 	</tr>
+	<tr>
+		<th>회원가입일</th>
+		<td>
+		<fmt:formatDate value="${memberDto.memberJoin}" 
+				pattern="y년 M월 d일 E a h시 m분 s초"/>
+		</td>
+	</tr>
+	<tr>
+		<th>마지막로그인시간</th>
+		<td>
+		<fmt:formatDate value="${memberDto.memberLastLogin}" 
+				pattern="y년 M월 d일 E a h시 m분 s초"/>
+		</td>
+	</tr>
+	<tr>
+		<th>마지막비밀번호변경일</th>
+		<td>
+		<fmt:formatDate value="${memberDto.memberChangePw}" 
+				pattern="y년 M월 d일 E a h시 m분 s초"/>
+		</td>
+	</tr>
 </table>
-
-	<a href="/delivery/mydelivery">배송지</a><br><br>
-	<a href="/follow/list">팔로잉</a><br><br>
-
-	<a href="password">
+	<div class="row">
+		<a href="/delivery/mydelivery" class="btn">
+			<i class="fa-regular fa-truck"></i>
+				배송지
+		</a>
+	</div>
+	<br>
+	
+	<div class="row">
+		<a href="/member/follow/list" class="btn">
+			<i class="fa-light fa-user"></i>
+				팔로잉
+		</a>
+	</div>
+	<br>
+	<div class="row">
+		<a href="password" class="btn">
 			<i class="fa-solid fa-key"></i>
 			비밀번호 변경
-	</a><br><br>
-	
-		<a href="change">
+		</a>
+	</div>
+	<br>
+	<div class="row">
+		<a href="change" class="btn">
 			<i class="fa-solid fa-user"></i>
 			개인정보 변경
-		</a><br><br>
-	
-		<a href="exit">
+		</a>
+	</div>
+		<br>
+	<div class="row">
+		<a href="exit" class="btn">
 			<i class="fa-solid fa-user-xmark"></i>
 			회원 탈퇴
-		</a><br><br>
+		</a>
+	</div>
+		<br>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

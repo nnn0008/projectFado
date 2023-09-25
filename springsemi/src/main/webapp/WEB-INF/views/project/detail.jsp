@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-    
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <!-- 타이머를 생성 및 카운트다운 -->
@@ -47,9 +47,60 @@ $(function(){
 
 </script>
 
-    <div class="container w-900">
+<c:if test="${sessionScope.name != null}">
+
+<script>
+	//좋아요 처리
+	//[1] 페이지가 로드되면 비동기 통신으로 좋아요 상태를 체크하여 하트 생성
+	//[2] 하트에 클릭 이벤트를 설정하여 좋아요 처리가 가능하도록 구현
+	$(function(){
+		var params = new URLSearchParams(location.search);
+		var projectNo = params.get("projectNo");
+	
+		$.ajax({
+			url:"/rest/like/check",
+			method:"post",
+			data:{projectNo : projectNo},
+			success:function(response) {
+				//response는 {"check":true, "count":0} 형태의 JSON이다
+			
+				if(response.check) {
+					$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-solid");
+				}
+				else{
+					$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-regular");
+				}
+				//전달받은 좋아요 개수를 하트 뒤의 span에 출력
+				$(".fa-heart").next("span").text(response.count);
+			}
+		});
+		
+		//[2]
+		$(".fa-heart").click(function(){
+			$.ajax({
+				url:"/rest/like/action",
+				method:"post",
+				data: {projectNo : projectNo},
+				success:function(response){
+					if(response.check) {
+						$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-solid");
+					}
+					else{
+						$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-regular");
+					}
+					//전달받은 좋아요 개수를 하트 뒤의 span에 출력
+					$(".fa-heart").next("span").text(response.count);
+				}
+			});
+		});
+	});
+</script>
+
+</c:if>
+
+    <div class="container w-1000">
     	<div class="row">
-    		<h5>${projectDto.projectCategory}</h5>
+    		<h5>${majorCategoryDto.majorCategoryType} > ${minorCategoryDto.minorCategoryType}</h5>
     	</div>
     	<div class="row">
     		<h1>${projectDto.projectTitle}</h1>
@@ -60,11 +111,11 @@ $(function(){
     				<img src="https://dummyimage.com/600x400/000/fff">
     			</div>
     			<div class="w-100 left">
-    				모인금액<br>
+    				모인금액
     				<fmt:formatNumber value="${projectDto.projectTotalPrice }" pattern="#,###"/>원<br>
     				남은시간
-    				<label class="timer"></label>
-    				${difference / 1000} 초
+<!--     				<label class="timer"></label> -->
+<%--     				${difference / 1000} 초 --%>
     				<label class="timer">0일 0시 0분 0초 남았습니다</label>
     				<br>
     				후원자
@@ -74,9 +125,10 @@ $(function(){
     				<fmt:formatNumber value="${projectDto.projectGoalPrice}" pattern="#,###"/>원<br>
     				펀딩기간
     				${projectDto.projectStartDate} ~ ${projectDto.projectEndDate}<br>
-    				결제
+    				
     				목표금액 달성시 ${projectDto.projectEndDate}에 결제 진행
-    				<i class="fa-solid fa-heart"></i><br>
+    				<i class="fa-heart fa-regular red"></i> 
+					<span>?</span>
     				<button class="btn btn-positive">이 프로젝트 후원하기</button>
     			</div>
     		</div>

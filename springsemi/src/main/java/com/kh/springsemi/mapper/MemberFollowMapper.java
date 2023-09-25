@@ -13,10 +13,11 @@ import com.kh.springsemi.dto.MemberFollowDto;
 public class MemberFollowMapper implements RowMapper<MemberFollowDto>{
 	@Override
 	public MemberFollowDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-		MemberFollowDto followDto = new MemberFollowDto();
-		followDto.setFollowerId(rs.getString("follower_id"));
-		followDto.setFolloweeId(rs.getString("followee_id"));
-		followDto.setFollowDate(rs.getDate("follow_date"));
-		return followDto;
+		MemberFollowDto memberFollowDto = new MemberFollowDto();
+		memberFollowDto.setFollowerId(rs.getString("follower_id"));
+		memberFollowDto.setFolloweeId(rs.getString("followee_id"));
+		memberFollowDto.setFollowDate(rs.getDate("follow_date"));
+		memberFollowDto.setFollowYN(rs.getString("follow_YN"));
+		return memberFollowDto;
 	}
 }

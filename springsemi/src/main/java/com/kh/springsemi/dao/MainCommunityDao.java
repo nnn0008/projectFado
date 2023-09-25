@@ -5,7 +5,6 @@ import java.util.List;
 import com.kh.springsemi.dto.MainCommunityDto;
 import com.kh.springsemi.dto.MainCommunityListDto;
 import com.kh.springsemi.vo.CommunityPaginationVO;
-import com.kh.springsemi.vo.PaginationVO;
 
 public interface MainCommunityDao {
 
@@ -24,4 +23,9 @@ public interface MainCommunityDao {
 	
 	int countNoticeList(CommunityPaginationVO vo); //notice리스트 카운트 
 	int countQnAList(CommunityPaginationVO vo); //qna 리스트 카운트
+	
+	
+	
+	
+	void replyInsert(MainCommunityDto mainComunityDto);   //댓글 등록
 }

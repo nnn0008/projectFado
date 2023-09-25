@@ -25,21 +25,27 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Autowired
 	private ProjectListMapper projectListMapper;
 	
+	@Autowired
+	private JudgeDao judgeDao;
+	
 	//프로젝트 등록(판매자가)
 	@Override
 	public int sequence() {
 		String sql = "select project_seq.nextval from dual";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
+	
 	@Override
 	public void insert(ProjectDto projectDto) {
 		Date endDate = projectDto.getCalculateEndDate();
 		projectDto.setProjectEndDate(endDate);
+//		int minorNo = minorCategoryDto.getMinorCategoryNo();
+//		projectDto.setMinorCategoryNo(minorNo);
 		String sql = "insert into project(project_no, project_title, project_goal_price, project_start_date, "
-				+ "project_duration, project_content, project_owner, project_end_date) values(?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "project_content, project_owner, project_end_date, project_period, minor_category_no) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] data = {projectDto.getProjectNo(), projectDto.getProjectTitle(), projectDto.getProjectGoalPrice(),
-				projectDto.getProjectStartDate(), projectDto.getProjectDuration(),
-				projectDto.getProjectContent(), projectDto.getProjectOwner(), endDate};
+				projectDto.getProjectStartDate(),projectDto.getProjectContent(), projectDto.getProjectOwner(), 
+				endDate, projectDto.getProjectPeriod(), projectDto.getMinorCategoryNo()};
 		 
 		jdbcTemplate.update(sql, data);
 	}
@@ -70,18 +76,24 @@ public class ProjectDaoImpl implements ProjectDao{
 		List<ProjectDto> list = jdbcTemplate.query(sql, projectMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-	
 
-	//프로젝트 리스트보기(관리자)
+	//프로젝트 리스트
 	@Override
 	public List<ProjectListDto> selectList() {
-		String sql = "select * from project order by project_no desc";
+		String sql = "select * from project_list order by project_no desc";
 		return jdbcTemplate.query(sql, projectListMapper);
 	}
 
 	@Override
 	public boolean updateProjectReadcount(int projectNo) {
 		String sql = "update project set project_readcount = project_readcount + 1 where project_no=?";
+		Object[] data = {projectNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}	
+	
+	@Override
+	public boolean plusProjectLikecount(int projectNo) {
+		String sql = "update project set project_likecount = project_likecount + 1 where project_no=?";
 		Object[] data = {projectNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
@@ -129,4 +141,17 @@ public class ProjectDaoImpl implements ProjectDao{
 //					return jdbcTemplate.query(sql, projectMapper, data);	
 //		}
 //}
+
+	public boolean minusProjectLikecount(int projectNo) {
+		String sql = "update project set project_likecount = project_likecount - 1 where project_no=?";
+		Object[] data = {projectNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	@Override
+	public List<ProjectListDto> selectListForAdmin() {
+		String sql = "select * from project order by project_no asc";
+		return null;
+	}
+	
 }

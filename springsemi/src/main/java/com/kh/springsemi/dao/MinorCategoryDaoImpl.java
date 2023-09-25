@@ -58,4 +58,12 @@ public class MinorCategoryDaoImpl implements MinorCategoryDao{
 		List<MinorCategoryDto> list = jdbcTemplate.query(sql, minorCategoryMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
+	@Override
+	public List<MinorCategoryDto> selectClassifyByNo(int majorCategoryNo) {
+		String sql = "select * from minorcategory where major_category_no = "
+				+ "(select major_category_no from majorcategory where major_category_no = ?)";
+		Object[] data = {majorCategoryNo};
+		return jdbcTemplate.query(sql, minorCategoryMapper, data);
+	}
 }

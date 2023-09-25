@@ -19,6 +19,8 @@ public interface ProjectDao {
 	//수정
 	boolean update(ProjectDto projectDto);
 	boolean updateProjectReadcount(int projectNo);
+	boolean plusProjectLikecount(int projectNo);
+	boolean minusProjectLikecount(int projectNo);
 	
 	//상세
 	ProjectDto selectOne(int projectNo);
@@ -30,4 +32,7 @@ public interface ProjectDao {
 	int countList(PaginationVO vo);
 	
 //	List<ProjectDto> selectListByPage(PaginationVO vo);
+	//관리자용 목록
+	List<ProjectListDto> selectListForAdmin();
+	
 }

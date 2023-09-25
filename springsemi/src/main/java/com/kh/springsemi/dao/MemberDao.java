@@ -3,6 +3,7 @@ package com.kh.springsemi.dao;
 import java.util.List;
 
 import com.kh.springsemi.dto.DeliveryDto;
+import com.kh.springsemi.dto.MemberBlockDto;
 import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.MemberFollowDto;
 import com.kh.springsemi.dto.MemberListDto;
@@ -22,6 +23,7 @@ public interface MemberDao {
 	//관리자 회원 정보 수정 
 	boolean updateMemberInfoByAdmin(MemberDto memberDto);
 
+	
 	//배송지번호 시퀀스
 	int sequence();
 	//C - 배송지 등록
@@ -43,6 +45,8 @@ public interface MemberDao {
 	void insertBlock(String memberId);
 	boolean deleteBlock(String memberId);
 	
+	List<MemberBlockDto> selectBlockList();
+	MemberBlockDto selectBlockOne(String memberId);
 	
 // 회원 프로필 관련 기능
 	void insertProfile(String memberId, int attachNo);

@@ -1,5 +1,7 @@
 package com.kh.springsemi.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.springsemi.dao.MemberDao;
-import com.kh.springsemi.dao.MemberFollowDao;
 import com.kh.springsemi.dto.MemberDto;
+import com.kh.springsemi.dto.MemberFollowDto;
+import com.kh.springsemi.vo.PaginationVO;
 
 @Controller
 @RequestMapping("/member")
@@ -21,9 +24,6 @@ public class MemberController {
 
 	@Autowired 
 	private MemberDao memberDao;
-	
-	@Autowired
-	private MemberFollowDao memberFollowDao;
 	
 	//회원가입
 	@GetMapping("/join")
@@ -49,10 +49,9 @@ public class MemberController {
 		
 		String memberId = (String) session.getAttribute("name"); //세션으로 사용자 아이디 꺼내옴
 		MemberDto memberDto = memberDao.selectOne(memberId); //회원정보 조회
-		
 		//조회한 정보를 모델에 첨부
 		model.addAttribute("memberDto",memberDto); 
-		model.addAttribute("memberFollowList", memberFollowDao.findByFollowerId(memberId));
+		model.addAttribute("memberFollowList", memberDao.findByFollowerId(memberId));
 		//회원의 프로필 이미지 번호를 모델에 첨부
 		model.addAttribute("profile", memberDao.findProfile(memberId)); 
 		
@@ -128,6 +127,7 @@ public class MemberController {
 		if(isCorrectPw) {
 			session.setAttribute("name", findDto.getMemberId()); 
 //			session.setAttribute("level", findDto.getMemberLevel());//확인받아야
+			memberDao.updateMemberLogin(inputDto.getMemberId());
 			return "redirect:/";
 		}
 		else {
@@ -163,6 +163,26 @@ public class MemberController {
 		return "redirect:exit?error";
 	}
 	
-//	@RequestMapping("/followList")
-//	public String list(@ModelAttribute)
+	@RequestMapping("/follow/list")
+	public String list(@ModelAttribute(name="vo") PaginationVO vo, Model model) {
+		int count = memberDao.countFollowList(vo);
+		vo.setCount(count);
+		
+		List<MemberFollowDto> list = memberDao.selectFollowListByPage(vo);
+		model.addAttribute("list", list);
+		
+		return "/WEB-INF/views/member/followList.jsp";
+	}
+	
+	@RequestMapping("/follow/following")
+	public String memberFollowing(@ModelAttribute MemberFollowDto memberFollowDto) {
+		memberDao.insert(memberFollowDto);
+		return "redirect:list";
+	}
+	
+	@RequestMapping("/follow/cancel")
+	public String memberCancel(@ModelAttribute MemberFollowDto memberFollowDto) {
+		memberDao.delete(memberFollowDto);
+		return "redirect:list";
+	}
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kh.springsemi.dao.MemberFollowDao;
+import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dto.MemberFollowDto;
 import com.kh.springsemi.vo.MemberFollowVO;
 
@@ -18,7 +18,7 @@ import com.kh.springsemi.vo.MemberFollowVO;
 public class MemberFollowRestController {
 	
 	@Autowired
-	private MemberFollowDao memberFollowDao;
+	private MemberDao memberDao;
 	
 	@RequestMapping("/check")
 	public MemberFollowVO check(@ModelAttribute MemberFollowDto memberFollowDto,
@@ -26,8 +26,8 @@ public class MemberFollowRestController {
 		String followerId = (String) session.getAttribute("name");
 		memberFollowDto.setFollowerId(followerId);
 		
-		boolean isCheck = memberFollowDao.check(memberFollowDto);
-		int count = memberFollowDao.count(memberFollowDto.getFolloweeId());
+		boolean isCheck = memberDao.check(memberFollowDto);
+		int count = memberDao.count(memberFollowDto.getFolloweeId());
 		
 		MemberFollowVO vo = new MemberFollowVO();
 		vo.setCheck(isCheck);
@@ -41,14 +41,14 @@ public class MemberFollowRestController {
 		String followerId = (String) session.getAttribute("name");
 		memberFollowDto.setFollowerId(followerId);
 		
-		boolean isCheck = memberFollowDao.check(memberFollowDto);
+		boolean isCheck = memberDao.check(memberFollowDto);
 		if(isCheck) {
-			memberFollowDao.delete(memberFollowDto);
+			memberDao.delete(memberFollowDto);
 		}
 		else {
-			memberFollowDao.insert(memberFollowDto);
+			memberDao.insert(memberFollowDto);
 		}
-		int count = memberFollowDao.count(memberFollowDto.getFolloweeId());
+		int count = memberDao.count(memberFollowDto.getFolloweeId());
 		MemberFollowVO vo = new MemberFollowVO();
 		vo.setCheck(!isCheck);
 		vo.setCount(count);

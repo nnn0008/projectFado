@@ -54,8 +54,8 @@ public class AdminController {
 		}
 //		차단 해제 
 		
-		@RequestMapping("/member/cancle")
-		public String memberCancle(@RequestParam String memberId) {
+		@RequestMapping("/member/cancel")
+		public String memberCancel(@RequestParam String memberId) {
 			memberDao.deleteBlock(memberId);
 			return "redirect:list";
 		}

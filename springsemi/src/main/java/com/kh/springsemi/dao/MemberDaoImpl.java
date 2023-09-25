@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.springsemi.dto.DeliveryDto;
 import com.kh.springsemi.dto.MemberDto;
+import com.kh.springsemi.dto.MemberFollowDto;
 import com.kh.springsemi.dto.MemberListDto;
+import com.kh.springsemi.mapper.MemberFollowMapper;
 import com.kh.springsemi.mapper.MemberListMapper;
 import com.kh.springsemi.mapper.MemberMapper;
 import com.kh.springsemi.vo.PaginationVO;
@@ -56,7 +58,7 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public boolean updateMemberPw(String memberId, String changePw) {
 			String sql = "update member "
-					+ "set member_pw=? "
+					+ "set member_pw=?, member_change_pw = sysdate "
 					+ "where member_id=?";
 			Object[] data = {changePw, memberId};
 			return jdbcTemplate.update(sql, data) > 0;
@@ -73,6 +75,13 @@ public class MemberDaoImpl implements MemberDao{
 				memberDto.getMemberContact(), memberDto.getMemberEmail(),
 				memberDto.getMemberId()
 		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	@Override
+	public boolean updateMemberLogin(String memberId) {
+		String sql = "update member set member_last_login = sysdate where member_id = ?";
+		Object[] data = {memberId};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 
@@ -260,4 +269,64 @@ public class MemberDaoImpl implements MemberDao{
 		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
+	//회원 팔로우 관련 기능
+	
+	@Autowired
+	private MemberFollowMapper memberFollowMapper;
+
+	@Override
+	public void insert(MemberFollowDto memberFollowDto) {
+		String sql = "insert into follow(follower_id, followee_id) values(?, ?)";
+		Object[] data = {memberFollowDto.getFollowerId(), memberFollowDto.getFolloweeId()};
+		jdbcTemplate.update(sql, data);
+	}
+
+	@Override
+	public boolean delete(MemberFollowDto memberFollowDto) {
+		String sql = "delete follow where follower_id =? and followee_id = ?";
+		Object[] data = {memberFollowDto.getFollowerId(), memberFollowDto.getFolloweeId()};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+
+	@Override
+	public boolean check(MemberFollowDto memberFollowDto) {
+		String sql = "select * from follow where follower_id = ? and followee_id = ?";
+		Object[] data = {memberFollowDto.getFollowerId(), memberFollowDto.getFolloweeId()};
+		List<MemberFollowDto> list = jdbcTemplate.query(sql, memberFollowMapper, data);
+		return list.isEmpty() ? false : true;
+	}
+
+	@Override
+	public int count(String followeeId) {
+		String sql ="select count(*) from follow where followee_id = ?";
+		Object[] data = {followeeId};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
+
+	@Override
+	public List<MemberDto> findByFollowerId(String followerId) {
+		String sql = "select member.* "
+						+ "from follow left outer join member "
+						+ "on follow.followee_id = member.member_id "
+						+ "where follow.follower_id = ? "
+						+ "order by member.member_id desc";
+		Object[] data = {followerId};
+		return jdbcTemplate.query(sql, memberMapper, data);
+	}
+	
+	@Override
+	public int countFollowList(PaginationVO vo) {
+		String sql = "select count(*) from follow_list";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	@Override
+	public List<MemberFollowDto> selectFollowListByPage(PaginationVO vo) {
+		String sql = "select * from (select rownum rn, TMP.* from (select * from follow_list order by follow_date desc)TMP) where rn between ? and ?";
+		Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+		return jdbcTemplate.query(sql, memberFollowMapper, data);
+	}
+	
+	
 }

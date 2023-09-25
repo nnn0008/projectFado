@@ -7,8 +7,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.springsemi.dto.DeliveryDto;
+import com.kh.springsemi.dto.MemberBlockDto;
 import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.MemberListDto;
+import com.kh.springsemi.mapper.MemberBlockMapper;
 import com.kh.springsemi.mapper.MemberListMapper;
 import com.kh.springsemi.mapper.MemberMapper;
 import com.kh.springsemi.vo.PaginationVO;
@@ -24,6 +26,9 @@ public class MemberDaoImpl implements MemberDao{
 	
 	@Autowired
 	private MemberListMapper memberListMapper;
+	
+	@Autowired
+	private MemberBlockMapper memberBlockMapper;
 	
 	// 회원
 	
@@ -121,41 +126,41 @@ public class MemberDaoImpl implements MemberDao{
 	public int countList(PaginationVO vo) {
 		if(vo.isSearch()) {
 			String sql = "select count(*) from member "
-					+ "where instr("+vo.getType()+", ?) > 0 "
-							+ "and member_level != '관리자'";
+							+ "where instr("+vo.getType()+", ?) > 0 "
+									+ "and member_level != '관리자'";
 			Object[] data = {vo.getKeyword()};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		else {
 			String sql = "select count(*) from member "
-					+ "where member_level != '관리자'";
-			return jdbcTemplate.queryForObject(sql,int.class);
+							+ "where member_level != '관리자'";
+			return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}
 	@Override
 	public List<MemberDto> selectListByPage(PaginationVO vo) {
 		if(vo.isSearch()) {
-			String sql = "seleect * from ("
-					+ "select rownum rn, TMP.* from ("
-					+ "select * from member "
-					+ "where instr("+vo.getType()+", ?) > 0 "
-					+ "and member_level != '관리자' "
-					+ "order by "+vo.getType()+ "asc "
-					+ ")TMP "
-					+ ") where rn between ? and ?";
-			Object[] data = {vo.getKeyword(),vo.getStartRow(), vo.getFinishRow()};
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select * from member "
+									+ "where instr("+vo.getType()+", ?) > 0 "
+									+ "and member_level != '관리자' " 
+									+ "order by "+vo.getType()+" asc"
+								+ ")TMP"
+							+ ") where rn between ? and ?";
+			Object[] data = {vo.getKeyword(), vo.getStartRow(), vo.getFinishRow()};
 			return jdbcTemplate.query(sql, memberMapper, data);
 		}
 		else {
-			String sql = "select * from ( "
-					+ "select rownum rn , TMP.* from( "
-					+ "select * from member "
-					+ "where member_level != '관리자' "
-					+ "order by member_id asc"
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+						+ "select * from member "
+						+ "where member_level != '관리자' " 
+						+ "order by member_id asc"
 					+ ")TMP"
-					+ ") where rn between ? and ?";
-			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
-			return jdbcTemplate.query(sql, memberMapper, data);			
+				+ ") where rn between ? and ?";
+				Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+				return jdbcTemplate.query(sql, memberMapper, data);	
 		}
 	}
 	
@@ -199,25 +204,25 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public List<MemberListDto> selectListByPage2(PaginationVO vo) {
 		if(vo.isSearch()) {
-			String sql = "seleect * from ("
-					+ "select rownum rn, TMP.* from ("
-					+ "select * from member_list "
-					+ "where instr("+vo.getType()+", ?) > 0 "
-					+ "and member_level != '관리자' "
-					+ "order by "+vo.getType()+ "asc "
-					+ ")TMP "
-					+ ") where rn between ? and ?";
-			Object[] data = {vo.getKeyword(),vo.getStartRow(), vo.getFinishRow()};
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select * from member_list "
+									+ "where instr("+vo.getType()+", ?) > 0 "
+									+ "and member_level != '관리자' " 
+									+ "order by "+vo.getType()+" asc"
+								+ ")TMP"
+							+ ") where rn between ? and ?";
+			Object[] data = {vo.getKeyword(), vo.getStartRow(), vo.getFinishRow()};
 			return jdbcTemplate.query(sql, memberListMapper, data);
 		}
 		else {
-			String sql = "select * from ( "
-					+ "select rownum rn , TMP.* from( "
-					+ "select * from member "
-					+ "where member_level != '관리자' "
-					+ "order by member_id asc"
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+						+ "select * from member_list "
+						+ "where member_level != '관리자' " 
+						+ "order by member_id asc"
 					+ ")TMP"
-					+ ") where rn between ? and ?";
+				+ ") where rn between ? and ?";
 			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
 			return jdbcTemplate.query(sql, memberListMapper, data);
 			}
@@ -258,6 +263,21 @@ public class MemberDaoImpl implements MemberDao{
 		String sql = "select * from member where member_nickname = ?";
 		Object[] data = {memberNickname};
 		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	@Override
+	public List<MemberBlockDto> selectBlockList() {
+		String sql = "select * from member_block order by block_time asc";
+		return jdbcTemplate.query(sql, memberBlockMapper);
+	}
+	
+	@Override
+	public MemberBlockDto selectBlockOne(String memberId) {
+		String sql = "select * from member_block where member_id = ?";
+		Object[] data = {memberId};
+		List<MemberBlockDto> list = 
+					jdbcTemplate.query(sql, memberBlockMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
 }

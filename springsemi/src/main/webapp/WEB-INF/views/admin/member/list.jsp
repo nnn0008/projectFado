@@ -7,15 +7,15 @@
     
     
     <div class="container w-700">
-    <div class="row">
+    <div class="row mv-40">
     <h3>전체회원관리 </h3>
     </div>
     
     <div class="row">
     <form action="list" method="get" >
-    
+				
    
-    <select name="type" class="form-input" height="300" >
+   <select name="type" class="form-input" height="300" >
 	<option value="member_id">아이디 </option>
 	<option value="member_nickname">닉네임 </option>
 	<option value="member_contact">연락처 </option>
@@ -41,8 +41,8 @@
     			<th>이메일 </th>
     			<th>생년월일 </th>
     			<th>등급</th>
-    			<th>상세 </th>
     			<th>차단여부 </th>
+    			<th>메뉴</th>
     		</tr>
     		
     		<tbody>
@@ -54,20 +54,24 @@
     				<td>${memberListDto.memberEmail }</td>
     				<td>${memberListDto.memberBirth }</td>
     				<td>${memberListDto.memberLevel }</td>
-    				<td>${memberListDto.memberBlock }</td>
+    				<td>${memberListDto.block }</td>
     			<td>
+    			
+    			
     			<a href="detail?memberId=${memberListDto.memberId }">상세 </a>
     			<a href="edit?memberId=${memberListDto.memberId }">수정 </a>
     			
-    			
     			<c:choose>
     				<c:when test="${memberListDto.block == 'Y'}">
-    					<a href="cancle?memberId=${memberListDto.memberId }"></a>
+    					<a href="block?memberId=${memberListDto.memberId }">차단 </a>
     				</c:when>
     				<c:otherwise>
-    					<a href="block?memberId=${memberListDto.memberId }"></a>
+    				
+    					<a href="cancle?memberId=${memberListDto.memberId }">해제 </a>
     				</c:otherwise>
     			</c:choose>
+    			
+    			
     			</td>	
     			</tr>
     			

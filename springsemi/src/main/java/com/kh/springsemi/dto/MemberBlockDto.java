@@ -5,8 +5,8 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class MemeberBlockDto {
+public class MemberBlockDto {
 
-	private String member_id;
-	private Date block_Time;
+	private String memberId;
+	private Date blockTime;
 }

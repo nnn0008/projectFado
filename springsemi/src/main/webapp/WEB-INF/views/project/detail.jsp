@@ -49,7 +49,7 @@ $(function(){
 
     <div class="container w-900">
     	<div class="row">
-    		<h5>${projectDto.projectCategory}</h5>
+    		<h5>${majorCategoryDto.majorCategoryType} > ${minorCategoryDto.minorCategoryType}</h5>
     	</div>
     	<div class="row">
     		<h1>${projectDto.projectTitle}</h1>
@@ -60,11 +60,11 @@ $(function(){
     				<img src="https://dummyimage.com/600x400/000/fff">
     			</div>
     			<div class="w-100 left">
-    				모인금액<br>
+    				모인금액
     				<fmt:formatNumber value="${projectDto.projectTotalPrice }" pattern="#,###"/>원<br>
     				남은시간
-    				<label class="timer"></label>
-    				${difference / 1000} 초
+<!--     				<label class="timer"></label> -->
+<%--     				${difference / 1000} 초 --%>
     				<label class="timer">0일 0시 0분 0초 남았습니다</label>
     				<br>
     				후원자

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.springsemi.dto.ProjectCommunityDto;
 import com.kh.springsemi.mapper.ProjectCommunityMapper;
+import com.kh.springsemi.vo.CommunityPaginationVO;
 import com.kh.springsemi.vo.PaginationVO;
 
 @Repository
@@ -41,23 +42,28 @@ public class ProjectCommunityDaoImpl implements ProjectCommunityDao{
 	}
 	
 	
+
 	@Override
-	public List<ProjectCommunityDto> selectList(PaginationVO vo) {  //프로젝트 커뮤니티 목록 페이지
-		if(vo.isSearch()) {
-			String sql = "select * from(select rownum rn, TMP.* from ("
-					+ "select * from project_community_list where instr("+vo.getType()+", ?) > 0 "
-							+ "order by " +vo.getType()+" asc)TMP) where rn between ? and ?)";
-			Object[] data = {vo.getKeyword(), vo.getStartRow(), vo.getFinishRow()};
-			return jdbcTemplate.query(sql, projectCommunityMapper, data);
-		}
-		else {
-			String sql = "select * from(select rownum rn, TMP.* from ("
-					+ "select * from project_community_list "
-					+ "order by project_community_no asc)TMP) "
-					+ "where rn between ? and ?";
-			Object[] data = {vo.getStartRow(), vo.getFinishRow()};
-			return jdbcTemplate.query(sql, projectCommunityMapper, data);
-		}
+	public List<ProjectCommunityDto> selectNoticeList(CommunityPaginationVO vo) {
+		String sql = "select * from (select rownum rn, TMP.* from("
+				+ "select * from project_community_list "
+				+ "where project_community_type = '공지사항' "
+				+ "order by project_community_no desc) TMP) "
+				+ "where rn between ? and ?";
+		Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+		return jdbcTemplate.query(sql, projectCommunityMapper, data);
+	}
+	
+	
+	@Override
+	public List<ProjectCommunityDto> selectQnAList(CommunityPaginationVO vo) {
+		String sql = "select * from (select rownum rn, TMP.* from ("
+				+ "select * from project_community_list "
+				+ "where project_community_type = 'Q&A' "
+				+ "order by project_community_no desc) TMP) "
+				+ "where rn between ? and ?";
+		Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+		return jdbcTemplate.query(sql, projectCommunityMapper, data);
 	}
 	
 	
@@ -86,4 +92,19 @@ public class ProjectCommunityDaoImpl implements ProjectCommunityDao{
 		Object[] data = {projectCommunityNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+
+
+	@Override
+	public int countNoticeList(CommunityPaginationVO vo) {
+		String sql = "select count(*) from project_community where project_community_type = '공지사항'";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+
+	@Override
+	public int countQnAList(CommunityPaginationVO vo) {
+		String sql = "select count(*) from project_community where project_community_type = 'Q&A'";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
 }

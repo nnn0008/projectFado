@@ -12,18 +12,18 @@
 <div class="container w-800">
 
 	<div class="row">
-		<a class="btn" href="/helperCommunity/noticeList">공지사항</a>
-		<a class="btn" style="background-color: #DEF2FF" href="/helperCommunity/qnaList">Q & A</a>
+		<a class="btn" style="background-color: #DEF2FF" href="/projectCommunity/noticeList">공지사항</a>
+		<a class="btn" href="/projectCommunity/qnaList">Q & A</a>
 	</div>
 	<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
-	<c:if test="${sessionScope.name != null && sessionScop.level != '관리자'}">
-	<div class="row right">
-		<a href="write" class="btn btn-positive">
-			<i class="fa-solid fa-pen"></i>
-			글쓰기
-		</a>
-	</div>
-	</c:if>
+		<c:if test="${sessionScope.name != null && sessionScope.level == '관리자'}">
+		    <div class="row right">
+		        <a href="write" class="btn btn-positive">
+		            <i class="fa-solid fa-pen"></i>
+		            글쓰기
+		        </a>
+		    </div>
+		</c:if>
 	
 	<%-- 
 		검색일 경우 검색어를 추가로 출력 
@@ -52,20 +52,20 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="mainCommunityListDto" items="${qnaList}">
+			<c:forEach var="projectCommunityListDto" items="${noticeList}">
 				<tr>
-					<td>${mainCommunityListDto.mainCommunityNo}</td>
-					<td>${mainCommunityListDto.mainCommunityType}</td>
-					<td>${mainCommunityListDto.getMainCommunityWriterString()}</td>
+					<td>${projectCommunityListDto.projectCommunityNo}</td>
+					<td>${projectCommunityListDto.projectCommunityType}</td>
+					<td>${projectCommunityListDto.getProjectCommunityWriterString()}</td>
 					<td align="left">
 						
 						<!-- 제목을 누르면 상세페이지로 이동 -->
-						<a class="link" href="detail?mainCommunityNo=${mainCommunityListDto.mainCommunityNo}">
-							${mainCommunityListDto.mainCommunityTitle}
+						<a class="link" href="detail?projectCommunityNo=${projectCommunityListDto.projectCommunityNo}">
+							${projectCommunityListDto.projectCommunityTitle}
 						</a>
 						
 					</td>
-					<td>${mainCommunityListDto.mainCommunityRegDate}</td>
+					<td>${projectCommunityListDto.projectCommunityRegDate}</td>
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -75,7 +75,8 @@
 		<div class="row page-navigator mv-30">
 		<!-- 이전 버튼 -->
 		<c:if test="${!vo.first}">
-			<a href="qnaList?${vo.prevQueryString}">
+		
+			<a href="notictList?${vo.prevQueryString}">
 				<i class="fa-solid fa-angle-left"></i>
 			</a>
 		</c:if>
@@ -87,23 +88,23 @@
 					<a class="on">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="qnaList?${vo.getQueryString(i)}">${i}</a> 
+					<a href="noticeList?${vo.getQueryString(i)}">${i}</a> 
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
 		<!-- 다음 버튼 -->
 		<c:if test="${!vo.last}">
-			<a href="qnaList?${vo.nextQueryString}">
+			<a href="noticeList?${vo.nextQueryString}">
 				<i class="fa-solid fa-angle-right"></i>
 			</a>
 		</c:if>
 	</div>
 	
 	<!-- 검색창 -->
-	<form action="qnaList" method="get">
+	<form action="noticeList" method="get">
 	<div class="row">
-
+		
 		<input type="search" name="keyword"  required class="form-input"
 					placeholder="검색어 입력" value="${param.keyword}">
 		<button type="submit" class="btn btn-positive">

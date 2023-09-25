@@ -11,6 +11,8 @@ public class CommunityPaginationVO {
 		private int size = 20; //보여줄 게시판의 글 수 (기본 : 10)
 		private int count; //전체 글 수 
 		private int navigatorSize = 10; //하단 네비게이터 표시 개수(기본 : 10)
+		private String notice;
+		private String qna;
 		
 		public boolean isSearch() {
 			return keyword != null;

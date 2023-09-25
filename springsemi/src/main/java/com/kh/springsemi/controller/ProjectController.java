@@ -105,6 +105,7 @@ public class ProjectController {
 		return "/WEB-INF/views/project/detail.jsp";
 	}
 	
+
 	@RequestMapping("/list")
 	public String list(Model model) {
 		List<ProjectListDto> projectList = projectDao.selectList();
@@ -112,6 +113,7 @@ public class ProjectController {
 		
 		return "/WEB-INF/views/project/list.jsp";
 	}
+
 	
 	@GetMapping("/edit")
 	public String edit(@RequestParam int projectNo, Model model) {
@@ -141,4 +143,19 @@ public class ProjectController {
 			throw new AuthorityException("프로젝트 소유자가 아닙니다");
 		}
 	}
+	
+//	@RequestMapping("/list2")
+//	public String list(@ModelAttribute(name = "vo") PaginationVO vo,
+//									Model model) {
+//		int count = projectDao.countList(vo);
+//		vo.setCount(count);
+//		model.addAttribute("vo", vo);
+//		
+//	List<ProjectDto> list = projectDao.selectListByPage(vo);
+//	model.addAttribute("list", list);
+//	
+//	return "/WEB-INF/views/project/list2.jsp";
+//}
+	
+	
 }

@@ -19,9 +19,33 @@
 		<h2>글제목 : ${mainCommunityDto.mainCommunityTitle}</h2>
 	</div>
 	<div>
-		<h2>글제목 : ${mainCommunityDto.mainCommunityContent}</h2>
+		<h2>글내용 : ${mainCommunityDto.mainCommunityContent}</h2>
 	</div>
 </div>
+
+
+
+	<%-- 댓글과 관련된 화면이 작성될 위치 --%>
+	<c:if test="${sessionScope.name != null}">
+	<div class="row left">
+		<form class="reply-insert-form">
+			<input type="hidden" name="replyOrigin" value="${mainCommunityDto.mainCommunityNo}">
+		
+			<div class="row">
+				<textarea name="replyContent" class="form-input w-100" rows="4"></textarea>
+			</div>
+			<div class="row">
+				<button class="btn btn-positive w-100">
+					<i class="fa-solid fa-pen"></i>
+					댓글등록
+				</button>
+			</div>
+		</form>
+	</div>
+	</c:if>
+	
+	
+	
 
 	<div class="row">
 	<c:if test="${sessionScope.name != null}">

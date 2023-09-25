@@ -20,7 +20,6 @@ import com.kh.springsemi.dto.MainCommunityListDto;
 import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.error.NoTargetException;
 import com.kh.springsemi.vo.CommunityPaginationVO;
-import com.kh.springsemi.vo.PaginationVO;
 
 @Controller
 @RequestMapping("/helperCommunity")
@@ -51,10 +50,8 @@ public class MainCommunityController {
 		mainCommunityDto.setMainCommunityNo(mainCommunityNo);
 		
 		String memberId = (String) session.getAttribute("name");
-		String memberLevel = (String) session.getAttribute("level");
 		
 		mainCommunityDto.setMainCommunityWriter(memberId);
-		memberDto.setMemberLevel(memberLevel);
 		
 		mainCommunityDao.insert(mainCommunityDto);
 
@@ -65,6 +62,7 @@ public class MainCommunityController {
 	public String edit(@RequestParam int mainCommunityNo, Model model) {
 		MainCommunityDto mainCommunityDto = mainCommunityDao.selectOne(mainCommunityNo);
 		model.addAttribute("mainCommunityDto", mainCommunityDto);
+		
 		return "/WEB-INF/views/helperCommunity/edit.jsp";
 	}
 	
@@ -78,30 +76,34 @@ public class MainCommunityController {
 	
 	
 	@RequestMapping("/noticeList")  //메인 커뮤니티 글 목록
-	public String noticeList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model) {
-		
+	public String noticeList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model,
+							@ModelAttribute MemberDto memberDto) {
 		int count = mainCommunityDao.countNoticeList(vo);  //페이지 네이션 카운트 메소드
 		vo.setCount(count);
 		model.addAttribute("vo", vo);
+
 		
 		List<MainCommunityListDto> noticeList = mainCommunityDao.selectNoticeList(vo);
 		model.addAttribute("noticeList", noticeList);
+		
 			
 		return "/WEB-INF/views/helperCommunity/noticeList.jsp";
 	}
-	
 
 		
 	
 	@RequestMapping("/qnaList")  //메인 커뮤니티 글 목록
-		public String qnaList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model) {
+		public String qnaList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model,
+							@ModelAttribute MemberDto memberDto) {
 		
 		int count = mainCommunityDao.countQnAList(vo);  //페이지 네이션 카운트 메소드
 		vo.setCount(count);
 		model.addAttribute("vo", vo);
 		
+		
 		List<MainCommunityListDto> qnaList = mainCommunityDao.selectQnAList(vo);
 		model.addAttribute("qnaList", qnaList);
+		
 			
 		return "/WEB-INF/views/helperCommunity/qnaList.jsp";
 		

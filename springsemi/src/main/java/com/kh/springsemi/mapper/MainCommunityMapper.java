@@ -20,7 +20,6 @@ public class MainCommunityMapper implements RowMapper<MainCommunityDto>{
 		mainCommunityDto.setMainCommunityContent(rs.getString("main_community_content"));
 		mainCommunityDto.setMainCommunityRegDate(rs.getDate("main_community_reg_date"));
 		mainCommunityDto.setMainCommunityType(rs.getString("main_community_type"));
-		mainCommunityDto.setMainCommunityReply(rs.getString("main_community_reply"));
 		return mainCommunityDto;
 	}
 

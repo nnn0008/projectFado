@@ -13,4 +13,12 @@ public class ProjectCommunityDto {
 	private Date projectCommunityRegDate;
 	private String projectCommunityType;
 	private String projectCommunityReply;
+	private String memberNickname; //작성자 닉네임
+	
+	public String getProjectCommunityWriterString() {
+		if(projectCommunityWriter == null)
+			return "탈퇴한 사용자";
+		return memberNickname;
+	}
+	
 }

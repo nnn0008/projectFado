@@ -19,6 +19,7 @@ public class ProjectDto {
 	private String projectOwner;
 	private long projectReadcount;
 	private int minorCategoryNo;
+//	private int judgeNo;
 	
 	//프로젝트 종료일을 계산하는 가상의 getter 메소드
 	public Date getCalculateEndDate() {

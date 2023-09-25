@@ -11,7 +11,6 @@ import com.kh.springsemi.dto.MainCommunityListDto;
 import com.kh.springsemi.mapper.MainCommunityListMapper;
 import com.kh.springsemi.mapper.MainCommunityMapper;
 import com.kh.springsemi.vo.CommunityPaginationVO;
-import com.kh.springsemi.vo.PaginationVO;
 
 @Repository
 public class MainCommunityDaoImpl implements MainCommunityDao{
@@ -156,6 +155,17 @@ public class MainCommunityDaoImpl implements MainCommunityDao{
 			String sql = "select count(*) from main_community where main_community_type = 'Q&A'";
 			return jdbcTemplate.queryForObject(sql, int.class);
 		}
+	}
+	
+	
+	
+	
+	
+	//댓글구현
+	
+	@Override
+	public void replyInsert(MainCommunityDto mainComunityDto) {
+		
 	}
 
 

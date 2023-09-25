@@ -81,6 +81,7 @@
          <li><a href="/member/mypage">회원상세</a></li>
          <li><a href="/member/change">회원정보수정</a></li>
          <li><a href="/helperCommunity/noticeList">공지사항</a></li>
+         <li><a href="/projectCommunity/noticeList">공지사항</a></li>
           <!-- <li><a href="/member/logout">로그아웃</a></li> -->
        </ul>
        

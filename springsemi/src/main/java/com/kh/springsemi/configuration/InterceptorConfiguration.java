@@ -63,6 +63,28 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 						"/project/list/Community/review"
 						
 						 );
+//	@Override
+//	public void addInterceptors(InterceptorRegistry registry) {
+//		
+//		registry.addInterceptor(memberInterceptor)
+//				.addPathPatterns(
+//						"/member/**",
+//						"/project/**"
+//						)
+////				제외시킬 주소(비회원) 
+//				.excludePathPatterns(
+//						  "/member/join*",
+//						  "/member/login*",
+//						"/project/list/like*",
+//						"/project/list/lank*",
+//						"/project/list/category*",
+//						"/project/list/period*",
+//						"/project/list/detail*",
+//						"/project/list/Community/QnA*",
+//						"/project/list/Community/notice*",
+//						"/project/list/Community/review"
+//						
+//						 );
 	
 				
 		

@@ -20,6 +20,7 @@
 					<th>좋아요</th>
 					<th>대분류</th>
 					<th>소분류</th>
+					<th>심사일</th>
 					<th>심사단계</th>			
 				</tr>
 			</thead>
@@ -42,7 +43,8 @@
 					<td>${projectListDto.projectLikecount }</td>
 					<td>${projectListDto.majorCategoryType}</td>
 					<td>${projectListDto.minorCategoryType}</td>	
-					<td>심사여부</td>				
+					<td>${projectListDto.judgeDate}</td>
+					<td>${projectListDto.judgeStatus}</td>				
 				</tr>
 				</c:forEach>
 			</tbody>

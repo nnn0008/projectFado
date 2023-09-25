@@ -24,6 +24,9 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Autowired
 	private ProjectListMapper projectListMapper;
 	
+	@Autowired
+	private JudgeDao judgeDao;
+	
 	//프로젝트 등록(판매자가)
 	@Override
 	public int sequence() {

@@ -13,15 +13,17 @@ public class ProjectDto {
 	private int projectTotalPrice;
 	private Date projectStartDate;
 	private Date projectEndDate;
-	private int projectDuration;
+	private int projectPeriod;
 	private Date projectRegDate;
 	private String projectContent;
 	private String projectOwner;
 	private long projectReadcount;
+	private int minorCategoryNo;
 	
+	//프로젝트 종료일을 계산하는 가상의 getter 메소드
 	public Date getCalculateEndDate() {
 		LocalDate start = projectStartDate.toLocalDate();
-		LocalDate end = start.plusDays(projectDuration);
+		LocalDate end = start.plusDays(projectPeriod);
 		return Date.valueOf(end);
 	}
 }

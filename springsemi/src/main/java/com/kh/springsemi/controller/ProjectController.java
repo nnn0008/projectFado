@@ -60,7 +60,6 @@ public class ProjectController {
 		String memberId = (String)session.getAttribute("name");
 		projectDto.setProjectOwner(memberId);
 		projectDao.insert(projectDto);
-		
 		return "redirect:detail?projectNo="+projectNo;
 	}
 	
@@ -69,6 +68,11 @@ public class ProjectController {
 	public String detail(Model model, @RequestParam int projectNo) {
 		ProjectDto projectDto = projectDao.selectOne(projectNo);
 		model.addAttribute("projectDto", projectDto);
+		
+		MinorCategoryDto minorCategoryDto = minorCategoryDao.selectOne(projectDto.getMinorCategoryNo());
+		model.addAttribute("minorCategoryDto", minorCategoryDto);
+		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(minorCategoryDto.getMajorCategoryNo());
+		model.addAttribute("majorCategoryDto", majorCategoryDto);
 		
 		Date currentTime = new Date();
 		Date endTime = projectDto.getProjectEndDate();
@@ -88,8 +92,8 @@ public class ProjectController {
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
-		List<ProjectListDto> list = projectDao.selectList();
-		model.addAttribute("list", list);
+		List<ProjectListDto> projectList = projectDao.selectList();
+		model.addAttribute("projectList", projectList);;
 		
 		return "/WEB-INF/views/project/list.jsp";
 	}

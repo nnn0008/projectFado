@@ -23,4 +23,8 @@ public interface ProjectDao {
 	
 	//목록
 	List<ProjectListDto> selectList();
+	
+	//관리자용 목록
+	List<ProjectListDto> selectListForAdmin();
+	
 }

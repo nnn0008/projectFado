@@ -8,12 +8,16 @@ import lombok.Data;
 public class ProjectListDto {
 	private int projectNo;
 	private String projectTitle;
-	private int projectGoalPrice;
-	private int projectTotalPrice;
+	private String projectOwner;
+	private Date projectRegDate;
 	private Date projectStartDate;
 	private Date projectEndDate;
-	private Date projectRegDate;
-//	private String projectContent;
-	private String projectOwner;
+	private int projectTotalPrice;
+	private int projectGoalPrice;
 	private long projectReadcount;
+	private int projectLikecount;
+	private String majorCategoryType;
+	private String minorCategoryType;
+//	private int projectPeriod;
+//	private int minorCategoryNo;
 }

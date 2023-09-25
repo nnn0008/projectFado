@@ -113,5 +113,3 @@
         <section>
     </ul>
     	  	
-  </nav>
-        <section>

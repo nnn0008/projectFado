@@ -55,11 +55,12 @@ public interface MemberDao {
 	MemberDto selectOneByMemberNickname(String memberNickname);
 	
 // 회원 팔로우 관련 기능	
-	void insert(MemberFollowDto memberFollowDto);
-	boolean delete(MemberFollowDto memberFollowDto);
+	void insertFollow(MemberFollowDto memberFollowDto);
+	boolean deleteFollow(MemberFollowDto memberFollowDto);
 	boolean check(MemberFollowDto memberFollowDto);
 	int count(String followeeId);
 	List<MemberDto> findByFollowerId(String followerId);
+	MemberFollowDto selectOneByFollowerId(String followerId);
 	
 	int countFollowList(PaginationVO vo);
 	List<MemberFollowDto> selectFollowListByPage(PaginationVO vo);

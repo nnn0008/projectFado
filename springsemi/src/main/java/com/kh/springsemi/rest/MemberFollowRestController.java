@@ -5,7 +5,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.springsemi.dao.MemberDao;
@@ -43,10 +45,10 @@ public class MemberFollowRestController {
 		
 		boolean isCheck = memberDao.check(memberFollowDto);
 		if(isCheck) {
-			memberDao.delete(memberFollowDto);
+			memberDao.deleteFollow(memberFollowDto);
 		}
 		else {
-			memberDao.insert(memberFollowDto);
+			memberDao.insertFollow(memberFollowDto);
 		}
 		int count = memberDao.count(memberFollowDto.getFolloweeId());
 		MemberFollowVO vo = new MemberFollowVO();
@@ -54,4 +56,18 @@ public class MemberFollowRestController {
 		vo.setCount(count);
 		return vo;
 	}
+	
+	@PostMapping("/insert")
+	public void insert(@ModelAttribute MemberFollowDto memberFollowDto, HttpSession session) {
+		String followerId = (String)session.getAttribute("name");
+		memberFollowDto.setFollowerId(followerId);
+		memberDao.insertFollow(memberFollowDto);
+	}
+	
+	@PostMapping("/delete")
+	public void delete(@RequestParam String followerId) {
+		MemberFollowDto memberFollowDto = memberDao.selectOneByFollowerId(followerId);
+		memberDao.deleteFollow(memberFollowDto);
+	}
+	
 }

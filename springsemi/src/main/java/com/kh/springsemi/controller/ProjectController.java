@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.springsemi.dao.JudgeDao;
 import com.kh.springsemi.dao.MajorCategoryDao;
 import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.MinorCategoryDao;
 import com.kh.springsemi.dao.ProjectDao;
+import com.kh.springsemi.dto.JudgeDto;
 import com.kh.springsemi.dto.MajorCategoryDto;
 import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.MinorCategoryDto;
@@ -26,6 +28,7 @@ import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ProjectListDto;
 import com.kh.springsemi.error.AuthorityException;
 import com.kh.springsemi.error.NoTargetException;
+import com.kh.springsemi.mapper.JudgeMapper;
 
 @Controller
 @RequestMapping("/project")
@@ -43,6 +46,12 @@ public class ProjectController {
 	@Autowired
 	private MinorCategoryDao minorCategoryDao;
 	
+	@Autowired
+	private JudgeDao judgeDao;
+	
+	@Autowired
+	private JudgeMapper judgeMapper;
+	
 	//프로젝트 등록
 	@GetMapping("/write")
 	public String write(Model majorModel, Model minorModel) {
@@ -54,12 +63,18 @@ public class ProjectController {
 	}
 
 	@PostMapping("/write")
-	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session) {
+	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session,
+			@ModelAttribute JudgeDto judgeDto) {
 		int projectNo = projectDao.sequence();
+		int judgeNo = judgeDao.sequence();
 		projectDto.setProjectNo(projectNo);
 		String memberId = (String)session.getAttribute("name");
 		projectDto.setProjectOwner(memberId);
 		projectDao.insert(projectDto);
+		
+		judgeDto.setProjectNo(projectNo);
+		judgeDto.setJudgeNo(judgeNo);
+		judgeDao.insert(judgeDto);
 		return "redirect:detail?projectNo="+projectNo;
 	}
 	

@@ -24,6 +24,7 @@ public class ProjectMapper implements RowMapper<ProjectDto> {
 		projectDto.setProjectOwner(rs.getString("project_owner"));
 		projectDto.setProjectReadcount(rs.getLong("project_readcount"));
 		projectDto.setMinorCategoryNo(rs.getInt("minor_category_no"));
+//		projectDto.setJudgeNo(rs.getInt("judge_no"));
 		return projectDto;
 	}
 }

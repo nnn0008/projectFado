@@ -25,6 +25,8 @@ public ProjectListDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 	projectListDto.setProjectLikecount(rs.getInt("project_likecount"));
 	projectListDto.setMajorCategoryType(rs.getString("major_category_type"));
 	projectListDto.setMinorCategoryType(rs.getString("minor_category_type"));
+	projectListDto.setJudgeStatus(rs.getString("judge_status"));
+	projectListDto.setJudgeDate(rs.getDate("judge_date"));
 //	projectListDto.setProjectPeriod(rs.getInt("project_period"));
 //	projectListDto.setProjectContent(rs.getString("project_content"));
 //	projectListDto.setMinorCategoryNo(rs.getInt("minor_category_no"));

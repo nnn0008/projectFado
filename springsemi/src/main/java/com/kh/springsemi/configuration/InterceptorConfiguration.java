@@ -23,46 +23,47 @@ import com.kh.springsemi.interceptor.TestInterceptor;
 //3. 상황에 맞는 메소드 재정의 및 코드 작성
 //*/
 //
-@Configuration//등록 
-public class InterceptorConfiguration implements WebMvcConfigurer {
+//@Configuration//등록 
+//public class InterceptorConfiguration implements WebMvcConfigurer {
+//	
+//	@Autowired
+//	private AdminInterceptor adminInterceptor;
+//	
+//	@Autowired
+//	private TestInterceptor testInterceptor;
+//	
+//	@Autowired
+//	private MemberInterceptor memberInterceptor;
+//	
+//	@Autowired
+//	private ProjectDefenderInterceptor projectDefenderInterceptor;
+//	
+//	@Autowired
+//	private ProjectOwnerInterceptor projectOwnerInterceptor;
 	
-	@Autowired
-	private AdminInterceptor adminInterceptor;
-	
-	@Autowired
-	private TestInterceptor testInterceptor;
-	
-	@Autowired
-	private MemberInterceptor memberInterceptor;
-	
-	@Autowired
-	private ProjectDefenderInterceptor projectDefenderInterceptor;
-	
-	@Autowired
-	private ProjectOwnerInterceptor projectOwnerInterceptor;
-	
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		
-		registry.addInterceptor(memberInterceptor)
-				.addPathPatterns(
-						"/member/**",
-						"/project/**"
-						)
-//				제외시킬 주소(비회원) 
-				.excludePathPatterns(
-						  "/member/join*",
-						  "/member/login*",
-						"/project/list/like*",
-						"/project/list/lank*",
-						"/project/list/category*",
-						"/project/list/period*",
-						"/project/list/detail*",
-						"/project/list/Community/QnA*",
-						"/project/list/Community/notice*",
-						"/project/list/Community/review"
-						
-						 );
+//	@Override
+//	public void addInterceptors(InterceptorRegistry registry) {
+//		
+//		registry.addInterceptor(memberInterceptor)
+//				.addPathPatterns(
+//						"/member/**",
+//						"/project/**"
+//						)
+////				제외시킬 주소(비회원) 
+//				.excludePathPatterns(
+//						  "/member/join*",
+//						  "/member/login*",
+//						"/project/list/like*",
+//						"/project/list/lank*",
+//						"/project/list/category*",
+//						"/project/list/period*",
+//						"/project/list/detail*",
+//						"/project/list/Community/QnA*",
+//						"/project/list/Community/notice*",
+//						"/project/list/Community/review"
+//						
+//						 );
+//	}
 //	@Override
 //	public void addInterceptors(InterceptorRegistry registry) {
 //		
@@ -98,13 +99,13 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 //			.excludePathPatterns(
 //					"/admin/member/list*"
 //					);
-			
-		
-		registry.addInterceptor(projectDefenderInterceptor)
-				.addPathPatterns("/project/detail");
-		
-		registry.addInterceptor(projectOwnerInterceptor)
-		.addPathPatterns("/project/edit", "/project/delete");
-			
-	}
-}
+//			
+//		
+//		registry.addInterceptor(projectDefenderInterceptor)
+//				.addPathPatterns("/project/detail");
+//		
+//		registry.addInterceptor(projectOwnerInterceptor)
+//		.addPathPatterns("/project/edit", "/project/delete");
+//			
+//	}
+//}

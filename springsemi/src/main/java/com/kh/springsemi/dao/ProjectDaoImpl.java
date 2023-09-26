@@ -77,13 +77,6 @@ public class ProjectDaoImpl implements ProjectDao{
 		return list.isEmpty() ? null : list.get(0);
 	}
 
-	//프로젝트 리스트
-	@Override
-	public List<ProjectListDto> selectList() {
-		String sql = "select * from project_list order by project_no desc";
-		return jdbcTemplate.query(sql, projectListMapper);
-	}
-
 	@Override
 	public boolean updateProjectReadcount(int projectNo) {
 		String sql = "update project set project_readcount = project_readcount + 1 where project_no=?";
@@ -148,10 +141,28 @@ public class ProjectDaoImpl implements ProjectDao{
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
+//	@Override
+//	public List<ProjectListDto> selectListForAdmin() {
+//		String sql = "select * from project order by project_no asc";
+//		return null;
+//	}
+	
+	//프로젝트 리스트
 	@Override
-	public List<ProjectListDto> selectListForAdmin() {
-		String sql = "select * from project order by project_no asc";
-		return null;
+	public List<ProjectListDto> selectList() {
+		String sql = "select * from project_list order by project_no desc";
+		return jdbcTemplate.query(sql, projectListMapper);
+	}
+	@Override
+	public List<ProjectListDto> selectList(String keyword) {
+		String sql = "select * from project_list where "
+				+ "instr(minor_category_type, ?) > 0 or "
+				+ "instr(project_owner, ?) > 0 or "
+				+ "instr(project_title, ?) > 0 or "
+				+ "instr(major_category_type, ?) > 0 "
+				+ "order by project_no desc";
+		Object[] data = {keyword, keyword, keyword, keyword};
+		return jdbcTemplate.query(sql, projectListMapper, data);
 	}
 	
 }

@@ -34,8 +34,20 @@
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/moment-duration-format@2.3.2/lib/moment-duration-format.min.js"></script>
-
-
+<script>
+$(function(){
+	$(".backdrop").hide();
+	
+	$(".search").click(function(){
+		$(".backdrop").show();
+		$(".focus").focus();
+	});
+	$(".exit").click(function(){
+		$(".backdrop").hide();
+	});
+});
+	
+</script>
 </head>
 <body>
    <main>
@@ -45,6 +57,12 @@
            <a href="/">
            <img src="/images/fado.jpg" width="200" height="180" >
            </a>
+           <form action="list" method="get">
+           		<label class="search">
+           		<input type="text" class="pointer" placeholder="검색어를 입력해주세요" required readonly>
+           		<i class="fa-solid fa-magnifying-glass"></i>
+           		</label>
+           </form>
         </div>
          
         <div class="login right">
@@ -115,3 +133,29 @@
     	  	
   </nav>
         <section>
+        <div class="backdrop">
+        <form action ="/project/list" method="get">
+        	<div class="container w-900">
+	        	<div class="flex-container">
+					<div class="w-100">
+		           		<i class="fa-solid fa-magnifying-glass"></i>
+		        		<input type="search" class="pointer w-100 focus" name="keyword" placeholder="검색어를 입력해주세요" value="">
+					</div>
+					
+	        			<i class="fa-solid fa-x exit"></i>					
+
+	        	</div>
+
+					<hr>	        	
+
+	        	<div class="row left">
+	        		최근검색어
+	        		
+	        	</div>
+	        	<div class="row left">
+	        		파도 인기 검색어
+	        		
+	        	</div>
+        	</div>
+        </form>
+        </div>

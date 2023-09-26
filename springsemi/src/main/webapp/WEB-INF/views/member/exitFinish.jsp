@@ -2,10 +2,21 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<h2>회원 탈퇴 완료</h2>
+<div class = "row red">
+	<h1>회원 탈퇴 완료</h1>
+</div>
 
-<h3>그동안 이용해주셔서 감사합니다</h3>
+<div class = "row">
+	<h3>그동안 이용해주셔서 감사합니다.</h3>
+</div>
 
-<h3><a href="/">메인페이지로 이동</a></h3>
+<div class = "row fado">
+
+	<a href="/"><img src="/images/fado.jpg" width="200" height="180" ></a>
+</div>
+
+<div class="row">
+	 <img src="/images/thankyou.png" width="700" height="700"  class="image image-round">
+</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

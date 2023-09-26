@@ -106,11 +106,17 @@ public class MemberController {
 		if(inputDto.getMemberPw().equals(findDto.getMemberPw())) { 
 			inputDto.setMemberId(memberId);
 			memberDao.updateMemberInfo(inputDto);
-			return "redirect:mypage";
+			return "redirect:changeFinish";
 		}
 		else {
 			return "redirect:change?error";
 		}
+	}
+	
+	//개인정보 변경 완료 페이지
+	@RequestMapping("/changeFinish") 
+	public String changeFinish() {
+		return "/WEB-INF/views/member/changeFinish.jsp";
 	}
 	
 	//회원 로그인 페이지
@@ -201,20 +207,24 @@ public class MemberController {
 	}
 	
 	@PostMapping("/findPw")
-	public String findPw(@ModelAttribute MemberDto memberDto) {
+	public String findPw(@ModelAttribute MemberDto memberDto, Model model) {
 		MemberDto findDto = memberDao.selectOne(memberDto.getMemberId());
 		boolean isValid = findDto != null && findDto.getMemberEmail().equals(memberDto.getMemberEmail());
 		
 		if(isValid) {
 			SimpleMailMessage message = new SimpleMailMessage();
 			message.setTo(findDto.getMemberEmail());
-			message.setSubject("비밀번호 찾기 결과");
-			message.setText(findDto.getMemberPw());
+			message.setSubject("[FADO] 비밀번호 찾기 결과");
+			message.setText("[FADO] 비밀번호 찾기 결과입니다.\n회원님의 비밀번호는 [" + 
+			findDto.getMemberPw() + "] 입니다.");
 			sender.send(message);
 			return "redirect:findPwFinish";
 		}
 		else {
-			return "redirect:findPw?error";
+			//return "redirect:findPw?error";
+	        // 에러 메시지를 모델에 추가하고 findPw.jsp 페이지로
+	        model.addAttribute("error", "가입된 이메일이 아닙니다.");
+	        return "forward:/WEB-INF/views/member/findPw.jsp";
 		}
 	}
 	

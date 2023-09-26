@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<style>
+	
+</style>
 
 <script>
 $(document).ready(function () {
@@ -11,13 +14,13 @@ $(document).ready(function () {
 
         var link = $(this);
         var row = link.closest("tr"); // 클릭된 버튼이 속한 <tr> 요소 가져오기 (팔로우 버튼이 포함된 행)
-        var followerId = row.data("follower"); //팔로우한 사람
-        var followeeId = row.data("followee"); //팔로우당한 사람
-        var isFollowing = link.text() === "팔로우하기"; // 현재 상태 판단
-						//클릭한 버튼의 텍스트
+        var followerId = row.data("follower"); // 팔로우한 사람
+        var followeeId = row.data("followee"); // 팔로우당한 사람
+        var isFollowing = link.text().includes("팔로잉"); // 현재 상태 판단
+
         // AJAX 요청
         $.ajax({
-            url: isFollowing ? "/member/follow/following" : "/member/follow/cancel",
+            url: isFollowing ? "/member/follow/cancel" : "/member/follow/following",
             type: "POST", // 또는 "GET" 등
             data: {
                 followerId: followerId,
@@ -25,13 +28,9 @@ $(document).ready(function () {
             },
             success: function (response) {
                 if (isFollowing) {
-                    link.text("팔로우해제");
-                    link.attr("href", "/member/follow/cancel?followerId=" + followerId + "&followeeId=" + followeeId);
-                    $(this).removeClass("fa-plus").addClass("fa-check");
+                    link.html('<i class="fa-solid fa-plus"></i> 팔로우');
                 } else {
-                    link.text("팔로우하기");
-                    link.attr("href", "/member/follow/following?followerId=" + followerId + "&followeeId=" + followeeId);
-                    $(this).removeClass("fa-check").addClass("fa-plus");
+                    link.html('<i class="fa-solid fa-check"></i> 팔로잉');
                 }
             },
             error: function () {
@@ -59,16 +58,18 @@ $(document).ready(function () {
                 <td>
                     <c:choose>
                         <c:when test="${memberFollowDto.followYN == 'Y'}">
+                        <button class="btn">
                             <a class="link" href="#">
-                            <i class="fa-solid fa-check"></i>
-                            팔로우해제
+                                <i class="fa-solid fa-check"></i> 팔로잉
                             </a>
+                           </button>
                         </c:when>
                         <c:otherwise>
+                         <button class="btn">
                             <a class="link" href="#">
-                            <i class="fa-solid fa-plus"></i>
-                            팔로우하기
+                                <i class="fa-solid fa-plus"></i> 팔로우
                             </a>
+                            </button>
                         </c:otherwise>
                     </c:choose> 
                 </td>

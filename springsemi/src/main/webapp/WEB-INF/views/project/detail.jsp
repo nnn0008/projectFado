@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <!-- 타이머를 생성 및 카운트다운 -->
 <script>
@@ -141,6 +142,7 @@ $(function(){
     			</div>
     			<div class="w-100">
     				창작자 소개<br>
+    				${memberFollowDto.followeeId}
     				리워드1<br>
     				리워드2<br>
     				조회수 : ${projectDto.projectReadcount}<br>

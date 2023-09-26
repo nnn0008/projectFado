@@ -35,7 +35,7 @@
 	        ]
 	    });
 	});
-d
+
 </script>
 
 
@@ -43,7 +43,7 @@ d
 <form action="write" method="post" autocomplete="off">
 <div class="container w-600">
 	<div>
-		<input type="hidden" name="projectNo" value="${projectNo}">
+		<input type="hidden" name="projectNo" value="${param.projectNo}">
 	</div>
 	<div>
 		<select name="projectCommunityType" required>

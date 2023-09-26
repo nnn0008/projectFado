@@ -203,12 +203,22 @@ textarea.form-input.fixed {
 .mt-30 { margin-top: 30px; }
 .mt-40 { margin-top: 40px; }
 .mt-50 { margin-top: 50px; }
+.mt-60 { margin-top: 60px; }
+.mt-70 { margin-top: 70px; }
+.mt-80 { margin-top: 80px; }
+.mt-90 { margin-top: 90px; }
+.mt-100 { margin-top: 100px; }
 
 .mb-10 { margin-bottom: 10px; }
 .mb-20 { margin-bottom: 20px; }
 .mb-30 { margin-bottom: 30px; }
 .mb-40 { margin-bottom: 40px; }
 .mb-50 { margin-bottom: 50px; }
+.mb-60 { margin-bottom: 60px; }
+.mb-70 { margin-bottom: 70px; }
+.mb-80 { margin-bottom: 80px; }
+.mb-90 { margin-bottom: 90px; }
+.mb-100 { margin-bottom: 100px; }
 
 .ms-10 { margin-left: 10px; }
 .ms-20 { margin-left: 20px; }
@@ -392,6 +402,26 @@ textarea.form-input.fixed {
         background-color: white;
     }
 */
+
+/* 알림창 관련 클래스 */  
+ .alert {
+            background-color: #ffffff; /* 배경 색상 */
+            color: #202020; /* 텍스트 색상 */
+            padding: 20px; /* 내용과 경계 사이 여백 조절 */
+            border-radius: 30px; /* 모서리 둥글게 */
+            border: 1px solid #2c8de0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* 그림자 효과 */
+            z-index: 1000; /* 다른 요소 위에 표시 */
+            max-width: 400px; /* 알림창 최대 너비 조절 */
+            
+        }
+
+.pds-30 {
+    padding-left: 30%;
+}
+.pde-30 {
+    padding-right: 30%;
+}
 
 /* 영역 가운데 위치시키는 필살 클래스(2번 방법 사용) */
 .position-center {

@@ -51,9 +51,6 @@ $(function(){
 <c:if test="${sessionScope.name != null}">
 
 <script>
-	//좋아요 처리
-	//[1] 페이지가 로드되면 비동기 통신으로 좋아요 상태를 체크하여 하트 생성
-	//[2] 하트에 클릭 이벤트를 설정하여 좋아요 처리가 가능하도록 구현
 	$(function(){
 		var params = new URLSearchParams(location.search);
 		var projectNo = params.get("projectNo");
@@ -63,7 +60,6 @@ $(function(){
 			method:"post",
 			data:{projectNo : projectNo},
 			success:function(response) {
-				//response는 {"check":true, "count":0} 형태의 JSON이다
 			
 				if(response.check) {
 					$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-solid");
@@ -71,12 +67,10 @@ $(function(){
 				else{
 					$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-regular");
 				}
-				//전달받은 좋아요 개수를 하트 뒤의 span에 출력
 				$(".fa-heart").next("span").text(response.count);
 			}
 		});
 		
-		//[2]
 		$(".fa-heart").click(function(){
 			$.ajax({
 				url:"/rest/like/action",
@@ -89,7 +83,6 @@ $(function(){
 					else{
 						$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-regular");
 					}
-					//전달받은 좋아요 개수를 하트 뒤의 span에 출력
 					$(".fa-heart").next("span").text(response.count);
 				}
 			});
@@ -98,6 +91,52 @@ $(function(){
 </script>
 
 </c:if>
+
+<script>
+    $(function(){
+    	var params = new URLSearchParams(location.search);
+		var followerId = params.get("projectOwner");
+        //  팔로우 버튼 클릭 시
+        $(".follow-button").click(function(){
+            
+            $.ajax({
+                url: "/rest/follow/insert",
+                method: "post",
+                data: {followerId : followerId}, 
+                success: function(response) {
+                    if (response.success) {
+                        // 팔로우 성공적으로 수행되었을 때 버튼 업데이트
+                        $(".follow-button").removeClass("follow-button").addClass("unfollow-button");
+                        $(".unfollow-button").html('<i class="fa-solid fa-check"></i> 팔로잉');
+                    } else {
+                        // 실패할 경우 처리
+                        alert("팔로우에 실패했습니다.");
+                    }
+                }
+            });
+        });
+
+        //언팔로우 버튼 클릭 시
+        $(".unfollow-button").click(function(){
+           
+            $.ajax({
+                url: "/rest/follow/delete",
+                method: "post",
+                data: {followerId : followerId}, 
+                success: function(response) {
+                    if (response.success) {
+                        // 언팔로우 성공적으로 수행되었을 때 버튼 업데이트
+                        $(".unfollow-button").removeClass("unfollow-button").addClass("follow-button");
+                        $(".follow-button").html('<i class="fa-solid fa-plus"></i> 팔로우');
+                    } else {
+                        // 실패할 경우 처리
+                        alert("언팔로우에 실패했습니다.");
+                    }
+                }
+            });
+        });
+    });
+</script>
 
     <div class="container w-1000">
     	<div class="row">
@@ -142,7 +181,21 @@ $(function(){
     			</div>
     			<div class="w-100">
     				창작자 소개<br>
-    				${memberFollowDto.followeeId}
+    				${projectDto.projectOwner}<br>
+    				
+<%--     				<c:choose> --%>
+<%--                         <c:when test="${memberFollowDto.followYN == 'Y'}"> --%>
+                        <button class="btn unfollow-button">
+                                <i class="fa-solid fa-check"></i> 팔로잉
+                           </button>
+<%--                         </c:when> --%>
+<%--                         <c:otherwise> --%>
+<!--                          <button class="btn follow-button"> -->
+<!--                                 <i class="fa-solid fa-plus"></i> 팔로우 -->
+<!--                             </button> -->
+<%--                         </c:otherwise> --%>
+<%--                     </c:choose> --%>
+    				<br>
     				리워드1<br>
     				리워드2<br>
     				조회수 : ${projectDto.projectReadcount}<br>

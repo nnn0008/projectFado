@@ -23,6 +23,7 @@ import com.kh.springsemi.dao.ProjectDao;
 import com.kh.springsemi.dto.JudgeDto;
 import com.kh.springsemi.dto.MajorCategoryDto;
 import com.kh.springsemi.dto.MemberDto;
+import com.kh.springsemi.dto.MemberFollowDto;
 import com.kh.springsemi.dto.MinorCategoryDto;
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ProjectListDto;
@@ -80,9 +81,13 @@ public class ProjectController {
 	
 	
 	@RequestMapping("/detail")
-	public String detail(Model model, @RequestParam int projectNo) {
+	public String detail(Model model, @RequestParam int projectNo, HttpSession session) {
 		ProjectDto projectDto = projectDao.selectOne(projectNo);
 		model.addAttribute("projectDto", projectDto);
+//		String memberId = (String)session.getAttribute("name");
+//		memberDto.setMemberId(memberId);
+//		memberDao.selectOneByFollowerId(memberId);
+//		model.addAttribute("memberFollowDto", memberFollowDto);
 		
 		MinorCategoryDto minorCategoryDto = minorCategoryDao.selectOne(projectDto.getMinorCategoryNo());
 		model.addAttribute("minorCategoryDto", minorCategoryDto);

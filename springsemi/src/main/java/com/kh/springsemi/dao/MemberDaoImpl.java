@@ -321,14 +321,6 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	
 	@Override
-	public MemberFollowDto selectOneByFollowerId(String followerId) {
-		String sql ="select * from follow where followerId = ?";
-		Object[] data = {followerId};
-		List<MemberFollowDto> list = jdbcTemplate.query(sql,  memberFollowMapper, data);
-		return list.isEmpty() ? null : list.get(0);
-	}
-	
-	@Override
 	public int countFollowList(PaginationVO vo) {
 		String sql = "select count(*) from follow_list";
 		return jdbcTemplate.queryForObject(sql, int.class);
@@ -341,6 +333,13 @@ public class MemberDaoImpl implements MemberDao{
 		return jdbcTemplate.query(sql, memberFollowMapper, data);
 	}
 	
+	@Override
+	public MemberFollowDto selectOneByFollowerId(String followerId) {
+		String sql ="select * from follow where followerId = ?";
+		Object[] data = {followerId};
+		List<MemberFollowDto> list = jdbcTemplate.query(sql,  memberFollowMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 	
 	@Override
 	public List<MemberBlockDto> selectBlockList() {

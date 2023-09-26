@@ -31,7 +31,8 @@
 .w-33, .col-3 { width:33.3333%; }
 .w-50, .col-2 { width:50%; }
 .w-75 { width:75%; }
-.w-100 { width:100%; }
+.w-90 {width: 90%;}
+.w-100 { width:100%;}
 
 .w-300 { width:300px; }
 .w-400 { width:400px; }
@@ -344,7 +345,7 @@ textarea.form-input.fixed {
         opacity는 현재 태그 뿐 아니라 내부 태그의 투명도도 조절한다
     */
 
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(250, 250, 250, 1);
     /* background-color: black; */
     /* opacity: 0.1; */
 

@@ -1,5 +1,3 @@
-
-
 package com.kh.springsemi.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +58,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 						"/project/list/detail*",
 						"/project/list/Community/QnA*",
 						"/project/list/Community/notice*",
-						"/project/list/Community/review",
-						"/member/find*"
+						"/project/list/Community/review"
+						
 						 );
 //	@Override
 //	public void addInterceptors(InterceptorRegistry registry) {
@@ -108,3 +106,4 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 			
 	}
 }
+

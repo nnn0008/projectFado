@@ -1,4 +1,4 @@
-package com.kh.springsemi.controller;
+ package com.kh.springsemi.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -106,14 +106,30 @@ public class ProjectController {
 	}
 	
 
+//	@RequestMapping("/list")
+//	public String list(Model model) {
+//		List<ProjectListDto> projectList = projectDao.selectList();
+//		model.addAttribute("projectList", projectList);;
+//		
+//		return "/WEB-INF/views/project/list.jsp";
+//	}
+	
+	//목록+검색(keyword의 차이) 
 	@RequestMapping("/list")
-	public String list(Model model) {
-		List<ProjectListDto> projectList = projectDao.selectList();
-		model.addAttribute("projectList", projectList);;
-		
+	public String list(Model model, @RequestParam(required = false) String keyword) {
+		boolean isSearch = keyword != null;
+		if(isSearch) { //검색이라면
+			List<ProjectListDto> projectList = projectDao.selectList(keyword);
+			model.addAttribute("projectList", projectList);
+			model.addAttribute("isSearch", true);
+		}
+		else { //목록이라면
+			List<ProjectListDto> projectList = projectDao.selectList();
+			model.addAttribute("projectList",projectList);
+			model.addAttribute("isSearch", false);
+		}
 		return "/WEB-INF/views/project/list.jsp";
 	}
-
 	
 	@GetMapping("/edit")
 	public String edit(@RequestParam int projectNo, Model model) {

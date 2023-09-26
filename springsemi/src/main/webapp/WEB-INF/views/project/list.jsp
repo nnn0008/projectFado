@@ -27,7 +27,6 @@
 			<tbody>
 				<c:forEach var="projectListDto" items="${projectList }">
 				<tr>
-					<td>${projectListDto.projectNo}</td>
 					<td>
 					<a class="link" href="detail?projectNo=${projectListDto.projectNo}">
 						${projectListDto.projectTitle}
@@ -51,5 +50,4 @@
 		</table>
 	</div>
 </div>
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -33,6 +33,9 @@ public interface ProjectDao {
 	
 //	List<ProjectDto> selectListByPage(PaginationVO vo);
 	//관리자용 목록
-	List<ProjectListDto> selectListForAdmin();
+//	List<ProjectListDto> selectListForAdmin();
+	
+	//검색
+	List<ProjectListDto> selectList(String keyword);
 	
 }

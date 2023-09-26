@@ -27,11 +27,13 @@ public interface ProjectDao {
 	
 	//목록
 	List<ProjectListDto> selectList();
+	List<ProjectListDto> selectListByPage(int page);
+	List<ProjectListDto> selectListByPage(String keyword, int page);
 	
-	//관리자 프로젝트리스트 관리 
-	int countList(PaginationVO vo);
+	//개수를 구하는 명령
+	int countList(); //목록일 때
+	int countList(String keyword); //검색일 때
 	
-//	List<ProjectDto> selectListByPage(PaginationVO vo);
 	//관리자용 목록
 //	List<ProjectListDto> selectListForAdmin();
 	

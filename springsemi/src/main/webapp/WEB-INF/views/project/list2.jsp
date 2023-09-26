@@ -1,4 +1,4 @@
-<%--  <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
     
@@ -66,4 +66,4 @@
 	</table>
 	</div>
 	
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>  --%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

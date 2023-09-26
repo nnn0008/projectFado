@@ -23,7 +23,7 @@ $(function(){
 	
 	//타이머가 종료시
 	timer.addEventListener('targetAchieved', function (e) {
-	    displayText('펀딩이 종료되었습니다');
+	    displayText('0초');
 	});
 	
 	//타이머 실행

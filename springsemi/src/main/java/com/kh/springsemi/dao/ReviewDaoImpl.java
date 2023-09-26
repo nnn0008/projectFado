@@ -26,21 +26,20 @@ public class ReviewDaoImpl implements ReviewDao{
 
 	@Override
 	public void insert(ReviewDto reviewDto) {
-		String sql = "insert into review(review_no, review_writer, "
-							+ "review_title, review_content, review_star) "
-							+ "values(?, ?, ?, ?, ?)";
-		Object[] data = {reviewDto.getReviewNo(), reviewDto.getReviewWriter(),
-								reviewDto.getReviewTitle(), reviewDto.getReviewContent(), 
-								reviewDto.getReviewStar()};
+		String sql = "insert into review("
+				+ "review_no, project_no, review_writer, review_content, review_star"
+				+ ") "
+				+ "values(?, ?, ?, ?, ?)";
+		Object[] data = {reviewDto.getReviewNo(), reviewDto.getProjectNo(), reviewDto.getReviewWriter(),
+						reviewDto.getReviewContent(), reviewDto.getReviewStar()};
 		jdbcTemplate.update(sql, data);
 	}
 
 	@Override
 	public boolean update(ReviewDto reviewDto) {
-		String sql = "update review set review_title=?, review_content=?, review_star=? "
+		String sql = "update review set review_content=?, review_star=? "
 						+ "where review_no=?";
-		Object[] data = {reviewDto.getReviewTitle(), reviewDto.getReviewContent(), 
-								reviewDto.getReviewStar(), reviewDto.getReviewNo()};
+		Object[] data = {reviewDto.getReviewContent(), reviewDto.getReviewStar(), reviewDto.getReviewNo()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 

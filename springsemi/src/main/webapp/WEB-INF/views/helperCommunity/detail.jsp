@@ -1,11 +1,193 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
+
+<style>
+	.note-viewer{
+		line-height: 2em !important;
+	}
+</style>
+
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<script>
+$(function(){
+	
+	$(".mainReply-insert-form").submit(function(e){
+		e.preventDefault();
+		
+		$.ajax({
+			url:"/rest/mainReply/insert",
+			method:"post",
+			data : $(e.target).serialize(),
+			success:function(response){
+				$("[name=mainReplyContent]").val("");//입력창 초기화
+				loadList();//목록 갱신
+			}
+		});
+	});
+	
+	loadList();
+	
+	
+	function loadList() {
+		var params = new URLSearchParams(location.search);
+		var no = params.get("mainCommunityNo");
+		var memberId = "${sessionScope.name}";
+		
+		//비동기 통신으로 화면 갱신
+		$.ajax({
+			url:"/rest/mainReply/list",
+			method:"post",
+			data:{ mainReplyOrigin : no },
+			success:function(response){
+				//화면 청소
+				$(".mainReply-list").empty();//자기 자신을 제외한 내부 코드 삭제
+				
+				for(var i=0; i < response.length; i++) {
+					var mainReply = response[i];
+					
+					var template = $("#mainReply-template").html();
+					var htmlTemplate = $.parseHTML(template);
+					
+					$(htmlTemplate).find(".mainReplyWriter").text(mainReply.mainReplyWriter || "탈퇴한 사용자");
+					$(htmlTemplate).find(".mainReplyContent").text(mainReply.mainReplyContent);
+					$(htmlTemplate).find(".mainReplyTime").text(mainReply.mainReplyTime);
+					
+					//내가 작성한 댓글이 아니라면
+					if(memberId.length == 0 || memberId != mainReply.mainReplyWriter) {
+						//버튼 삭제
+						$(htmlTemplate).find(".w-25").empty();
+					}
+					
+					$(htmlTemplate).find(".btn-delete")
+										.attr("data-mainReply-no", mainReply.mainReplyNo)
+										.click(function(e){
+						var mainReplyNo = $(this).attr("data-mainReply-no");
+						$.ajax({
+							url:"/rest/mainReply/delete",
+							method:"post",
+							data:{mainReplyNo : mainReplyNo},
+							success:function(response){
+								loadList();
+							},
+						});
+					});
+					
+					$(htmlTemplate).find(".btn-edit")
+											.attr("data-mainReply-no", mainReply.mainReplyNo)
+											.click(function(){
+						//this == 수정버튼
+						var editTemplate = $("#mainReply-edit-template").html();
+						var editHtmlTemplate = $.parseHTML(editTemplate);
+						
+						//value 설정
+						var mainReplyNo = $(this).attr("data-mainReply-no");
+						var mainReplyContent = $(this).parents(".view-container")
+																.find(".mainReplyContent").text();
+						$(editHtmlTemplate).find("[name=mainReplyNo]").val(mainReplyNo);
+						$(editHtmlTemplate).find("[name=mainReplyContent]").val(mainReplyContent);
+						
+						//취소 버튼에 대한 처리 구현
+						$(editHtmlTemplate).find(".btn-cancel")
+													.click(function(){
+							//this == 취소버튼
+							$(this).parents(".edit-container")
+										.prev(".view-container").show();
+							$(this).parents(".edit-container").remove();
+						});
+						
+						$(editHtmlTemplate).submit(function(e){
+							
+							e.preventDefault();
+							
+							$.ajax({
+								url:"/rest/mainReply/edit",
+								method:"post",
+								data : $(e.target).serialize(),
+								success:function(response){
+									loadList();
+								}
+							});
+						});
+						
+						//화면 배치
+						$(this).parents(".view-container")
+									.hide()
+									.after(editHtmlTemplate);
+					});
+					
+					$(".mainReply-list").append(htmlTemplate);
+				}
+			},
+		});
+	}
+});
+</script>
+<script id="mainReply-template" type="text/template">
+		<div class="row flex-container view-container">
+			<div class="w-75">
+				<div class="row left">
+					<h3 class="mainReplyWriter">작성자</h3>
+				</div>
+				<div class="row left">
+					<pre class="mainReplyContent">내용</pre>
+				</div>
+				<div class="row left">
+					<span class="mainReplyTime">yyyy-MM-dd HH:mm:ss</span>
+				</div>
+			</div>
+			<div class="w-25">
+				<div class="row right">
+					<button class="btn btn-edit">
+						<i class="fa-solid fa-edit"></i>
+						수정
+					</button>
+				</div>
+				<div class="row right">
+					<button class="btn btn-negative btn-delete">
+						<i class="fa-solid fa-trash"></i>
+						삭제
+					</button>
+				</div>
+			</div>
+		</div>
+</script>
+<script id="mainReply-edit-template" type="text/template">
+		<form class="mainReply-edit-form edit-container">
+		<input type="hidden" name="mainReplyNo" value="?">
+		<div class="row flex-container">
+			<div class="w-75">
+				<textarea name="mainReplyContent" class="form-input w-100" rows="4">어쩌구저쩌구</textarea>
+			</div>
+			<div class="w-25">
+				<div class="row right">
+					<button type="submit" class="btn btn-positive">
+						<i class="fa-solid fa-check"></i>
+						수정
+					</button>
+				</div>
+				<div class="row right">
+					<button type="button" class="btn btn-negative btn-cancel">
+						<i class="fa-solid fa-xmark"></i>
+						취소
+					</button>
+				</div>
+			</div>
+		</div>
+		</form>
+</script>
+
+
+
+
 
 
 <div class="container w-800">
@@ -13,7 +195,7 @@
 		<h1>${mainCommunityDto.mainCommunityNo}번 게시글</h1>
 	</div>
 	<div>
-		<h2>작성자 : ${mainCommunityDto.mainCommunityWriter}</h2>
+		<h2>작성자 : ${mainCommunityDto.getMainCommunityWriterString()}</h2>
 	</div>
 	<div>
 		<h2>글제목 : ${mainCommunityDto.mainCommunityTitle}</h2>
@@ -25,14 +207,15 @@
 
 
 
+
 	<%-- 댓글과 관련된 화면이 작성될 위치 --%>
 	<c:if test="${sessionScope.name != null}">
 	<div class="row left">
-		<form class="reply-insert-form">
-			<input type="hidden" name="replyOrigin" value="${mainCommunityDto.mainCommunityNo}">
+		<form class="mainReply-insert-form">
+			<input type="hidden" name="mainReplyOrigin" value="${mainCommunityDto.mainCommunityNo}">
 		
 			<div class="row">
-				<textarea name="replyContent" class="form-input w-100" rows="4"></textarea>
+				<textarea name="mainReplyContent" class="form-input w-100" rows="4"></textarea>
 			</div>
 			<div class="row">
 				<button class="btn btn-positive w-100">
@@ -44,9 +227,14 @@
 	</div>
 	</c:if>
 	
+		<%-- 댓글 목록이 표시될 영역 --%>
+	<div class="row left mainReply-list"></div>
+	
 	
 	
 
+
+	<%-- 각종 버튼이 위치하는 곳 --%>
 	<div class="row">
 	<c:if test="${sessionScope.name != null}">
 		<a class="btn btn-positive" href="write">
@@ -60,7 +248,7 @@
 			<i class="fa-solid fa-pen-to-square"></i>
 			수정
 		</a>
-		<a class="btn btn-negative" href="delete?boardNo=${mainCommunityDto.mainCommunityNo}">
+		<a class="btn btn-negative" href="delete?mainCommunityNo=${mainCommunityDto.mainCommunityNo}">
 			<i class="fa-solid fa-trash"></i>
 			삭제
 		</a>
@@ -79,6 +267,8 @@
 			</c:otherwise>
 		</c:choose>
 		</div>
+
+
 
 
 

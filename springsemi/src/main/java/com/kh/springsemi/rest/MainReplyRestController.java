@@ -46,8 +46,6 @@ public class MainReplyRestController {
 	@PostMapping("/delete")
 	public void delete(@RequestParam int mainReplyNo) {
 		mainReplyDao.delete(mainReplyNo);
-		
-		
 	}
 	
 	

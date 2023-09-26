@@ -31,11 +31,11 @@ public class ProjectCommunityDaoImpl implements ProjectCommunityDao{
 	@Override
 	public void insert(ProjectCommunityDto projectCommunityDto) {  //프로젝트 커뮤니티 등록
 		String sql = "insert into project_community("
-				+ "project_community_no, project_community_writer, project_community_title, "
+				+ "project_community_no, project_no, project_community_writer, "
 				+ "project_community_content, project_community_type) values(?, ?, ?, ?, ?)";
 		Object[] data = {
-				projectCommunityDto.getProjectCommunityNo(), projectCommunityDto.getProjectCommunityWriter(),
-				projectCommunityDto.getProjectCommunityTitle(), projectCommunityDto.getProjectCommunityContent(),
+				projectCommunityDto.getProjectCommunityNo(), projectCommunityDto.getProjectNo(),
+				projectCommunityDto.getProjectCommunityWriter(), projectCommunityDto.getProjectCommunityContent(),
 				projectCommunityDto.getProjectCommunityType()
 		};
 				jdbcTemplate.update(sql,data);
@@ -46,7 +46,7 @@ public class ProjectCommunityDaoImpl implements ProjectCommunityDao{
 	@Override
 	public List<ProjectCommunityDto> selectNoticeList(CommunityPaginationVO vo) {
 		String sql = "select * from (select rownum rn, TMP.* from("
-				+ "select * from project_community_list "
+				+ "select * from project_community "
 				+ "where project_community_type = '공지사항' "
 				+ "order by project_community_no desc) TMP) "
 				+ "where rn between ? and ?";
@@ -58,7 +58,7 @@ public class ProjectCommunityDaoImpl implements ProjectCommunityDao{
 	@Override
 	public List<ProjectCommunityDto> selectQnAList(CommunityPaginationVO vo) {
 		String sql = "select * from (select rownum rn, TMP.* from ("
-				+ "select * from project_community_list "
+				+ "select * from project_community "
 				+ "where project_community_type = 'Q&A' "
 				+ "order by project_community_no desc) TMP) "
 				+ "where rn between ? and ?";
@@ -79,9 +79,8 @@ public class ProjectCommunityDaoImpl implements ProjectCommunityDao{
 
 	@Override
 	public boolean update(ProjectCommunityDto projectCommunityDto) {  //프로젝트 커뮤니티 수정
-		String sql = "update project_community set project_community_title=?, "
-				+ "project_community_content=? where project_community_no=?";
-		Object[] data = {projectCommunityDto.getProjectCommunityTitle(), projectCommunityDto.getProjectCommunityContent()};
+		String sql = "update project_community set project_community_content=? where project_community_no=?";
+		Object[] data = {projectCommunityDto.getProjectCommunityContent()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 

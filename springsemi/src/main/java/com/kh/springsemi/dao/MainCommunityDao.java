@@ -27,5 +27,4 @@ public interface MainCommunityDao {
 	
 	
 	
-	void replyInsert(MainCommunityDto mainComunityDto);   //댓글 등록
 }

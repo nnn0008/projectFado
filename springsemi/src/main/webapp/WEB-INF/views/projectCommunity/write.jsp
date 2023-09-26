@@ -35,7 +35,7 @@
 	        ]
 	    });
 	});
-
+d
 </script>
 
 
@@ -43,13 +43,13 @@
 <form action="write" method="post" autocomplete="off">
 <div class="container w-600">
 	<div>
+		<input type="hidden" name="projectNo" value="${projectNo}">
+	</div>
+	<div>
 		<select name="projectCommunityType" required>
 			<option selected>Q&A</option>
 			<option selected>공지사항</option>
 		</select>
-	</div>
-	<div>
-		<input type="text" class="form-input w-100 mb-20" name="projectCommunityTitle" placeholder="제목을 입력해주세요">
 	</div>
 	<div>
 		<textarea name="projectCommunityContent"></textarea>

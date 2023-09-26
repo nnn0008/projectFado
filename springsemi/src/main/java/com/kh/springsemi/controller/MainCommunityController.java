@@ -116,6 +116,7 @@ public class MainCommunityController {
 	public String detail(@RequestParam int mainCommunityNo, Model model, HttpSession session) {
 		MainCommunityDto mainCommunityDto = mainCommunityDao.selectOne(mainCommunityNo);
 		model.addAttribute("mainCommunityDto", mainCommunityDto);
+		
 		String mainCommunityWriter = mainCommunityDto.getMainCommunityWriter();
 		if(mainCommunityWriter != null) {
 			MemberDto memberDto = memberDao.selectOne(mainCommunityWriter);

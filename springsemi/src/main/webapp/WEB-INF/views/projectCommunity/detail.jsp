@@ -6,9 +6,6 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-
-
 
 
 <style>
@@ -16,6 +13,10 @@
 		line-height: 2em !important;
 	}
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+
 
 <script>
 $(function(){
@@ -38,11 +39,8 @@ $(function(){
 	
 	
 	function loadList() {
-		//Javascript로 boardNo라는 이름의 파라미터 값 읽기
 		var params = new URLSearchParams(location.search);
-		var no = params.get("projectReplyNo");
-		
-		//(중요) 로그인한 사용자의 정보를 EL을 이용하여 저장(매우 위험한 코드)
+		var no = params.get("projectCommunityNo");
 		var memberId = "${sessionScope.name}";
 		
 		//비동기 통신으로 화면 갱신
@@ -107,18 +105,13 @@ $(function(){
 							$(this).parents(".edit-container").remove();
 						});
 						
-						//완료(등록) 버튼 처리
-						//- editHtmlTemplate 자체가 form이므로 추가 탐색을 하지 않음
 						$(editHtmlTemplate).submit(function(e){
-							//검사 코드(미입력)
 							
-							//기본 이벤트 차단
 							e.preventDefault();
 							
 							$.ajax({
 								url:"/rest/projectReply/edit",
 								method:"post",
-								//data:{projectReplyNo : ?, projectReplyContent : ?},
 								data : $(e.target).serialize(),
 								success:function(response){
 									loadList();
@@ -203,10 +196,7 @@ $(function(){
 		<h1>${projectCommunityDto.projectCommunityNo}번 게시글</h1>
 	</div>
 	<div>
-		<h2>작성자 : ${projectCommunityDto.projectCommunityWriter}</h2>
-	</div>
-	<div>
-		<h2>글제목 : ${projectCommunityDto.projectCommunityTitle}</h2>
+		<h2>작성자 : ${projectCommunityDto.getProjectCommunityWriterString()}</h2>
 	</div>
 	<div>
 		<h2>글내용 : ${projectCommunityDto.projectCommunityContent}</h2>
@@ -256,7 +246,7 @@ $(function(){
 			<i class="fa-solid fa-pen-to-square"></i>
 			수정
 		</a>
-		<a class="btn btn-negative" href="delete?boardNo=${projectCommunityDto.projectCommunityNo}">
+		<a class="btn btn-negative" href="delete?projectCommunityNo=${projectCommunityDto.projectCommunityNo}">
 			<i class="fa-solid fa-trash"></i>
 			삭제
 		</a>

@@ -12,7 +12,12 @@ public class MainCommunityDto {
 	private String mainCommunityContent;
 	private Date mainCommunityRegDate;
 	private String mainCommunityType;
-	private String mainCommunityReply;
+	private String memberNickname;
 	
-	//이미지 private boolean image 추가해야 뜸
+	
+	public String getMainCommunityWriterString() {
+		if(mainCommunityWriter == null)
+			return "탈퇴한 사용자";
+		return memberNickname;
+	}
 }

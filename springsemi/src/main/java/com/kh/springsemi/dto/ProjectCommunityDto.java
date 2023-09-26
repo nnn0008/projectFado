@@ -7,12 +7,11 @@ import lombok.Data;
 @Data
 public class ProjectCommunityDto {
 	private int projectCommunityNo;
+	private int projectNo;
 	private String projectCommunityWriter;
-	private String projectCommunityTitle;
 	private String projectCommunityContent;
 	private Date projectCommunityRegDate;
 	private String projectCommunityType;
-	private String projectCommunityReply;
 	private String memberNickname; //작성자 닉네임
 	
 	public String getProjectCommunityWriterString() {

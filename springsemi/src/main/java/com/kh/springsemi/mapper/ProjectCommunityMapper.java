@@ -15,8 +15,8 @@ public class ProjectCommunityMapper implements RowMapper<ProjectCommunityDto> {
 	public ProjectCommunityDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		ProjectCommunityDto projectCommunityDto = new ProjectCommunityDto();
 		projectCommunityDto.setProjectCommunityNo(rs.getInt("project_community_no"));
+		projectCommunityDto.setProjectNo(rs.getInt("project_no"));
 		projectCommunityDto.setProjectCommunityWriter(rs.getString("project_community_writer"));
-		projectCommunityDto.setProjectCommunityTitle(rs.getString("Project_community_title"));
 		projectCommunityDto.setProjectCommunityContent(rs.getString("Project_community_content"));
 		projectCommunityDto.setProjectCommunityRegDate(rs.getDate("Project_community_reg_date"));
 		projectCommunityDto.setProjectCommunityType(rs.getString("Project_community_type"));

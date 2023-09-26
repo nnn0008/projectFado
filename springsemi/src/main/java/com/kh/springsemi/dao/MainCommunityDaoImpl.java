@@ -157,18 +157,6 @@ public class MainCommunityDaoImpl implements MainCommunityDao{
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	//댓글구현
-	
-	@Override
-	public void replyInsert(MainCommunityDto mainComunityDto) {
-		
-	}
 
 
 }

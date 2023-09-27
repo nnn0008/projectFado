@@ -59,7 +59,7 @@ public class ProjectCommunityController {
 	}
 	
 	
-	@GetMapping("edit")
+	@GetMapping("/edit")
 	public String edit(@RequestParam int projectCommunityNo, Model model) {
 		ProjectCommunityDto projectCommunityDto = projectCommunityDao.selectOne(projectCommunityNo);
 		model.addAttribute("projectCommunityDto", projectCommunityDto);

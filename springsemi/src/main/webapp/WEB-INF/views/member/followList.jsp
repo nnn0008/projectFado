@@ -13,7 +13,7 @@ $(document).ready(function () {
         event.preventDefault(); // 기본 링크 동작 방지
 
         var link = $(this);
-        var row = link.closest("tr"); // 클릭된 버튼이 속한 <tr> 요소 가져오기 (팔로우 버튼이 포함된 행)
+        var row = link.closest("div"); // 클릭된 버튼이 속한 <div> 요소 가져오기 (팔로우 버튼이 포함된 행)
         var followerId = row.data("follower"); // 팔로우한 사람
         var followeeId = row.data("followee"); // 팔로우당한 사람
         var isFollowing = link.text().includes("팔로잉"); // 현재 상태 판단
@@ -41,22 +41,36 @@ $(document).ready(function () {
 });
 </script>
 
-<div class="row">
-<table border="1" width="800">
-    <thead>
-        <tr>
-            <th>팔로위</th>
-            <th>팔로우한 날짜</th>
-            <th>버튼</th>
-        </tr>
-    </thead>
-    <tbody align="center">
-        <c:forEach var="memberFollowDto" items="${list}">
-            <tr data-follower="${memberFollowDto.followerId}" data-followee="${memberFollowDto.followeeId}">
-                <td>${memberFollowDto.followeeId}</td>
-                <td>${memberFollowDto.followDate}</td>
-                <td>
-                    <c:choose>
+
+
+
+	<div class="container w-800">
+        <div class="row">
+        	<h1>
+            <i class="fa-regular fa-heart red"></i> 
+            내가 팔로잉하는 서퍼
+            <i class="fa-regular fa-bell yellow"></i>
+            </h1>
+        </div>
+
+		<c:forEach var="memberFollowDto" items="${list}">
+        <div class="row" style="display: flex; border: 1px solid #2c8de0;">
+        
+<!--             <div style="flex-grow: 1; justify-content: center; align-items: center;"> -->
+                <img class="image image-circle" src="https://picsum.photos/id/2/100/100">
+<!--             </div> -->
+            
+            <div class="left ml-20" style="flex-grow: 3;"
+             data-follower="${memberFollowDto.followerId}" data-followee="${memberFollowDto.followeeId}">
+                <div style="height: 50%; display: flex; flex-direction: column; 
+                justify-content: center;" class="w-100">${memberFollowDto.followeeId}</div>
+                <div style="height: 50%; display: flex; flex-direction: column; 
+                justify-content: center;"class="w-100">팔로우 날짜 : ${memberFollowDto.followDate}</div>
+            </div>
+
+            <div style="flex-grow: 1; display: flex; justify-content: center; align-items: center;"
+             data-follower="${memberFollowDto.followerId}" data-followee="${memberFollowDto.followeeId}">
+                <c:choose>
                         <c:when test="${memberFollowDto.followYN == 'Y'}">
                         <button class="btn">
                             <a class="link" href="#">
@@ -71,14 +85,13 @@ $(document).ready(function () {
                             </a>
                             </button>
                         </c:otherwise>
-                    </c:choose> 
-                </td>
-            </tr>
-        </c:forEach>
-    </tbody>
-</table> 
-
-</div>
+                    </c:choose>
+            	</div>
+            	
+        	</div>
+          </c:forEach>
+          
+    </div>
 
 <div class="row page-navigator mv-30">
     <!-- 이전 버튼 -->

@@ -20,19 +20,15 @@ public class RewardDaoImpl implements RewardDao{
 
 	@Override
 	public void insert(RewardDto rewardDto) {
-		String sql = "insert into reward(reward_name, reward_type, reward_price)"
-							+ " values(?, ?, ?)";
-		Object[] data = {rewardDto.getRewardName(), rewardDto.getRewardType(),
-								rewardDto.getRewardPrice()};
+		String sql = "insert into reward(reward_type, reward_price) values(?, ?)";
+		Object[] data = {rewardDto.getRewardType(), rewardDto.getRewardPrice()};
 		jdbcTemplate.update(sql, data);
 	}
 
 	@Override
 	public boolean updateInfo(RewardDto rewardDto) {
-		String sql = "update reward set reward_name=?, reward_type=?, reward_price=? "
-							+ "where reward_no=?";
-		Object[] data = {rewardDto.getRewardName(), rewardDto.getRewardType(),
-								rewardDto.getRewardPrice(), rewardDto.getRewardNo()};
+		String sql = "update reward set reward_type=?, reward_price=? where reward_no=?";
+		Object[] data = { rewardDto.getRewardType(), rewardDto.getRewardPrice(), rewardDto.getRewardNo()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 

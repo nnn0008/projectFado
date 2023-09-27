@@ -60,8 +60,10 @@ public interface MemberDao {
 	boolean check(MemberFollowDto memberFollowDto);
 	int count(String followeeId);
 	List<MemberDto> findByFollowerId(String followerId);
-	
-	int countFollowList(PaginationVO vo);
 	MemberFollowDto selectOneByFollowerId(String followerId);
-	List<MemberFollowDto> selectFollowListByPage(PaginationVO vo);
+	int countFollowList(PaginationVO vo);
+	List<MemberFollowDto> selectFollowingList(MemberFollowDto memberFollowDto);
+	List<MemberFollowDto> selectFollowListByPage(PaginationVO vo, String followerId);
+	
+	boolean updateFollow(String followerId, String followeeId);
 }

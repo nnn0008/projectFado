@@ -158,12 +158,6 @@ public class ProjectDaoImpl implements ProjectDao{
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-//	@Override
-//	public List<ProjectListDto> selectListForAdmin() {
-//		String sql = "select * from project order by project_no asc";
-//		return null;
-//	}
-	
 	//프로젝트 리스트
 	@Override
 	public List<ProjectListDto> selectList() {

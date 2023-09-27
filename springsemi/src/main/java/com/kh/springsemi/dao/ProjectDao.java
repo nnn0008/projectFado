@@ -9,7 +9,7 @@ import com.kh.springsemi.vo.PaginationVO;
 
 public interface ProjectDao {
 	//CRUD
-	//C 프로젝트 등록
+	//프로젝트 등록
 	int sequence();
 	void insert(ProjectDto projectDto);
 	
@@ -33,9 +33,6 @@ public interface ProjectDao {
 	//개수를 구하는 명령
 	int countList(); //목록일 때
 	int countList(String keyword); //검색일 때
-	
-	//관리자용 목록
-//	List<ProjectListDto> selectListForAdmin();
 	
 	//검색
 	List<ProjectListDto> selectList(String keyword);

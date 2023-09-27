@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.springsemi.dao.MemberDao;
+import com.kh.springsemi.dao.ProjectDao;
 import com.kh.springsemi.dto.MemberFollowDto;
+import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.vo.MemberFollowVO;
 
 @CrossOrigin
@@ -21,6 +23,9 @@ public class MemberFollowRestController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private ProjectDao projectDao;
 	
 	@RequestMapping("/check")
 	public MemberFollowVO check(@ModelAttribute MemberFollowDto memberFollowDto,
@@ -39,9 +44,12 @@ public class MemberFollowRestController {
 	
 	@RequestMapping("/action")
 	public MemberFollowVO action(@ModelAttribute MemberFollowDto memberFollowDto,
+														@RequestParam int projectNo,
 														HttpSession session) {
 		String followerId = (String) session.getAttribute("name");
+		ProjectDto projectDto = projectDao.selectOne(projectNo);
 		memberFollowDto.setFollowerId(followerId);
+		memberFollowDto.setFolloweeId(projectDto.getProjectOwner());
 		
 		boolean isCheck = memberDao.check(memberFollowDto);
 		if(isCheck) {
@@ -64,10 +72,10 @@ public class MemberFollowRestController {
 		memberDao.insertFollow(memberFollowDto);
 	}
 	
-	@PostMapping("/delete")
-	public void delete(@RequestParam String followerId) {
-		MemberFollowDto memberFollowDto = memberDao.selectOneByFollowerId(followerId);
-		memberDao.deleteFollow(memberFollowDto);
-	}
+//	@PostMapping("/delete")
+//	public void delete(@ModelAttribute MemberFollowDto memberFollowDto) {
+//		List<MemberFollowDto> followList = memberDao.selectFollowingList(memberFollowDto);
+//		memberDao.deleteFollow(followList);
+//	}
 	
 }

@@ -93,49 +93,49 @@ $(function(){
 </c:if>
 
 <script>
-    $(function(){
-    	var params = new URLSearchParams(location.search);
-		var followerId = params.get("projectOwner");
-        //  팔로우 버튼 클릭 시
-        $(".follow-button").click(function(){
-            
-            $.ajax({
-                url: "/rest/follow/insert",
-                method: "post",
-                data: {followerId : followerId}, 
-                success: function(response) {
-                    if (response.success) {
-                        // 팔로우 성공적으로 수행되었을 때 버튼 업데이트
-                        $(".follow-button").removeClass("follow-button").addClass("unfollow-button");
-                        $(".unfollow-button").html('<i class="fa-solid fa-check"></i> 팔로잉');
-                    } else {
-                        // 실패할 경우 처리
-                        alert("팔로우에 실패했습니다.");
-                    }
-                }
-            });
-        });
-
-        //언팔로우 버튼 클릭 시
-        $(".unfollow-button").click(function(){
-           
-            $.ajax({
-                url: "/rest/follow/delete",
-                method: "post",
-                data: {followerId : followerId}, 
-                success: function(response) {
-                    if (response.success) {
-                        // 언팔로우 성공적으로 수행되었을 때 버튼 업데이트
-                        $(".unfollow-button").removeClass("unfollow-button").addClass("follow-button");
-                        $(".follow-button").html('<i class="fa-solid fa-plus"></i> 팔로우');
-                    } else {
-                        // 실패할 경우 처리
-                        alert("언팔로우에 실패했습니다.");
-                    }
-                }
-            });
-        });
-    });
+	$(function(){
+		var followButton = $(this);
+		var btn = followButton.closest("button");
+		var followeeId = btn.data("followee");
+		var params = new URLSearchParams(location.search);
+		var projectNo = params.get("projectNo");
+	
+		$.ajax({
+			url:"/rest/follow/check",
+			method:"post",
+			data:{
+				followeeId : followeeId,
+				projectNo : projectNo
+			},
+			success:function(response) {
+				if(response.check) {
+					$(".ic").removeClass("fa-check fa-plus").addClass("fa-check");
+				}
+				else{
+					$(".ic").removeClass("fa-check fa-plus").addClass("fa-plus");
+				}
+			}
+		});
+		
+		$(".follow-button").click(function(){
+			$.ajax({
+				url:"/rest/follow/action",
+				method:"post",
+				data:{
+					followeeId : followeeId,
+					projectNo : projectNo
+				},
+				success:function(response){
+					if(response.check) {
+						$(".ic").removeClass("fa-check fa-plus").addClass("fa-check");
+					}
+					else{
+						$(".ic").removeClass("fa-check fa-plus").addClass("fa-plus");
+					}
+				}
+			});
+		});
+	});
 </script>
 
     <div class="container w-1000">
@@ -179,22 +179,22 @@ $(function(){
     			<div class="w-100 left">
     				${projectDto.projectContent}
     			</div>
-    			<div class="w-100">
     				창작자 소개<br>
     				${projectDto.projectOwner}<br>
+    			<div class="w-100">
     				
-<%--     				<c:choose> --%>
-<%--                         <c:when test="${memberFollowDto.followYN == 'Y'}"> --%>
-                        <button class="btn unfollow-button">
-                                <i class="fa-solid fa-check"></i> 팔로잉
+    				<c:choose>
+                        <c:when test="${isFollowing == 'true'}">
+                        <button class="btn follow-button" data-followee="${memberFollowDto.followeeId}">
+                                <i class="fa-solid fa-check ic"></i> 팔로잉
                            </button>
-<%--                         </c:when> --%>
-<%--                         <c:otherwise> --%>
-<!--                          <button class="btn follow-button"> -->
-<!--                                 <i class="fa-solid fa-plus"></i> 팔로우 -->
-<!--                             </button> -->
-<%--                         </c:otherwise> --%>
-<%--                     </c:choose> --%>
+                        </c:when>
+                        <c:otherwise>
+                         <button class="btn follow-button"  data-followee="${memberFollowDto.followeeId}">
+                                <i class="fa-solid fa-plus ic"></i> 팔로우
+                            </button>
+                        </c:otherwise>
+                    </c:choose>
     				<br>
     				리워드1<br>
     				리워드2<br>

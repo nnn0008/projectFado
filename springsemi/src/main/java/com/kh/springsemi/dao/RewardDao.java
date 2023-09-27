@@ -7,4 +7,6 @@ public interface RewardDao {
 	void insert(RewardDto rewardDto);
 	boolean updateInfo(RewardDto rewardDto);
 	boolean delete(int rewardNo);
+	
+
 }

@@ -21,7 +21,7 @@ import com.kh.springsemi.interceptor.TestInterceptor;
 //3. 상황에 맞는 메소드 재정의 및 코드 작성
 //*/
 //
-@Configuration//등록 
+//@Configuration//등록 
 public class InterceptorConfiguration implements WebMvcConfigurer {
 	
 	@Autowired

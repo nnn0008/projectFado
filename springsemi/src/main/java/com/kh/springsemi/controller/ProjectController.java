@@ -81,13 +81,9 @@ public class ProjectController {
 	
 	
 	@RequestMapping("/detail")
-	public String detail(Model model, @RequestParam int projectNo, HttpSession session) {
+	public String detail(@RequestParam int projectNo, HttpSession session, Model model) {
 		ProjectDto projectDto = projectDao.selectOne(projectNo);
 		model.addAttribute("projectDto", projectDto);
-//		String memberId = (String)session.getAttribute("name");
-//		memberDto.setMemberId(memberId);
-//		memberDao.selectOneByFollowerId(memberId);
-//		model.addAttribute("memberFollowDto", memberFollowDto);
 		
 		MinorCategoryDto minorCategoryDto = minorCategoryDao.selectOne(projectDto.getMinorCategoryNo());
 		model.addAttribute("minorCategoryDto", minorCategoryDto);

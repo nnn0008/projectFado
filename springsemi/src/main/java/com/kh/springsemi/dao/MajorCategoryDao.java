@@ -20,4 +20,7 @@ public interface MajorCategoryDao {
 	
 	//선택
 	MajorCategoryDto selectOne(int majorCategoryNo);
+	
+	//이름을 받아서 번호를 선택하는 메소드
+	MajorCategoryDto selectOne(String majorCategoryType);
 }

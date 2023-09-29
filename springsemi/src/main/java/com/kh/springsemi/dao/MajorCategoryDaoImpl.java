@@ -60,4 +60,12 @@ public class MajorCategoryDaoImpl implements MajorCategoryDao{
 		List<MajorCategoryDto> list = jdbcTemplate.query(sql, majorCategoryMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
+	@Override
+	public MajorCategoryDto selectOne(String majorCategoryType) {
+		String sql = "select * from majorcategory where major_category_type = ?";
+		Object[] data = {majorCategoryType};
+		List<MajorCategoryDto> list = jdbcTemplate.query(sql, majorCategoryMapper, data); 
+		return list.isEmpty() ? null : list.get(0);
+	}
 }

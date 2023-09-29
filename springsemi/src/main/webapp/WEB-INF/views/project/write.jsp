@@ -75,10 +75,10 @@ $(function () {
 	    		},
 	    		success:function(response){
 	    			$("[name=minorCategoryNo]").empty();
-	    			$.each(response, function(minorCategoryNo, majorCategoryNo){
+	    			$.each(response, function(minorCategoryNo, minorCategoryType){
 		    			$("[name=minorCategoryNo]").append($('<option>',{
 		    				value: minorCategoryNo,
-		    				text: majorCategoryNo
+		    				text: minorCategoryType
 		    			}));
 	    			});
 	    		},

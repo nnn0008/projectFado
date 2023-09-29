@@ -29,22 +29,31 @@ public class CategoryController {
 		List<MajorCategoryDto> majorList = majorCategoryDao.selectList();
 		majorModel.addAttribute("majorList", majorList);
 		List<MinorCategoryDto> minorList = minorCategoryDao.selectList();
+		minorModel.addAttribute("minorList",minorList);
 		return "/WEB-INF/views/admin/category/list.jsp";
 	}
 	
 	@PostMapping("/list")
 	public String write(@ModelAttribute MajorCategoryDto majorCategoryDto, @ModelAttribute MinorCategoryDto minorCategoryDto) {
-		int majorCategoryNo = majorCategoryDao.sequence();
-		int minorCategoryNo = minorCategoryDao.sequence();
-		majorCategoryDto.setMajorCategoryNo(majorCategoryNo);
-		minorCategoryDto.setMajorCategoryNo(majorCategoryNo);
-		minorCategoryDto.setMinorCategoryNo(minorCategoryNo);
-		
-		majorCategoryDao.insert(majorCategoryDto);
-		minorCategoryDao.insert(minorCategoryDto);
-		
+		//소분류의 정보가 필요없을 때(대분류의 정보만 삽입이 필요할 때가 있다)
+		if(minorCategoryDto.getMinorCategoryType().equals(null)) { //대분류만 넣고 싶을 때
+			int majorCategoryNo = majorCategoryDao.sequence();
+			majorCategoryDto.setMajorCategoryNo(majorCategoryNo);
+			majorCategoryDao.insert(majorCategoryDto);
+		}
+		else { //대분류와 소분류를 모두 넣고 싶을 때
+			int majorCategoryNo = majorCategoryDao.sequence();
+			int minorCategoryNo = minorCategoryDao.sequence();
+			majorCategoryDto.setMajorCategoryNo(majorCategoryNo);
+			minorCategoryDto.setMajorCategoryNo(majorCategoryNo);
+			minorCategoryDto.setMinorCategoryNo(minorCategoryNo);
+			majorCategoryDao.insert(majorCategoryDto);
+			minorCategoryDao.insert(minorCategoryDto);
+		}
 		return "/WEB-INF/views/admin/category/list.jsp";
 	}
+		
+		
 	
 	
 }

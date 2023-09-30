@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -97,11 +96,11 @@ public class CategoryRestController {
 	}
 	
 	@PostMapping("/majorDelete")
-	public void majorDelete(@RequestParam int majorCategoryNo) {
-		majorCategoryDao.delete(majorCategoryNo);
-		
-		//(대분류)카테고리 개수 업데이트
-//		majorCategoryDao.updateMajorCategoryCount();
+	public void majorDelete(@RequestParam String majorCategoryType) {
+		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(majorCategoryType);
+		majorCategoryDao.delete(majorCategoryDto.getMajorCategoryNo());
+//		(대분류)카테고리 개수 업데이트
+		majorCategoryDao.updateMajorCategoryCount();
 	}
 	
 	

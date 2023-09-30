@@ -14,7 +14,7 @@
 			method:"post",
 // 			data:{},
 			success:function(response){
-// 				console.log(response);
+// 				console.log(response);]
 				for(var i = 0; i < response.length; i++){
 					var div = $("<div>").addClass("p-10 row left major").text(response[i].majorCategoryType);
 					var xBtn = $("<button>").text("X").attr("type","button").click(function(){
@@ -23,13 +23,12 @@
 						$.ajax({
 								url:"/rest/category/majorDelete",
 								method:"post",
-								data: {majorCategoryNo : majorCategoryNo},
+								data: {majorCategoryType : majorCategoryType},
 								success:function(response){
 									$(".major").remove();
 								},
 						});
 					});	
-
 					div.append(xBtn).appendTo(".category-main");
 				}
 			},

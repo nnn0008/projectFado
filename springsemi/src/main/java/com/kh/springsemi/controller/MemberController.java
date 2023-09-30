@@ -192,11 +192,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/follow/list")
-	public String list(@ModelAttribute(name="vo") PaginationVO vo, Model model) {
-		int count = memberDao.countFollowList(vo);
+	public String list(@ModelAttribute(name="vo") PaginationVO vo, Model model, HttpSession session) {
+		String followerId = (String) session.getAttribute("name");
+		int count = memberDao.countFollowList(vo, followerId);
 		vo.setCount(count);
 		
-		List<MemberFollowDto> list = memberDao.selectFollowListByPage(vo);
+		List<MemberFollowDto> list = memberDao.selectFollowListByPage(vo, followerId);
 		model.addAttribute("list", list);
 		
 		return "/WEB-INF/views/member/followList.jsp";
@@ -208,8 +209,8 @@ public class MemberController {
 		return "redirect:list";
 	}
 	
-	@RequestMapping("/follow/cancel")
-	public String memberCancel(@ModelAttribute MemberFollowDto memberFollowDto) {
+	@RequestMapping("/follow/unfollowing")
+	public String memberUnfollowing(@ModelAttribute MemberFollowDto memberFollowDto) {
 		memberDao.deleteFollow(memberFollowDto);
 		return "redirect:list";
 	}

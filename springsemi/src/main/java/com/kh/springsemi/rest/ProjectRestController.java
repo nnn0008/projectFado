@@ -22,7 +22,6 @@ import com.kh.springsemi.dto.MinorCategoryDto;
 @RequestMapping("/rest/project")
 public class ProjectRestController {
 	
-	
 	@Autowired
 	private ProjectDao projectDao;
 	
@@ -37,7 +36,7 @@ public class ProjectRestController {
 		List<MinorCategoryDto> list = minorCategoryDao.selectClassifyByNo(majorCategoryNo); // 대분류 번호를 jsp에서 받아서 dto값 넣었음
 		Map <Integer, String> classify = new TreeMap<>(); 
 //		Set<Object> set = new TreeSet<>();
-		MajorCategoryDto majorCategoryDto = new MajorCategoryDto();
+//		MajorCategoryDto majorCategoryDto = new MajorCategoryDto();
 		for(MinorCategoryDto minorCategoryDto : list) {
 //			set.add(minorCategoryDto.getMinorCategoryNo());
 //			set.add(minorCategoryDto.getMinorCategoryType());

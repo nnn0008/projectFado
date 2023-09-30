@@ -52,7 +52,7 @@ pageEncoding="UTF-8"%>
         <div class="flex-container auto-width">
 
             <!-- 프로필 왼쪽 -->
-            <div class="ms-40 row w-10 mt-100 mb-100">
+            <div class="row w-10 mt-100 mb-100">
 
                 <c:choose>
                     <c:when test= "${profile == null}">
@@ -65,7 +65,7 @@ pageEncoding="UTF-8"%>
                     </c:otherwise>
                 </c:choose>
 
-                <label style="display: block; font-size: 15px;" class="mb-10 mt-10">
+                <label style="display: block;" class="mb-10 mt-10">
                     ${memberDto.memberNickname}님의 회원 정보
                 </label>
                 <hr class="w-50 mb-20">
@@ -76,7 +76,7 @@ pageEncoding="UTF-8"%>
             
         
             <!-- 프로필 오른쪽 -->
-            <div class=" ms-100 flex-container auto-width w-75">
+            <div class="flex-container auto-width w-75">
 
                 <div class= "container">
 

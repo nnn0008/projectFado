@@ -175,11 +175,32 @@ $(function(){
 	
 
 
+
+	<div class="container w-600">
+            <div class="row">
+                <hr>
+                <h2>서퍼 Q&A</h2>
+                <hr>
+            </div>
+            <div class="flex-container">
+                <img src="http://dummyimage.com/40X40/000/fff" width="40" height="40">
+                <h3>${projectCommunityDto.getProjectCommunityWriterString()}</h3>
+            </div>
+            <div>
+                ${projectCommunityDto.projectCommunityContent}
+            </div>
+            <div>
+            	${projectCommunityDto.projectCommunityRegDate}
+            </div>
+            <div class="row">
+                <button class="btn" href="detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}"><i class="fa-solid fa-arrow-down"></i> 더보기</button>
+            </div>
+        </div>
 	
 	
 	
 	
-	
+	<c:forEach var="projectCommunityDto" items="${qnaList}">
 	<div class="row">
 		<table class="table table-slit">
 			<thead>
@@ -198,6 +219,9 @@ $(function(){
 					<td>${projectCommunityDto.projectCommunityType}</td>
 					<td>${projectCommunityDto.getProjectCommunityWriterString()}</td>
 					<td align="left">
+											<a class="link" href="detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}">
+							${projectCommunityDto.projectCommunityNo}
+						</a>
 
 						
 					</td>
@@ -207,7 +231,7 @@ $(function(){
 			</tbody>
 		</table>
 	</div>
-	
+	        </c:forEach>
 	
 	
 	

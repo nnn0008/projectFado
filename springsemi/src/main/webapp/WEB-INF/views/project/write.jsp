@@ -53,7 +53,7 @@ $(function () {
 		numberOfColumns: 2,
 		numberOfMonths:2, //두 달이 보이게 설정
 		format: 'YYYY-MM-DD', //날짜형식 설정
-		minDate : moment().startOf(new Date()).add(7, 'day'),
+		minDate : moment().startOf(new Date()).add(14, 'day'),
 // 		minDate: new Date(), //오늘 이전의 날짜를 선택하지 못하게 설정	
 	});
 
@@ -75,10 +75,10 @@ $(function () {
 	    		},
 	    		success:function(response){
 	    			$("[name=minorCategoryNo]").empty();
-	    			$.each(response, function(minorCategoryNo, majorCategoryNo){
+	    			$.each(response, function(minorCategoryNo, minorCategoryType){
 		    			$("[name=minorCategoryNo]").append($('<option>',{
 		    				value: minorCategoryNo,
-		    				text: majorCategoryNo
+		    				text: minorCategoryType
 		    			}));
 	    			});
 	    		},

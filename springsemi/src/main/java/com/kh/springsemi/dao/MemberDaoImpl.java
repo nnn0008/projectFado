@@ -296,7 +296,7 @@ public class MemberDaoImpl implements MemberDao{
 
 	@Override
 	public boolean check(MemberFollowDto memberFollowDto) {
-		String sql = "select * from follow where follower_id = ? and followee_id = ?";
+		String sql = "select * from follow_list where follower_id = ? and followee_id = ?";
 		Object[] data = {memberFollowDto.getFollowerId(), memberFollowDto.getFolloweeId()};
 		List<MemberFollowDto> list = jdbcTemplate.query(sql, memberFollowMapper, data);
 		return list.isEmpty() ? false : true;
@@ -321,26 +321,39 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	
 	@Override
-	public MemberFollowDto selectOneByFollowerId(String followerId) {
-		String sql ="select * from follow where followerId = ?";
+	public int countFollowList(PaginationVO vo, String followerId) {
+		String sql = "select count(*) from follow_list where follower_id = ?";
 		Object[] data = {followerId};
-		List<MemberFollowDto> list = jdbcTemplate.query(sql,  memberFollowMapper, data);
-		return list.isEmpty() ? null : list.get(0);
+		return jdbcTemplate.queryForObject(sql, int.class,data);
 	}
 	
 	@Override
-	public int countFollowList(PaginationVO vo) {
-		String sql = "select count(*) from follow_list";
-		return jdbcTemplate.queryForObject(sql, int.class);
-	}
-	
-	@Override
-	public List<MemberFollowDto> selectFollowListByPage(PaginationVO vo) {
-		String sql = "select * from (select rownum rn, TMP.* from (select * from follow_list order by follow_date desc)TMP) where rn between ? and ?";
-		Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+	public List<MemberFollowDto> selectFollowListByPage(PaginationVO vo, String followerId) {
+		String sql = "select * from (select rownum rn, TMP.* from (select * from follow_list where follower_id = ? order by follow_date desc)TMP) where rn between ? and ?";
+		Object[] data = {followerId, vo.getStartRow(), vo.getFinishRow()};
 		return jdbcTemplate.query(sql, memberFollowMapper, data);
 	}
 	
+	@Override
+	public List<MemberFollowDto> selectFollowingList(MemberFollowDto memberFollowDto) {
+		String sql ="select * from follow_list where follower_id = ? and followee_id = ?";
+		Object[] data = {memberFollowDto.getFollowerId(), memberFollowDto.getFolloweeId()};
+		return jdbcTemplate.query(sql,  memberFollowMapper, data);
+	}
+	
+	public MemberFollowDto selectOneByFollowerId(String followerId) {
+		String sql = "select * from follow_list where follower_id = ?";
+		Object[] data = {followerId};
+		List<MemberFollowDto> list = jdbcTemplate.query(sql, memberFollowMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+ 	}
+	
+	@Override
+	public boolean updateFollow(String followerId, String followeeId) {
+		String sql ="select * from follow_list where follower_id = ? and followee_id = ?";
+		Object[] data = {followerId, followeeId};                                             
+		return jdbcTemplate.update(sql, data) > 0; 
+	}
 	
 	@Override
 	public List<MemberBlockDto> selectBlockList() {

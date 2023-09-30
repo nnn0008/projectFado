@@ -23,7 +23,7 @@ $(function(){
 	
 	//타이머가 종료시
 	timer.addEventListener('targetAchieved', function (e) {
-	    displayText('펀딩이 종료되었습니다');
+	    displayText('0초');
 	});
 	
 	//타이머 실행
@@ -51,9 +51,6 @@ $(function(){
 <c:if test="${sessionScope.name != null}">
 
 <script>
-	//좋아요 처리
-	//[1] 페이지가 로드되면 비동기 통신으로 좋아요 상태를 체크하여 하트 생성
-	//[2] 하트에 클릭 이벤트를 설정하여 좋아요 처리가 가능하도록 구현
 	$(function(){
 		var params = new URLSearchParams(location.search);
 		var projectNo = params.get("projectNo");
@@ -63,7 +60,6 @@ $(function(){
 			method:"post",
 			data:{projectNo : projectNo},
 			success:function(response) {
-				//response는 {"check":true, "count":0} 형태의 JSON이다
 			
 				if(response.check) {
 					$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-solid");
@@ -71,12 +67,10 @@ $(function(){
 				else{
 					$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-regular");
 				}
-				//전달받은 좋아요 개수를 하트 뒤의 span에 출력
 				$(".fa-heart").next("span").text(response.count);
 			}
 		});
 		
-		//[2]
 		$(".fa-heart").click(function(){
 			$.ajax({
 				url:"/rest/like/action",
@@ -89,7 +83,6 @@ $(function(){
 					else{
 						$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-regular");
 					}
-					//전달받은 좋아요 개수를 하트 뒤의 span에 출력
 					$(".fa-heart").next("span").text(response.count);
 				}
 			});
@@ -97,7 +90,53 @@ $(function(){
 	});
 </script>
 
-</c:if>
+</c:if>1
+
+<script>
+	$(function(){
+		var followButton = $(this);
+		var btn = followButton.closest("button");
+		var followeeId = btn.data("followee");
+		var params = new URLSearchParams(location.search);
+		var projectNo = params.get("projectNo");
+	
+		$.ajax({
+			url:"/rest/follow/check",
+			method:"post",
+			data:{
+				followeeId : followeeId,
+				projectNo : projectNo
+			},
+			success:function(response) {
+				if(response.check) {
+					$(".ic").removeClass("fa-check fa-plus").addClass("fa-check");
+				}
+				else{
+					$(".ic").removeClass("fa-check fa-plus").addClass("fa-plus");
+				}
+			}
+		});
+		
+		$(".follow-button").click(function(){
+			$.ajax({
+				url:"/rest/follow/action",
+				method:"post",
+				data:{
+					followeeId : followeeId,
+					projectNo : projectNo
+				},
+				success:function(response){
+					if(response.check) {
+						$(".ic").removeClass("fa-check fa-plus").addClass("fa-check");
+					}
+					else{
+						$(".ic").removeClass("fa-check fa-plus").addClass("fa-plus");
+					}
+				}
+			});
+		});
+	});
+</script>
 
     <div class="container w-1000">
     	<div class="row">
@@ -140,9 +179,24 @@ $(function(){
     			<div class="w-100 left">
     				${projectDto.projectContent}
     			</div>
-    			<div class="w-100">
     				창작자 소개<br>
-    				${memberFollowDto.followeeId}
+    				${projectDto.projectOwner}<br>
+    			<div class="w-100">
+    				<c:if test="${sessionScope.name != projectDto.projectOwner}">
+    				<c:choose>
+                        <c:when test="${isFollowing == 'true'}">
+                        <button class="btn follow-button" data-followee="${memberFollowDto.followeeId}">
+                                <i class="fa-solid fa-check ic"></i> 팔로잉
+                           </button>
+                        </c:when>
+                        <c:otherwise>
+                         <button class="btn follow-button"  data-followee="${memberFollowDto.followeeId}">
+                                <i class="fa-solid fa-plus ic"></i> 팔로우
+                            </button>
+                        </c:otherwise>
+                    </c:choose>
+                    </c:if>
+    				<br>
     				리워드1<br>
     				리워드2<br>
     				조회수 : ${projectDto.projectReadcount}<br>
@@ -150,6 +204,120 @@ $(function(){
     		</div>
     	</div>
     </div>
+    
+    
+    
+    <!-- 여기서부터 list 추가한거 있어요 -->
+    <div class="row">
+	<hr>
+</div>
+
+<div class="container w-800">
+
+	<div class="row">
+		<a class="btn" style="background-color: #DEF2FF" href="/projectCommunity/noticeList">공지사항</a>
+		<a class="btn" href="/projectCommunity/qnaList">Q & A</a>
+	</div>
+	<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
+		<c:if test="${sessionScope.name != null && sessionScope.level == '관리자'}">
+		    <div class="row right">
+		        <a href="/projectCommunity/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
+		            <i class="fa-solid fa-pen"></i>
+		            글쓰기
+		        </a>
+		    </div>
+		</c:if>
+	
+	<%-- 
+		검색일 경우 검색어를 추가로 출력 
+		(참고) 논리 반환값을 가지는 getter 메소드는 get이 아니라 is로 시작한다
+	--%>
+	<c:if test="${vo.search}">
+	<div class="row left">
+		&quot;${vo.keyword}&quot;에 대한 검색 결과
+	</div>
+	</c:if>
+</div>
+
+	
+	
+	
+	
+	<div class="container w-600">
+           <div class="row">
+               <hr>
+               <h2>서퍼 공지 업데이트</h2>
+               <hr>
+           </div>
+		<c:forEach var="projectCommunityDto" items="${noticeList}">
+           <div class="flex-container">
+               <img src="http://dummyimage.com/40X40/000/fff" width="40" height="40">
+               <h3>${projectCommunityDto.getProjectCommunityWriterString()}</h3>
+           </div>
+           <div>
+               ${projectCommunityDto.projectCommunityContent}
+           </div>
+           <div>
+           	${projectCommunityDto.projectCommunityRegDate}
+           </div>
+           <div class="row">
+               <button class="btn" href="detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}"><i class="fa-solid fa-arrow-down"></i> 더보기</button>
+           </div>
+       </c:forEach>
+   </div>
+	
+	
+
+
+		<div class="row page-navigator mv-30">
+		<!-- 이전 버튼 -->
+		<c:if test="${!vo.first}">
+			<a href="qnaList?${vo.prevQueryString}">
+				<i class="fa-solid fa-angle-left"></i>
+			</a>
+		</c:if>
+		
+		<!-- 숫자 버튼 -->
+		<c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
+			<c:choose>
+				<c:when test="${vo.page == i}">
+					<a class="on">${i}</a>
+				</c:when>
+				<c:otherwise>
+					<a href="qnaList?${vo.getQueryString(i)}">${i}</a> 
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		
+		<!-- 다음 버튼 -->
+		<c:if test="${!vo.last}">
+			<a href="noticeList?${vo.nextQueryString}">
+				<i class="fa-solid fa-angle-right"></i>
+			</a>
+		</c:if>
+	</div>
+	
+	<!-- 검색창 -->
+	<form action="noticeList" method="get">
+	<div class="row">
+		
+		<input type="search" name="keyword"  required class="form-input"
+					placeholder="검색어 입력" value="${param.keyword}">
+		<button type="submit" class="btn btn-positive">
+			<i class="fa-solid fa-magnifying-glass"></i>
+			검색
+		</button>
+	</div>
+	</form>
+
+
+
+
+
+
+    
+    
+    
     
     
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>   

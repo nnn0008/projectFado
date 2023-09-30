@@ -2,8 +2,17 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-	<h1>비밀번호 변경 완료</h1>
-	<h3><a href="/">메인페이지로 이동</a></h3>	
-	<h3><a href="mypage">마이페이지로 이동</a></h3>
+	<div class="container w-600">
+        <div class="modal position-center">
+            <div class="row alert">
+                <div class = "row mt-10 ms-30 me-30">
+                    <span style="font-weight: bold;">비밀번호 변경이 완료 되었습니다.</span>
+                </div>
+                <div class = "row mb-10 mt-30">
+                    <a href ="/" class="btn btn-positive me-10" style="font-size:15px;">파도 메인으로 가기</a>
+                </div>
+            </div>
+        </div>
+    </div>
 		
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

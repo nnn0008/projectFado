@@ -36,25 +36,22 @@ public class ProjectCommunityController {
 	
 	
 	@GetMapping("/write")  //프로젝트 커뮤니티 글작성
-	public String insert(@RequestParam int projectNo, Model model) {
-		model.addAttribute("projectNo",projectNo);
+	public String insert(@RequestParam int projectNo) {
 		return "/WEB-INF/views/projectCommunity/write.jsp";
 	}
 	
 	
 	@PostMapping("/write")
-	public String insert(@ModelAttribute ProjectCommunityDto projectCommunityDto, Model model,
+	public String insert(@ModelAttribute ProjectCommunityDto projectCommunityDto,
 						@ModelAttribute ProjectDto projectDto, HttpSession session) {
+		String memberId = (String) session.getAttribute("name");
 	
 		int projectCommunityNo = projectCommunityDao.sequence();
-		projectCommunityDto.setProjectCommunityNo(projectCommunityNo);
-		
-		String memberId = (String) session.getAttribute("name");
-		
-		projectCommunityDto.setProjectCommunityWriter(memberId);
-		
 		int projectNo = projectDto.getProjectNo();
+		
 		projectCommunityDto.setProjectNo(projectNo);
+		projectCommunityDto.setProjectCommunityWriter(memberId);
+		projectCommunityDto.setProjectCommunityNo(projectCommunityNo);
 		
 		projectCommunityDao.insert(projectCommunityDto);
 
@@ -62,7 +59,7 @@ public class ProjectCommunityController {
 	}
 	
 	
-	@GetMapping("edit")
+	@GetMapping("/edit")
 	public String edit(@RequestParam int projectCommunityNo, Model model) {
 		ProjectCommunityDto projectCommunityDto = projectCommunityDao.selectOne(projectCommunityNo);
 		model.addAttribute("projectCommunityDto", projectCommunityDto);

@@ -117,10 +117,10 @@ $(function(){
 </script>
 
 <form action="change" method="post" autocomplete="off" class="change-form">
-<div class="center container w-700">
+<div class="center container w-500">
 
 
-	<div class="row fado">
+	<div class="row fado mt-100">
 		<h1>개인정보 변경</h1>
 	</div>
 	
@@ -128,7 +128,7 @@ $(function(){
 	
 		<label>닉네임</label>
 	  	<input type="text" name="memberNickname"  class="form-input w-100 mt-10"
-	  	 value="${memberDto.memberNickname}" >
+	  	 value="${memberDto.memberNickname}"  style="	font-size: 15px;">
 		<div class="success-feedback">사용 가능한 닉네임입니다.</div>
 		<div class="fail-feedback">닉네임은 한글 또는 숫자로 2~10자 이내에 작성해주세요.</div>
 		<div class="fail2-feedback">이미 사용중인 닉네임입니다.</div>
@@ -140,7 +140,7 @@ $(function(){
 	<div class="row left fado">
 		<label>이메일</label>
     	<input type="email" name="memberEmail"  class="form-input w-100 mt-10"
-   	 	value="${memberDto.memberEmail}" placeholder="testuser@kh.com">
+   	 	value="${memberDto.memberEmail}" placeholder="testuser@kh.com" style="font-size: 15px;">
 	</div>
 	
 	<hr class="hr-style">
@@ -148,7 +148,7 @@ $(function(){
 	<div class="row left fado">
 		<label>연락처</label>
     	<input type="tel" name="memberContact"  class="form-input w-100 mt-10"
-     	value="${memberDto.memberContact}" placeholder="- 제외하고 입력">
+     	value="${memberDto.memberContact}" placeholder="- 제외하고 입력" style="font-size: 15px;">
 	</div>
 	
 	<hr class="hr-style">
@@ -156,14 +156,14 @@ $(function(){
 	<div class="row left fado">
 		<label>생년월일</label>
     	<input type="date" name="memberBirth" value="${memberDto.memberBirth}"
-    	class="form-input w-100 mt-10">
+    	class="form-input w-100 mt-10" style="font-size: 15px;">
 	</div>
 	
 	<hr class="hr-style">
 	
 	<div class="row left fado">
 		<label>비밀번호 확인</label>
-    	<input type="password" name="memberPw" required class="form-input w-100 mt-10">
+    	<input type="password" name="memberPw" required class="form-input w-100 mt-10" style="font-size: 15px;"> 
 	</div>
 	
 	<hr class="hr-style">

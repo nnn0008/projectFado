@@ -15,7 +15,7 @@ public class DeliveryMapper implements RowMapper<DeliveryDto> {
 	public DeliveryDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		DeliveryDto deliveryDto = new DeliveryDto();
 		deliveryDto.setDeliveryNo(rs.getInt("delivery_no"));
-		deliveryDto.setDeliveryMember(rs.getString("delivery_member"));
+		deliveryDto.setMemberId(rs.getString("member_id"));
 		deliveryDto.setDeliveryReceiver(rs.getString("delivery_receiver"));
 		deliveryDto.setDeliveryPost(rs.getString("delivery_post"));
 		deliveryDto.setDeliveryAddr1(rs.getString("delivery_addr1"));

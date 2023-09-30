@@ -2,7 +2,9 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<h1>이메일 전송이 완료되었습니다. 확인 바랍니다.</h1>
+<div class="row fado mt-80">
+	<h1>이메일 전송이 완료되었습니다. 확인 바랍니다.</h1>
+</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 

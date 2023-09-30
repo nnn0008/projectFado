@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.springsemi.dto.AttachDto;
 import com.kh.springsemi.dto.ReviewDto;
+import com.kh.springsemi.mapper.AttachMapper;
 import com.kh.springsemi.mapper.ReviewMapper;
 
 @Repository
@@ -17,6 +20,9 @@ public class ReviewDaoImpl implements ReviewDao{
 	
 	@Autowired
 	private ReviewMapper reviewMapper;
+	
+	@Autowired
+	private AttachMapper attachMapper;
 
 	@Override
 	public int sequence() {
@@ -26,21 +32,20 @@ public class ReviewDaoImpl implements ReviewDao{
 
 	@Override
 	public void insert(ReviewDto reviewDto) {
-		String sql = "insert into review(review_no, review_writer, "
-							+ "review_title, review_content, review_star) "
-							+ "values(?, ?, ?, ?, ?)";
-		Object[] data = {reviewDto.getReviewNo(), reviewDto.getReviewWriter(),
-								reviewDto.getReviewTitle(), reviewDto.getReviewContent(), 
-								reviewDto.getReviewStar()};
+		String sql = "insert into review("
+				+ "review_no, project_no, review_writer, review_content, review_star"
+				+ ") "
+				+ "values(?, ?, ?, ?)";
+		Object[] data = {reviewDto.getReviewNo(), reviewDto.getProjectNo(),
+				reviewDto.getReviewWriter(), reviewDto.getReviewContent()};
 		jdbcTemplate.update(sql, data);
 	}
 
 	@Override
 	public boolean update(ReviewDto reviewDto) {
-		String sql = "update review set review_title=?, review_content=?, review_star=? "
+		String sql = "update review set review_content=?, review_star=? "
 						+ "where review_no=?";
-		Object[] data = {reviewDto.getReviewTitle(), reviewDto.getReviewContent(), 
-								reviewDto.getReviewStar(), reviewDto.getReviewNo()};
+		Object[] data = {reviewDto.getReviewContent(), reviewDto.getReviewNo()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 
@@ -50,11 +55,38 @@ public class ReviewDaoImpl implements ReviewDao{
 		Object[] data = {reviewNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
+	
+	@Override
+	public ReviewDto selectOne(int reviewNo) {
+		String sql = "select * from review where review_no=?";
+		Object[] data = {reviewNo};
+		List<ReviewDto> list = jdbcTemplate.query(sql, reviewMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 
 	@Override
-	public List<ReviewDto> selectList() {
+	public List<ReviewDto> selectList(@RequestParam int reviewNo) {
 		String sql = "select * from review order by review_no desc";
-		return jdbcTemplate.query(sql, reviewMapper);
+		Object[] data = {reviewNo};
+		return jdbcTemplate.query(sql, reviewMapper, data);
 	}
-	
+
+	@Override
+	public void connect(int reviewNo, int attachNo) {
+		String sql = "insert into review_photo values(?, ?)";
+		Object[] data = {reviewNo, attachNo};
+		jdbcTemplate.update(sql, data);
+		
+	}
+
+	@Override
+	public AttachDto findReviewPhoto(int reviewNo) {
+		String sql = "select * from attach where attach_no (select attach attach_no from review_photo where review_no = ?)";
+		Object[] data = {reviewNo};
+		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+
+
 }

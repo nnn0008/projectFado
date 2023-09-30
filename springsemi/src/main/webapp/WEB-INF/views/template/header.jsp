@@ -28,11 +28,14 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
 <style>
-        .btn .btn-positive {
+        .btn .btn-positive1 {
             width: 150px;
             height: 150px;
             padding-left: 100px;
             padding-right: 100px;
+            background-color:#ffffff00;
+            border-color:#ffffff00;
+            font-color:black;
         }
 
         /* .hr1{
@@ -211,15 +214,48 @@
 
     <header>
         <div class="logo">
-            <a href=""><img src="./image/smallfado.jpg" style="height: 60px;" class="me-50"></a>
+            <a href="/"><img src="./image/smallfado.jpg" style="height: 60px;" class="me-50"></a>
         </div>
         <div class="title">
 
         </div>
         <div class="etc">
+        
+        	<a href="#">
             <i class="me-10 fa-solid fa-heart" style="color: #fa7d90;"></i>
-
+			</a>
+			
+			<a href="#">
             <i class="me-20 fa-solid fa-bell" style="color: #2c8de0;"></i>
+			</a>
+
+
+            <a href="http://localhost:8080/member/login" class="btn btn-positive1" >   
+                 
+                 
+                 
+			    <c:choose>
+			        <c:when test="${not empty sessionScope.name}">
+			            ${sessionScope.nickname}
+			        </c:when>
+			        <c:otherwise>
+			            login
+			        </c:otherwise>
+			    </c:choose>
+			</a>
+			
+			<a href="http://localhost:8080/"></a>
+			
+			<c:choose>
+			    <c:when test="${not empty sessionScope.name}">
+			        <a href="http://localhost:8080/member/logout" class="mb-50">logout</a>
+			    </c:when>
+			    <c:otherwise>
+			        <!-- 로그인되지 않은 경우 아무것도 표시하지 않음 -->
+			    </c:otherwise>
+			</c:choose>
+
+
 
             <a href="http://localhost:8080/member/login" class="btn btn-positive" style="padding-left: 60px;
              padding-right: 60px; height:40px; 
@@ -230,6 +266,7 @@
             
         </div>
        
+
     </header>
 
     <!-- <hr> -->
@@ -246,7 +283,7 @@
                 <ul>
                     <li style="display: flex; list-style: 
                                 none; padding: 0;">
-                    <li><a href="#">전체</a></li>
+                    <li><a href="/funding/list">전체</a></li>
                     <li><a href="#">의류</a></li>
                     <li><a href="#">향수</a></li>
                     <li><a href="#">반려동물</a></li>

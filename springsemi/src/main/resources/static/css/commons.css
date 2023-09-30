@@ -147,10 +147,10 @@ textarea.form-input.fixed {
     글자를 두껍게 보여주도록 처리(bold)
 */
 .btn {/*수정함*/
-    font-weight: bold;
+    font-weight: normal;
     border-color: #2c8de0;
     background-color: white;
-    color: #fbfbfb;
+    color: rgb(0, 0, 0);
     cursor: pointer;
 }
 .btn:hover { /*마우스가 버튼에 올라가면 배경을 조금 더 어둡게*/
@@ -173,6 +173,7 @@ textarea.form-input.fixed {
     border-color: #2c8de0;
     background-color: #2c8de0;
     color: white;
+    font-size: 10px;
 }
 .btn.btn-negative {
     border-color: #e17055;

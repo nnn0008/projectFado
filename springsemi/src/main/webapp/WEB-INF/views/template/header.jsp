@@ -158,12 +158,13 @@
 
 
         // window.addEventListener("이벤트종류",함수);
-        window.addEventListener("load", function () {
+    
+       /*  window.addEventListener("load", function () {
             var btn = document.querySelector(".btn");
             btn.addEventListener("click", function () {
                 alert("빵빵아");
             });
-        });
+        }); */
 
         // 배너를 위한 스크립트
 
@@ -221,11 +222,13 @@
 
             <i class="me-20 fa-solid fa-bell" style="color: #2c8de0;"></i>
 
-            <button class="btn btn-positive" style="padding-left: 60px;
+            <a href="http://localhost:8080/member/login" class="btn btn-positive" style="padding-left: 60px;
              padding-right: 60px; height:40px; 
              padding-bottom:38px;">
-                login
-            </button>
+             login
+            <!-- <a href="http://localhost:8080/member/login" class="link">login</a> -->    
+            </a>
+            
         </div>
        
     </header>
@@ -285,10 +288,10 @@
             
             <a>
             
-                 <div class="w-300 ms-500" style="width: 300px;">
+                <div class="w-300 ms-500" style="width: 300px;">
                     <i class="fa-solid fa-magnifying-glass" style="color: #2c8de0;"></i>
                  <input type="search" class="pointer w-100 focus" name="keyword" placeholder="검색어를 입력해주세요" value="">
-                 </div>
+                 </div> 
 
 
 				<!-- 조장님이 만든 검색창  -->
@@ -318,7 +321,7 @@
 	        	</div>
         	</div>
         </form>
-        </div> -->
+        </div>  -->
 		
 	        	 
             </a>

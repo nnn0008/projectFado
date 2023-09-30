@@ -452,7 +452,7 @@ textarea.form-input.fixed {
     /*
         opacity는 현재 태그 뿐 아니라 내부 태그의 투명도도 조절한다
     */
-
+		/*백드롭 배경색 수정해야됨*/ 
     background-color: rgba(0, 0, 0, 0.1);
     /* background-color: black; */
     /* opacity: 0.1; */

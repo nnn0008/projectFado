@@ -229,6 +229,7 @@
             <i class="me-20 fa-solid fa-bell" style="color: #2c8de0;"></i>
 			</a>
 
+
             <a href="http://localhost:8080/member/login" class="btn btn-positive1" >   
                  
                  
@@ -254,6 +255,17 @@
 			    </c:otherwise>
 			</c:choose>
 
+
+
+            <a href="http://localhost:8080/member/login" class="btn btn-positive" style="padding-left: 60px;
+             padding-right: 60px; height:40px; 
+             padding-bottom:38px;">
+             login
+            <!-- <a href="http://localhost:8080/member/login" class="link">login</a> -->    
+            </a>
+            
+        </div>
+       
 
     </header>
 

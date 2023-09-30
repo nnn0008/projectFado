@@ -5,38 +5,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
-<div class="row">
-	<hr>
-</div>
-
-<div class="container w-800">
-
-	<div class="row">
-		<a class="btn" style="background-color: #DEF2FF" href="/projectCommunity/noticeList">공지사항</a>
-		<a class="btn" href="/projectCommunity/qnaList">Q & A</a>
-	</div>
-	<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
-		<c:if test="${sessionScope.name != null && sessionScope.level == '관리자'}">
-		    <div class="row right">
-		        <a href="write=${projectDto.projectNo}" class="btn btn-positive">
-		            <i class="fa-solid fa-pen"></i>
-		            글쓰기
-		        </a>
-		    </div>
-		</c:if>
-	
-	<%-- 
-		검색일 경우 검색어를 추가로 출력 
-		(참고) 논리 반환값을 가지는 getter 메소드는 get이 아니라 is로 시작한다
-	--%>
-	<c:if test="${vo.search}">
-	<div class="row left">
-		&quot;${vo.keyword}&quot;에 대한 검색 결과
-	</div>
-	</c:if>
-</div>
-
-	
+ 	
 	
 	
 	
@@ -110,6 +79,7 @@
 
 
 
+ 
 
 
 

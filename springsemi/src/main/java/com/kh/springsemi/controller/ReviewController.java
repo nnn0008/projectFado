@@ -3,7 +3,6 @@ package com.kh.springsemi.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,11 +23,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.springsemi.dao.AttachDao;
+import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.ReviewDao;
 import com.kh.springsemi.dto.AttachDto;
+import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ReviewDto;
-import com.kh.springsemi.vo.PaginationVO;
 
 @Controller
 @RequestMapping("/review")
@@ -39,6 +39,9 @@ public class ReviewController {
 	
 	@Autowired
 	private AttachDao attachDao;
+	
+	@Autowired
+	private MemberDao memberDao;
 	
 	
 	
@@ -125,6 +128,12 @@ public class ReviewController {
 	public String detail(@RequestParam int reviewNo, Model model) {
 		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
 		model.addAttribute("reviewDto", reviewDto);
+		
+		String reviewWriter = reviewDto.getReviewWriter();
+		if(reviewWriter != null) {
+			MemberDto memberDto = memberDao.selectOne(reviewWriter);
+			model.addAttribute("reviewWriterDto", memberDto);
+		}
 		return "/WEB-INF/views/review/detail.jsp";
 	}
 	

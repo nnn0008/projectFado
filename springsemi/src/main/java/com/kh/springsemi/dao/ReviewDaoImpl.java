@@ -43,8 +43,7 @@ public class ReviewDaoImpl implements ReviewDao{
 
 	@Override
 	public boolean update(ReviewDto reviewDto) {
-		String sql = "update review set review_content=?, review_star=? "
-						+ "where review_no=?";
+		String sql = "update review set review_content=? where review_no=?";
 		Object[] data = {reviewDto.getReviewContent(), reviewDto.getReviewNo()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}

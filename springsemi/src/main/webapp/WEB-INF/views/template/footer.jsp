@@ -1,21 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-	</section>
-		<footer>
-		<div class="right">	
-		<i class="fa-brands fa-instagram" style="color: #3dccd6;" ></i>
-		<i class="fa-brands fa-facebook" style="color: #3dccd6;"></i>
-		</div>
-		<div class="right">
-			${sessionScope.name}
-		</div>
-		
-		<div class="right">
-			<span>고객센터 평일 09:00 ~ 18:00 (12:00 ~ 14:00 제외)</span>
-		</div>
-	    </footer>
-	</main>
-	
+	<hr class="hr1">
+    <!-- 세로길이줄이고싶음  -->
+    <footer style="height: 40px;">
+        <div class="row flex-container auto-width ">
+            <div class="left">
+                <img style="width:120px;height:40px;" src="./image/smallfado.jpg">
+
+            </div>
+
+
+            <div class="right mt-70" style="font-size: 12px;">
+                <i class="fa-brands fa-google 
+                            me-10" style="color:coral ;"></i>
+
+                <i class="fa-brands fa-facebook
+                            me-10" style="color: #1236ed;"></i>
+
+                <i class="fa-brands fa-twitter
+                            me-10" style="color: #38c0ff;"></i>
+
+                <i class="fa-brands fa-instagram
+                        me-10" style="color: #ff0862;"></i>
+
+                <i class="fa-brands fa-youtube" style="color:red;"></i>
+                <div class="row flex-container ms-750 ">
+                    고객센터
+                    <!-- </div> -->
+                    <!-- <div class="row flex-container ms-700"> -->
+                    평일 09:00 ~ 18:00
+                    <!-- </div> -->
+                    <!-- <div class="row flex-container ms-700"> -->
+                    (12:00 ~ 14:00 제외)
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    </main>
 </body>
+
 </html>

@@ -32,9 +32,13 @@
 .w-33, .col-3 { width:33.3333%; }
 .w-50, .col-2 { width:50%; }
 .w-75 { width:75%; }
+
+.w-100 { width:100%; }
+
 .w-80 {width: 90%;}
 .w-90 {width: 90%;}
 .w-100 { width:100%;}
+
 
 .w-300 { width:300px; }
 .w-400 { width:400px; }
@@ -146,7 +150,7 @@ textarea.form-input.fixed {
     font-weight: bold;
     border-color: #2c8de0;
     background-color: white;
-    color: #2c8de0;
+    color: #fbfbfb;
     cursor: pointer;
 }
 .btn:hover { /*마우스가 버튼에 올라가면 배경을 조금 더 어둡게*/
@@ -206,6 +210,9 @@ textarea.form-input.fixed {
 .mt-30 { margin-top: 30px; }
 .mt-40 { margin-top: 40px; }
 .mt-50 { margin-top: 50px; }
+
+.mt-70 { margin-top: 70px; }
+
 .mt-60 { margin-top: 60px; }
 .mt-70 { margin-top: 70px; }
 .mt-80 { margin-top: 80px; }
@@ -213,33 +220,53 @@ textarea.form-input.fixed {
 .mt-100 { margin-top: 100px; }
 .mt-115 { margin-top: 115px; }
 
+
 .mb-10 { margin-bottom: 10px; }
 .mb-20 { margin-bottom: 20px; }
 .mb-30 { margin-bottom: 30px; }
 .mb-40 { margin-bottom: 40px; }
 .mb-50 { margin-bottom: 50px; }
+
+.mb-80 { margin-bottom: 80px; }
+
 .mb-60 { margin-bottom: 60px; }
 .mb-70 { margin-bottom: 70px; }
 .mb-80 { margin-bottom: 80px; }
 .mb-90 { margin-bottom: 90px; }
 .mb-100 { margin-bottom: 100px; }
 
+
 .ms-10 { margin-left: 10px; }
 .ms-20 { margin-left: 20px; }
 .ms-30 { margin-left: 30px; }
 .ms-40 { margin-left: 40px; }
 .ms-50 { margin-left: 50px; }
+
+.ms-70 { margin-left: 70px; }
+.ms-500 { margin-left: 500px; }
+.ms-580 { margin-left: 580px; }
+.ms-660 { margin-left: 660px; }
+.ms-580 { margin-left: 580px; }
+.ms-700 { margin-left: 700px; }
+.ms-750 { margin-left: 750px; }
+
+
 .ms-60 { margin-left: 10px; }
 .ms-70 { margin-left: 20px; }
 .ms-80 { margin-left: 30px; }
 .ms-90 { margin-left: 40px; }
 .ms-100 { margin-left: 50px; }
 
+
 .me-10 { margin-right: 10px;}
+.me-15 { margin-right: 15px;}
 .me-20 { margin-right: 20px;}
 .me-30 { margin-right: 30px;}
 .me-40 { margin-right: 40px;}
 .me-50 { margin-right: 50px;}
+
+.me-70 { margin-right: 70px;}
+
 
 /* padding */
 .p-10 { padding: 10px; }
@@ -296,6 +323,7 @@ textarea.form-input.fixed {
 .pe-50 {padding-right: 50px;}
 
 
+
 /*
     테이블 디자인
     - 클래스가 table인 항목을 디자인
@@ -350,7 +378,7 @@ textarea.form-input.fixed {
     background-color: #dfe6e9;
 }
 .table.table-stripe > tbody > tr:nth-child(2n) {
-    background-color: #dfe6e9;
+    background-color: #dfe6e900;
 }
 
 /*
@@ -383,8 +411,8 @@ textarea.form-input.fixed {
     cursor: pointer;
     text-decoration: none;
     /* border:1px solid #2d3436; */
-    box-shadow: 0px 0px 1px 0px #2d3436;
-    color: #2d3436;
+    box-shadow: 0px 0px 1px 0px #2c8de0;
+    color: #2c8de0;
 }
 .page-navigator > a.on,
 .page-navigator > a:hover {
@@ -393,11 +421,14 @@ textarea.form-input.fixed {
     color: #0984e3;
 }
 
+
+
+
 /*
     글자 색상과 관련된 클래스
     - 아이콘에도 사용 가능
 */
-/* 
+/* .red { color: #d63031; }
 .blue { color:#0984e3; }
 .yellow { color:#fdcb6e; }
 .green { color:#00b894; }
@@ -407,8 +438,12 @@ textarea.form-input.fixed {
 
 /*수정한부분*/
 .fado{color: #2c8de0;}
+
+
+
 .red { color: #d63031; }
 .yellow { color: yellow;}
+
 
 /*
     전체 화면 디자인
@@ -418,7 +453,7 @@ textarea.form-input.fixed {
         opacity는 현재 태그 뿐 아니라 내부 태그의 투명도도 조절한다
     */
 
-    background-color: rgba(250, 250, 250, 1);
+    background-color: rgba(0, 0, 0, 0.1);
     /* background-color: black; */
     /* opacity: 0.1; */
 
@@ -556,19 +591,22 @@ ul.menu > li {
 ul.menu,
 ul.menu ul
 {
-    font-size: 24px;
-    background-color: #4EB9CD;
+    font-size: 22px;
+    /* 메뉴 라인*/
+    background-color: #fbfbfb00;
 }
 ul.menu li {
-    color: white;
-    background-color: #4EB9CD;
+    color: #2c8de0;
+    /* 메뉴 라인*/
+    background-color: #94949400;
     width: 150px;
+
 }
 
 /* 메뉴에 마우스가 올라가면 하이라이트 효과 (수정함)*/
 ul.menu li:hover {
-    background-color: #28ABC3;
-    color : #FFBE2F;
+    background-color: #9494941a;
+    color : #329efd;
 }
 
 /* 
@@ -753,7 +791,7 @@ a.link:hover /*수정함*/
     opacity: 1;
 }
 .image.image-lift {
-    box-shadow: 0 0 2px 0px #2d3436;
+    box-shadow: 0 5 2px 0px #2d3436;
 }
 .image.image-leaf {
     border-top-left-radius: 50%;
@@ -793,7 +831,7 @@ a.link:hover /*수정함*/
     border-color: #0ed2aa !important;
 }
 .success:not([type=date]) {
-    background-image: url("../images/valid.png");
+    background-image: url("../image/valid.png");
     background-repeat: no-repeat;
     /* background-position-x: right;
     background-position-y: center; */
@@ -804,11 +842,75 @@ a.link:hover /*수정함*/
 .fail2
 {
     border-color: #e94a4a !important;
-    background-image: url("../images/invalid.png");
+    background-image: url("../image/invalid.png");
     background-repeat: no-repeat;
     background-position: center right 1em;
     background-size: 1em;
 }
+
+
+
+
+img{
+    width: 200px;
+    height: 200px;
+}
+
+main{
+    width: 1100px;
+    margin: 0 auto;
+    font-size: 16px;
+}
+/* 
+    헤더는 좌/중/우 3개로 구분하여 작성
+    -좌- 로고 등을 배치
+    -중- 검색창이나 타이틀을 배치
+    -우- ?
+*/
+header{
+    display: flex;
+    flex-wrap: nowrap;
+    min-height: 50px;
+}
+
+header > .logo{
+    background:linear-gradient(
+        red50px,#00b894(255,255,255,0.5)
+        #00b894(255,255,255,0.5)
+    );
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+header > .title{
+    flex-grow: 1;
+}
+
+header > .etc{
+    width: 25%;
+}
+
+header > .logo,
+header > .title,
+header > .etc
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav{
+    position: relative;
+} 
+
+section{
+    min-height: 400px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
 
 /* 수평선 스타일 */
 .hr-style {
@@ -822,3 +924,4 @@ a.link:hover /*수정함*/
 .bold {
     font-weight: bold;
 }
+

@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class DeliveryDto {
 	private int deliveryNo;
-	private String deliveryMember, deliveryReceiver, deliveryPost, deliveryAddr1, deliveryAddr2, deliveryContact;
+	private String memberId, deliveryReceiver, deliveryPost, deliveryAddr1, deliveryAddr2, deliveryContact;
 }

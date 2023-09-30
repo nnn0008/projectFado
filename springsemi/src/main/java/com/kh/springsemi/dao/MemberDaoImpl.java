@@ -321,9 +321,10 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	
 	@Override
-	public int countFollowList(PaginationVO vo) {
-		String sql = "select count(*) from follow_list";
-		return jdbcTemplate.queryForObject(sql, int.class);
+	public int countFollowList(PaginationVO vo, String followerId) {
+		String sql = "select count(*) from follow_list where follower_id = ?";
+		Object[] data = {followerId};
+		return jdbcTemplate.queryForObject(sql, int.class,data);
 	}
 	
 	@Override

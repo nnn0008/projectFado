@@ -7,15 +7,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.springsemi.dao.DeliveryDao;
 import com.kh.springsemi.dto.DeliveryDto;
-import com.kh.springsemi.error.NoTargetException;
 
 @Controller
 @RequestMapping("/delivery")
@@ -57,11 +54,12 @@ public class DeliveryController {
 //		
 //		return "/WEB-INF/views/delivery/mydelivery.jsp";
 //	}
-	@RequestMapping("/mydelivery")
-	public String myDelivery(Model model, HttpSession session, @RequestParam int deliveryNo) {
-		DeliveryDto deliveryDto = deliveryDao.selectOne(deliveryNo);
-		model.addAttribute("deliveryDto",deliveryDto);
-		return "/WEB-INF/views/delivery/mydelivery.jsp";
+	@RequestMapping("/myDeliveryList")
+	public String myDelivery(Model model, HttpSession session) {
+//		String memberId = (String) session.getAttribute("name");
+//		DeliveryDto deliveryDto = deliveryDao.selectOneByMemberId(memberId);
+//		model.addAttribute("deliveryDto", deliveryDto);
+		return "/WEB-INF/views/delivery/myDeliveryList.jsp";
 	}
 	
 //	//배송지 삭제
@@ -69,7 +67,7 @@ public class DeliveryController {
 //	public String delete(@RequestParam int deliveryNo) {
 //		boolean result = deliveryDao.delete(deliveryNo);
 //		if(result) {
-//			return "redirect:mydelivery";
+//			return "redirect:mydelivery",
 //		}
 //		else {
 //			throw new NoTargetException("존재하지 않는 배송지입니다.");

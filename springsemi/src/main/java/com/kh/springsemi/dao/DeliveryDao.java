@@ -12,8 +12,10 @@ public interface DeliveryDao {
 	void insert(DeliveryDto deliveryDto);
 	//R - 배송지 목록
 	List<DeliveryDto> selectList(int deliveryNo);
+	List<DeliveryDto> selectListByMemberId(String memberId);
 	//R - 배송지 상세
 	DeliveryDto selectOne(int deliveryNo);
+	DeliveryDto selectOneByMemberId(String memberId);
 	//U - 배송지 수정
 	boolean update(DeliveryDto deliveryDto);
 	//D - 배송지 삭제

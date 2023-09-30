@@ -128,16 +128,13 @@ public class ReviewController {
 		return "/WEB-INF/views/review/detail.jsp";
 	}
 	
-	//목록
-	@RequestMapping("/list")
-	public String list(Model model, @ModelAttribute(name = "vo") PaginationVO vo) {
-		int count = reviewDao.countList(vo);
-		vo.setCount(count);
-		
-		List <ReviewDto>list = reviewDao.selectListBypage(vo);
-		model.addAttribute("list", list);
-		return "/WEB-INF/views/review/list.jsp";
-	}
+//	//목록
+//	@RequestMapping("/list")
+//	public String list(Model model) {
+//		List <ReviewDto>list = reviewDao.selectList();
+//		model.addAttribute("list", list);
+//		return "/WEB-INF/views/review/list.jsp";
+//	}
 	
 	//수정
 	@GetMapping("/edit")

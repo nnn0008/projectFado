@@ -16,12 +16,10 @@ public interface ReviewDao {
 	List<ReviewDto> selectList(int reviewNo);
 	
 	
-	
+	 
 	
 	//리뷰 사진등록
 	void connect(int reviewNo, int attachNo);
 	AttachDto findReviewPhoto(int reviewNo);
 
-	int countList(PaginationVO vo);
-	List<ReviewDto> selectListBypage(PaginationVO vo);
 }

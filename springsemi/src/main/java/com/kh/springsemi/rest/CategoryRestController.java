@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,34 +40,37 @@ public class CategoryRestController {
 		return majorList; //화면은 프론트가 해준다
 	}
 	
-//	@PostMapping("/minorList")
-//	public List<MinorCategoryDto> minorList(@RequestParam String majorCategoryType){
-//		//이름 넣어서 DTO 선택
-//		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(majorCategoryType);
-//		//거기서 번호를 추출
-//		List<MinorCategoryDto> minorList  = minorCategoryDao.selectClassifyByNo(majorCategoryDto.getMajorCategoryNo());
-////		Map <Integer, String> minorMap = new TreeMap<>(); 
-////		for(MinorCategoryDto minorCategoryDto : minorList) {
-////			minorMap.put(minorCategoryDto.getMinorCategoryNo(),minorCategoryDto.getMinorCategoryType()); //Map에 소분류의 번호와 타입
-////		}
-//		return minorList;
-//	}
-	
 	@PostMapping("/minorList")
-	public Map <Integer, String> classifyCheck(@RequestParam String majorCategoryType){
-		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(majorCategoryType);
-		List<MinorCategoryDto> list = minorCategoryDao.selectClassifyByNo(majorCategoryDto.getMajorCategoryNo()); // 대분류 번호를 jsp에서 받아서 dto값 넣었음
-		Map <Integer, String> classify = new TreeMap<>(); 
-//		Set<Object> set = new TreeSet<>();
-//		MajorCategoryDto majorCategoryDto = new MajorCategoryDto();
-		for(MinorCategoryDto minorCategoryDto : list) {
-//			set.add(minorCategoryDto.getMinorCategoryNo());
-//			set.add(minorCategoryDto.getMinorCategoryType());
-			classify.put(minorCategoryDto.getMinorCategoryNo(),minorCategoryDto.getMinorCategoryType()); //Map에 소분류의 번호와 타입
-		}	
-//		return set;
-		return classify;
+	public List<MinorCategoryDto> minorList(@RequestParam String majorCategoryType){
+		String replace = majorCategoryType.replaceAll("X", "");
+		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(replace);
+		//이름 넣어서 DTO 선택
+//		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(majorCategoryType);
+		//거기서 번호를 추출
+		List<MinorCategoryDto> minorList  = minorCategoryDao.selectClassifyByNo(majorCategoryDto.getMajorCategoryNo());
+//		Map <Integer, String> minorMap = new TreeMap<>(); 
+//		for(MinorCategoryDto minorCategoryDto : minorList) {
+//			minorMap.put(minorCategoryDto.getMinorCategoryNo(),minorCategoryDto.getMinorCategoryType()); //Map에 소분류의 번호와 타입
+//		}
+		return minorList;
 	}
+	
+//	@PostMapping("/minorList")
+//	public Map <Integer, String> classifyCheck(@RequestParam String majorCategoryType){
+//		String replace = majorCategoryType.replaceAll("X", "");
+//		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(replace);
+//		List<MinorCategoryDto> list = minorCategoryDao.selectClassifyByNo(majorCategoryDto.getMajorCategoryNo()); // 대분류 번호를 jsp에서 받아서 dto값 넣었음
+//		Map <Integer, String> classify = new TreeMap<>(); 
+////		Set<Object> set = new TreeSet<>();
+////		MajorCategoryDto majorCategoryDto = new MajorCategoryDto();
+//		for(MinorCategoryDto minorCategoryDto : list) {
+////			set.add(minorCategoryDto.getMinorCategoryNo());
+////			set.add(minorCategoryDto.getMinorCategoryType());
+//			classify.put(minorCategoryDto.getMinorCategoryNo(),minorCategoryDto.getMinorCategoryType()); //Map에 소분류의 번호와 타입
+//		}	
+////		return set;
+//		return classify;
+//	}
 	
 	//대분류 추가
 	//기존 목록의 아래쪽으로 구현
@@ -97,11 +99,22 @@ public class CategoryRestController {
 	}
 	
 	@PostMapping("/majorDelete")
-	public void majorDelete(@RequestParam int majorCategoryNo) {
-		majorCategoryDao.delete(majorCategoryNo);
+	public void majorDelete(@RequestParam String majorCategoryType) {
+		String replace = majorCategoryType.replaceAll("X", "");
 		
-		//(대분류)카테고리 개수 업데이트
+		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(replace);
+		majorCategoryDao.delete(majorCategoryDto.getMajorCategoryNo());
+		
+//		(대분류)카테고리 개수 업데이트
 //		majorCategoryDao.updateMajorCategoryCount();
+	}
+	
+	@PostMapping("/minorDelete")
+	public void minorDelete(@RequestParam String minorCategoryType) {
+		String replace = minorCategoryType.replaceAll("X", "");
+//		System.out.println("replace : " + replace);
+		MinorCategoryDto minorCategoryDto = minorCategoryDao.selectOne(replace);
+		minorCategoryDao.delete(minorCategoryDto.getMinorCategoryNo());
 	}
 	
 	

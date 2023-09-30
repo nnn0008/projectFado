@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-	<hr class="hr1">
+	<hr class="hr1 mt-70">
     <!-- 세로길이줄이고싶음  -->
     <footer style="height: 40px;">
         <div class="row flex-container auto-width ">

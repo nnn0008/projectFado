@@ -33,7 +33,7 @@ public class ReviewDaoImpl implements ReviewDao{
 	@Override
 	public void insert(ReviewDto reviewDto) {
 		String sql = "insert into review("
-				+ "review_no, project_no, review_writer, review_content, review_star"
+				+ "review_no, project_no, review_writer, review_content"
 				+ ") "
 				+ "values(?, ?, ?, ?)";
 		Object[] data = {reviewDto.getReviewNo(), reviewDto.getProjectNo(),
@@ -58,7 +58,10 @@ public class ReviewDaoImpl implements ReviewDao{
 	
 	@Override
 	public ReviewDto selectOne(int reviewNo) {
-		String sql = "select * from review where review_no=?";
+		String sql = "select review.*, review_image.attach_no "
+				+ "from review "
+				+ "left outer join review_image on review.review_no = review_image.review_no "
+				+ "where review.review_no = ?";
 		Object[] data = {reviewNo};
 		List<ReviewDto> list = jdbcTemplate.query(sql, reviewMapper, data);
 		return list.isEmpty() ? null : list.get(0);
@@ -66,7 +69,12 @@ public class ReviewDaoImpl implements ReviewDao{
 
 	@Override
 	public List<ReviewDto> selectList(@RequestParam int reviewNo) {
-		String sql = "select * from review order by review_no desc";
+		String sql = "select * from review_list "
+						+ "where review_no = ("
+							+ "select review_no from review_photo "
+								+ "where attach_no = ("
+							+ "select attach_no from attach "
+						+ "where attach_no=?))";
 		Object[] data = {reviewNo};
 		return jdbcTemplate.query(sql, reviewMapper, data);
 	}
@@ -81,11 +89,15 @@ public class ReviewDaoImpl implements ReviewDao{
 
 	@Override
 	public AttachDto findReviewPhoto(int reviewNo) {
-		String sql = "select * from attach where attach_no (select attach attach_no from review_photo where review_no = ?)";
+		String sql = "select * from attach where attach_no ("
+				+ "select attach attach_no from review_photo "
+				+ "where review_no = ?)";
 		Object[] data = {reviewNo};
 		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+
+
 
 
 }

@@ -25,12 +25,14 @@
     - 최소 300px, 최대 1200px까지 100px 단위로 설정
     - 100부터는 비율(%)로 설정
 */
+.w-10 { width:10%;}
 .w-16, .col-6 { width:16.66666%; }
 .w-20, .col-5 { width:20%; }
 .w-25, .col-4 { width:25%; }
 .w-33, .col-3 { width:33.3333%; }
 .w-50, .col-2 { width:50%; }
 .w-75 { width:75%; }
+.w-80 {width: 90%;}
 .w-90 {width: 90%;}
 .w-100 { width:100%;}
 
@@ -80,7 +82,7 @@
     text-decoration: none;
     vertical-align: bottom;
 
-    font-size: 20px;
+    font-size: 15px;
     padding: 0.5em 1em;
     outline: none; /*outline은 입력 창 선택 시 강조 효과 */
     border: 1px solid #2c8de0 ;
@@ -209,6 +211,7 @@ textarea.form-input.fixed {
 .mt-80 { margin-top: 80px; }
 .mt-90 { margin-top: 90px; }
 .mt-100 { margin-top: 100px; }
+.mt-115 { margin-top: 115px; }
 
 .mb-10 { margin-bottom: 10px; }
 .mb-20 { margin-bottom: 20px; }
@@ -226,12 +229,71 @@ textarea.form-input.fixed {
 .ms-30 { margin-left: 30px; }
 .ms-40 { margin-left: 40px; }
 .ms-50 { margin-left: 50px; }
+.ms-60 { margin-left: 10px; }
+.ms-70 { margin-left: 20px; }
+.ms-80 { margin-left: 30px; }
+.ms-90 { margin-left: 40px; }
+.ms-100 { margin-left: 50px; }
 
 .me-10 { margin-right: 10px;}
 .me-20 { margin-right: 20px;}
 .me-30 { margin-right: 30px;}
 .me-40 { margin-right: 40px;}
 .me-50 { margin-right: 50px;}
+
+/* padding */
+.p-10 { padding: 10px; }
+.p-20 { padding: 20px; }
+.p-30 { padding: 30px; }
+.p-40 { padding: 40px; }
+.p-50 { padding: 50px; }
+
+.ph-10 {padding:0px 10px; }
+.ph-20 {padding:0px 20px; }
+.ph-30 {padding:0px 30px; }
+.ph-40 {padding:0px 40px; }
+.ph-50 {padding:0px 50px; }
+
+.pv-10 {padding:10px 0px; }
+.pv-20 {padding:20px 0px; }
+.pv-30 {padding:30px 0px; }
+.pv-40 {padding:40px 0px; }
+.pv-50 {padding:50px 0px; }
+
+.pt-10 {padding-top: 10px; }
+.pt-20 {padding-top: 20px; }
+.pt-30 {padding-top: 30px; }
+.pt-40 {padding-top: 40px; }
+.pt-50 {padding-top: 50px; }
+.pt-60 {padding-top: 60px; }
+.pt-70 {padding-top: 70px; }
+.pt-80 {padding-top: 80px; }
+.pt-90 {padding-top: 90px; }
+.pt-100{padding-top: 100px; }
+
+.pb-10 {padding-bottom: 10px; }
+.pb-20 {padding-bottom: 20px; }
+.pb-30 {padding-bottom: 30px; }
+.pb-40 {padding-bottom: 40px; }
+.pb-50 {padding-bottom: 50px; }
+.pb-60 {padding-bottom: 60px; }
+.pb-70 {padding-bottom: 70px; }
+.pb-80 {padding-bottom: 80px; }
+.pb-90 {padding-bottom: 90px; }
+.pb-100{padding-bottom: 100px; }
+
+.ps-10 {padding-left: 10px; }
+.ps-20 {padding-left: 20px; }
+.ps-30 {padding-left: 30px; }
+.ps-40 {padding-left: 40px; }
+.ps-50 {padding-left: 50px; }
+.ps-100 {padding-left: 100px; }
+
+.pe-10 {padding-right: 10px;}
+.pe-20 {padding-right: 20px;}
+.pe-30 {padding-right: 30px;}
+.pe-40 {padding-right: 40px;}
+.pe-50 {padding-right: 50px;}
 
 
 /*
@@ -756,3 +818,7 @@ a.link:hover /*수정함*/
             opacity: 0.2; 
             margin: 3em 0px;
         }
+
+.bold {
+    font-weight: bold;
+}

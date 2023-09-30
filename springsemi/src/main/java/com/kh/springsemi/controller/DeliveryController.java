@@ -39,9 +39,6 @@ public class DeliveryController {
 //		return "redirect:mydelivery"; 
 //	}
 	
-
-	//배송지 목록
-
 //	//배송지 목록
 
 //	@RequestMapping("/mydelivery")

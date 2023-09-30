@@ -10,6 +10,5 @@ public class ReviewDto {
 	private int projectNo;
 	private String reviewWriter;
 	private String reviewContent;
-	private int reviewStar;
 	private Date reviewRegDate; 
 }

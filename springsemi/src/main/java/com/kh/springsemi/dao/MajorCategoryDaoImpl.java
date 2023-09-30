@@ -68,4 +68,10 @@ public class MajorCategoryDaoImpl implements MajorCategoryDao{
 		List<MajorCategoryDto> list = jdbcTemplate.query(sql, majorCategoryMapper, data); 
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
+	@Override
+	public boolean updateMajorCategoryCount() {
+		String sql = "select count(*) from majorcategory";
+		return jdbcTemplate.update(sql) > 0;
+	}
 }

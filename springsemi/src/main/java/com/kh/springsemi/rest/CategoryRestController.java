@@ -79,7 +79,9 @@ public class CategoryRestController {
 	public void majorInsert(@ModelAttribute MajorCategoryDto majorCategoryDto) {
 		int majorNo = majorCategoryDao.sequence();
 		majorCategoryDto.setMajorCategoryNo(majorNo);
-		majorCategoryDao.insert(majorCategoryDto);	
+		majorCategoryDao.insert(majorCategoryDto);
+		//(대분류)카테고리 개수 업데이트
+//		majorCategoryDao.updateMajorCategoryCount();
 	}
 	
 	@PostMapping("/majorCheck")
@@ -93,4 +95,18 @@ public class CategoryRestController {
 			return "Y";
 		}
 	}
+	
+	@PostMapping("/majorDelete")
+	public void majorDelete(@RequestParam int majorCategoryNo) {
+		majorCategoryDao.delete(majorCategoryNo);
+		
+		//(대분류)카테고리 개수 업데이트
+//		majorCategoryDao.updateMajorCategoryCount();
+	}
+	
+	
+	
+	
+	
+	
 }

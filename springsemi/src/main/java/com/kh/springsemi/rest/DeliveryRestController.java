@@ -27,26 +27,26 @@ public class DeliveryRestController {
 	//배송지 등록
 	@PostMapping("/insert")
 	public void insert(@ModelAttribute DeliveryDto deliveryDto, HttpSession session) {
-		int deliveryNo = deliveryDao.sequence(); //시퀀스 번호 가져옴
-		deliveryDto.setDeliveryNo(deliveryNo); //시퀀스로 번호 넣기
+		int deliveryNo = deliveryDao.sequence(); 
+		deliveryDto.setDeliveryNo(deliveryNo); 
 		
-		String findMember = (String) session.getAttribute("name"); //세션에 있는 멤버 가져오기
-		deliveryDto.setDeliveryMember(findMember); 
+		String memberId = (String) session.getAttribute("name"); 
+		deliveryDto.setMemberId(memberId);
 		
 		deliveryDao.insert(deliveryDto);
-		
 	}
 	
 	//배송지 목록
 	@PostMapping("/list")
-	public List<DeliveryDto> list(@RequestParam int deliveryNo) {
-		List<DeliveryDto> list = deliveryDao.selectList(deliveryNo);
+	public List<DeliveryDto> list(HttpSession session) {
+		String memberId = (String) session.getAttribute("name");
+		List<DeliveryDto> list = deliveryDao.selectListByMemberId(memberId);
 		return list;
 	}
 	
 	//배송지 삭제
+	@PostMapping("/delete")
 	public void delete(@RequestParam int deliveryNo) {
-//		DeliveryDto deliveryDto = deliveryDao.selectOne(deliveryNo); 상세는 필요가 없다
 		deliveryDao.delete(deliveryNo);
 	}
 	

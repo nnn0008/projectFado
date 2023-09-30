@@ -25,7 +25,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="projectListDto" items="${projectList }">
+				<c:forEach var="projectListDto" items="${projectList}">
 				<tr>
 					<td>${projectListDto.projectNo }</td>
 					<td>

@@ -46,26 +46,31 @@ pageEncoding="UTF-8"%>
             justify-content: center;
             display: flex;
         }
-        </style>
+        
+		.image {
+		width:100px;
+		height:100px;
+		}
+</style>
 
 <div class="container mt-70">
         <div class="flex-container auto-width">
 
             <!-- 프로필 왼쪽 -->
-            <div class="row w-10 mt-100 mb-100">
+            <div class="ms-50 row w-10 mt-30 mb-100">
 
                 <c:choose>
                     <c:when test= "${profile == null}">
-                        <img src ="/images/user.png" width="150" height ="150" 
+                        <img src ="/images/user.png" width="100" height ="100" 
                         class="image image-circle image-border profile-image" >
                     </c:when>
                     <c:otherwise>
-                    <img src ="/rest/member/download?attachNo=${profile}" width="150" height ="150" 
+                    <img src ="/rest/member/download?attachNo=${profile}" width="100" height ="100" 
                         class="image image-circle image-border profile-image" >
                     </c:otherwise>
                 </c:choose>
 
-                <label style="display: block;" class="mb-10 mt-10">
+                <label style="display: block; font-size:15px;" class="mb-10 mt-10">
                     ${memberDto.memberNickname}님의 회원 정보
                 </label>
                 <hr class="w-50 mb-20">
@@ -76,7 +81,7 @@ pageEncoding="UTF-8"%>
             
         
             <!-- 프로필 오른쪽 -->
-            <div class="flex-container auto-width w-75">
+            <div class="ms-100 flex-container auto-width w-75">
 
                 <div class= "container">
 

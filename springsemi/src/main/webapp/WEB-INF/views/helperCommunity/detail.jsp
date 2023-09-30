@@ -13,6 +13,23 @@
 	.note-viewer{
 		line-height: 2em !important;
 	}
+	
+	 .box {
+	    	box-shadow: 0px 0px 1px 0px #2c8de0;
+            color: #202020;
+            padding: 20px;
+            border-radius: 10px;
+            padding-bottom: 20%;
+        }
+        
+        /* 수평선 스타일 */
+		.hr-style {
+            border: none; 
+            height: 2px; /* 수평선의 높이(굵기) 설정 */
+            background-color: #2c8de0;
+            opacity: 0.2; 
+            margin: 1em 0px;
+        }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -132,7 +149,7 @@ $(function(){
 });
 </script>
 <script id="mainReply-template" type="text/template">
-		<div class="row flex-container view-container">
+		<div class="row flex-container view-container ms-50">
 			<div class="w-75">
 				<div class="row left">
 					<h3 class="mainReplyWriter">작성자</h3>
@@ -142,9 +159,10 @@ $(function(){
 				</div>
 				<div class="row left">
 					<span class="mainReplyTime">yyyy-MM-dd HH:mm:ss</span>
+					<hr>
 				</div>
 			</div>
-			<div class="w-25">
+			<div class="w-25 me-50">
 				<div class="row right">
 					<button class="btn btn-edit">
 						<i class="fa-solid fa-edit"></i>
@@ -159,6 +177,7 @@ $(function(){
 				</div>
 			</div>
 		</div>
+
 </script>
 <script id="mainReply-edit-template" type="text/template">
 		<form class="mainReply-edit-form edit-container">
@@ -192,17 +211,27 @@ $(function(){
 
 <div class="container w-800">
 	<div class="row">
-		<h1>${mainCommunityDto.mainCommunityNo}번 게시글</h1>
+		<h3 style="color:#2c8de0;">${mainCommunityDto.mainCommunityNo}번 게시글</h3>
 	</div>
-	<div>
-		<h2>작성자 : ${mainCommunityDto.getMainCommunityWriterString()}</h2>
+	
+	<div class="left box">
+	
+		<div class="right">
+			<span>작성자 : ${mainCommunityDto.getMainCommunityWriterString()}</span>
+		</div>
+		
+		
+		<div>
+		<h4>${mainCommunityDto.mainCommunityTitle}</h4>
+		<hr class="w-100 hr-style">
+		</div>
+		
+		<div>
+			<span>${mainCommunityDto.mainCommunityContent}</span>
+		</div>
+		
 	</div>
-	<div>
-		<h2>글제목 : ${mainCommunityDto.mainCommunityTitle}</h2>
-	</div>
-	<div>
-		<h2>글내용 : ${mainCommunityDto.mainCommunityContent}</h2>
-	</div>
+	
 </div>
 
 
@@ -210,15 +239,16 @@ $(function(){
 
 	<%-- 댓글과 관련된 화면이 작성될 위치 --%>
 	<c:if test="${sessionScope.name != null}">
-	<div class="row left">
+	<div class="row left mt-100 ms-100 me-100">
 		<form class="mainReply-insert-form">
 			<input type="hidden" name="mainReplyOrigin" value="${mainCommunityDto.mainCommunityNo}">
 		
-			<div class="row">
-				<textarea name="mainReplyContent" class="form-input w-100" rows="4"></textarea>
+			<div class="row ms-100 me-100">
+				<textarea name="mainReplyContent" class="form-input w-100 reply-textarea"
+				style="resize:none;" rows=4; ></textarea>
 			</div>
-			<div class="row">
-				<button class="btn btn-positive w-100">
+			<div class="right ms-100 me-100">
+				<button class="right btn btn-positive w-30 mt-10">
 					<i class="fa-solid fa-pen"></i>
 					댓글등록
 				</button>
@@ -228,8 +258,8 @@ $(function(){
 	</c:if>
 	
 		<%-- 댓글 목록이 표시될 영역 --%>
-	<div class="row left mainReply-list"></div>
-	
+	<div class="row left mainReply-list mt-70"></div>
+
 	
 	
 

@@ -150,6 +150,7 @@ textarea.form-input.fixed {
     font-weight: normal;
     border-color: #2c8de0;
     background-color: white;
+    color: #2c8de0;
     color: rgb(0, 0, 0);
     cursor: pointer;
 }
@@ -252,11 +253,11 @@ textarea.form-input.fixed {
 .ms-750 { margin-left: 750px; }
 
 
-.ms-60 { margin-left: 10px; }
-.ms-70 { margin-left: 20px; }
-.ms-80 { margin-left: 30px; }
-.ms-90 { margin-left: 40px; }
-.ms-100 { margin-left: 50px; }
+.ms-60 { margin-left: 60px; }
+.ms-70 { margin-left: 70px; }
+.ms-80 { margin-left: 80px; }
+.ms-90 { margin-left: 90px; }
+.ms-100 { margin-left: 100px; }
 
 
 .me-10 { margin-right: 10px;}
@@ -265,8 +266,11 @@ textarea.form-input.fixed {
 .me-30 { margin-right: 30px;}
 .me-40 { margin-right: 40px;}
 .me-50 { margin-right: 50px;}
-
+.me-60 { margin-right: 60px;}
 .me-70 { margin-right: 70px;}
+.me-80 { margin-right: 80px;}
+.me-90 { margin-right: 90px;}
+.me-100 { margin-right: 100px;}
 
 
 /* padding */

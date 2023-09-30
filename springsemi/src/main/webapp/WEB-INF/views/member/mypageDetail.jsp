@@ -2,8 +2,14 @@
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<style>
+.image {
+width:100px;
+height:100px;
+}
+</style>
 
 <script>
 $(function(){
@@ -66,11 +72,11 @@ $(function(){
 
 		<c:choose>
 			<c:when test= "${profile == null}">
-				<img src ="/images/user.png" width="100" height ="100" 
+				<img src ="/images/user.png"
 				class="image image-circle image-border profile-image" >
 			</c:when>
 			<c:otherwise>
-			<img src ="/rest/member/download?attachNo=${profile}" width="100" height ="100" 
+			<img src ="/rest/member/download?attachNo=${profile}"
 				class="image image-circle image-border profile-image" >
 			</c:otherwise>
 		</c:choose>

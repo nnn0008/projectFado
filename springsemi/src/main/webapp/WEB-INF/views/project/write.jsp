@@ -4,31 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<!-- summernote cdn -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-
 <!-- Lightpick  CDN -->
 <link rel="stylesheet" href="/css/lightpick.css">
 <script src="/js/lightpick.js"></script>
 
 <script>
 $(function () {
-    $('[name=projectContent]').summernote({
-      placeholder: '내용을 작성하세요',
-      tabsize: 2, //탭을 누르면 이동할 간격
-      height: 200, //에디터 높이
-      minHeight: 200, //에디터 최소높이
-      lineHeight: 20, //기본 줄간격(px)
-      toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'italic', 'underline']],
-        ['color', ['color']],
-        ['para', ['paragraph']],
-        ['table', ['table']],
-        ['insert', ['link']],
-      ],
-    });  
     
     //마감일자는 모든 정보를 입력하기 전까지 보여주지 않는다
     $('.end').hide();

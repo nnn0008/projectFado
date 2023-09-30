@@ -1,16 +1,22 @@
 package com.kh.springsemi.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.springsemi.dto.RewardDto;
+import com.kh.springsemi.mapper.RewardMapper;
 
 @Repository
 public class RewardDaoImpl implements RewardDao{
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private RewardMapper rewardMapper;
 	
 	@Override
 	public int sequence() {
@@ -37,6 +43,13 @@ public class RewardDaoImpl implements RewardDao{
 		String sql = "delete reward where reward_no=?";
 		Object[] data = {rewardNo};
 		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	@Override
+	public List<RewardDto> selectListByProjectNo(int projectNo) {
+		String sql = "select * from reward where project_no = ?";
+		Object[] data = {projectNo};
+		return jdbcTemplate.query(sql, rewardMapper, data);
 	}
 
 }

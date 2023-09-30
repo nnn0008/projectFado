@@ -20,7 +20,7 @@
 					var xBtn = $("<button>").text("X").attr("type","button").click(function(){
 						alert("관련된 소분류가 모두 삭제될 수 있습니다. 정말 삭제하시겠습니까?");
 						//x버튼 눌렀을 때 분류 삭제되도록 구현	
-						$.ajax({g
+						$.ajax({
 								url:"/rest/category/majorDelete",
 								method:"post",
 								data: {majorCategoryNo : majorCategoryNo},
@@ -28,9 +28,9 @@
 									$(".major").remove();
 								},
 						});
-					div.append(xBtn).appendTo(".category-main");
 					});	
 
+					div.append(xBtn).appendTo(".category-main");
 				}
 			},
 		});
@@ -51,17 +51,17 @@
 // 					    var div = $("<div>").addClass("p-10").text(minorCategoryType);
 // 					    div.appendTo(".category-detail");
 // 					});
-					for(var i = 0; response.length; i++){
+					for(var i = 0; i < response.length; i++){
 						var div = $("<div>").addClass("p-10").text(response[i]);
 						var xBtn = $("<button>").text("X").attr("type","button").click(function(){
 							//x버튼 눌렀을 때 분류 삭제되도록 구현
 				
 							});
-						});
+						}
 						
 					    div.append(xBtn).appendTo(".category-detail");
-					}
 				},
+				
 			});			
 		});
 		

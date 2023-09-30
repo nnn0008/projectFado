@@ -211,7 +211,7 @@
 
     <header>
         <div class="logo">
-            <a href=""><img src="./image/smallfado.jpg" style="height: 60px;" class="me-50"></a>
+            <a href=""><img src="/images/smallfado.jpg" style="height: 60px;" class="me-50"></a>
         </div>
         <div class="title">
 
@@ -281,7 +281,7 @@
             </li>
 
             <li>
-                <a class="ms-20" href="#">공지사항</a>
+                <a class="ms-20" href="http://localhost:8080/helperCommunity/noticeList">커뮤니티</a>
             </li>
             <!-- 검색창 -->
             

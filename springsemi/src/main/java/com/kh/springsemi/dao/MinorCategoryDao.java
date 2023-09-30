@@ -18,7 +18,7 @@ public interface MinorCategoryDao {
 	//보기(한 개, 목록)
 	List<MinorCategoryDto> selectList();
 	MinorCategoryDto selectOne(int minorCategoryNo);
-	
+	MinorCategoryDto selectOne(String minorCategoryType);
 	//minorCategoryNo만을 저장
 	List<MinorCategoryDto> selectClassifyByNo(int majorCategoryNo);
 	

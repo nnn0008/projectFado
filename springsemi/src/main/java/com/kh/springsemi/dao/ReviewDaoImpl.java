@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.springsemi.dto.AttachDto;
 import com.kh.springsemi.dto.ReviewDto;
+import com.kh.springsemi.mapper.AttachMapper;
 import com.kh.springsemi.mapper.ReviewMapper;
-import com.kh.springsemi.vo.PaginationVO;
 
 @Repository
 public class ReviewDaoImpl implements ReviewDao{
@@ -20,6 +20,9 @@ public class ReviewDaoImpl implements ReviewDao{
 	
 	@Autowired
 	private ReviewMapper reviewMapper;
+	
+	@Autowired
+	private AttachMapper attachMapper;
 
 	@Override
 	public int sequence() {
@@ -32,9 +35,9 @@ public class ReviewDaoImpl implements ReviewDao{
 		String sql = "insert into review("
 				+ "review_no, project_no, review_writer, review_content, review_star"
 				+ ") "
-				+ "values(?, ?, ?, ?, ?)";
-		Object[] data = {reviewDto.getReviewNo(), reviewDto.getProjectNo(), reviewDto.getReviewWriter(),
-						reviewDto.getReviewContent(), reviewDto.getReviewStar()};
+				+ "values(?, ?, ?, ?)";
+		Object[] data = {reviewDto.getReviewNo(), reviewDto.getProjectNo(),
+				reviewDto.getReviewWriter(), reviewDto.getReviewContent()};
 		jdbcTemplate.update(sql, data);
 	}
 
@@ -42,7 +45,7 @@ public class ReviewDaoImpl implements ReviewDao{
 	public boolean update(ReviewDto reviewDto) {
 		String sql = "update review set review_content=?, review_star=? "
 						+ "where review_no=?";
-		Object[] data = {reviewDto.getReviewContent(), reviewDto.getReviewStar(), reviewDto.getReviewNo()};
+		Object[] data = {reviewDto.getReviewContent(), reviewDto.getReviewNo()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 
@@ -69,30 +72,21 @@ public class ReviewDaoImpl implements ReviewDao{
 		return jdbcTemplate.query(sql, reviewMapper, data);
 	}
 
-
-
 	@Override
 	public void connect(int reviewNo, int attachNo) {
-		// TODO Auto-generated method stub
+		String sql = "insert into review_photo values(?, ?)";
+		Object[] data = {reviewNo, attachNo};
+		jdbcTemplate.update(sql, data);
 		
 	}
 
 	@Override
-	public int countList(PaginationVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<ReviewDto> selectListBypage(PaginationVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public AttachDto findReviewPhoto(int reviewNo) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from attach where attach_no (select attach attach_no from review_photo where review_no = ?)";
+		Object[] data = {reviewNo};
+		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
+
 
 }

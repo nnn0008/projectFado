@@ -69,7 +69,12 @@ public class ReviewDaoImpl implements ReviewDao{
 
 	@Override
 	public List<ReviewDto> selectList(@RequestParam int reviewNo) {
-		String sql = "select * from review_list order by review_no desc";
+		String sql = "select * from review_list "
+						+ "where review_no = ("
+							+ "select review_no from review_photo "
+								+ "where attach_no = ("
+							+ "select attach_no from attach "
+						+ "where attach_no=?))";
 		Object[] data = {reviewNo};
 		return jdbcTemplate.query(sql, reviewMapper, data);
 	}
@@ -91,6 +96,8 @@ public class ReviewDaoImpl implements ReviewDao{
 		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+
+
 
 
 }

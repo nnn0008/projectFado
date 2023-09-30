@@ -9,28 +9,28 @@
 	
 	
 	
-	<div class="container w-600">
-           <div class="row">
-               <hr>
-               <h2>서퍼 공지 업데이트</h2>
-               <hr>
-           </div>
-		<c:forEach var="projectCommunityDto" items="${noticeList}">
-           <div class="flex-container">
-               <img src="http://dummyimage.com/40X40/000/fff" width="40" height="40">
-               <h3>${projectCommunityDto.getProjectCommunityWriterString()}</h3>
-           </div>
-           <div>
-               ${projectCommunityDto.projectCommunityContent}
-           </div>
-           <div>
-           	${projectCommunityDto.projectCommunityRegDate}
-           </div>
-           <div class="row">
-               <button class="btn" href="detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}"><i class="fa-solid fa-arrow-down"></i> 더보기</button>
-           </div>
-       </c:forEach>
-   </div>
+<div class="container w-600">
+    <div class="row">
+        <hr>
+        <h2>서퍼 공지 업데이트</h2>
+        <hr>
+    </div>
+	<c:forEach var="projectCommunityDto" items="${noticeList}">
+          <div class="flex-container">
+              <img src="http://dummyimage.com/40X40/000/fff" width="40" height="40">
+              <h3>${projectCommunityDto.getProjectCommunityWriterString()}</h3>
+          </div>
+          <div>
+              ${projectCommunityDto.projectCommunityContent}
+          </div>
+          <div>
+          	${projectCommunityDto.projectCommunityRegDate}
+          </div>
+          <div class="row">
+              <button class="btn" href="detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}"><i class="fa-solid fa-arrow-down"></i> 더보기</button>
+          </div>
+      </c:forEach>
+  </div>
 	
 	
 
@@ -38,7 +38,7 @@
 		<div class="row page-navigator mv-30">
 		<!-- 이전 버튼 -->
 		<c:if test="${!vo.first}">
-			<a href="qnaList?${vo.prevQueryString}">
+			<a href="noticeList?${vo.prevQueryString}">
 				<i class="fa-solid fa-angle-left"></i>
 			</a>
 		</c:if>
@@ -50,7 +50,7 @@
 					<a class="on">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="qnaList?${vo.getQueryString(i)}">${i}</a> 
+					<a href="noticeList?${vo.getQueryString(i)}">${i}</a> 
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>

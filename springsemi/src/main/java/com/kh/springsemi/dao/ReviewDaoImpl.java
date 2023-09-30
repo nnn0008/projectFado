@@ -97,7 +97,4 @@ public class ReviewDaoImpl implements ReviewDao{
 		return list.isEmpty() ? null : list.get(0);
 	}
 
-
-
-
 }

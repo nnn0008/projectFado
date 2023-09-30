@@ -12,8 +12,8 @@
 <div class="container w-800">
 
 	<div class="row">
-		<a class="btn" href="/helperCommunity/noticeList">공지사항</a>
-		<a class="btn" style="background-color: #DEF2FF" href="/helperCommunity/qnaList">Q & A</a>
+		<a class="btn" href="/mainCommunity/noticeList">공지사항</a>
+		<a class="btn" style="background-color: #DEF2FF" href="/mainCommunity/qnaList">Q & A</a>
 	</div>
 	<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
 	<c:if test="${sessionScope.name != null && sessionScop.level != '관리자'}">

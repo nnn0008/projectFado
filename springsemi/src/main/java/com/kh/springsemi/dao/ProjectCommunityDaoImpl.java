@@ -105,5 +105,4 @@ public class ProjectCommunityDaoImpl implements ProjectCommunityDao{
 		String sql = "select count(*) from project_community where project_community_type = 'Q&A'";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
-	
 }

@@ -23,7 +23,7 @@ $(function(){
 	
 	//타이머가 종료시
 	timer.addEventListener('targetAchieved', function (e) {
-	    displayText('펀딩이 종료되었습니다');
+	    displayText('0초');
 	});
 	
 	//타이머 실행
@@ -182,7 +182,7 @@ $(function(){
     				창작자 소개<br>
     				${projectDto.projectOwner}<br>
     			<div class="w-100">
-    				
+    				<c:if test="${sessionScope.name != projectDto.projectOwner}">
     				<c:choose>
                         <c:when test="${isFollowing == 'true'}">
                         <button class="btn follow-button" data-followee="${memberFollowDto.followeeId}">
@@ -195,6 +195,7 @@ $(function(){
                             </button>
                         </c:otherwise>
                     </c:choose>
+                    </c:if>
     				<br>
     				리워드1<br>
     				리워드2<br>

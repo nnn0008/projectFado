@@ -51,14 +51,32 @@ public class MemberController {
 		
 		String memberId = (String) session.getAttribute("name"); //세션으로 사용자 아이디 꺼내옴
 		MemberDto memberDto = memberDao.selectOne(memberId); //회원정보 조회
+		
 		//조회한 정보를 모델에 첨부 
 		model.addAttribute("memberDto",memberDto); 
 		model.addAttribute("memberFollowList", memberDao.findByFollowerId(memberId));
+		
 		//회원의 프로필 이미지 번호를 모델에 첨부
 		model.addAttribute("profile", memberDao.findProfile(memberId)); 
 		
 		return "/WEB-INF/views/member/mypage.jsp";
 	}	
+	
+	//회원 상세의 상세페이지
+	@RequestMapping("/mypageDetail")
+	public String mypageDetail(HttpSession session, Model model) {
+		String memberId = (String) session.getAttribute("name"); //세션으로 사용자 아이디 꺼내옴
+		MemberDto memberDto = memberDao.selectOne(memberId); //회원정보 조회
+		
+		//조회한 정보를 모델에 첨부 
+		model.addAttribute("memberDto",memberDto); 
+		model.addAttribute("memberFollowList", memberDao.findByFollowerId(memberId));
+		
+		//회원의 프로필 이미지 번호를 모델에 첨부
+		model.addAttribute("profile", memberDao.findProfile(memberId)); 
+		
+		return "/WEB-INF/views/member/mypageDetail.jsp";
+	}
 	
 	//회원 비밀번호 변경 페이지
 	@GetMapping("/password")
@@ -174,8 +192,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/follow/list")
-	public String list(@ModelAttribute(name="vo") PaginationVO vo, Model model, @RequestParam String followerId) {
-		int count = memberDao.countFollowList(vo);
+	public String list(@ModelAttribute(name="vo") PaginationVO vo, Model model, HttpSession session) {
+		String followerId = (String) session.getAttribute("name");
+		int count = memberDao.countFollowList(vo, followerId);
 		vo.setCount(count);
 		
 		List<MemberFollowDto> list = memberDao.selectFollowListByPage(vo, followerId);
@@ -190,8 +209,8 @@ public class MemberController {
 		return "redirect:list";
 	}
 	
-	@RequestMapping("/follow/cancel")
-	public String memberCancel(@ModelAttribute MemberFollowDto memberFollowDto) {
+	@RequestMapping("/follow/unfollowing")
+	public String memberUnfollowing(@ModelAttribute MemberFollowDto memberFollowDto) {
 		memberDao.deleteFollow(memberFollowDto);
 		return "redirect:list";
 	}

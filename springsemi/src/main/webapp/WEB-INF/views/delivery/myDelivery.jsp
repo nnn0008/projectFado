@@ -5,6 +5,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
+
 </style>
 
 <script>
@@ -136,7 +137,7 @@ $(function(){
 								method:"post",
 								data : $(e.target).serialize(),
 								success:function(response){
-								loadList();
+									loadList();
 								}
 							});
 						});
@@ -184,77 +185,74 @@ $(function(){
 				</button>
 			</div>
 	</div>
-
 </script>
 
-		<script id = "delivery-edit-template" type="text/template">
-
-			<form class="delivery-edit-form edit-container">
-			<input type="hidden" name="deliveryNo" value="?">
-				<div class="row">
-					<div class= "row">
-						<input type="text" name="deliveryReceiver" class="form-input w-100">
-					</div>
-					<div class= "row">
-						<input type="text" name="deliveryPost" class="form-input w-100">
-					</div>
-					<div class= "row">
-						<input type="text" name="deliveryAddr1" class="form-input w-100">
-					</div>
-					<div class= "row">
-						<input type="text" name="deliveryAddr2" class="form-input w-100">
-					</div>
-					<div class= "row">
-						<input type="text" name="deliveryContact" class="form-input w-100">
-					</div>
-					<div class="row left">
-						<button type="submit" class="btn btn-positive">
-							<i class="fa-solid fa-check"></i>
+<script id ="delivery-edit-template" type="text/template">
+	<form class="delivery-edit-form edit-container">
+		<input type="hidden" name="deliveryNo" value="?">
+			<div class="row">
+				<div class= "row">
+					<input type="text" name="deliveryReceiver" class="form-input w-100">
+				</div>
+				<div class= "row">
+					<input type="text" name="deliveryPost" class="form-input w-100">
+				</div>
+				<div class= "row">
+					<input type="text" name="deliveryAddr1" class="form-input w-100">
+				</div>
+				<div class= "row">
+					<input type="text" name="deliveryAddr2" class="form-input w-100">
+				</div>
+				<div class= "row">
+					<input type="text" name="deliveryContact" class="form-input w-100">
+				</div>
+				<div class="row left">
+					<button type="submit" class="btn btn-positive">
+						<i class="fa-solid fa-check"></i>
 							수정
-						</button>
-					</div>
-					<div class="row right">
-						<button type="button" class="btn btn-negative btn-cancel">
-							<i class="fa-solid fa-xmark"></i>
-							취소
-						</button>
+					</button>
+				</div>
+				<div class="row right">
+					<button type="button" class="btn btn-negative btn-cancel">
+						<i class="fa-solid fa-xmark"></i>
+						취소
+					</button>
 				</div>
 			</div>
-		</form>
-	</script>
-				<div class="row left">
-				<form class="delivery-insert-form">
-				<input type="hidden" name="deliveryNo" value="${deliveryDto.deliveryNo}">
-				
-						<div class="row">
-							<input type="text" name="deliveryReceiver" class="form-input w-100"
-						placeholder="받는사람">
-						</div>
-						<div class= "row">
-							<input type="text" name="deliveryPost" class="form-input w-100"
-						placeholder="우편번호">
-						</div>
-						<div class= "row">
-							<input type="text" name="deliveryAddr1" class="form-input w-100" 
-						placeholder="기본주소">
-						</div>
-						<div class= "row">
-							<input type="text" name="deliveryAddr2" class="form-input w-100" 
-						placeholder="상세주소">
-						</div>
-						<div class= "row">
-							<input type="text" name="deliveryContact" class="form-input w-100" 
-						placeholder="받는사람 전화번호">
-						</div>
-					<div class="row">
-					<button class="btn btn-positive w-100">
-					<i class="fa-solid fa-pen"></i>
-					배송지 추가
-				</button>
-				</div>
-			</form>
+	</form>
+</script>
+<div class="row left">
+	<form class="delivery-insert-form">
+		<input type="hidden" name="deliveryNo" value="${deliveryDto.deliveryNo}">
+	
+		<div class="row">
+			<input type="text" name="deliveryReceiver" class="form-input w-100"
+			placeholder="받는사람">
+		</div>
+		<div class= "row">
+			<input type="text" name="deliveryPost" class="form-input w-100"
+			placeholder="우편번호">
+		</div>
+		<div class= "row">
+			<input type="text" name="deliveryAddr1" class="form-input w-100" 
+			placeholder="기본주소">
+		</div>
+		<div class= "row">
+			<input type="text" name="deliveryAddr2" class="form-input w-100" 
+			placeholder="상세주소">
+		</div>
+		<div class= "row">
+			<input type="text" name="deliveryContact" class="form-input w-100" 
+			placeholder="받는사람 전화번호">
+		</div>
+		<div class="row">
+			<button class="btn btn-positive w-100">
+				<i class="fa-solid fa-pen"></i>
+				배송지 추가
+			</button>
+		</div>
+	</form>
 </div>
-
 <div class="row left delivery-list"></div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

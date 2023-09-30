@@ -17,14 +17,14 @@
 // 				console.log(response);]
 				for(var i = 0; i < response.length; i++){
 					var div = $("<div>").addClass("p-10 row left major").text(response[i].majorCategoryType);
-					var xBtn = $("<button>").text("X").attr("type","button").click(function(){
-						alert("관련된 소분류가 모두 삭제될 수 있습니다. 정말 삭제하시겠습니까?");
+					var xBtn = $("<button>").addClass("btn-main").text("X").attr("type","button").click(function(){
 						//x버튼 눌렀을 때 분류 삭제되도록 구현	
 						$.ajax({
 								url:"/rest/category/majorDelete",
 								method:"post",
-								data: {majorCategoryType : majorCategoryType},
+								data: {majorCategoryType : $(this).parent().text()},
 								success:function(response){
+									alert("관련된 소분류가 모두 삭제될 수 있습니다. 정말 삭제하시겠습니까?");
 									$(".major").remove();
 								},
 						});
@@ -35,10 +35,10 @@
 		});
 		
 // 		대분류를 클릭했을 때, 관련 소분류를 로딩하기(아직 구현 안됨)
-		 $(".category-main").click(".div", function(e){
-            var majorCategoryType = $(this).text();
-      	    console.log("click: " + majorCategoryType);
-			if(majorCategoryType.length == 0) return;
+		 $(".category-main").click("div", function(e){
+            var majorCategoryType = $(e.target).text();
+//       	    console.log(majorCategoryType);
+// 			if(majorCategoryType.length == 0) return;
 			$.ajax({
 				url:"/rest/category/minorList",
 				method:"post",
@@ -46,21 +46,24 @@
 				success:function(response){
 					console.log(response);
 					$(".category-detail").empty();
-// 					$.each(response, function(minorCategoryType) {
-// 					    var div = $("<div>").addClass("p-10").text(minorCategoryType);
-// 					    div.appendTo(".category-detail");
-// 					});
 					for(var i = 0; i < response.length; i++){
-						var div = $("<div>").addClass("p-10").text(response[i]);
+						var div = $("<div>").addClass("p-10 row left minor").text(response[i].minorCategoryType);
 						var xBtn = $("<button>").text("X").attr("type","button").click(function(){
 							//x버튼 눌렀을 때 분류 삭제되도록 구현
-				
+							$.ajax({
+								url:"/rest/category/minorDelete",
+								method:"post",
+								data: {
+									minorCategoryType : $(this).parent().text()
+								},
+								success:function(response){
+									$(".minor").remove();
+								},								
 							});
-						}
-						
-					    div.append(xBtn).appendTo(".category-detail");
-				},
-				
+						});
+					 div.append(xBtn).appendTo(".category-detail");
+					}					
+				},			
 			});			
 		});
 		
@@ -122,11 +125,9 @@
 				},
 			});
 		});
-		
-		
-		
-		
 	});
+	
+	
 	
 </script>
 

@@ -16,7 +16,7 @@
 		<a class="btn" style="background-color: #DEF2FF" href="/helperCommunity/qnaList">Q & A</a>
 	</div>
 	<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
-	<c:if test="${sessionScope.name != null && sessionScop.level != '관리자'}">
+	<c:if test="${sessionScope.name != null && sessionScop.level == '관리자'}">
 	<div class="row right">
 		<a href="write" class="btn btn-positive">
 			<i class="fa-solid fa-pen"></i>

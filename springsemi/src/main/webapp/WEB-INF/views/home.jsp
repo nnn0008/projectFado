@@ -12,7 +12,7 @@
                     <div class="swiper-wrapper">
                         <!-- Slides -->
                         <div class="swiper-slide">
-                            <img src="https://picsum.photos/id/101/600/300" width="200% " height="200%">
+                            <img src="https://picsum.photos/id/101/600/300" width="100% " height="100%">
                         </div>
                         <div class="swiper-slide">
                             <img src="https://picsum.photos/id/101/600/300" width="100%" height="100%">

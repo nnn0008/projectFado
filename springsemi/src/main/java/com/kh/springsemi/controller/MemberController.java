@@ -155,6 +155,9 @@ public class MemberController {
 		if(isCorrectPw) {
 			session.setAttribute("name", findDto.getMemberId()); 
 			session.setAttribute("level", findDto.getMemberLevel());//확인받아야
+			session.setAttribute("nickname", findDto.getMemberNickname());
+			
+			
 			memberDao.updateMemberLogin(inputDto.getMemberId());
 			return "redirect:/";
 		}

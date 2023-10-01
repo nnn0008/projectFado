@@ -3,6 +3,7 @@ package com.kh.springsemi.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,7 +27,6 @@ import com.kh.springsemi.dao.AttachDao;
 import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.ReviewDao;
 import com.kh.springsemi.dto.AttachDto;
-import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ReviewDto;
 
@@ -66,9 +66,6 @@ public class ReviewController {
 		reviewDto.setReviewWriter(memberId);
 		reviewDto.setReviewNo(reviewNo);
 		
-		reviewDao.insert(reviewDto);
-		
-		
 		//첨부파일 등록
 		if(!attach.isEmpty()) {
 			//첨부파일등록(파일이 있을때만)
@@ -90,6 +87,7 @@ public class ReviewController {
 			//연결(파일이 있을때만)
 			reviewDao.connect(reviewNo, attachNo);
 		}
+		reviewDao.insert(reviewDto);
 		
 		return "redirect:list";
 	}
@@ -123,27 +121,27 @@ public class ReviewController {
 						  .body(resource);
 	}
 	
-	//상세
-	@RequestMapping("/detail")
-	public String detail(@RequestParam int reviewNo, Model model) {
-		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
-		model.addAttribute("reviewDto", reviewDto);
-		
-		String reviewWriter = reviewDto.getReviewWriter();
-		if(reviewWriter != null) {
-			MemberDto memberDto = memberDao.selectOne(reviewWriter);
-			model.addAttribute("reviewWriterDto", memberDto);
-		}
-		return "/WEB-INF/views/review/detail.jsp";
-	}
-	
-//	//목록
-//	@RequestMapping("/list")
-//	public String list(Model model) {
-//		List <ReviewDto>list = reviewDao.selectList();
-//		model.addAttribute("list", list);
-//		return "/WEB-INF/views/review/list.jsp";
+//	//상세
+//	@RequestMapping("/detail")
+//	public String detail(@RequestParam int reviewNo, Model model) {
+//		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
+//		model.addAttribute("reviewDto", reviewDto);
+//		
+//		String reviewWriter = reviewDto.getReviewWriter();
+//		if(reviewWriter != null) {
+//			MemberDto memberDto = memberDao.selectOne(reviewWriter);
+//			model.addAttribute("reviewWriterDto", memberDto);
+//		}
+//		return "/WEB-INF/views/review/detail.jsp";
 //	}
+	
+	//목록
+	@RequestMapping("/list")
+	public String list(Model model) {
+		List <ReviewDto>list = reviewDao.selectList(0);
+		model.addAttribute("list", list);
+		return "/WEB-INF/views/review/list.jsp";
+	}
 	
 	//수정
 	@GetMapping("/edit")

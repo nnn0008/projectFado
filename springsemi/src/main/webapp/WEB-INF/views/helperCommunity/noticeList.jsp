@@ -41,7 +41,7 @@
 	        </a>
 	    </div>
 		</c:if>
-        <div class="mt-50">
+        <div class="mt-30">
 	        <c:forEach var="mainCommunityListDto" items="${noticeList}">
 	        <div class="">
 	            <a class="link" href="detail?mainCommunityNo=${mainCommunityListDto.mainCommunityNo}"
@@ -59,7 +59,7 @@
 					${mainCommunityListDto.mainCommunityRegDate}
 		        </div>
 	        </div>
-	        <div>
+	        <div class="mt-20 mb-20">
 	            <hr>
 	        </div>
         	</c:forEach>

@@ -25,5 +25,5 @@ public interface MajorCategoryDao {
 	MajorCategoryDto selectOne(String majorCategoryType);
 	
 	//카테고리가 추가되거나 삭제될 시에 현재 남은 대분류 카테고리를 갱신하여 보여주기
-	Integer updateMajorCategoryCount();
+	int updateMajorCategoryCount();
 }

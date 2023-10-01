@@ -1,8 +1,6 @@
 package com.kh.springsemi.rest;
 
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,14 +23,6 @@ public class CategoryRestController {
 	
 	@Autowired
 	private MinorCategoryDao minorCategoryDao;
-	
-//	@PostMapping("/insert")
-//	public void insert(@ModelAttribute MajorCategoryDto majorCategoryDto) {
-//		int majorCategoryNo = majorCategoryDao.sequence();
-//		majorCategoryDto.setMajorCategoryNo(majorCategoryNo);
-//		
-//		majorCategoryDao.insert(majorCategoryDto);
-//	}
 	
 	@PostMapping("/majorList")
 	public List<MajorCategoryDto> majorList(){
@@ -83,7 +73,23 @@ public class CategoryRestController {
 		majorCategoryDto.setMajorCategoryNo(majorNo);
 		majorCategoryDao.insert(majorCategoryDto);
 		//(대분류)카테고리 개수 업데이트
-//		majorCategoryDao.updateMajorCategoryCount();
+		majorCategoryDao.updateMajorCategoryCount();
+	}
+	
+	@PostMapping("/minorInsert")
+	public void minorInsert(@RequestParam String majorCategoryType, @RequestParam String minorCategoryType, @ModelAttribute MinorCategoryDto minorCategoryDto) {
+		//시퀀스로 부여받은 번호 넣기
+		int minorNo = minorCategoryDao.sequence();
+		minorCategoryDto.setMinorCategoryNo(minorNo);
+		//jsp에서 보내준 majorCategoryType을 넣어주고(X)표시가 있다
+		String majorReplace = majorCategoryType.replaceAll("X", "");
+		//대분류 테이블에서 majorCategoryDto추출
+		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(majorReplace);		
+		//jsp에서 보내준 minorCategoryType을 minorCategoryType에 세팅
+		minorCategoryDto.setMinorCategoryType(minorCategoryType);
+		//대분류에서 얻은 번호를 소분류의 번호로 세팅해주고
+		minorCategoryDto.setMajorCategoryNo(majorCategoryDto.getMajorCategoryNo());
+		minorCategoryDao.insert(minorCategoryDto);
 	}
 	
 	@PostMapping("/majorCheck")
@@ -98,27 +104,37 @@ public class CategoryRestController {
 		}
 	}
 	
+	@PostMapping("/minorCheck")
+	public String minorCheck(@RequestParam String minorCategoryType) {
+		MinorCategoryDto minorCategoryDto = minorCategoryDao.selectOne(minorCategoryType);
+		
+		if(minorCategoryDto != null) { //이미 있는 카테고리라면
+			return "N";	
+		}
+		else {
+			return "Y";
+		}
+	}
+	
 	@PostMapping("/majorDelete")
 	public void majorDelete(@RequestParam String majorCategoryType) {
-		String replace = majorCategoryType.replaceAll("X", "");
+//		String replace = majorCategoryType.replaceAll("X", "");
 		
-		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(replace);
+		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(majorCategoryType);
 		majorCategoryDao.delete(majorCategoryDto.getMajorCategoryNo());
 		
-//		(대분류)카테고리 개수 업데이트
+		//(대분류)카테고리 개수 업데이트
 		majorCategoryDao.updateMajorCategoryCount();
 	}
 	
 	@PostMapping("/minorDelete")
 	public void minorDelete(@RequestParam String minorCategoryType) {
-		String replace = minorCategoryType.replaceAll("X", "");
+//		String replace = minorCategoryType.replaceAll("X", "");
 //		System.out.println("replace : " + replace);
-		MinorCategoryDto minorCategoryDto = minorCategoryDao.selectOne(replace);
+		MinorCategoryDto minorCategoryDto = minorCategoryDao.selectOne(minorCategoryType);
+//		System.out.println("minorCategoryDto.getMinorCategoryNo() : " + minorCategoryDto.getMinorCategoryNo());
 		minorCategoryDao.delete(minorCategoryDto.getMinorCategoryNo());
 	}
-	
-	
-	
 	
 	
 	

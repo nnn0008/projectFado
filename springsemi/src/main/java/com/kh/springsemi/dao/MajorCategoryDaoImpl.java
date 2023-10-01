@@ -21,7 +21,6 @@ public class MajorCategoryDaoImpl implements MajorCategoryDao{
 	@Override
 	public int sequence() {
 		String sql = "select majorcategory_seq.nextval from dual";
-		
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
@@ -29,7 +28,6 @@ public class MajorCategoryDaoImpl implements MajorCategoryDao{
 	public void insert(MajorCategoryDto majorCategoryDto) {
 		String sql = "insert into majorcategory(major_category_no, major_category_type) values(?, ?)";
 		Object[] data = {majorCategoryDto.getMajorCategoryNo(), majorCategoryDto.getMajorCategoryType()};
-		
 		jdbcTemplate.update(sql, data);
 	}
 	
@@ -70,8 +68,8 @@ public class MajorCategoryDaoImpl implements MajorCategoryDao{
 	}
 	
 	@Override
-	public Integer updateMajorCategoryCount() {
-		String sql = "select count(*) from majorcategory";
-		return jdbcTemplate.queryForObject(sql, Integer.class);
+	public int updateMajorCategoryCount() {
+		String sql = "update majorcategory set major_category_count = (select count(*) from majorcategory)";
+		return jdbcTemplate.update(sql);
 	}
 }

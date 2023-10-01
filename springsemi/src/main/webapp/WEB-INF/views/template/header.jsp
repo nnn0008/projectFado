@@ -318,7 +318,7 @@
             </li>
 
             <li>
-                <a class="ms-20" href="http://localhost:8080/helperCommunity/noticeList">커뮤니티</a>
+                <a class="ms-20" href="http://localhost:8080/mainCommunity/noticeList">커뮤니티</a>
             </li>
             <!-- 검색창 -->
             

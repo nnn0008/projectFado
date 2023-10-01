@@ -12,8 +12,8 @@
 <div class="container w-800">
 
    <div class="row mt-50">
-      <a class="btn" style="background-color: #DEF2FF" href="/helperCommunity/noticeList">공지사항</a>
-      <a class="btn" href="/helperCommunity/qnaList">Q & A</a>
+      <a class="btn" style="background-color: #DEF2FF" href="/mainCommunity/noticeList">공지사항</a>
+      <a class="btn" href="/mainCommunity/qnaList">Q & A</a>
    </div>
 
    <%-- 

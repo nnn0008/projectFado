@@ -70,8 +70,8 @@ public class MajorCategoryDaoImpl implements MajorCategoryDao{
 	}
 	
 	@Override
-	public boolean updateMajorCategoryCount() {
+	public Integer updateMajorCategoryCount() {
 		String sql = "select count(*) from majorcategory";
-		return jdbcTemplate.update(sql) > 0;
+		return jdbcTemplate.queryForObject(sql, Integer.class);
 	}
 }

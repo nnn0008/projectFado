@@ -106,7 +106,7 @@ public class CategoryRestController {
 		majorCategoryDao.delete(majorCategoryDto.getMajorCategoryNo());
 		
 //		(대분류)카테고리 개수 업데이트
-//		majorCategoryDao.updateMajorCategoryCount();
+		majorCategoryDao.updateMajorCategoryCount();
 	}
 	
 	@PostMapping("/minorDelete")

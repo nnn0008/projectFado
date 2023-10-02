@@ -12,33 +12,31 @@
 <script>
 $(function () {
 	
-	$(function(){
-        //최초 게이지 계산
-        refreshProgressbar();
+      //최초 게이지 계산
+      refreshProgressbar();
 
-        //이전이나 다음버튼을 누르면 진행상황을 파악하여 게이지 계산
-        $(".btn-prev, .btn-next").click(function(){
-            refreshProgressbar();
-        });
+      //이전이나 다음버튼을 누르면 진행상황을 파악하여 게이지 계산
+      $(".btn-prev, .btn-next").click(function(){
+          refreshProgressbar();
+      });
 
-        function refreshProgressbar() {
-            //page중에 보여지는 태그를 찾아서 계산
-            //- 전체 페이지 수 + 보여지는 페이지 번호
+      function refreshProgressbar() {
+          //page중에 보여지는 태그를 찾아서 계산
+          //- 전체 페이지 수 + 보여지는 페이지 번호
 
-            var count = 0;
-            var index = 0;
-            $(".page").each(function(idx, el){
-                //if(현재 태그가 표시중이라면) {
-                if($(this).is(":visible")) {
-                    index = idx+1;
-                }
-                count++;
-            });
+          var count = 0;
+          var index = 0;
+          $(".page").each(function(idx, el){
+              //if(현재 태그가 표시중이라면) {
+              if($(this).is(":visible")) {
+                  index = idx+1;
+              }
+              count++;
+          });
 
-            var percent = index * 100 / count;
-            $(".progressbar > .guage").css("width", percent+"%");
-        }
-    });
+          var percent = index * 100 / count;
+          $(".progressbar > .guage").css("width", percent+"%");
+      }
     
     //마감일자는 모든 정보를 입력하기 전까지 보여주지 않는다
     $('.end').hide();
@@ -109,8 +107,38 @@ $(function () {
     
   });
 </script>
+<script>
+$(function(){
+	$(".reward-insert-form").submit(function(e){
+		e.preventDefault();
+		
+		$.ajax({
+			url: "/rest/reward/insert",
+			method: "post",
+			data: $(e.target).serialize(),
+			success: function(response){
+				$("[name=rewardType]").val("");
+				$("[name=rewardPrice]").val("");
+				loadList();
+			}
+		});
+	});	
+	loadList();
+	
+	function loadList() {
+		
+		$.ajax({
+			url: "/rest/reward/list",
+			method: "post",
+			success: function(response){
+				
+			}
+		});
+	}
 
-<form action="write" method="post">
+});
+</script>
+<form action="write" method="post" autocomplete="off">
       <input type="hidden" name="projectOwner" value="${sessionScope.name}">
       
    <div class="container w-600">
@@ -123,7 +151,7 @@ $(function () {
         </div>
 	</div>
 	
-	<div class="row page">
+	<div class="row">
       <div class="row left">
          제목
          <input type="text" name="projectTitle" class="form-input w-100" placeholder="제목을 입력하세요">
@@ -160,7 +188,8 @@ $(function () {
             </button>
         </div>
       </div>
-      <div class="row page">
+      
+      <div class="row">
 	      <div class="row left">
 	         목표 금액
 	         <input type="number" name="projectGoalPrice" class="form-input w-100" placeholder="목표로 하는 금액을 입력하세요">
@@ -191,7 +220,7 @@ $(function () {
         </div>
       </div>
       
-      <div class="row page">
+      <div class="row">
       	
       	<div class="container flex-container w-800">
       		<div class="row">
@@ -214,7 +243,7 @@ $(function () {
 						placeholder="리워드 가격">
 					</div>
 					<div class="row me-10">
-						<button type="submit" class="btn btn-positive w-100 btn-adds">
+						<button type="submit" class="btn btn-positive w-100">
 							<i class="fa-solid fa-plus"></i>
 								추가
 						</button>

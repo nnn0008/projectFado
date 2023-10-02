@@ -90,7 +90,7 @@ $(function(){
 	});
 </script>
 
-</c:if>1
+</c:if>
 
 <script>
 	$(function(){
@@ -209,8 +209,8 @@ $(function(){
     
     <!-- 여기서부터 list 추가한거 있어요 -->
     <div class="row">
-	<hr>
-</div>
+		<hr>
+	</div>
 
 <div class="container w-800">
 
@@ -239,10 +239,6 @@ $(function(){
 	</div>
 	</c:if>
 </div>
-
-	
-	
-	
 	
 	<div class="container w-600">
            <div class="row">

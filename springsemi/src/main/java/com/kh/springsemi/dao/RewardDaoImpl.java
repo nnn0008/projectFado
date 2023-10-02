@@ -26,8 +26,8 @@ public class RewardDaoImpl implements RewardDao{
 
 	@Override
 	public void insert(RewardDto rewardDto) {
-		String sql = "insert into reward(reward_type, reward_price) values(?, ?)";
-		Object[] data = {rewardDto.getRewardType(), rewardDto.getRewardPrice()};
+		String sql = "insert into reward(reward_no, project_no, reward_type, reward_price) values(?, ?, ?, ?)";
+		Object[] data = {rewardDto.getRewardNo(),rewardDto.getProjectNo() , rewardDto.getRewardType(), rewardDto.getRewardPrice()};
 		jdbcTemplate.update(sql, data);
 	}
 

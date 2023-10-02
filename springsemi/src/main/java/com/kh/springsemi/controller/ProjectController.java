@@ -19,17 +19,17 @@ import com.kh.springsemi.dao.MajorCategoryDao;
 import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.MinorCategoryDao;
 import com.kh.springsemi.dao.ProjectDao;
+import com.kh.springsemi.dao.RewardDao;
 import com.kh.springsemi.dto.JudgeDto;
 import com.kh.springsemi.dto.MajorCategoryDto;
 import com.kh.springsemi.dto.MemberDto;
-import com.kh.springsemi.dto.MemberFollowDto;
 import com.kh.springsemi.dto.MinorCategoryDto;
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ProjectListDto;
+import com.kh.springsemi.dto.RewardDto;
 import com.kh.springsemi.error.AuthorityException;
 import com.kh.springsemi.error.NoTargetException;
 import com.kh.springsemi.mapper.JudgeMapper;
-import com.kh.springsemi.vo.PaginationVO;
 
 @Controller
 @RequestMapping("/project")
@@ -51,6 +51,9 @@ public class ProjectController {
 	private JudgeDao judgeDao;
 	
 	@Autowired
+	private RewardDao rewardDao;
+	
+	@Autowired
 	private JudgeMapper judgeMapper;
 	
 	//프로젝트 등록
@@ -66,7 +69,7 @@ public class ProjectController {
 	@PostMapping("/write")
 	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session,
 			@ModelAttribute JudgeDto judgeDto) {
-		int projectNo = projectDao.sequence();
+		int projectNo = projectDao.sequence();                                                           
 		int judgeNo = judgeDao.sequence();
 		projectDto.setProjectNo(projectNo);
 		String memberId = (String)session.getAttribute("name");
@@ -76,6 +79,18 @@ public class ProjectController {
 		judgeDto.setProjectNo(projectNo);
 		judgeDto.setJudgeNo(judgeNo);
 		judgeDao.insert(judgeDto);
+		return "redirect:reward/write?projectNo="+projectNo;
+	}
+	
+	@GetMapping("/reward/write")
+	public String rewardWrite(@RequestParam int projectNo) {
+		return "/WEB-INF/views/reward/write.jsp";
+	}
+	
+	@PostMapping("/reward/write")
+	public String rewardWrite(@ModelAttribute RewardDto rewardDto, 
+											@RequestParam int projectNo) {
+		
 		return "redirect:detail?projectNo="+projectNo;
 	}
 	
@@ -89,6 +104,9 @@ public class ProjectController {
 		model.addAttribute("minorCategoryDto", minorCategoryDto);
 		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(minorCategoryDto.getMajorCategoryNo());
 		model.addAttribute("majorCategoryDto", majorCategoryDto);
+		
+		List<RewardDto> rewardList = rewardDao.selectListByProjectNo(projectNo);
+		model.addAttribute("rewardList", rewardList);
 		
 		Date currentTime = new Date();
 		Date endTime = projectDto.getProjectEndDate();

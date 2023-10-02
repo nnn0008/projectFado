@@ -11,4 +11,11 @@ public class ReviewDto {
 	private String reviewWriter;
 	private String reviewContent;
 	private Date reviewRegDate; 
+	private String memberNickname; //작성자 닉네임
+	
+	public String getReviewWriterString() {
+		if(reviewWriter == null)
+			return "탈퇴한 사용자";
+		return memberNickname;
+	}
 }

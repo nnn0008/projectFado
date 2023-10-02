@@ -22,7 +22,7 @@ import com.kh.springsemi.error.NoTargetException;
 import com.kh.springsemi.vo.CommunityPaginationVO;
 
 @Controller
-@RequestMapping("/helperCommunity")
+@RequestMapping("/mainCommunity")
 public class MainCommunityController {
 
 	@Autowired
@@ -38,7 +38,7 @@ public class MainCommunityController {
 	
 	@GetMapping("/write")  //메인 커뮤니티 글작성-get
 	public String insert() {
-		return "/WEB-INF/views/helperCommunity/write.jsp";
+		return "/WEB-INF/views/mainCommunity/write.jsp";
 	}
 	
 	
@@ -63,7 +63,7 @@ public class MainCommunityController {
 		MainCommunityDto mainCommunityDto = mainCommunityDao.selectOne(mainCommunityNo);
 		model.addAttribute("mainCommunityDto", mainCommunityDto);
 		
-		return "/WEB-INF/views/helperCommunity/edit.jsp";
+		return "/WEB-INF/views/mainCommunity/edit.jsp";
 	}
 	
 	
@@ -87,7 +87,7 @@ public class MainCommunityController {
 		model.addAttribute("noticeList", noticeList);
 		
 			
-		return "/WEB-INF/views/helperCommunity/noticeList.jsp";
+		return "/WEB-INF/views/mainCommunity/noticeList.jsp";
 	}
 
 		
@@ -105,7 +105,7 @@ public class MainCommunityController {
 		model.addAttribute("qnaList", qnaList);
 		
 			
-		return "/WEB-INF/views/helperCommunity/qnaList.jsp";
+		return "/WEB-INF/views/mainCommunity/qnaList.jsp";
 		
 	}
 	
@@ -122,7 +122,7 @@ public class MainCommunityController {
 			MemberDto memberDto = memberDao.selectOne(mainCommunityWriter);
 			model.addAttribute("WriterDto", memberDto);  //writerDto = model 저장명 이름
 		}
-		return "/WEB-INF/views/helperCommunity/detail.jsp";
+		return "/WEB-INF/views/mainCommunity/detail.jsp";
 	}
 	
 	

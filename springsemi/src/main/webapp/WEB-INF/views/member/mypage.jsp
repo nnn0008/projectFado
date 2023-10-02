@@ -112,7 +112,7 @@ pageEncoding="UTF-8"%>
                         <span class="bold">고객센터</span>
                     </div>
                     <div class="left mb-10">
-                        <a href="http://localhost:8080/helperCommunity/noticeList" class="link">공지사항</a>
+                        <a href="http://localhost:8080/mainCommunity/noticeList" class="link">공지사항</a>
                     </div>
                     <div class="left">
                         <a href="#" class="link">설정</a>

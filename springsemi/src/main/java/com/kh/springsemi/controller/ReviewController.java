@@ -27,6 +27,7 @@ import com.kh.springsemi.dao.AttachDao;
 import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.ReviewDao;
 import com.kh.springsemi.dto.AttachDto;
+import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ReviewDto;
 
@@ -47,7 +48,7 @@ public class ReviewController {
 	
 	
 	@GetMapping("/write")  //프로젝트 별 후기 글 작성
-	public String insert(@RequestParam int reviewNo) {
+	public String insert(@RequestParam int projectNo) {
 		return "/WEB-INF/views/review/write.jsp";
 	}
 	
@@ -59,8 +60,8 @@ public class ReviewController {
 		//프로젝트 번호 따와서 후기 글 쓸 준비 
 		String memberId = (String) session.getAttribute("name");
 		
-		int projectNo = projectDto.getProjectNo();
 		int reviewNo = reviewDao.sequence();
+		int projectNo = projectDto.getProjectNo();
 		
 		reviewDto.setProjectNo(projectNo);
 		reviewDto.setReviewWriter(memberId);
@@ -137,9 +138,16 @@ public class ReviewController {
 	
 	//목록
 	@RequestMapping("/list")
-	public String list(Model model) {
+	public String list(@RequestParam int reviewNo, Model model) {
+		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
 		List <ReviewDto>list = reviewDao.selectList(0);
 		model.addAttribute("list", list);
+		
+		String reviewWriter = reviewDto.getReviewWriter();
+		if(reviewWriter != null) {
+			MemberDto memberDto = memberDao.selectOne(reviewWriter);
+			model.addAttribute("WriterDto", memberDto);
+		}
 		return "/WEB-INF/views/review/list.jsp";
 	}
 	

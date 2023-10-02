@@ -4,6 +4,15 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<style>
+
+a{
+text-decoration: none;
+   color: #2c8de0;;
+            }
+
+</style>
+
 <form action="login" method="post" autocomplete="off">
 
 	<div class="container w-400">

@@ -245,6 +245,7 @@ textarea.form-input.fixed {
 .ms-50 { margin-left: 50px; }
 
 .ms-70 { margin-left: 70px; }
+.ms-110 { margin-left: 110px; }
 .ms-500 { margin-left: 500px; }
 .ms-580 { margin-left: 580px; }
 .ms-660 { margin-left: 660px; }
@@ -928,5 +929,21 @@ section{
 
 .bold {
     font-weight: bold;
+}
+
+/*
+    진행바 디자인
+*/
+.progressbar {
+    width: 100%;
+    height: 5px;
+}
+.progressbar > .guage {
+    width: 0%;
+    height: 100%;
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    /* 스르륵 */
+    transition: width 0.1s ease-out;
 }
 

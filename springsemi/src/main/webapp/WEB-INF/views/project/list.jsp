@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+
+
 <div class="container w-800">
 	<div class="row">
 		<table>
@@ -55,7 +57,7 @@
 			<h3>
 			<!-- 이전 버튼 : begin이 1이면 없다 -->
 			<c:if test="${begin > 1}">
-			<%-- 링크는 검색과 목록을 따로 구현 --%>
+			링크는 검색과 목록을 따로 구현
 				<c:choose>
 					<c:when test="${isSearch }">
 						<a href="list?page=${begin-1}&keyword=${param.keyword}">&lt;</a>
@@ -69,10 +71,10 @@
 				<c:forEach var="i" begin="${begin}" end="${end}" step="1">
 					<c:choose>
 						<c:when test="${page == i }">
-							${i} <%-- 현재페이지라면 숫자만 보여주기 --%>
+							${i} 현재페이지라면 숫자만 보여주기
 						</c:when>
 						<c:otherwise>
-							<%-- 링크는 검색과 목록을 따로 구현 --%>
+							링크는 검색과 목록을 따로 구현
 							<c:choose>
 								<c:when test="${isSearch }">
 									<a href="list?page=${i}&keyword=${param.keyword}"></a>
@@ -86,7 +88,7 @@
 				</c:forEach>
 			<!-- 다음 버튼 : 마지막 숫자(end)가 pageCount보다 크면 없다 -->
 			<c:if test="${end < pageCount}">
-				<%-- 링크는 검색과 목록을 따로 구현 --%>
+				링크는 검색과 목록을 따로 구현
 				<c:choose>
 					<c:when test="${isSearch}">
 						<a href="list?page=${end+1}&keyword=${param.keyword}">&gt;</a>
@@ -101,5 +103,5 @@
 			
 		<br>
 	</div>
-</div>
+</div> 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

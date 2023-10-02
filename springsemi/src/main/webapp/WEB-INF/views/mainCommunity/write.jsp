@@ -8,12 +8,12 @@
 
 
     <style>
-	.note-editable{
-	line-height: 2em !important;
-	}
-	
-	.select{
-	display: inline-block;
+   .note-editable{
+   line-height: 2em !important;
+   }
+   
+   .select{
+   display: inline-block;
     text-decoration: none;
     vertical-align: bottom;
 
@@ -23,10 +23,10 @@
     border: 1px solid #2c8de0 ;
     border-radius: 0.5em;
     line-height: 1.2em;
-	}
-	
-	.form-input1
-	{
+   }
+   
+   .form-input1
+   {
     /* a 태그 때문에 추가한 속성 */
     display: inline-block;
     text-decoration: none;
@@ -50,26 +50,26 @@
 
 <form action="write" method="post" autocomplete="off">
 <div class="container w-600">
-	
-	<c:choose>
-		<c:when test="${sessionScope.level == '관리자'}">
-			<input type="hidden" name="mainCommunityType" value="공지사항">
-		</c:when>
-		
-		<c:otherwise>
-			<input type="hidden" name="mainCommunityType" value="Q&A">
-		</c:otherwise>
-	</c:choose>
+   
+   <c:choose>
+      <c:when test="${sessionScope.level == '관리자'}">
+         <input type="hidden" name="mainCommunityType" value="공지사항">
+      </c:when>
+      
+      <c:otherwise>
+         <input type="hidden" name="mainCommunityType" value="Q&A">
+      </c:otherwise>
+   </c:choose>
 
-	<div>
-		<input type="text" class="form-input1 w-100 mb-20" name="mainCommunityTitle" placeholder="제목을 입력해주세요.">
-	</div>
-	<div>
-		<textarea name="mainCommunityContent" class="form-input1 w-100" rows="15" style="resize:none;"></textarea>
-	</div>
-	<div class="right mt-10">
-		<button class="btn btn-positive">작성하기</button>
-	</div>
+   <div>
+      <input type="text" class="form-input1 w-100 mb-20" name="mainCommunityTitle" placeholder="제목을 입력해주세요.">
+   </div>
+   <div>
+      <textarea name="mainCommunityContent" class="form-input1 w-100" rows="15" style="resize:none;"></textarea>
+   </div>
+   <div class="right mt-10">
+      <button class="btn btn-positive">작성하기</button>
+   </div>
 </div>
 </form>
 

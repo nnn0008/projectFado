@@ -15,19 +15,17 @@ import com.kh.springsemi.dto.RewardDto;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/rest/project")
+@RequestMapping("/rest/reward")
 public class RewardRestController {
 	
 	@Autowired
 	private RewardDao rewardDao;
 	
 	@PostMapping("/insert")
-	public void insert(@ModelAttribute RewardDto rewardDto
-								,@RequestParam int projectNo) {
+	public void insert(@ModelAttribute RewardDto rewardDto, @RequestParam int projectNo) {
 		int rewardNo = rewardDao.sequence();
 		rewardDto.setRewardNo(rewardNo);
 		rewardDto.setProjectNo(projectNo);
-		
 		rewardDao.insert(rewardDto);
 	}
 	

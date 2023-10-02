@@ -50,9 +50,6 @@ public class ProjectController {
 	@Autowired
 	private JudgeDao judgeDao;
 	
-	@Autowired
-	private JudgeMapper judgeMapper;
-	
 	//프로젝트 등록
 	@GetMapping("/write")
 	public String write(Model majorModel, Model minorModel) {
@@ -65,7 +62,7 @@ public class ProjectController {
 
 	@PostMapping("/write")
 	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session,
-			@ModelAttribute JudgeDto judgeDto) {
+			@ModelAttribute JudgeDto judgeDto, Model model) {
 		int projectNo = projectDao.sequence();
 		int judgeNo = judgeDao.sequence();
 		projectDto.setProjectNo(projectNo);
@@ -76,6 +73,8 @@ public class ProjectController {
 		judgeDto.setProjectNo(projectNo);
 		judgeDto.setJudgeNo(judgeNo);
 		judgeDao.insert(judgeDto);
+		//프로젝트의 이미지 번호를 찾아서 넘겨준다
+		model.addAttribute("projectNo", projectDao.findPhoto(projectNo));
 		return "redirect:detail?projectNo="+projectNo;
 	}
 	

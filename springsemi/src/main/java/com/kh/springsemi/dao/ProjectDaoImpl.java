@@ -176,4 +176,25 @@ public class ProjectDaoImpl implements ProjectDao{
 		return jdbcTemplate.query(sql, projectListMapper, data);
 	}
 	
+	//프로필 관련 기능
+	@Override
+	public void insertPhoto(int projectNo, int attachNo) {
+		String sql = "insert into project_photo values(?, ?)";
+		Object[] data = {projectNo, attachNo};
+		jdbcTemplate.update(sql, data);
+	}
+	
+	@Override
+	public boolean deletePhoto(int projectNo) {
+		String sql = "delete project_photo where project_no = ?";
+		Object[] data = {projectNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	@Override
+	public Integer findPhoto(int projectNo) {
+		String sql = "select attach_no from project_photo where project_no = ?";
+		Object[] data = {projectNo};
+		return jdbcTemplate.queryForObject(sql, Integer.class, data);
+	}
 }

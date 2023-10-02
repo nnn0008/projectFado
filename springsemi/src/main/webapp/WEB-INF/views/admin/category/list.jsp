@@ -178,7 +178,7 @@
 			e.preventDefault();
 			//비동기통신으로 분류 추가하게 만들기
 			//대분류는 텍스트로 불러와야되고
-// 			var majorCategoryType = ;
+			var majorCategoryType = $();
 			//소분류는 내가 입력한 값을 불러와야 한다
 			var minorCategoryType = $("[name=minorCategoryType]").val();
 			$.ajax({
@@ -230,6 +230,7 @@
 				},
 			});
 		}
+		
 		
 	});
 

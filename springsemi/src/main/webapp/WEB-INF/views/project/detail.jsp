@@ -215,8 +215,9 @@ $(function(){
 <div class="container w-800">
 
 	<div class="row">
-		<a class="btn" style="background-color: #DEF2FF" href="/projectCommunity/noticeList">공지사항</a>
-		<a class="btn" href="/projectCommunity/qnaList">Q & A</a>
+		<a class="btn" href="/projectCommunity/noticeList?projectNo=${projectDto.projectNo}">공지사항</a>
+		<a class="btn" href="/projectCommunity/qnaList?projectNo=${projectDto.projectNo}">Q & A</a>
+		<a class="btn" href="/review/list?projectNo=${projectDto.projectNo}">후기</a>
 	</div>
 	<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
 		<c:if test="${sessionScope.name != null && sessionScope.level == '관리자'}">

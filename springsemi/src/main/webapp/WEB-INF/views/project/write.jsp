@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<!-- moment.js -->
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
 <!-- Lightpick  CDN -->
 <link rel="stylesheet" href="/css/lightpick.css">
 <script src="/js/lightpick.js"></script>
@@ -75,8 +77,43 @@ $(function () {
     		
 //     	}
 //     });
+    //목표 : 
+    $(".btn-save").click(function(){
+	    //파일 선택창을 Javascript로 불러와야함
+	    var input = $(".file-chooser")[0];
+	    
+	    //input이 file이라면 files 라는 항목이 존재
+// 	    console.log(input.files);
+	    if(input.files.length == 0) return;
+	    
+	    //비동기 통신
+	    //- form으로 파일 전송 시에 multipart/form-data 설정을 해야함
+	    //- 비동기 통신일 때는 
+	    //- processData : false로 설정
+	    //- contentType: false로 설정
+	    //- FormData 객체를 만들어 파일을 추가한 뒤에 전송
+	    var form = new FormData();
+	    //form.append("이름", 데이터);
+	    form.append("attach", input.files[0]); //우측에는 선택한 파일이 하나이므로 
+	    
+	    $.ajax({
+	    	url:"/rest/project/upload",
+	    	method:"post", //get방식은 파일전송이 안된다
+	    	processData:false,
+	    	contentType:false,
+	    	data:form, //form으로 전송되는 것 처럼 날아감
+	    	success:function(response){
+// 	    		console.log(response);
+	    		//이미지의 src를 바꾸는 코드
+	    		$(".img").attr("src", "/rest/project/download?attachNo="+response.attachNo);
+	    	},
+	    	error:function(){
+	    		window.alert("통신 오류 발생 \n 잠시 후 다시 시도해 주세요");
+	    	},
+	    });
+    });
     
-    
+    	
     
   });
 </script>
@@ -87,6 +124,13 @@ $(function () {
    <div class="container w-600">
       <div class="row">
          <h1>fado 프로젝트 등록하기</h1>            
+      </div>
+      <div class="row">
+      	<input type="file" class="file-chooser" accept="image/*">
+      	<button class="btn-save" type="button">설정하기</button>
+      </div>
+      <div class="row">
+      	<img src="https://dummyimage.com/200x200/000/fff" class="img">
       </div>
       <div class="row left">
          제목

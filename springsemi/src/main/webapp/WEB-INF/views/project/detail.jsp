@@ -155,11 +155,11 @@ $(function(){
     	<div class="row">
     		<div class="flex-container">
     			<div class="w-100 left">
-    				<img src="https://dummyimage.com/600x400/000/fff">
+    				<img src="/rest/project/download?attachNo=${projectNo}" class="" width="500" height="500">
     			</div>
     			<div class="w-100 left">
     				모인금액
-    				<fmt:formatNumber value="${projectDto.projectTotalPrice }" pattern="#,###"/>원<br>
+    				<fmt:formatNumber value="${projectDto.projectTotalPrice}" pattern="#,###"/>원<br>
     				남은시간
 <!--     				<label class="timer"></label> -->
 <%--     				${difference / 1000} 초 --%>

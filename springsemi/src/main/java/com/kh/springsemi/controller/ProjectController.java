@@ -68,8 +68,8 @@ public class ProjectController {
 
 	@PostMapping("/write")
 	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session,
-			@ModelAttribute JudgeDto judgeDto) {
-		int projectNo = projectDao.sequence();                                                           
+			@ModelAttribute JudgeDto judgeDto, Model model) {
+		int projectNo = projectDao.sequence();
 		int judgeNo = judgeDao.sequence();
 		projectDto.setProjectNo(projectNo);
 		String memberId = (String)session.getAttribute("name");
@@ -79,6 +79,9 @@ public class ProjectController {
 		judgeDto.setProjectNo(projectNo);
 		judgeDto.setJudgeNo(judgeNo);
 		judgeDao.insert(judgeDto);
+    
+		//프로젝트의 이미지 번호를 찾아서 넘겨준다
+		model.addAttribute("projectNo", projectDao.findPhoto(projectNo));
 		return "redirect:reward/write?projectNo="+projectNo;
 	}
 	
@@ -90,7 +93,6 @@ public class ProjectController {
 	@PostMapping("/reward/write")
 	public String rewardWrite(@ModelAttribute RewardDto rewardDto, 
 											@RequestParam int projectNo) {
-		
 		return "redirect:detail?projectNo="+projectNo;
 	}
 	

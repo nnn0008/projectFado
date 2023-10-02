@@ -189,5 +189,12 @@ public class ProjectController {
 //	return "/WEB-INF/views/project/list2.jsp";
 //}
 //	
+
+	@RequestMapping("/fundinglist")
+	public String fundinglist () {
+		return "/WEB-INF/views/project/fundinglist.jsp";
+	}
+	
+	
 	
 }

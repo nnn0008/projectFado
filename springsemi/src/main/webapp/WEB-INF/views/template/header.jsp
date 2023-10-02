@@ -214,7 +214,7 @@
 
     <header>
         <div class="logo">
-            <a href=""><img src="/images/smallfado.jpg" style="height: 60px;" class="me-50"></a>
+            <a href="http://localhost:8080/"><img src="/images/smallfado.jpg" style="height: 60px;" class="me-50"></a>
         </div>
         <div class="title">
 
@@ -257,12 +257,12 @@
 
 
 
-            <a href="http://localhost:8080/member/login" class="btn btn-positive" style="padding-left: 60px;
+      <!--       <a href="http://localhost:8080/member/login" class="btn btn-positive" style="padding-left: 60px;
              padding-right: 60px; height:40px; 
              padding-bottom:38px;">
              login
-            <!-- <a href="http://localhost:8080/member/login" class="link">login</a> -->    
-            </a>
+            <a href="http://localhost:8080/member/login" class="link">login</a>    
+            </a> -->
             
         </div>
        
@@ -283,39 +283,38 @@
                 <ul>
                     <li style="display: flex; list-style: 
                                 none; padding: 0;">
-                    <li><a href="/funding/list">전체</a></li>
+                    <li><a href="/project/list">전체</a></li>
                     <li><a href="#">의류</a></li>
                     <li><a href="#">향수</a></li>
                     <li><a href="#">반려동물</a></li>
                     <li><a href="#">푸드</a></li>
-                    <li><a href="#">푸드</a></li>
-                    <li><a href="#">푸드</a></li>
-                    <li><a href="#">푸드</a></li>
-                    <li><a href="#">푸드</a></li>
-                    <li><a href="#">푸드</a></li>
-                    <li><a href="#">푸드</a></li>
-                    <li><a href="#">푸드</a></li>
-                    <li><a href="#">푸드</a></li>
+                    <li><a href="#">가전</a></li>
+                    <li><a href="#">디지털 게임</a></li>
+                    <li><a href="#">음악</a></li>
+                    <li><a href="#">주얼리</a></li>
+                    <li><a href="#">사진</a></li>
+                    <li><a href="#">예술</a></li>
+                    
 
                 </ul>
             </li>
 
             <li>
-                <a href="#" class="ms-20">홈</a>
+                <a href="http://localhost:8080/" class="ms-20">홈</a>
 
             </li>
 
             <li>
-                <a href="#">인기</a>
+                <a href="/project/fundinglist">프로젝트</a>
             </li>
 
-            <li>
+            <!-- <li>
                 <a href="#">신규</a>
-            </li>
+            </li> -->
 
-            <li>
+            <!-- <li>
                 <a href="#">마감임박</a>
-            </li>
+            </li> -->
 
             <li>
                 <a class="ms-20" href="http://localhost:8080/mainCommunity/noticeList">커뮤니티</a>
@@ -324,7 +323,7 @@
             
             <a>
             
-                <div class="w-300 ms-500" style="width: 300px;">
+                <div class=" ms-500" style="width: 200px;">
                     <i class="fa-solid fa-magnifying-glass" style="color: #2c8de0;"></i>
                  <input type="search" class="pointer w-100 focus" name="keyword" placeholder="검색어를 입력해주세요" value="">
                  </div> 

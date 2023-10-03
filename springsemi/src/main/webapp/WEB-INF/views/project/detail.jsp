@@ -48,6 +48,31 @@ $(function(){
 });	
 
 </script>
+<script>
+ 	//목표 : 버튼의 텍스트를 읽어 프로젝트의 승인완료/승인거절
+ 	$(function(){
+		$(".judge").click(function(){
+			var queryString = window.location.search;
+			var searchParams = new URLSearchParams(queryString);
+			var projectNo = searchParams.get("projectNo");
+			var buttonText = $(this).text();
+			console.log(projectNo);
+			console.log(buttonText);
+			$.ajax({
+				url:"/rest/judge",
+				method:"post",
+				data:{ 
+					judgeStatus : buttonText,
+					projectNo : projectNo
+				},
+				success:function(response){
+					window.location.href = "/project/list";
+				},
+			});
+		});
+		
+	});
+</script>
 
 <c:if test="${sessionScope.name != null}">
 
@@ -177,12 +202,12 @@ $(function(){
     		<label>프로젝트 계획</label> <label>업데이트</label> <label>커뮤니티</label> <label>추천</label>
     		</div>
     		<div class="flex-container">
-    			<div class="w-100 left">
+    			<div class="w-75 left">
     				<img src="/rest/project/download?attachNo=${subAttachDto.attachNo}">
     			</div>
     				창작자 소개<br>
     				${projectDto.projectOwner}<br>
-    			<div class="w-100">
+    			<div class="w-25">
     				<c:if test="${sessionScope.name != projectDto.projectOwner}">
     				<c:choose>
                         <c:when test="${isFollowing == 'true'}">
@@ -204,18 +229,18 @@ $(function(){
     			</div>
     		</div>
     	</div>
+    	<c:if test="${sessionScope.level == '관리자'}">
+	    	<div class="row">
+	    		<button class="btn btn-positive judge">승인완료</button> <button class="btn btn-negative judge" value="">승인거절</button>
+	    	</div>
+    	</c:if>
     </div>
-        
     <!--  커뮤니티 리스트 스크립트 -->
     <script>
 
     </script>
     
     <div class="container w-1000 flex-container">
-    
-    	<div class="row" style="flex-grow: 3.5;">
-    		<img src="https://picsum.photos/id/2/100/100">
-    	</div>
     	
     	<div class="row w-200" style="background-color: #E0F2F7; flex-frow:1.5; border: 1px solid #E0F2F7; border-radius: 10px;">
     	<div class="row">

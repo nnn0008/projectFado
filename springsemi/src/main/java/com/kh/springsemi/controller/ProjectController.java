@@ -165,6 +165,12 @@ public class ProjectController {
 	
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int projectNo, HttpSession session, Model model) {
+		JudgeDto judgeDto = judgeDao.selectOneByProjectNo(projectNo);
+		String memberLevel = (String)session.getAttribute("level");
+		if(memberLevel != null && memberLevel.equals("관리자")) {
+			judgeDto.setJudgeStatus("심사진행중");
+			judgeDao.update(judgeDto);
+		}
 		ProjectDto projectDto = projectDao.selectOne(projectNo);
 		MinorCategoryDto minorCategoryDto = minorCategoryDao.selectOne(projectDto.getMinorCategoryNo());
 		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(minorCategoryDto.getMajorCategoryNo());

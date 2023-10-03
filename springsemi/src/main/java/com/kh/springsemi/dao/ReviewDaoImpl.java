@@ -90,7 +90,7 @@ public class ReviewDaoImpl implements ReviewDao{
 	@Override
 	public AttachDto findReviewPhoto(int reviewNo) {
 		String sql = "select * from attach where attach_no ("
-				+ "select attach attach_no from review_photo "
+				+ "select attach_no from review_photo "
 				+ "where review_no = ?)";
 		Object[] data = {reviewNo};
 		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);

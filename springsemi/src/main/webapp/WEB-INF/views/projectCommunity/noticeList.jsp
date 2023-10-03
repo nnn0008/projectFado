@@ -208,7 +208,7 @@ $(function(){
     
     
     <!-- 여기서부터 list 추가한거 있어요 -->
-    <div class="row">
+<div class="row">
 	<hr>
 </div>
 

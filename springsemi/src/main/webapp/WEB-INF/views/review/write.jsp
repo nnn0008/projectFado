@@ -21,7 +21,7 @@
 }
 </style>
 
-<div class="row">
+<div class="container center w-600 mb-50">
    	<hr>
    	<h2>서핑 후기 작성</h2>
    	<hr>

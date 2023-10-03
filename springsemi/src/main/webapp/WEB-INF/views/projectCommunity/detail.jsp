@@ -235,11 +235,6 @@ $(function(){
 	<%-- 각종 버튼이 위치하는 곳 --%>
 	<div class="row">
 	<c:if test="${sessionScope.name != null}">
-		<a class="btn btn-positive" href="write">
-			<i class="fa-solid fa-pen"></i>
-			새글
-		</a>
-		
 		<%-- 수정/삭제는 소유자일 경우만 나와야 한다 --%>
 		<c:if test="${sessionScope.name == projectCommunityDto.projectCommunityWriter}">
 		<a class="btn btn-negative" href="edit?projectCommunityNo=${projectCommunityDto.projectCommunityNo}">
@@ -265,6 +260,9 @@ $(function(){
 			</c:otherwise>
 		</c:choose>
 		</div>
+		
+		
+		
 
 
 

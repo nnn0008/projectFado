@@ -37,4 +37,8 @@ public interface ProjectDao {
 	//검색
 	List<ProjectListDto> selectList(String keyword);
 	
+	//프로젝트 사진 관련 기능
+	void insertPhoto(int projectNo, int attachNo);
+	boolean deletePhoto(int projectNo);
+	Integer findPhoto(int projectNo);
 }

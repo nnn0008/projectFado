@@ -22,15 +22,19 @@ import com.kh.springsemi.dao.JudgeDao;
 import com.kh.springsemi.dao.MajorCategoryDao;
 import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.MinorCategoryDao;
+import com.kh.springsemi.dao.ProjectCommunityDao;
 import com.kh.springsemi.dao.ProjectDao;
+import com.kh.springsemi.dao.ReviewDao;
 import com.kh.springsemi.dao.RewardDao;
 import com.kh.springsemi.dto.AttachDto;
 import com.kh.springsemi.dto.JudgeDto;
 import com.kh.springsemi.dto.MajorCategoryDto;
 import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.MinorCategoryDto;
+import com.kh.springsemi.dto.ProjectCommunityDto;
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ProjectListDto;
+import com.kh.springsemi.dto.ReviewDto;
 import com.kh.springsemi.dto.RewardDto;
 import com.kh.springsemi.error.AuthorityException;
 import com.kh.springsemi.error.NoTargetException;
@@ -59,6 +63,12 @@ public class ProjectController {
 	
 	@Autowired
 	private AttachDao attachDao;
+	
+	@Autowired
+	private ReviewDao reviewDao;
+	
+	@Autowired
+	private ProjectCommunityDao projectCommunityDao;
 	
 	//프로젝트 등록
 	@GetMapping("/write")
@@ -157,6 +167,19 @@ public class ProjectController {
 			MemberDto memberDto = memberDao.selectOne(projectOwner);
 			model.addAttribute("OwnerDto", memberDto);
 		}
+		
+	
+		
+		
+		
+		List<ReviewDto> reviewList = reviewDao.selectList(projectNo);
+		model.addAttribute("reviewList", reviewList);
+		
+		List<ProjectCommunityDto> noticeList = projectCommunityDao.selectNoticeList(projectNo);
+		model.addAttribute("noticeList", noticeList);
+		
+		List<ProjectCommunityDto> qnaList = projectCommunityDao.selectQnAList(projectNo);
+		model.addAttribute("qnaList", qnaList);
 		
 		return "/WEB-INF/views/project/detail.jsp";
 	}

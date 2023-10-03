@@ -30,6 +30,18 @@
             opacity: 0.2; 
             margin: 1em 0px;
         }
+        .btn.btn-positive{
+        	display: inline-block;
+		    text-decoration: none;
+		    vertical-align: bottom;
+		    font-size: 13px;
+		    padding: 0.5em 1em;
+		    outline: none; /*outline은 입력 창 선택 시 강조 효과 */
+		    border: 1px solid #2c8de0 ;
+		    border-radius: 1em;
+		    line-height: 1.2em;
+        }
+        
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -211,13 +223,13 @@ $(function(){
 
 <div class="container w-800">
    <div class="row">
-      <h3 style="color:#2c8de0;">${mainCommunityDto.mainCommunityNo}번 게시글</h3>
+      <h3 style="color:#2c8de0;">커뮤니티</h3>
    </div>
    
    <div class="left box">
    
       <div class="right">
-         <span>작성자 : ${mainCommunityDto.getMainCommunityWriterString()}</span>
+          작성자 : ${writerDto.memberNickname}
       </div>
       
       
@@ -237,37 +249,10 @@ $(function(){
 
 
 
-   <%-- 댓글과 관련된 화면이 작성될 위치 --%>
-   <c:if test="${sessionScope.name != null}">
-   <div class="row left mt-100 ms-100 me-100">
-      <form class="mainReply-insert-form">
-         <input type="hidden" name="mainReplyOrigin" value="${mainCommunityDto.mainCommunityNo}">
-      
-         <div class="row ms-100 me-100">
-            <textarea name="mainReplyContent" class="form-input w-100 reply-textarea"
-            style="resize:none;" rows=4; ></textarea>
-         </div>
-         <div class="right ms-100 me-100">
-            <button class="right btn btn-positive w-30 mt-10">
-               <i class="fa-solid fa-pen"></i>
-               댓글등록
-            </button>
-         </div>
-      </form>
-   </div>
-   </c:if>
-   
-      <%-- 댓글 목록이 표시될 영역 --%>
-   <div class="row left mainReply-list mt-70"></div>
-
-   
-   
-
-
-   <%-- 각종 버튼이 위치하는 곳 --%>
+ <%-- 각종 버튼이 위치하는 곳 --%>
    <div class="row">
    <c:if test="${sessionScope.name != null}">
-      <a class="btn btn-positive" href="write">
+      <a class="btn btn-positive" href="write" style="width:75px; height:35px;">
          <i class="fa-solid fa-pen"></i>
          새글
       </a>
@@ -297,6 +282,39 @@ $(function(){
          </c:otherwise>
       </c:choose>
       </div>
+
+
+   <%-- 댓글과 관련된 화면이 작성될 위치 --%>
+   <div class="container w-1000">
+      <c:if test="${sessionScope.name != null}">
+   <div class="row left mt-100 ms-100 me-100">
+      <form class="mainReply-insert-form">
+         <input type="hidden" name="mainReplyOrigin" value="${mainCommunityDto.mainCommunityNo}">
+      
+         <div class="row ms-100 me-100">
+            <textarea name="mainReplyContent" class="form-input w-100 reply-textarea"
+            style="resize:none;" rows=4; ></textarea>
+         </div>
+         <div class="right ms-100 me-100">
+            <button class="right btn btn-positive w-30 mt-10">
+               <i class="fa-solid fa-pen"></i>
+               댓글등록
+            </button>
+         </div>
+      </form>
+   </div>
+   </c:if>
+   
+      <%-- 댓글 목록이 표시될 영역 --%>
+   <div class="row left mainReply-list mt-70"></div>
+   </div>
+
+
+   
+   
+
+
+  
 
 
 

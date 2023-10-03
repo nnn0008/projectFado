@@ -140,11 +140,6 @@ $(function(){
 	});
 </script>
 
-
-
-
-
-
     <div class="container w-1000">
     	<div class="row">
     		<h5>${majorCategoryDto.majorCategoryType} > ${minorCategoryDto.minorCategoryType}</h5>
@@ -211,12 +206,202 @@ $(function(){
     		</div>
     	</div>
     </div>
+        
+    <!--  커뮤니티 리스트 스크립트 -->
+    <script>
+
+    </script>
+    
+    <div class="container w-1000 flex-container">
+    
+    	<div class="row" style="flex-grow: 3.5;">
+    		<img src="https://picsum.photos/id/2/100/100">
+    	</div>
+    	
+    	<div class="row w-200" style="background-color: #E0F2F7; flex-frow:1.5; border: 1px solid #E0F2F7; border-radius: 10px;">
+    	<div class="row">
+    		리워드 선택
+    	</div>
+    	<c:forEach var="rewardDto" items="${rewardList}">
+    		<button class="btn reward-btn" style="display: block">
+	    	<div class="container w-100 mt-10" >
+	    		<div class="row" style="display: block">
+	    			${rewardDto.rewardPrice}원
+	    		</div>
+	    		<div class="row" style="display: block">
+	    			${rewardDto.rewardType}
+	    		</div>
+	    	</div>
+	    	</button>
+    	</c:forEach>
+    	<div class="row">
+    		<button class="btn btn-positive">
+    			<a class="link" href="/orders/receipt"></a>
+    			주문하기
+    		</button>
+    	</div>
+    	</div> 
+    </div>
     
     
     
+    
+    
+    
+    
+    <div class="row">
+	<div class="row" id="notice; qna; review">
+		<hr>
+	</div>
+	
+	<div class="container w-800">
+		<div class="row">
+			<a class="btn btn-notice" href="#notice">공지사항</a>
+			<a class="btn btn-qna" href="#qna">Q & A</a>
+			<a class="btn btn-review" href="review">후기</a>
+		</div>
+	</div>    
+    
+    
+    
+    
+    <!-- 
+    !!!공지사항!!! 
+    --> 
+    <div class="container w-600 noticePage">
+		<c:if test="${sessionScope.name != null && sessionScope.level == '판매자'}">
+		    <div class="row right">
+		        <a href="/projectCommunity/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
+		            <i class="fa-solid fa-pen"></i>
+		            글쓰기
+		        </a>
+		    </div>
+		</c:if>
+	
+	    <div class="row">
+	        <hr>
+	        <h2>서퍼 공지 업데이트</h2>
+	        <hr>
+	    </div>
+	    
+       <div class="mt-30">
+           <c:forEach var="projectCommunityDto" items="${noticeList}">
+           <div class="">
+               <a class="link" href="/projectCommunity/detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}"
+                  style="font-weight:bold; font-size:18px;">
+                        ${projectCommunityDto.projectCommunityContent}</a>
+           </div>
+           <div class="flex-container">
+              <div>
+               ${projectCommunityDto.getProjectCommunityWriterString()}
+              </div>
+              <div class="ms-20 me-10">
+                 <i class="fa-regular fa-window-minimize fa-rotate-90"></i>
+              </div>
+              <div>
+               ${projectCommunityDto.projectCommunityRegDate}
+              </div>
+           </div>
+           <div class="mt-20 mb-20">
+               <hr>
+           </div>
+           </c:forEach>
+       	</div>
+	    </div>
+	
+	
+
+
+
+	
+	
+	
+   	<!-- 
+   	!!!Q&A!!! 
+   	--> 
+   	<div class="container w-600 qnaPage">
+   	    <c:if test="${sessionScope.name != null && sessionScop.level != '관리자'}">
+			<div class="row right">
+				<a href="/projectCommunity/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
+					<i class="fa-solid fa-pen"></i>
+					글쓰기
+				</a>
+			</div>
+		</c:if>
+
+      
+        <div class="row">
+	            <hr>
+	            	<h2>서퍼 Q&A</h2>
+	            <hr>
+	    </div>
+       	<div class="mt-30">
+           <c:forEach var="projectCommunityDto" items="${qnaList}">
+           <div class="">
+               <a class="link" href="/projectCommunity/detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}"
+                  style="font-weight:bold; font-size:18px;">
+                        ${projectCommunityDto.projectCommunityContent}</a>
+           </div>
+           <div class="flex-container">
+              <div>
+               ${projectCommunityDto.getProjectCommunityWriterString()}
+              </div>
+              <div class="ms-20 me-10">
+                 <i class="fa-regular fa-window-minimize fa-rotate-90"></i>
+              </div>
+              <div>
+               ${projectCommunityDto.projectCommunityRegDate}
+              </div>
+           </div>
+           <div class="mt-20 mb-20">
+               <hr>
+           </div>
+           </c:forEach>
+       	</div>
+	    </div>
+	
+	
+      
+      
+      
+      
+      
+      
+   	<!-- 
+   	!!!후기!!! 
+   	--> 
+   	<div class="container w-600 reviewPage">
+   	   	<c:if test="${sessionScope.name != null && sessionScope.level == '구매자'}">
+		    <div class="row right">
+		        <a href="/review/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
+		            <i class="fa-solid fa-pen"></i>
+		            글쓰기
+		        </a>
+		    </div>
+	</c:if>
+        <div class="row">
+            <hr>
+            <h2>서핑 후기</h2>
+            <hr>
+        </div>
+		<c:forEach var="reviewDto" items="${reviewList}">
+        	<div class="flex-container">
+	             <img src="http://dummyimage.com/40X40/000/fff" width="40" height="40">
+	             <h3>${reviewDto.getReviewWriterString()}</h3>
+         	</div>
+         <div>
+             ${reviewDto.reviewContent}
+         </div>
+         <div>
+         	${reviewDto.reviewRegDate}
+         </div>
+
+       </c:forEach>
+      </div>
+      
+      
+    </div> 
     
 
-    
-    
     
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>   

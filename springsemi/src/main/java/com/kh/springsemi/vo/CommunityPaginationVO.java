@@ -8,7 +8,7 @@ public class CommunityPaginationVO {
 		//검색 분류 및 키워드
 		private String keyword; //검색 분류 및 키워드
 		private int page = 1; //현재 페이지 번호  private in page = 1;  < 이런식으로 페이지 지정이 가능하다 (기본 : 1)
-		private int size = 20; //보여줄 게시판의 글 수 (기본 : 10)
+		private int size = 10; //보여줄 게시판의 글 수 (기본 : 10)
 		private int count; //전체 글 수 
 		private int navigatorSize = 10; //하단 네비게이터 표시 개수(기본 : 10)
 

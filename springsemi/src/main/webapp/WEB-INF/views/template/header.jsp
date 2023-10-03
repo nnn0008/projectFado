@@ -28,6 +28,12 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
 <style>
+
+		a{
+		text-decoration: none;
+		   color: #2c8de0;;
+		}
+            
         .btn .btn-positive1 {
             width: 150px;
             height: 150px;
@@ -140,7 +146,42 @@
                 background-color: #fa7d90;
 
             }
-        }
+            
+            /* 검색창 */
+            /* 초기에 숨겨진 검색창 */
+			/* .backdrop {
+			    display: none;
+			    position: fixed;
+			    top: 0;
+			    left: 0;
+			    width: 100%;
+			    height: 100%;
+			    background-color: rgba(0, 0, 0, 0.7);
+			    z-index: 999;
+			} */
+			
+			/* 확장된 검색창 스타일 */
+			/* .container.w-900 {
+			    position: fixed;
+			    top: 50%;
+			    left: 50%;
+			    transform: translate(-50%, -50%);
+			    background-color: #fff;
+			    padding: 20px;
+			    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+			    z-index: 1000;
+			} */
+			
+			/* 검색창 확장 시 스타일 */
+			/* .search-expanded .backdrop {
+			    display: block;
+			} */
+			
+			/* 검색창 닫힘 시 스타일 */
+			/* .search-collapsed .backdrop {
+			    display: none;
+			}
+        } */
     </style>
     
 	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
@@ -204,6 +245,26 @@
                 effect: "slide",//(slide/fade/cube/coverflow/flip/creative/cards)
             });
         });
+        
+        
+        /* 검색창  */
+        /* $(document).ready(function () { */
+    // 검색창 클릭 이벤트
+  /*   $(".search-container").click(function () {
+        // 검색창 상태에 따라 클래스를 토글하여 확장/축소
+        if ($(".backdrop").hasClass("search-expanded")) {
+            $(".backdrop").removeClass("search-expanded");
+        } else {
+            $(".backdrop").addClass("search-expanded");
+        }
+    });
+    
+    // 검색창 닫기 버튼 클릭 이벤트
+    $(".exit").click(function () {
+        $(".backdrop").removeClass("search-expanded");
+    });
+}); */
+        
     </script>
 
 
@@ -229,31 +290,43 @@
             <i class="me-20 fa-solid fa-bell" style="color: #2c8de0;"></i>
 			</a>
 
-
-            <a href="http://localhost:8080/member/login" class="btn btn-positive1" >   
-                 
-                 
-                 
-			    <c:choose>
-			        <c:when test="${not empty sessionScope.name}">
-			            ${sessionScope.nickname}
-			        </c:when>
-			        <c:otherwise>
-			            login
-			        </c:otherwise>
-			    </c:choose>
+			
+				<!-- 로그인 버튼 관련 -->
+			
+					<a href="<c:choose>
+			            <c:when test='${empty sessionScope.name}'>
+			                http://localhost:8080/member/login
+			            </c:when>
+			            <c:otherwise>
+			                http://localhost:8080/member/mypage
+			            </c:otherwise>
+			        </c:choose>"
+			   				class="btn btn-positive1">
+			  		 <c:choose>
+			       <c:when test="${not empty sessionScope.name}">
+			           ${sessionScope.nickname}
+			       </c:when>
+			       <c:otherwise>
+			           Login
+			       </c:otherwise>
+			   </c:choose>
 			</a>
 			
 			<a href="http://localhost:8080/"></a>
 			
-			<c:choose>
-			    <c:when test="${not empty sessionScope.name}">
-			        <a href="http://localhost:8080/member/logout" class="mb-50">logout</a>
-			    </c:when>
-			    <c:otherwise>
-			        <!-- 로그인되지 않은 경우 아무것도 표시하지 않음 -->
-			    </c:otherwise>
-			</c:choose>
+						<c:choose>
+						    <c:when test="${not empty sessionScope.name}">
+						        <a href="http://localhost:8080/member/logout" class="mb-50">logout</a>
+						        
+						    </c:when>
+						    <c:otherwise>
+						        <!-- 로그인되지 않은 경우 아무것도 표시하지 않음 -->
+						    </c:otherwise>
+						</c:choose>
+			
+						
+						
+				
 
 
 
@@ -323,10 +396,12 @@
             
             <a>
             
-                <div class=" ms-500" style="width: 200px;">
+                <div class=" ms-660" style="width: 200px;">
                     <i class="fa-solid fa-magnifying-glass" style="color: #2c8de0;"></i>
                  <input type="search" class="pointer w-100 focus" name="keyword" placeholder="검색어를 입력해주세요" value="">
-                 </div> 
+                 </div>  
+
+
 
 
 				<!-- 조장님이 만든 검색창  -->

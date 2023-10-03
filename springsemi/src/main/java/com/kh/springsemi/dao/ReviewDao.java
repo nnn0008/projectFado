@@ -13,7 +13,7 @@ public interface ReviewDao {
 	boolean delete(int reviewNo);
 	
 	ReviewDto selectOne(int reviewNo);
-	List<ReviewDto> selectList(int reviewNo);
+	List<ReviewDto> selectList(int projectNo);
 	
 	
 	 

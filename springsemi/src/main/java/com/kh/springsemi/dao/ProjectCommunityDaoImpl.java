@@ -43,28 +43,28 @@ public class ProjectCommunityDaoImpl implements ProjectCommunityDao{
 	
 	
 
-	@Override
-	public List<ProjectCommunityDto> selectNoticeList(CommunityPaginationVO vo) {
-		String sql = "select * from (select rownum rn, TMP.* from("
-				+ "select * from project_community "
-				+ "where project_community_type = '공지사항' and project_no = ? "
-				+ "order by project_community_no desc) TMP) "
-				+ "where rn between ? and ?";
-		Object[] data = {vo.getStartRow(), vo.getFinishRow()};
-		return jdbcTemplate.query(sql, projectCommunityMapper, data);
-	}
-	
-	
-	@Override
-	public List<ProjectCommunityDto> selectQnAList(CommunityPaginationVO vo) {
-		String sql = "select * from (select rownum rn, TMP.* from ("
-				+ "select * from project_community "
-				+ "where project_community_type = 'Q&A' and project_no = ? "
-				+ "order by project_community_no desc) TMP) "
-				+ "where rn between ? and ?";
-		Object[] data = {vo.getStartRow(), vo.getFinishRow()};
-		return jdbcTemplate.query(sql, projectCommunityMapper, data);
-	}
+//	@Override
+//	public List<ProjectCommunityDto> selectNoticeList(CommunityPaginationVO vo) {
+//		String sql = "select * from (select rownum rn, TMP.* from("
+//				+ "select * from project_community "
+//				+ "where project_community_type = '공지사항' and project_no = ? "
+//				+ "order by project_community_no desc) TMP) "
+//				+ "where rn between ? and ?";
+//		Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+//		return jdbcTemplate.query(sql, projectCommunityMapper, data);
+//	}
+//	
+//	
+//	@Override
+//	public List<ProjectCommunityDto> selectQnAList(CommunityPaginationVO vo) {
+//		String sql = "select * from (select rownum rn, TMP.* from ("
+//				+ "select * from project_community "
+//				+ "where project_community_type = 'Q&A' and project_no = ? "
+//				+ "order by project_community_no desc) TMP) "
+//				+ "where rn between ? and ?";
+//		Object[] data = {vo.getStartRow(), vo.getFinishRow()};
+//		return jdbcTemplate.query(sql, projectCommunityMapper, data);
+//	}
 	
 	
 	@Override
@@ -93,16 +93,34 @@ public class ProjectCommunityDaoImpl implements ProjectCommunityDao{
 	}
 
 
-	@Override
-	public int countNoticeList(CommunityPaginationVO vo) {
-		String sql = "select count(*) from project_community where project_community_type = '공지사항'";
-		return jdbcTemplate.queryForObject(sql, int.class);
-	}
+//	@Override
+//	public int countNoticeList(CommunityPaginationVO vo) {
+//		String sql = "select count(*) from project_community where project_community_type = '공지사항'";
+//		return jdbcTemplate.queryForObject(sql, int.class);
+//	}
+//	
+//
+//	@Override
+//	public int countQnAList(CommunityPaginationVO vo) {
+//		String sql = "select count(*) from project_community where project_community_type = 'Q&A'";
+//		return jdbcTemplate.queryForObject(sql, int.class);
+//	}
+
 	
+	
+	@Override
+	public List<ProjectCommunityDto> selectNoticeList(int projectNo) {
+		String sql = "select * from project_community "
+				+ "where project_community_type = '공지사항' and project_no = ?";
+		Object[] data = {projectNo};
+		return jdbcTemplate.query(sql, projectCommunityMapper, data);
+	}
 
 	@Override
-	public int countQnAList(CommunityPaginationVO vo) {
-		String sql = "select count(*) from project_community where project_community_type = 'Q&A'";
-		return jdbcTemplate.queryForObject(sql, int.class);
+	public List<ProjectCommunityDto> selectQnAList(int projectNo) {
+		String sql = "select * from project_community "
+				+ "where project_community_type = 'Q&A' and project_no = ?";
+		Object[] data = {projectNo};
+		return jdbcTemplate.query(sql, projectCommunityMapper, data);
 	}
 }

@@ -236,7 +236,7 @@ $(function(){
     	</c:forEach>
     	<div class="row">
     		<button class="btn btn-positive">
-    			<a class="link" href="/orders/receipt"></a>
+    			<a class="link" href="/orders/write?projectNo=${projectDto.projectNo}"></a>
     			주문하기
     		</button>
     	</div>

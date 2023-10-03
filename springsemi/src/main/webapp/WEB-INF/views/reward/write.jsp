@@ -135,12 +135,6 @@ $(function(){
 </div>
 </script>
 
-<!-- <div class="row"> -->
-<!-- 	<form action="write" method="post" autocomplete="off"> -->
-<!-- 		<div class="row reward-list"></div> -->
-<!-- 		<button type="submit" class="btn btn-positive w-100">리워드 추가완료하기</button> -->
-<!-- 	</form> -->
-<!-- </div> -->
 <div class="flex-container">
 <div class="row left reward-list"></div>
 

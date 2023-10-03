@@ -18,11 +18,13 @@ import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.OrdersDao;
 import com.kh.springsemi.dao.PaymentDao;
 import com.kh.springsemi.dao.ProjectDao;
+import com.kh.springsemi.dao.RewardDao;
 import com.kh.springsemi.dto.DeliveryDto;
 import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.OrdersDto;
 import com.kh.springsemi.dto.PaymentDto;
 import com.kh.springsemi.dto.ProjectDto;
+import com.kh.springsemi.dto.RewardDto;
 
 @Controller
 @RequestMapping("/orders")
@@ -42,20 +44,25 @@ public class OrdersController {
 	@Autowired
 	private PaymentDao paymentDao;
 	
-	@GetMapping("/write")
-	public String ordersWrite(@RequestParam int projectNo,HttpSession session, Model model) {
+	@Autowired
+	private RewardDao rewardDao;
+	
+	@GetMapping("/insert")
+	public String ordersInsert(@RequestParam int projectNo,HttpSession session, Model model) {
 		String memberId = (String)session.getAttribute("name");
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		List<DeliveryDto> deliveryList = deliveryDao.selectListByMemberId(memberId);
 		ProjectDto projectDto = projectDao.selectOne(projectNo);
+		RewardDto rewardDto = rewardDao.selectOne(projectNo);
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("deliveryList",deliveryList);
 		model.addAttribute("projectDto",projectDto);
-		return "/WEB-INF/views/orders/write.jsp";
+		model.addAttribute("rewardDto",rewardDto);
+		return "/WEB-INF/views/orders/insert.jsp";
 	}
 	
-	@PostMapping("/write")
-	public String ordersWrite(@ModelAttribute OrdersDto ordersDto, 
+	@PostMapping("/insert")
+	public String ordersInsert(@ModelAttribute OrdersDto ordersDto, 
 										 @ModelAttribute PaymentDto paymentDto,
 										 HttpSession session ,Model model) {
 		int ordersNo = ordersDao.sequence();
@@ -67,6 +74,11 @@ public class OrdersController {
 		
 		ordersDao.createOrders(ordersDto);
 		paymentDao.createPayment(paymentDto);
-		return "redirect:";
+		return "redirect:insertFinish";
+	}
+	
+	@RequestMapping("/insertFinish")
+	public String insertFinish() {
+		return "/WEB-INF/views/orders/insertFinish.jsp";
 	}
 }

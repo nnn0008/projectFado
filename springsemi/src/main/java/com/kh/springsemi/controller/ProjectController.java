@@ -82,7 +82,8 @@ public class ProjectController {
 
 	@PostMapping("/write")
 	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session,
-			@ModelAttribute JudgeDto judgeDto, @RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+			@ModelAttribute JudgeDto judgeDto, @RequestParam MultipartFile mainAttach,
+			@RequestParam MultipartFile subAttach) throws IllegalStateException, IOException {
 		int projectNo = projectDao.sequence();
 		int judgeNo = judgeDao.sequence();
 		projectDto.setProjectNo(projectNo);
@@ -91,20 +92,31 @@ public class ProjectController {
 		projectDao.insert(projectDto);
 		
 		//첨부파일등록
-		int attachNo = attachDao.sequence();
+		int mainAttachNo = attachDao.sequence();
+		int subAttachNo = attachDao.sequence();
 		
 		String home = System.getProperty("user.home");
 		File dir = new File(home, "upload");
 		dir.mkdirs();
-		File target = new File(dir, String.valueOf(attachNo));
-		attach.transferTo(target);
+		File mainTarget = new File(dir, String.valueOf(mainAttachNo));
+		mainAttach.transferTo(mainTarget);
+		File subTarget = new File(dir, String.valueOf(subAttachNo));
+		subAttach.transferTo(subTarget);
+		//메인사진 insert
+		AttachDto mainAttachDto = new AttachDto();
+		mainAttachDto.setAttachNo(mainAttachNo);
+		mainAttachDto.setAttachName(mainAttach.getOriginalFilename());
+		mainAttachDto.setAttachSize(mainAttach.getSize());
+		mainAttachDto.setAttachType(mainAttach.getContentType());
+		attachDao.insert(mainAttachDto);
 		
-		AttachDto attachDto = new AttachDto();
-		attachDto.setAttachNo(attachNo);
-		attachDto.setAttachName(attach.getOriginalFilename());
-		attachDto.setAttachSize(attach.getSize());
-		attachDto.setAttachType(attach.getContentType());
-		attachDao.insert(attachDto);
+		//서브사진 insert
+		AttachDto subAttachDto = new AttachDto();
+		subAttachDto.setAttachNo(subAttachNo);
+		subAttachDto.setAttachName(subAttach.getOriginalFilename());
+		subAttachDto.setAttachSize(subAttach.getSize());
+		subAttachDto.setAttachType(subAttachDto.getAttachType());
+		attachDao.insert(subAttachDto);
 		
 		judgeDto.setProjectNo(projectNo);
 		judgeDto.setJudgeNo(judgeNo);

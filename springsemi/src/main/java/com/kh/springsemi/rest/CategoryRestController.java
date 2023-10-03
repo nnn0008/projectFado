@@ -77,14 +77,15 @@ public class CategoryRestController {
 	}
 	
 	@PostMapping("/minorInsert")
-	public void minorInsert(@RequestParam String majorCategoryType, @RequestParam String minorCategoryType, @ModelAttribute MinorCategoryDto minorCategoryDto) {
+	public void minorInsert(@RequestParam String majorCategoryType, @RequestParam String minorCategoryType, 
+			@ModelAttribute MinorCategoryDto minorCategoryDto) {
 		//시퀀스로 부여받은 번호 넣기
 		int minorNo = minorCategoryDao.sequence();
 		minorCategoryDto.setMinorCategoryNo(minorNo);
 		//jsp에서 보내준 majorCategoryType을 넣어주고(X)표시가 있다
-		String majorReplace = majorCategoryType.replaceAll("X", "");
+//		String majorReplace = majorCategoryType.replaceAll("X", "");
 		//대분류 테이블에서 majorCategoryDto추출
-		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(majorReplace);		
+		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(majorCategoryType);		
 		//jsp에서 보내준 minorCategoryType을 minorCategoryType에 세팅
 		minorCategoryDto.setMinorCategoryType(minorCategoryType);
 		//대분류에서 얻은 번호를 소분류의 번호로 세팅해주고

@@ -131,4 +131,14 @@ public class ProjectRestController {
 				)
 			.body(resource);
 	}
+	
+//	@PostMapping("/getNickname")
+//	public String getNickname(@RequestParam int projectNo) {
+//		
+//	}
+	
+	
+	
+	
+	
 }

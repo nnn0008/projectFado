@@ -12,7 +12,7 @@
 
 <script>
 $(function () {
-    
+	
     //마감일자는 모든 정보를 입력하기 전까지 보여주지 않는다
     $('.end').hide();
     $("[name=projectStartDate], [name=projectPeriod]").on("input", function(){
@@ -123,12 +123,11 @@ $(function () {
       <div class="row">
          <h1>fado 프로젝트 등록하기</h1>            
       </div>
-      <div class="row">
-      	<input type="file" class="file-chooser" accept="image/*" name="attach">
-      	<button class="btn-save" type="button">설정하기</button>
+      <div class="row left">
+      	<input type="file" class="file-chooser-main" accept="image/*" name="mainAttach">
       </div>
       <div class="row">
-      	<img src="https://dummyimage.com/200x200/000/fff" class="img">
+      	
       </div>
       <div class="row left">
          제목
@@ -175,8 +174,8 @@ $(function () {
 				</select>
 			</div>
          </div>
-      <div class="row">
-         <textarea name="projectContent" placeholder="내용을 작성하세요"></textarea>
+      <div class="row left">
+         <input type="file" class="file-chooser-sub" accept="image/*" name="subAttach"> 	
       </div>
       <div class="row">
          <button type="submit" class="btn btn-positive w-100">작성하기</button>

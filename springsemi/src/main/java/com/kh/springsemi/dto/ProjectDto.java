@@ -15,7 +15,7 @@ public class ProjectDto {
 	private Date projectEndDate;
 	private int projectPeriod;
 	private Date projectRegDate;
-	private String projectContent;
+//	private String projectContent;
 	private String projectOwner;
 	private long projectReadcount;
 	private int minorCategoryNo;

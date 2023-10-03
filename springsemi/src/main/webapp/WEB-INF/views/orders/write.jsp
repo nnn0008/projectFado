@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <script>
@@ -33,6 +33,30 @@
 					</div>
 					<div class="row">
 						배송지
+						<c:forEach var="deliveryDto" items="${deliveryList}">
+							<div class="container w-800">
+								<div style="border: 1px solid #2c8de0; border-radius: 10px;" class="w-500 row container">
+									<div class="row">
+										${deliveryDto.deliveryReceiver}
+									</div>
+									<div class="row">
+										${deliveryDto.deliveryPost}
+									</div>
+									<div class="row">
+										${deliveryDto.deliveryAddr1}
+									</div>
+									<div class="row">
+										${deliveryDto.deliveryAddr2}
+									</div>
+									<div class="row">
+										${deliveryDto.deliveryContact}
+									</div>
+									<div class="row right">
+										<button class="btn">선택</button>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
 					</div>
 					<div class="row">
 						결제수단

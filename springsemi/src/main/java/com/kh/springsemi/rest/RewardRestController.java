@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.springsemi.dao.RewardDao;
+import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.RewardDto;
 
 @CrossOrigin
@@ -22,7 +23,8 @@ public class RewardRestController {
 	private RewardDao rewardDao;
 	
 	@PostMapping("/insert")
-	public void insert(@ModelAttribute RewardDto rewardDto, @RequestParam int projectNo) {
+	public void insert(@ModelAttribute RewardDto rewardDto,
+								@RequestParam int projectNo) {
 		int rewardNo = rewardDao.sequence();
 		rewardDto.setRewardNo(rewardNo);
 		rewardDto.setProjectNo(projectNo);

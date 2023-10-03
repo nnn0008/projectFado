@@ -179,7 +179,7 @@ $(function(){
     		</div>
     		<div class="flex-container">
     			<div class="w-100 left">
-    				${projectDto.projectContent}
+    				프로젝트 서브사진
     			</div>
     				창작자 소개<br>
     				${projectDto.projectOwner}<br>

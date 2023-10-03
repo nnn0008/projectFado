@@ -98,8 +98,8 @@ public class ProjectRestController {
 		attachDao.insert(attachDto);
 		
 		//파일 업로드가 완료되면 프로젝트와 파일번호를 연결
-		int projectNo = (int)session.getAttribute("projectNo");
-		projectDao.insertPhoto(projectNo, attachNo);//신규 이미지를 추가
+//		int projectNo = projectDao.sequence();
+//		projectDao.insertPhoto(projectNo, attachNo);//신규 이미지를 추가
 				
 		//화면에서 사용할 수 있도록 파일번호 또는 다운주소를 반환
 		//return 객체 or Map;

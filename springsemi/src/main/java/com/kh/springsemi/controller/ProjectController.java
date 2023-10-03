@@ -1,5 +1,7 @@
  package com.kh.springsemi.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -13,13 +15,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.springsemi.dao.AttachDao;
 import com.kh.springsemi.dao.JudgeDao;
 import com.kh.springsemi.dao.MajorCategoryDao;
 import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.MinorCategoryDao;
 import com.kh.springsemi.dao.ProjectDao;
 import com.kh.springsemi.dao.RewardDao;
+import com.kh.springsemi.dto.AttachDto;
 import com.kh.springsemi.dto.JudgeDto;
 import com.kh.springsemi.dto.MajorCategoryDto;
 import com.kh.springsemi.dto.MemberDto;
@@ -29,7 +34,6 @@ import com.kh.springsemi.dto.ProjectListDto;
 import com.kh.springsemi.dto.RewardDto;
 import com.kh.springsemi.error.AuthorityException;
 import com.kh.springsemi.error.NoTargetException;
-import com.kh.springsemi.mapper.JudgeMapper;
 
 @Controller
 @RequestMapping("/project")
@@ -54,7 +58,7 @@ public class ProjectController {
 	private RewardDao rewardDao;
 	
 	@Autowired
-	private JudgeMapper judgeMapper;
+	private AttachDao attachDao;
 	
 	//프로젝트 등록
 	@GetMapping("/write")
@@ -68,7 +72,7 @@ public class ProjectController {
 
 	@PostMapping("/write")
 	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session,
-			@ModelAttribute JudgeDto judgeDto, Model model) {
+			@ModelAttribute JudgeDto judgeDto, @RequestParam MultipartFile attach) throws IllegalStateException, IOException {
 		int projectNo = projectDao.sequence();
 		int judgeNo = judgeDao.sequence();
 		projectDto.setProjectNo(projectNo);
@@ -76,12 +80,25 @@ public class ProjectController {
 		projectDto.setProjectOwner(memberId);
 		projectDao.insert(projectDto);
 		
+		//첨부파일등록
+		int attachNo = attachDao.sequence();
+		
+		String home = System.getProperty("user.home");
+		File dir = new File(home, "upload");
+		dir.mkdirs();
+		File target = new File(dir, String.valueOf(attachNo));
+		attach.transferTo(target);
+		
+		AttachDto attachDto = new AttachDto();
+		attachDto.setAttachNo(attachNo);
+		attachDto.setAttachName(attach.getOriginalFilename());
+		attachDto.setAttachSize(attach.getSize());
+		attachDto.setAttachType(attach.getContentType());
+		attachDao.insert(attachDto);
+		
 		judgeDto.setProjectNo(projectNo);
 		judgeDto.setJudgeNo(judgeNo);
 		judgeDao.insert(judgeDto);
-    
-		//프로젝트의 이미지 번호를 찾아서 넘겨준다
-		model.addAttribute("projectNo", projectDao.findPhoto(projectNo));
 		return "redirect:reward/write?projectNo="+projectNo;
 	}
 	

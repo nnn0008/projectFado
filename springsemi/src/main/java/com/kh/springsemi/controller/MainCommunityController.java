@@ -76,8 +76,7 @@ public class MainCommunityController {
 	
 	
 	@RequestMapping("/noticeList")  //메인 커뮤니티 글 목록
-	public String noticeList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model,
-							@ModelAttribute MemberDto memberDto) {
+	public String noticeList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model) {
 		int count = mainCommunityDao.countNoticeList(vo);  //페이지 네이션 카운트 메소드
 		vo.setCount(count);
 		model.addAttribute("vo", vo);
@@ -93,8 +92,7 @@ public class MainCommunityController {
 		
 	
 	@RequestMapping("/qnaList")  //메인 커뮤니티 글 목록
-		public String qnaList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model,
-							@ModelAttribute MemberDto memberDto) {
+		public String qnaList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model) {
 		
 		int count = mainCommunityDao.countQnAList(vo);  //페이지 네이션 카운트 메소드
 		vo.setCount(count);
@@ -120,7 +118,7 @@ public class MainCommunityController {
 		String mainCommunityWriter = mainCommunityDto.getMainCommunityWriter();
 		if(mainCommunityWriter != null) {
 			MemberDto memberDto = memberDao.selectOne(mainCommunityWriter);
-			model.addAttribute("WriterDto", memberDto);  //writerDto = model 저장명 이름
+			model.addAttribute("writerDto", memberDto);  //writerDto = model 저장명 이름
 		}
 		return "/WEB-INF/views/mainCommunity/detail.jsp";
 	}

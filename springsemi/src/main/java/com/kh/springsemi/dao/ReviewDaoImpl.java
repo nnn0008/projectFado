@@ -68,14 +68,11 @@ public class ReviewDaoImpl implements ReviewDao{
 	}
 
 	@Override
-	public List<ReviewDto> selectList(@RequestParam int reviewNo) {
-		String sql = "select * from review_list "
-						+ "where review_no = ("
-							+ "select review_no from review_photo "
-								+ "where attach_no = ("
-							+ "select attach_no from attach "
-						+ "where attach_no=?))";
-		Object[] data = {reviewNo};
+	public List<ReviewDto> selectList(@RequestParam int projectNo) {
+		String sql = "SELECT * FROM review_list LEFT OUTER JOIN review_photo rp "
+				+ "ON review_list.review_no = rp.REVIEW_NO "
+				+ "WHERE PROJECT_NO = ?";
+		Object[] data = {projectNo};
 		return jdbcTemplate.query(sql, reviewMapper, data);
 	}
 

@@ -10,21 +10,14 @@
 
 
 <div class="container w-800">
-
-   <div class="row">
+  	<div class="row">
       <a class="btn" href="/mainCommunity/noticeList">공지사항</a>
       <a class="btn" style="background-color: #DEF2FF" href="/mainCommunity/qnaList">Q & A</a>
-   </div>
-   <%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
-   <c:if test="${sessionScope.name != null && sessionScop.level == '관리자'}">
-   <div class="row right">
-      <a href="write" class="btn btn-positive">
-         <i class="fa-solid fa-pen"></i>
-         글쓰기
-      </a>
-   </div>
-   </c:if>
-   
+   	</div>
+
+
+
+
    <%-- 
       검색일 경우 검색어를 추가로 출력 
       (참고) 논리 반환값을 가지는 getter 메소드는 get이 아니라 is로 시작한다
@@ -34,43 +27,57 @@
       &quot;${vo.keyword}&quot;에 대한 검색 결과
    </div>
    </c:if>
+   
+   
+     <div class="container w-600">
+	     <div class="row mb-50 mt-50">
+	         <h1 style="font-size:30px;">Q & A</h1>
+	         <hr style="border-color:#2c8de0; border-width:0.5px;">
+	     </div>
+   
 
+
+   	<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
+	   <c:if test="${sessionScope.name != null}">
+	   <div class="row right">
+	      <a href="write" class="btn btn-positive">
+	         <i class="fa-solid fa-pen"></i>
+	         글쓰기
+	      </a>
+	   </div>
+	   </c:if>
    
    
    
-   
-   
-   <div class="row">
-      <table class="table table-slit">
-         <thead>
-            <tr>
-               <th>번호</th>
-               <th>분류</th>
-               <th>작성자</th>
-               <th width="40%">제목</th>
-               <th>작성일</th>
-            </tr>
-         </thead>
-         <tbody>
+    <div class="mt-30">
          <c:forEach var="mainCommunityListDto" items="${qnaList}">
-            <tr>
-               <td>${mainCommunityListDto.mainCommunityNo}</td>
-               <td>${mainCommunityListDto.mainCommunityType}</td>
-               <td>${mainCommunityListDto.getMainCommunityWriterString()}</td>
-               <td align="left">
-                  
-                  <!-- 제목을 누르면 상세페이지로 이동 -->
-                  <a class="link" href="detail?mainCommunityNo=${mainCommunityListDto.mainCommunityNo}">
-                     ${mainCommunityListDto.mainCommunityTitle}
-                  </a>
-                  
-               </td>
-               <td>${mainCommunityListDto.mainCommunityRegDate}</td>
-            </tr>
-            </c:forEach>
-         </tbody>
-      </table>
-   </div>
+          <div class="">
+              <a class="link" href="detail?mainCommunityNo=${mainCommunityListDto.mainCommunityNo}"
+                 style="font-weight:bold; font-size:18px;">
+                      ${mainCommunityListDto.mainCommunityTitle}</a>
+          </div>
+          <div class="flex-container">
+             <div>
+              ${mainCommunityListDto.getMainCommunityWriterString()}
+             </div>
+             <div class="ms-20 me-10">
+                <i class="fa-regular fa-window-minimize fa-rotate-90"></i>
+             </div>
+             <div>
+              ${mainCommunityListDto.mainCommunityRegDate}
+             </div>
+          </div>
+          <div class="mt-20 mb-20">
+              <hr>
+          </div>
+          </c:forEach>
+       </div>
+    </div>
+
+
+ 
+   
+   
    
       <div class="row page-navigator mv-30">
       <!-- 이전 버튼 -->
@@ -112,8 +119,8 @@
       </button>
    </div>
    </form>
-</div>
 
+</div>
 
 
 

@@ -67,6 +67,7 @@ public class ReviewController {
 		reviewDto.setReviewWriter(memberId);
 		reviewDto.setReviewNo(reviewNo);
 		
+		reviewDao.insert(reviewDto);
 		//첨부파일 등록
 		if(!attach.isEmpty()) {
 			//첨부파일등록(파일이 있을때만)
@@ -88,7 +89,6 @@ public class ReviewController {
 			//연결(파일이 있을때만)
 			reviewDao.connect(reviewNo, attachNo);
 		}
-		reviewDao.insert(reviewDto);
 		
 		return "redirect:list";
 	}
@@ -135,19 +135,14 @@ public class ReviewController {
 //		}
 //		return "/WEB-INF/views/review/detail.jsp";
 //	}
+
 	
 	//목록
 	@RequestMapping("/list")
-	public String list(@RequestParam int reviewNo, Model model) {
-		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
-		List <ReviewDto>list = reviewDao.selectList(0);
+	public String list(@RequestParam int projectNo, Model model) {
+		List <ReviewDto>list = reviewDao.selectList(projectNo);
 		model.addAttribute("list", list);
 		
-		String reviewWriter = reviewDto.getReviewWriter();
-		if(reviewWriter != null) {
-			MemberDto memberDto = memberDao.selectOne(reviewWriter);
-			model.addAttribute("WriterDto", memberDto);
-		}
 		return "/WEB-INF/views/review/list.jsp";
 	}
 	

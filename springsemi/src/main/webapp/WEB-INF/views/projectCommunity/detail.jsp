@@ -136,7 +136,7 @@ $(function(){
 		<div class="row flex-container view-container">
 			<div class="w-75">
 				<div class="row left">
-					<h3 class="projectReplyWriter">작성자</h3>
+					<h3 class="projectCommunityDto.getProjectCommunityWriterString()">작성자</h3>
 				</div>
 				<div class="row left">
 					<pre class="projectReplyContent">내용</pre>
@@ -196,7 +196,7 @@ $(function(){
 		<h1>${projectCommunityDto.projectCommunityNo}번 게시글</h1>
 	</div>
 	<div>
-		<h2>작성자 : ${projectCommunityDto.getProjectCommunityWriterString()}</h2>
+		<h2>작성자 : ${writerDto.memberNickname}</h2>
 	</div>
 	<div>
 		<h2>글내용 : ${projectCommunityDto.projectCommunityContent}</h2>

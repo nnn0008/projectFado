@@ -1,7 +1,5 @@
 package com.kh.springsemi.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.ProjectCommunityDto;
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.error.NoTargetException;
-import com.kh.springsemi.vo.CommunityPaginationVO;
 
 @Controller
 @RequestMapping("/projectCommunity")
@@ -67,45 +64,45 @@ public class ProjectCommunityController {
 	}
 	
 	
-	@RequestMapping("/noticeList")
-	public String noticeList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model,
-							@ModelAttribute ProjectDto projectDto, 
-							@ModelAttribute ProjectCommunityDto projectCommunityDto) {
-		
-		int count = projectCommunityDao.countNoticeList(vo);  //페이지 네이션 카운트 메소드
-		int projectNo = projectDto.getProjectNo();
-		
-		projectCommunityDto.setProjectNo(projectNo);
-		
-		vo.setCount(count);
-		List<ProjectCommunityDto> noticeList = projectCommunityDao.selectNoticeList(vo);
-		
-		model.addAttribute("vo", vo);
-		model.addAttribute("noticeList", noticeList);
-			
-		return "/WEB-INF/views/projectCommunity/noticeList.jsp";
-	}
+//	@RequestMapping("/noticeList")
+//	public String noticeList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model,
+//							@ModelAttribute ProjectDto projectDto, 
+//							@ModelAttribute ProjectCommunityDto projectCommunityDto) {
+//		
+//		int count = projectCommunityDao.countNoticeList(vo);  //페이지 네이션 카운트 메소드
+//		int projectNo = projectDto.getProjectNo();
+//		
+//		projectCommunityDto.setProjectNo(projectNo);
+//		
+//		vo.setCount(count);
+//		List<ProjectCommunityDto> noticeList = projectCommunityDao.selectNoticeList(vo);
+//		
+//		model.addAttribute("vo", vo);
+//		model.addAttribute("noticeList", noticeList);
+//			
+//		return "/WEB-INF/views/projectCommunity/noticeList.jsp";
+//	}
 	
 	
-	@RequestMapping("/qnaList") 
-	public String qnaList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model,
-						@ModelAttribute ProjectDto projectDto,
-						@ModelAttribute ProjectCommunityDto projectCommunityDto) {
-	
-		int count = projectCommunityDao.countQnAList(vo);  //페이지 네이션 카운트 메소드
-		int projectdNo = projectDto.getProjectNo();  //프로젝트 넘버 가져와서 리스트 뽑기 위한 메소드
-		
-		projectCommunityDto.setProjectNo(projectdNo);
-		
-		vo.setCount(count);
-		
-		List<ProjectCommunityDto> qnaList = projectCommunityDao.selectQnAList(vo);
-		
-		model.addAttribute("vo", vo);
-		model.addAttribute("qnaList", qnaList);
-			
-		return "/WEB-INF/views/projectCommunity/qnaList.jsp";
-	}
+//	@RequestMapping("/qnaList") 
+//	public String qnaList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model,
+//						@ModelAttribute ProjectDto projectDto,
+//						@ModelAttribute ProjectCommunityDto projectCommunityDto) {
+//	
+//		int count = projectCommunityDao.countQnAList(vo);  //페이지 네이션 카운트 메소드
+//		int projectdNo = projectDto.getProjectNo();  //프로젝트 넘버 가져와서 리스트 뽑기 위한 메소드
+//		
+//		projectCommunityDto.setProjectNo(projectdNo);
+//		
+//		vo.setCount(count);
+//		
+//		List<ProjectCommunityDto> qnaList = projectCommunityDao.selectQnAList(vo);
+//		
+//		model.addAttribute("vo", vo);
+//		model.addAttribute("qnaList", qnaList);
+//			
+//		return "/WEB-INF/views/projectCommunity/qnaList.jsp";
+//	}
 	
 	
 	@RequestMapping("/detail")  
@@ -116,7 +113,7 @@ public class ProjectCommunityController {
 		String projectCommunityWriter = projectCommunityDto.getProjectCommunityWriter();
 		if(projectCommunityWriter != null) {
 			MemberDto memberDto = memberDao.selectOne(projectCommunityWriter);
-			model.addAttribute("WriterDto", memberDto); 
+			model.addAttribute("writerDto", memberDto); 
 		}
 		return "/WEB-INF/views/projectCommunity/detail.jsp";
 	}

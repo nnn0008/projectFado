@@ -12,6 +12,33 @@
 	.note-viewer{
 		line-height: 2em !important;
 	}
+	.box {
+          box-shadow: 0px 0px 1px 0px #2c8de0;
+            color: #202020;
+            padding: 20px;
+            border-radius: 10px;
+            padding-bottom: 20%;
+        }
+        
+        /* 수평선 스타일 */
+      .hr-style {
+            border: none; 
+            height: 2px; /* 수평선의 높이(굵기) 설정 */
+            background-color: #2c8de0;
+            opacity: 0.2; 
+            margin: 1em 0px;
+        }
+        .btn.btn-positive{
+        	display: inline-block;
+		    text-decoration: none;
+		    vertical-align: bottom;
+		    font-size: 13px;
+		    padding: 0.5em 1em;
+		    outline: none; /*outline은 입력 창 선택 시 강조 효과 */
+		    border: 1px solid #2c8de0 ;
+		    border-radius: 1em;
+		    line-height: 1.2em;
+        }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -193,20 +220,46 @@ $(function(){
 
 <div class="container w-800">
 	<div class="row">
-		<h1>${projectCommunityDto.projectCommunityNo}번 게시글</h1>
+		<h1 style="color:#2c8de0;">프로젝트 커뮤니티</h1>
 	</div>
-	<div>
-		<h2>작성자 : ${writerDto.memberNickname}</h2>
-	</div>
-	<div>
-		<h2>글내용 : ${projectCommunityDto.projectCommunityContent}</h2>
-	</div>
+   <div class="left box">
+   
+      <div class="right">
+          작성자 : ${writerDto.memberNickname}
+      </div>
+
+      
+      <div>
+         <span>${projectCommunityDto.projectCommunityContent}</span>
+      </div>
+      
+   </div>
 </div>
 
 
 
+	<%-- 각종 버튼이 위치하는 곳 --%>
+	<div class="row">
+	<c:if test="${sessionScope.name != null}">
+		<%-- 수정/삭제는 소유자일 경우만 나와야 한다 --%>
+		<c:if test="${sessionScope.name == projectCommunityDto.projectCommunityWriter}">
+		<a class="btn btn-negative" href="edit?projectCommunityNo=${projectCommunityDto.projectCommunityNo}">
+			<i class="fa-solid fa-pen-to-square"></i>
+			수정
+		</a>
+		<a class="btn btn-negative" href="delete?projectCommunityNo=${projectCommunityDto.projectCommunityNo}">
+			<i class="fa-solid fa-trash"></i>
+			삭제
+		</a>
+		</c:if>
+		</c:if>
+		
+		</div>
+
+
 
 	<%-- 댓글과 관련된 화면이 작성될 위치 --%>
+	<div class="container w-1000">
 	<c:if test="${sessionScope.name != null}">
 	<div class="row left">
 		<form class="projectReply-insert-form">
@@ -227,39 +280,13 @@ $(function(){
 	
 		<%-- 댓글 목록이 표시될 영역 --%>
 	<div class="row left projectReply-list"></div>
+	</div>
 	
 	
 	
 
 
-	<%-- 각종 버튼이 위치하는 곳 --%>
-	<div class="row">
-	<c:if test="${sessionScope.name != null}">
-		<%-- 수정/삭제는 소유자일 경우만 나와야 한다 --%>
-		<c:if test="${sessionScope.name == projectCommunityDto.projectCommunityWriter}">
-		<a class="btn btn-negative" href="edit?projectCommunityNo=${projectCommunityDto.projectCommunityNo}">
-			<i class="fa-solid fa-pen-to-square"></i>
-			수정
-		</a>
-		<a class="btn btn-negative" href="delete?projectCommunityNo=${projectCommunityDto.projectCommunityNo}">
-			<i class="fa-solid fa-trash"></i>
-			삭제
-		</a>
-		</c:if>
-		</c:if>
-		<c:choose>
-			<c:when test="${projectCommunityDto.projectCommunityType == '공지사항'}">
-				<a href="noticeList" class="btn">
-					<i class="fa-solid fa-list"></i>목록
-				</a>
-			</c:when>
-			<c:otherwise>
-				<a href="qnaList" class="btn">
-					<i class="fa-solid fa-list"></i>목록
-				</a>
-			</c:otherwise>
-		</c:choose>
-		</div>
+
 		
 		
 		

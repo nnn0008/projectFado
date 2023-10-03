@@ -18,4 +18,6 @@ public class ReviewDto {
 			return "탈퇴한 사용자";
 		return memberNickname;
 	}
+	
+	private boolean image;
 }

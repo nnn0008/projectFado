@@ -140,8 +140,10 @@ public class ReviewController {
 	//목록
 	@RequestMapping("/list")
 	public String list(@RequestParam int projectNo, Model model) {
-		List <ReviewDto>list = reviewDao.selectList(projectNo);
-		model.addAttribute("list", list);
+		
+		
+		List <ReviewDto> reviewList = reviewDao.selectList(projectNo);
+		model.addAttribute("reviewList", reviewList);
 		
 		return "/WEB-INF/views/review/list.jsp";
 	}

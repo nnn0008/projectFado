@@ -32,17 +32,6 @@ public class PaymentDaoImpl implements PaymentDao{
 		jdbcTemplate.update(sql, data);
 	}
 
-	@Override
-	public boolean updatePaymentPerson(PaymentDto paymentDto) {
-		String sql = "";
-		return false;
-	}
-	
-	@Override
-		public boolean updatePaymentPrice(PaymentDto paymentDto) {
-			// TODO Auto-generated method stub
-			return false;
-	}
 	
 	@Override
 	public boolean updatePaymentStatus(PaymentDto paymentDto) {

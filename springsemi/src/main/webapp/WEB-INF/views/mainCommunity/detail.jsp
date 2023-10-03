@@ -223,7 +223,7 @@ $(function(){
 
 <div class="container w-800">
    <div class="row">
-      <h3 style="color:#2c8de0;">커뮤니티</h3>
+      <h1 style="color:#2c8de0;">커뮤니티</h1>
    </div>
    
    <div class="left box">

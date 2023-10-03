@@ -10,8 +10,6 @@ public interface PaymentDao {
 	
 	int sequence();
 	void createPayment(PaymentDto paymentDto);
-	boolean updatePaymentPerson(PaymentDto paymentDto);
-	boolean updatePaymentPrice(PaymentDto paymentDto);
 	boolean updatePaymentStatus(PaymentDto paymentDto);
 	OrdersDto selectOne(int paymentNo);
 	List<PaymentDto> selectList();

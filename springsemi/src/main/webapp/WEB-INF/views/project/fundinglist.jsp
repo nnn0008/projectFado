@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
@@ -44,7 +44,7 @@
         .list_wrap .item .image{
             width: 100%;
             height: 150px;
-            background: url(./image/noshowoff.jpg);
+            background: url(../images/fado.jpg);
             background-repeat: no-repeat;
             background-position: 50% 50%;
             background-size: cover;
@@ -90,6 +90,9 @@
         }
         </style>
         
+        
+		
+		
          <div class="list_wrap">
                 <ul>
                     <li class="item">

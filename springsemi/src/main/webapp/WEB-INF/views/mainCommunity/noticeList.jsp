@@ -5,9 +5,20 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
+<style>
+ .btn.btn-positive{
+        	display: inline-block;
+		    text-decoration: none;
+		    vertical-align: bottom;
+		    font-size: 13px;
+		    padding: 0.5em 1em;
+		    outline: none; /*outline은 입력 창 선택 시 강조 효과 */
+		    border: 1px solid #2c8de0 ;
+		    border-radius: 1em;
+		    line-height: 1.2em;
+        }
 
-
-
+</style>
 
 <div class="container w-800">
 
@@ -103,7 +114,7 @@
       
       <input type="search" name="keyword"  required class="form-input"
                placeholder="검색어 입력" value="${param.keyword}">
-      <button type="submit" class="btn btn-positive">
+      <button type="submit" class="btn btn-positive" style="width:70px; height:35px;">
          <i class="fa-solid fa-magnifying-glass"></i>
          검색
       </button>

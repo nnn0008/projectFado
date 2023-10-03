@@ -20,5 +20,4 @@ public class PaymentMapper implements RowMapper<PaymentDto>{
 		paymentDto.setPaymentDate(rs.getDate("payment_date"));
 		return paymentDto;
 	}
-
 }

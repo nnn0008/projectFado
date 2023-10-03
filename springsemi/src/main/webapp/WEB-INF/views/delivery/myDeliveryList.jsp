@@ -69,7 +69,7 @@ $(function(){
 	function loadList() {
 		$.ajax({
 			url:"/rest/delivery/list",
-			method:"post",
+// 			method:"post",
 			success: function(response){
 				$(".delivery-list").empty();
 				
@@ -266,7 +266,7 @@ $(function(){
 		<div class="row">
 			<h1>배송지 등록</h1>
 		</div>
-		`
+		
 		<div class="row left">
            <input style="width:8em" type="text" name="deliveryPost" size="6" maxlength="6" 
            class="form-input post-search" placeholder="우편번호" readonly>

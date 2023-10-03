@@ -8,6 +8,7 @@ import lombok.Data;
 public class OrdersDto {
 	private int ordersNo;
 	private String ordersPerson;
+	private int projectNo;
 	private Date ordersDate;
 	private String ordersReward;
 	private int ordersPrice;

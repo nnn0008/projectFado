@@ -140,11 +140,6 @@ $(function(){
 	});
 </script>
 
-
-
-
-
-
     <div class="container w-1000">
     	<div class="row">
     		<h5>${majorCategoryDto.majorCategoryType} > ${minorCategoryDto.minorCategoryType}</h5>
@@ -211,13 +206,42 @@ $(function(){
     		</div>
     	</div>
     </div>
-    
         
     <!--  커뮤니티 리스트 스크립트 -->
     <script>
 
     </script>
     
+    <div class="container w-1000 flex-container">
+    
+    	<div class="row" style="flex-grow: 3.5;">
+    		<img src="https://picsum.photos/id/2/100/100">
+    	</div>
+    	
+    	<div class="row w-200" style="background-color: #E0F2F7; flex-frow:1.5; border: 1px solid #E0F2F7; border-radius: 10px;">
+    	<div class="row">
+    		리워드 선택
+    	</div>
+    	<c:forEach var="rewardDto" items="${rewardList}">
+    		<button class="btn reward-btn" style="display: block">
+	    	<div class="container w-100 mt-10" >
+	    		<div class="row" style="display: block">
+	    			${rewardDto.rewardPrice}원
+	    		</div>
+	    		<div class="row" style="display: block">
+	    			${rewardDto.rewardType}
+	    		</div>
+	    	</div>
+	    	</button>
+    	</c:forEach>
+    	<div class="row">
+    		<button class="btn btn-positive">
+    			<a class="link" href="/orders/receipt"></a>
+    			주문하기
+    		</button>
+    	</div>
+    	</div> 
+    </div>
     
     
     
@@ -225,6 +249,7 @@ $(function(){
     
     
     
+    <div class="row">
 	<div class="row" id="notice; qna; review">
 		<hr>
 	</div>
@@ -373,7 +398,12 @@ $(function(){
 
        </c:forEach>
       </div>
-
+      
+      
+    </div> 
+    
+    
+      
    	
     
     

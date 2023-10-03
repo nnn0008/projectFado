@@ -39,6 +39,13 @@ public class JudgeDaoImpl implements JudgeDao{
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
+	@Override
+	public boolean updateByProjectNo(JudgeDto judgeDto) {
+		String sql = "update judge set judge_date = sysdate, judge_status = ? where project_no = ?";
+		Object[] data = {judgeDto.getJudgeStatus(), judgeDto.getProjectNo()};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 	//삭제
 	@Override
 	public boolean delete(int judgeNo) {
@@ -63,4 +70,11 @@ public class JudgeDaoImpl implements JudgeDao{
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	@Override
+	public JudgeDto selectOneByProjectNo(int projectNo) {
+		String sql = "select * from judge where project_no = ?";
+		Object[] data = {projectNo};
+		List<JudgeDto> list = jdbcTemplate.query(sql, judgeMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 }

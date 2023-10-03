@@ -11,7 +11,6 @@ import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ProjectListDto;
 import com.kh.springsemi.mapper.ProjectListMapper;
 import com.kh.springsemi.mapper.ProjectMapper;
-import com.kh.springsemi.vo.PaginationVO;
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao{
@@ -197,4 +196,5 @@ public class ProjectDaoImpl implements ProjectDao{
 		Object[] data = {projectNo};
 		return jdbcTemplate.queryForObject(sql, Integer.class, data);
 	}
+	
 }

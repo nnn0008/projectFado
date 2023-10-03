@@ -12,6 +12,7 @@ public interface JudgeDao {
 	
 	//수정
 	boolean update(JudgeDto judgeDto);
+	boolean updateByProjectNo(JudgeDto judgeDto);
 	
 	//삭제
 	boolean delete(int judgeNo);
@@ -21,5 +22,5 @@ public interface JudgeDao {
 	
 	//상세
 	JudgeDto selectOne(int judgeNo);
-	
+	JudgeDto selectOneByProjectNo(int projectNo);
 }

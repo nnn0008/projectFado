@@ -24,6 +24,8 @@ import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.MinorCategoryDao;
 import com.kh.springsemi.dao.ProjectCommunityDao;
 import com.kh.springsemi.dao.ProjectDao;
+import com.kh.springsemi.dao.ProjectPhotoDao;
+import com.kh.springsemi.dao.ProjectSubPhotoDao;
 import com.kh.springsemi.dao.ReviewDao;
 import com.kh.springsemi.dao.RewardDao;
 import com.kh.springsemi.dto.AttachDto;
@@ -34,6 +36,8 @@ import com.kh.springsemi.dto.MinorCategoryDto;
 import com.kh.springsemi.dto.ProjectCommunityDto;
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ProjectListDto;
+import com.kh.springsemi.dto.ProjectPhotoDto;
+import com.kh.springsemi.dto.ProjectSubPhotoDto;
 import com.kh.springsemi.dto.ReviewDto;
 import com.kh.springsemi.dto.RewardDto;
 import com.kh.springsemi.error.AuthorityException;
@@ -70,6 +74,12 @@ public class ProjectController {
 	@Autowired
 	private ProjectCommunityDao projectCommunityDao;
 	
+	@Autowired
+	private ProjectPhotoDao projectPhotoDao;
+	
+	@Autowired
+	private ProjectSubPhotoDao projectSubPhotoDao;
+	
 	//프로젝트 등록
 	@GetMapping("/write")
 	public String write(Model majorModel, Model minorModel) {
@@ -82,18 +92,19 @@ public class ProjectController {
 
 	@PostMapping("/write")
 	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session,
-			@ModelAttribute JudgeDto judgeDto, @RequestParam MultipartFile mainAttach,
+			@ModelAttribute JudgeDto judgeDto, @ModelAttribute ProjectPhotoDto projectPhotoDto,
+			@ModelAttribute ProjectSubPhotoDto projectSubPhotoDto ,@RequestParam MultipartFile mainAttach,
 			@RequestParam MultipartFile subAttach) throws IllegalStateException, IOException {
 		int projectNo = projectDao.sequence();
 		int judgeNo = judgeDao.sequence();
-		projectDto.setProjectNo(projectNo);
-		String memberId = (String)session.getAttribute("name");
-		projectDto.setProjectOwner(memberId);
-		projectDao.insert(projectDto);
 		
 		//첨부파일등록
 		int mainAttachNo = attachDao.sequence();
 		int subAttachNo = attachDao.sequence();
+		projectPhotoDto.setProjectNo(projectNo);
+		projectPhotoDto.setAttachNo(mainAttachNo);
+		projectSubPhotoDto.setProjectNo(projectNo);
+		projectSubPhotoDto.setAttachNo(subAttachNo);
 		
 		String home = System.getProperty("user.home");
 		File dir = new File(home, "upload");
@@ -102,6 +113,7 @@ public class ProjectController {
 		mainAttach.transferTo(mainTarget);
 		File subTarget = new File(dir, String.valueOf(subAttachNo));
 		subAttach.transferTo(subTarget);
+		
 		//메인사진 insert
 		AttachDto mainAttachDto = new AttachDto();
 		mainAttachDto.setAttachNo(mainAttachNo);
@@ -117,6 +129,15 @@ public class ProjectController {
 		subAttachDto.setAttachSize(subAttach.getSize());
 		subAttachDto.setAttachType(subAttachDto.getAttachType());
 		attachDao.insert(subAttachDto);
+		
+		//사진 등록 후 프로젝트 등록
+		projectDto.setProjectNo(projectNo);
+		String memberId = (String)session.getAttribute("name");
+		projectDto.setProjectOwner(memberId);
+		projectDao.insert(projectDto);	
+		
+		projectPhotoDao.insert(projectPhotoDto);
+		projectSubPhotoDao.insert(projectSubPhotoDto);
 		
 		judgeDto.setProjectNo(projectNo);
 		judgeDto.setJudgeNo(judgeNo);
@@ -145,21 +166,25 @@ public class ProjectController {
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int projectNo, HttpSession session, Model model) {
 		ProjectDto projectDto = projectDao.selectOne(projectNo);
-		model.addAttribute("projectDto", projectDto);
-		
 		MinorCategoryDto minorCategoryDto = minorCategoryDao.selectOne(projectDto.getMinorCategoryNo());
-		model.addAttribute("minorCategoryDto", minorCategoryDto);
 		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(minorCategoryDto.getMajorCategoryNo());
+		ProjectPhotoDto projectPhotoDto = projectPhotoDao.selectOne(projectNo);
+		AttachDto mainAttachDto = attachDao.selectOne(projectPhotoDto.getAttachNo());
+		ProjectSubPhotoDto projectSubPhotoDto = projectSubPhotoDao.selectOne(projectNo);
+		AttachDto subAttachDto = attachDao.selectOne(projectSubPhotoDto.getAttachNo());
+		
+		model.addAttribute("projectDto", projectDto);
+		model.addAttribute("minorCategoryDto", minorCategoryDto);
 		model.addAttribute("majorCategoryDto", majorCategoryDto);
+		model.addAttribute("mainAttachDto", mainAttachDto);
+		model.addAttribute("subAttachDto", subAttachDto);
 		
 		List<RewardDto> rewardList = rewardDao.selectListByProjectNo(projectNo);
 		model.addAttribute("rewardList", rewardList);
 		
 		Date currentTime = new Date();
 		Date endTime = projectDto.getProjectEndDate();
-//		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
 		long difference = endTime.getTime() - currentTime.getTime();
-//		String d = fmt.format(difference);
 		model.addAttribute("difference", difference);
 		
 		String projectOwner = projectDto.getProjectOwner();

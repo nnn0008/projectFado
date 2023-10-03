@@ -5,7 +5,6 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-
     <!--  프로젝트 디테일 스크립트 -->
 <!-- 타이머를 생성 및 카운트다운 -->
 <script>
@@ -140,7 +139,7 @@ $(function(){
 	});
 </script>
 
-    <div class="container w-1000">
+    <div class="container w-800">
     	<div class="row">
     		<h5>${majorCategoryDto.majorCategoryType} > ${minorCategoryDto.minorCategoryType}</h5>
     	</div>
@@ -149,10 +148,10 @@ $(function(){
     	</div>
     	<div class="row">
     		<div class="flex-container">
-    			<div class="w-100 left">
-    				<img src="/rest/project/download?attachNo=${projectNo}" class="" width="500" height="500">
+    			<div class="w-75 left">
+    				<img src="/rest/project/download?attachNo=${mainAttachDto.attachNo}"  width="400px" height="400px">
     			</div>
-    			<div class="w-100 left">
+    			<div class="w-50 left">
     				모인금액
     				<fmt:formatNumber value="${projectDto.projectTotalPrice}" pattern="#,###"/>원<br>
     				남은시간
@@ -179,7 +178,7 @@ $(function(){
     		</div>
     		<div class="flex-container">
     			<div class="w-100 left">
-    				프로젝트 서브사진
+    				<img src="/rest/project/download?attachNo=${subAttachDto.attachNo}">
     			</div>
     				창작자 소개<br>
     				${projectDto.projectOwner}<br>

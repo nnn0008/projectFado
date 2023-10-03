@@ -24,9 +24,15 @@
     <link rel="stylesheet" type="text/css" href="/css/commons.css">
     <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 
+    <!-- jquery cdn -->
+	<script src="/js/easytimer.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/moment-duration-format@2.3.2/lib/moment-duration-format.min.js"></script>
 	<!-- swiper cdn -->
+	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-
+	
 <style>
 
 		a{

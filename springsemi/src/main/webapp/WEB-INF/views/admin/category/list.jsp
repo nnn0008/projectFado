@@ -7,6 +7,7 @@
 
 	$(function(){
 		refreshMajor();
+		
 // 		//대분류 반복문으로 구현
 // 		$(".category-main").empty();
 // 		$.ajax({
@@ -65,6 +66,7 @@
 								},
 								success:function(response){
 									$(".minor").remove();
+									refreshMinor();
 								},								
 							});
 						});
@@ -148,7 +150,7 @@
 				$(".btn-addDetail").prop("disabled", true);
 				$(".minor-check").text("한글 1~10자 이내로 입력하십시오");
 			}
-		});
+		});	
 		
 		//추가 버튼을 눌렀을 때, 대분류가 추가되도록 만들기
 		$(".major-insert-form").submit(function(e){
@@ -172,13 +174,21 @@
 			});
 		});
 		
+		//전역변수로 선택
+		var clickedText;
+		//대분류를 클릭했을 때, 그 값을 저장하는 메소드
+		$(".category-main").on("click", ".major", function() {
+		    clickedText = $(this).text();
+// 		    console.log("Clicked text:", clickedText);
+		});
+		
 		//추가 버튼을 클릭시, 소분류가 추가되도록 만들기
 		$(".minor-insert-form").submit(function(e){
 			//폼 전송을 방지
 			e.preventDefault();
 			//비동기통신으로 분류 추가하게 만들기
-			//대분류는 텍스트로 불러와야되고
-			var majorCategoryType = $();
+			//대분류는 전역변수로 설정해둔 값을 받아옴
+			var majorCategoryType = clickedText;
 			//소분류는 내가 입력한 값을 불러와야 한다
 			var minorCategoryType = $("[name=minorCategoryType]").val();
 			$.ajax({
@@ -191,6 +201,7 @@
 				success:function(response){
 // 					console:log(response);
 					$("[name=minorCategoryType]").val("").focus(); //입력창 초기화
+					refreshMinor();
 				},
 			});
 		});
@@ -231,6 +242,40 @@
 			});
 		}
 		
+		//소분류가 추가됐을 때, 화면을 갱신하는 함수
+		function refreshMinor(){
+			$(".category-detail").empty();
+			var majorCategoryType = clickedText;
+//   	    console.log(majorCategoryType);
+			if(majorCategoryType.length == 0) return;
+			$.ajax({
+				url:"/rest/category/minorList",
+				method:"post",
+				data: {majorCategoryType : majorCategoryType},
+				success:function(response){
+					console.log(response);
+					$(".category-detail").empty();
+					for(var i = 0; i < response.length; i++){
+						var div = $("<div>").addClass("p-10 row left minor").text(response[i].minorCategoryType);
+						var xBtn = $("<button>").addClass("btn-main fas fa-x").attr("type","button").click(function(){
+							//x버튼 눌렀을 때 분류 삭제되도록 구현
+							$.ajax({
+								url:"/rest/category/minorDelete",
+								method:"post",
+								data: {
+									minorCategoryType : $(this).parent().text()
+								},
+								success:function(response){
+									$(".minor").remove();
+									refreshMinor();
+								},								
+							});
+						});
+					 div.append(xBtn).appendTo(".category-detail");
+					}					
+				},			
+			});	
+			}
 		
 	});
 

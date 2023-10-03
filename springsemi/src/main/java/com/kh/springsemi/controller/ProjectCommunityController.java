@@ -57,8 +57,15 @@ public class ProjectCommunityController {
 	
 	
 	@GetMapping("/edit")
-	public String edit(@RequestParam int projectCommunityNo, Model model) {
+	public String edit(@RequestParam int projectCommunityNo, Model model,
+						@ModelAttribute ProjectDto projectDto) {
+		int projectNo = projectDto.getProjectNo();
+		
+		
 		ProjectCommunityDto projectCommunityDto = projectCommunityDao.selectOne(projectCommunityNo);
+		
+		projectCommunityDto.setProjectNo(projectNo);
+		
 		model.addAttribute("projectCommunityDto", projectCommunityDto);
 		return "/WEB-INF/views/fundingCommunity/edit.jsp";
 	}

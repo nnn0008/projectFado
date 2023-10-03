@@ -30,6 +30,18 @@
             opacity: 0.2; 
             margin: 1em 0px;
         }
+        .btn.btn-positive{
+        	display: inline-block;
+		    text-decoration: none;
+		    vertical-align: bottom;
+		    font-size: 13px;
+		    padding: 0.5em 1em;
+		    outline: none; /*outline은 입력 창 선택 시 강조 효과 */
+		    border: 1px solid #2c8de0 ;
+		    border-radius: 1em;
+		    line-height: 1.2em;
+        }
+        
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -240,7 +252,7 @@ $(function(){
  <%-- 각종 버튼이 위치하는 곳 --%>
    <div class="row">
    <c:if test="${sessionScope.name != null}">
-      <a class="btn btn-positive" href="write">
+      <a class="btn btn-positive" href="write" style="width:75px; height:35px;">
          <i class="fa-solid fa-pen"></i>
          새글
       </a>

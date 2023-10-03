@@ -243,7 +243,7 @@ $(function(){
     <!-- 
     !!!공지사항!!! 
     --> 
-    <div class="container w-800 noticePage">
+    <div class="container w-600 noticePage">
 		<c:if test="${sessionScope.name != null && sessionScope.level == '판매자'}">
 		    <div class="row right">
 		        <a href="/projectCommunity/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
@@ -259,64 +259,42 @@ $(function(){
 	        <hr>
 	    </div>
 	    
-		<c:forEach var="projectCommunityDto" items="${noticeList}">
-	          <div class="flex-container">
-	              <h3>${projectCommunityDto.getProjectCommunityWriterString()}</h3>
-	          </div>
-	          <div>
-	              ${projectCommunityDto.projectCommunityContent}
-	          </div>
-	          <div>
-	          	${projectCommunityDto.projectCommunityRegDate}
-	          </div>
-	          <div class="row">
-	              <button class="btn" href="detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}"><i class="fa-solid fa-arrow-down"></i> 더보기</button>
-	          </div>
-	      </c:forEach>
+       <div class="mt-30">
+           <c:forEach var="projectCommunityDto" items="${noticeList}">
+           <div class="">
+               <a class="link" href="/projectCommunity/detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}"
+                  style="font-weight:bold; font-size:18px;">
+                        ${projectCommunityDto.projectCommunityContent}</a>
+           </div>
+           <div class="flex-container">
+              <div>
+               ${projectCommunityDto.getProjectCommunityWriterString()}
+              </div>
+              <div class="ms-20 me-10">
+                 <i class="fa-regular fa-window-minimize fa-rotate-90"></i>
+              </div>
+              <div>
+               ${projectCommunityDto.projectCommunityRegDate}
+              </div>
+           </div>
+           <div class="mt-20 mb-20">
+               <hr>
+           </div>
+           </c:forEach>
+       	</div>
+	    </div>
 	
 	
 
 
-		<div class="row page-navigator mv-30">
-			<!-- 이전 버튼 -->
-			<c:if test="${!vo.first}">
-				<a href="noticeList?${vo.prevQueryString}">
-					<i class="fa-solid fa-angle-left"></i>
-				</a>
-			</c:if>
-			
-			<!-- 숫자 버튼 -->
-			<c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
-				<c:choose>
-					<c:when test="${vo.page == i}">
-						<a class="on">${i}</a>
-					</c:when>
-					<c:otherwise>
-						<a href="noticeList?${vo.getQueryString(i)}">${i}</a> 
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			
-			<!-- 다음 버튼 -->
-			<c:if test="${!vo.last}">
-				<a href="noticeList?${vo.nextQueryString}">
-					<i class="fa-solid fa-angle-right"></i>
-				</a>
-			</c:if>
-		</div>
-	</div>
-  
-	
 
-	
-	
 	
 	
 	
    	<!-- 
    	!!!Q&A!!! 
    	--> 
-   	<div class="container w-800 qnaPage">
+   	<div class="container w-600 qnaPage">
    	    <c:if test="${sessionScope.name != null && sessionScop.level != '관리자'}">
 			<div class="row right">
 				<a href="/projectCommunity/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
@@ -328,95 +306,36 @@ $(function(){
 
       
         <div class="row">
-            <hr>
-            	<h2>서퍼 Q&A</h2>
-            <hr>
-        </div>
-        <div class="flex-container">
-            <h3>${projectCommunityDto.getProjectCommunityWriterString()}</h3>
-        </div>
-        <div>
-            ${projectCommunityDto.projectCommunityContent}
-        </div>
-        <div>
-        	${projectCommunityDto.projectCommunityRegDate}
-        </div>
-        <div class="row">
-            <button class="btn" href="detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}"><i class="fa-solid fa-arrow-down"></i> 더보기</button>
-        </div>
+	            <hr>
+	            	<h2>서퍼 Q&A</h2>
+	            <hr>
+	    </div>
+       	<div class="mt-30">
+           <c:forEach var="projectCommunityDto" items="${qnaList}">
+           <div class="">
+               <a class="link" href="/projectCommunity/detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}"
+                  style="font-weight:bold; font-size:18px;">
+                        ${projectCommunityDto.projectCommunityContent}</a>
+           </div>
+           <div class="flex-container">
+              <div>
+               ${projectCommunityDto.getProjectCommunityWriterString()}
+              </div>
+              <div class="ms-20 me-10">
+                 <i class="fa-regular fa-window-minimize fa-rotate-90"></i>
+              </div>
+              <div>
+               ${projectCommunityDto.projectCommunityRegDate}
+              </div>
+           </div>
+           <div class="mt-20 mb-20">
+               <hr>
+           </div>
+           </c:forEach>
+       	</div>
+	    </div>
 	
 	
-	
-	
-	<c:forEach var="projectCommunityDto" items="${qnaList}">
-		<div class="row">
-			<table class="table table-slit">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>분류</th>
-						<th>작성자</th>
-						<th width="40%">제목</th>
-						<th>작성일</th>
-					</tr>
-				</thead>
-				<tbody>
-				<c:forEach var="projectCommunityDto" items="${qnaList}">
-					<tr>
-						<td>${projectCommunityDto.projectCommunityNo}</td>
-						<td>${projectCommunityDto.projectCommunityType}</td>
-						<td>${projectCommunityDto.getProjectCommunityWriterString()}</td>
-						<td align="left">
-							<a class="link" href="detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}">
-								${projectCommunityDto.projectCommunityNo}
-							</a>
-	
-							
-						</td>
-						<td>${projectCommunityDto.projectCommunityRegDate}</td>
-					</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-	</c:forEach>
-	
-	
-	
-	
-	
-		<div class="row page-navigator mv-30">
-			<!-- 이전 버튼 -->
-			<c:if test="${!vo.first}">
-				<a href="qnaList?${vo.prevQueryString}">
-					<i class="fa-solid fa-angle-left"></i>
-				</a>
-			</c:if>
-			
-			<!-- 숫자 버튼 -->
-			<c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
-				<c:choose>
-					<c:when test="${vo.page == i}">
-						<a class="on">${i}</a>
-					</c:when>
-					<c:otherwise>
-						<a href="qnaList?${vo.getQueryString(i)}">${i}</a> 
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			
-			<!-- 다음 버튼 -->
-			<c:if test="${!vo.last}">
-				<a href="qnaList?${vo.nextQueryString}">
-					<i class="fa-solid fa-angle-right"></i>
-				</a>
-			</c:if>
-		</div>
-	</div>
-	
-      
-      
-      
       
       
       
@@ -426,7 +345,7 @@ $(function(){
    	<!-- 
    	!!!후기!!! 
    	--> 
-   	<div class="container w-800 reviewPage">
+   	<div class="container w-600 reviewPage">
    	   	<c:if test="${sessionScope.name != null && sessionScope.level == '구매자'}">
 		    <div class="row right">
 		        <a href="/review/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
@@ -440,7 +359,7 @@ $(function(){
             <h2>서핑 후기</h2>
             <hr>
         </div>
-		<c:forEach var="reviewDto" items="${list}">
+		<c:forEach var="reviewDto" items="${reviewList}">
         	<div class="flex-container">
 	             <img src="http://dummyimage.com/40X40/000/fff" width="40" height="40">
 	             <h3>${reviewDto.getReviewWriterString()}</h3>

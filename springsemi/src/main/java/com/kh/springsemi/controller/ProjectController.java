@@ -102,17 +102,23 @@ public class ProjectController {
 		return "redirect:reward/write?projectNo="+projectNo;
 	}
 	
-	@GetMapping("/reward/write")
-	public String rewardWrite(@RequestParam int projectNo) {
+//	@GetMapping("/reward/write")
+//	public String rewardWrite(@RequestParam int projectNo) {
+//		return "/WEB-INF/views/reward/write.jsp";
+//	}
+//	
+//	@PostMapping("/reward/write")
+//	public String rewardWrite(@ModelAttribute RewardDto rewardDto, 
+//											@RequestParam int projectNo) {
+//		return "redirect:detail?projectNo="+projectNo;
+//	}
+	
+	@RequestMapping("/reward/write")
+	public String write(@RequestParam int projectNo, Model model) {
+		ProjectDto projectDto = projectDao.selectOne(projectNo);
+		model.addAttribute("projectDto",projectDto);
 		return "/WEB-INF/views/reward/write.jsp";
 	}
-	
-	@PostMapping("/reward/write")
-	public String rewardWrite(@ModelAttribute RewardDto rewardDto, 
-											@RequestParam int projectNo) {
-		return "redirect:detail?projectNo="+projectNo;
-	}
-	
 	
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int projectNo, HttpSession session, Model model) {

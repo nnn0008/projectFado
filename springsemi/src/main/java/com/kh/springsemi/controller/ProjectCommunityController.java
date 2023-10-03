@@ -68,13 +68,19 @@ public class ProjectCommunityController {
 	
 	
 	@RequestMapping("/noticeList")
-	public String noticeList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model) {
+	public String noticeList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model,
+							@ModelAttribute ProjectDto projectDto, 
+							@ModelAttribute ProjectCommunityDto projectCommunityDto) {
 		
 		int count = projectCommunityDao.countNoticeList(vo);  //페이지 네이션 카운트 메소드
-		vo.setCount(count);
-		model.addAttribute("vo", vo);
+		int projectNo = projectDto.getProjectNo();
 		
+		projectCommunityDto.setProjectNo(projectNo);
+		
+		vo.setCount(count);
 		List<ProjectCommunityDto> noticeList = projectCommunityDao.selectNoticeList(vo);
+		
+		model.addAttribute("vo", vo);
 		model.addAttribute("noticeList", noticeList);
 			
 		return "/WEB-INF/views/projectCommunity/noticeList.jsp";
@@ -82,10 +88,17 @@ public class ProjectCommunityController {
 	
 	
 	@RequestMapping("/qnaList") 
-	public String qnaList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model) {
+	public String qnaList(@ModelAttribute(name = "vo") CommunityPaginationVO vo, Model model,
+						@ModelAttribute ProjectDto projectDto,
+						@ModelAttribute ProjectCommunityDto projectCommunityDto) {
 	
 		int count = projectCommunityDao.countQnAList(vo);  //페이지 네이션 카운트 메소드
+		int projectdNo = projectDto.getProjectNo();  //프로젝트 넘버 가져와서 리스트 뽑기 위한 메소드
+		
+		projectCommunityDto.setProjectNo(projectdNo);
+		
 		vo.setCount(count);
+		
 		List<ProjectCommunityDto> qnaList = projectCommunityDao.selectQnAList(vo);
 		
 		model.addAttribute("vo", vo);

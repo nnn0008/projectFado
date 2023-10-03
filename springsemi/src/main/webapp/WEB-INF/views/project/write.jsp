@@ -175,6 +175,7 @@ $(function () {
 			</div>
          </div>
       <div class="row left">
+      		내용사진을 입력하세요
          <input type="file" class="file-chooser-sub" accept="image/*" name="subAttach"> 	
       </div>
       <div class="row">

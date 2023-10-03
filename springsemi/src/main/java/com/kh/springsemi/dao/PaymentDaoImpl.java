@@ -27,7 +27,7 @@ public class PaymentDaoImpl implements PaymentDao{
 
 	@Override
 	public void createPayment(PaymentDto paymentDto) {
-		String sql = "";
+		String sql = "insert into payment";
 		Object[] data = {};
 		jdbcTemplate.update(sql, data);
 	}

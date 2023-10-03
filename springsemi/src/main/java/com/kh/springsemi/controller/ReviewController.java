@@ -106,7 +106,7 @@ public class ReviewController {
 		}
 		
 		String home = System.getProperty("user.home");
-		File dir = new File(home, "upload");
+		File dir = new File(home, "fado");
 		File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 		
 		byte[] data = FileUtils.readFileToByteArray(target); //실제 파일정보 불러오기

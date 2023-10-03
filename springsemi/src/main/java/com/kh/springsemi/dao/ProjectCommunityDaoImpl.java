@@ -47,7 +47,7 @@ public class ProjectCommunityDaoImpl implements ProjectCommunityDao{
 	public List<ProjectCommunityDto> selectNoticeList(CommunityPaginationVO vo) {
 		String sql = "select * from (select rownum rn, TMP.* from("
 				+ "select * from project_community "
-				+ "where project_community_type = '공지사항' "
+				+ "where project_community_type = '공지사항' and project_no = ? "
 				+ "order by project_community_no desc) TMP) "
 				+ "where rn between ? and ?";
 		Object[] data = {vo.getStartRow(), vo.getFinishRow()};
@@ -59,7 +59,7 @@ public class ProjectCommunityDaoImpl implements ProjectCommunityDao{
 	public List<ProjectCommunityDto> selectQnAList(CommunityPaginationVO vo) {
 		String sql = "select * from (select rownum rn, TMP.* from ("
 				+ "select * from project_community "
-				+ "where project_community_type = 'Q&A' "
+				+ "where project_community_type = 'Q&A' and project_no = ? "
 				+ "order by project_community_no desc) TMP) "
 				+ "where rn between ? and ?";
 		Object[] data = {vo.getStartRow(), vo.getFinishRow()};

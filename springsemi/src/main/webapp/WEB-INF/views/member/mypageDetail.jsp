@@ -164,14 +164,6 @@ $(function(){
 		</a>
 	</div>
 	<br>
-	
-	<div class="row">
-		<a href="/member/follow/list" class="btn">
-			<i class="fa-light fa-user"></i>
-				팔로잉
-		</a>
-	</div>
-	<br>
 	<div class="row">
 		<a href="password" class="btn">
 			<i class="fa-solid fa-key"></i>

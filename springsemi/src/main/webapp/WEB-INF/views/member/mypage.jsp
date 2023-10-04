@@ -36,15 +36,16 @@ pageEncoding="UTF-8"%>
         .graybox {
             background-color: rgb(245, 245, 245);
             color: #202020;
-            padding: 20px;
+            padding-top:12%;
+            padding-bottom:12%;
             border-radius: 15px;
             margin-right: 30%;
-            padding-bottom: 20%;
             align-items: center;
 		    text-align: center;
 		    flex-direction: column; 
             justify-content: center;
             display: flex;
+            height: 150px;
         }
         
 		.image {
@@ -53,7 +54,7 @@ pageEncoding="UTF-8"%>
 		}
 </style>
 
-<div class="container mt-70">
+<div class="container mt-70" >
         <div class="flex-container auto-width">
 
             <!-- 프로필 왼쪽 -->
@@ -86,9 +87,11 @@ pageEncoding="UTF-8"%>
                 <div class= "container">
 
                     <div class="flex-container graybox">
-                        <div style="display:block; ">
-                            포인트 <fmt:formatNumber value="${memberDto.memberPoint}" 
-                            pattern="#,##0"></fmt:formatNumber> pt
+                        <div style="display:block; font-size:20px;">
+                            포인트 
+                            <fmt:formatNumber value="${memberDto.memberPoint}" 
+                            pattern="#,##0"></fmt:formatNumber> pt 
+                            
                         </div>
                     </div>
 
@@ -107,15 +110,18 @@ pageEncoding="UTF-8"%>
                 <div class= "container">
                     <div class="left graybox">
                         <span>펀딩내역</span>
+                        <br>
+                        <span>
+                        내가 서핑한 파도
+                        <br>
+                        <i class="fa-regular fa-hand-point-right"></i><a href="http://localhost:8080/orders/list" class="link"> 보러가기</a>
+                        </span>
                     </div>
                     <div class="left mt-100 mb-10">
                         <span class="bold">고객센터</span>
                     </div>
                     <div class="left mb-10">
                         <a href="http://localhost:8080/mainCommunity/noticeList" class="link">공지사항</a>
-                    </div>
-                    <div class="left">
-                        <a href="#" class="link">설정</a>
                     </div>
                 </div>
 

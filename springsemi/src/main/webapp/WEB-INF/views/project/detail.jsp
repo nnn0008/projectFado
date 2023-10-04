@@ -209,9 +209,7 @@ $(function(){
 			});
 		});
 	});
-</script>
-
-<script>
+	
 //Q&A랑 후기 버튼으로 넘기기
     $(function(){
         $(".page").hide().first().show(); 
@@ -226,40 +224,6 @@ $(function(){
             $(this).parent(".page").hide().prev(".page").show();
         });
     });
-</script>
-
-<script>
-$(document).ready(function() {
-    var selectedReward = null; // 선택한 리워드 정보를 저장할 변수
-
-    // 리워드 버튼 클릭 시
-    $(".reward-btn").click(function() {
-        // 선택한 리워드 정보 가져오기
-        var price = $(this).find(".row:first-child").text().trim();
-        var type = $(this).find(".row:last-child").text().trim();
-
-        // 선택한 리워드 정보 저장
-        selectedReward = {
-            price: price,
-            type: type
-        };
-
-        // 리워드 버튼에 선택 표시 추가 (선택한 리워드에 따라 스타일링할 수 있음)
-        $(".reward-btn").removeClass("selected"); // 모든 리워드 버튼에서 선택 표시 제거
-        $(this).addClass("selected"); // 클릭한 리워드 버튼에 선택 표시 추가
-    });
-
-    // 주문하기 버튼 클릭 시
-    $(".order-btn").click(function() {
-        if (selectedReward) {
-            // 선택한 리워드 정보를 주문 페이지로 전달
-            var orderPageUrl = "/orders/insert?projectNo=" + projectDto.projectNo + "&price=" + selectedReward.price + "&type=" + selectedReward.type;
-            window.location.href = orderPageUrl;
-        } else {
-            alert("리워드를 선택하세요."); // 리워드를 선택하지 않았을 때 경고 메시지 표시
-        }
-    });
-});
 </script>
 
     <div class="container w-800">
@@ -399,18 +363,37 @@ $(document).ready(function() {
 	    	</div>
     	</c:if>
     </div>
-    <!--  커뮤니티 리스트 스크립트 -->
-    <script>
-
-    </script>
     
-    
-    <div class="left">
-	<div class="left" id="notice; qna; review">
-		<hr>
-	</div>
-	
-	
+<!--     <div class="container w-1000 flex-container"> -->
+    	
+<!--     	<div class="row w-200" style="background-color: #E0F2F7; flex-frow:1.5; border: 1px solid #E0F2F7; border-radius: 10px;"> -->
+<!--     	<div class="row"> -->
+<!--     		리워드 선택 -->
+<!--     	</div> -->
+<!--     	<form action="/orders/insert"> -->
+<%--     	<input type="hidden" name="projectNo" value="${projectDto.projectNo}"> --%>
+<%--     	<c:forEach var="rewardDto" items="${rewardList}" varStatus="stat"> --%>
+<%--     		<c:choose> --%>
+<%--     			<c:when test="${stat.first}"> --%>
+<%-- 		    		<input type="radio" name="rewardNo" value="${rewardDto.rewardNo}" checked>  --%>
+<%-- 		    		${rewardDto.rewardType} --%>
+<%-- 		    		${rewardDto.rewardPrice}원 --%>
+<%--     			</c:when> --%>
+<%--     			<c:otherwise> --%>
+<%--     				<input type="radio" name="rewardNo" value="${rewardDto.rewardNo}"> --%>
+<%--     				${rewardDto.rewardType} --%>
+<%--     				${rewardDto.rewardPrice} --%>
+<%--     			</c:otherwise> --%>
+<%--     		</c:choose> --%>
+<%--     	</c:forEach> --%>
+<!--     	<div class="row"> -->
+<!--     		<button class="btn btn-positive" type="submit"> -->
+<!--     			주문하기 -->
+<!--     		</button> -->
+<!--     	</div> -->
+<!--     	</form> -->
+<!--     	</div>  -->
+<!--     </div> -->
 	
 <div class="container">
     <!-- 

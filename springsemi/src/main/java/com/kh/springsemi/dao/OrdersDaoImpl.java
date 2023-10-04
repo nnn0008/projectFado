@@ -27,10 +27,10 @@ public class OrdersDaoImpl implements OrdersDao{
 	@Override
 	public void createOrders(OrdersDto ordersDto) {
 		String sql = "insert into orders"
-				+ "(orders_no, orders_person, project_no, orders_reward, orders_price)"
-				+ " values(?, ?, ?, ?, ?)";
+				+ "(orders_no, orders_person, project_no, delivery_no, orders_reward, orders_price)"
+				+ " values(?, ?, ?, ?, ?, ?)";
 		Object[] data = {ordersDto.getOrdersNo(), ordersDto.getOrdersPerson(), ordersDto.getProjectNo(),
-								ordersDto.getOrdersReward(), ordersDto.getOrdersPrice()
+								ordersDto.getDeliveryNo(), ordersDto.getOrdersReward(), ordersDto.getOrdersPrice()
 								};
 		jdbcTemplate.update(sql, data);
 	}

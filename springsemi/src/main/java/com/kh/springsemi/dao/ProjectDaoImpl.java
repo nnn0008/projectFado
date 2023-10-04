@@ -6,12 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.springsemi.dto.ProjectDto;
+import com.kh.springsemi.dto.ProjectListAttachDto;
 import com.kh.springsemi.dto.ProjectListDto;
+import com.kh.springsemi.mapper.ProjectListAttachMapper;
 import com.kh.springsemi.mapper.ProjectListMapper;
 import com.kh.springsemi.mapper.ProjectMapper;
+import com.kh.springsemi.vo.PaginationVO;
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao{
@@ -27,6 +29,9 @@ public class ProjectDaoImpl implements ProjectDao{
 	
 	@Autowired
 	private JudgeDao judgeDao;
+	
+	@Autowired
+	private ProjectListAttachMapper projectListAttachMapper;
 	
 	//프로젝트 등록(판매자가)
 	@Override
@@ -201,19 +206,23 @@ public class ProjectDaoImpl implements ProjectDao{
 	
 	//좋아요 순
 	@Override
-	public List<ProjectListDto> selectListByLikeCountTop8() {
+	public List<ProjectListAttachDto> selectListByLikeCount() {
+//		int begin = page * 10 - 9;
+//		int end = page * 10;
 		String sql = "select * from("
 						+ "	select rownum rn, TMP.* from("
-						+ "			select * from project_list "
+						+ "			select * from project_list pl "
+						+ "			left outer join project_photo pp on pl.project_no = pp.project_no "
 						+ "			order by project_likecount desc"
 						+ "	)TMP"
 						+ ") where rn between 1 and 8";
-		return jdbcTemplate.query(sql, projectListMapper);
+//		Object[] data = {begin, end};
+		return jdbcTemplate.query(sql, projectListAttachMapper);
 	}
 	
 	//조회수 8위까지
 	@Override
-	public List<ProjectListDto> selectListByReadCountTop8() {
+	public List<ProjectListAttachDto> selectListByReadCountTop8() {
 		String sql = "select * from("
 				+ "	select rownum rn, TMP.* from("
 				+ "			select * from project_list pl "
@@ -221,12 +230,12 @@ public class ProjectDaoImpl implements ProjectDao{
 				+ "			order by project_readcount desc"
 				+ "	)TMP"
 				+ ") where rn between 1 and 8";
-		return jdbcTemplate.query(sql, projectListMapper);
+		return jdbcTemplate.query(sql, projectListAttachMapper);
 	}
 	
 	//달성률 순서
 	@Override
-	public List<ProjectListDto> selectListByAchievementRateTop8() {
+	public List<ProjectListAttachDto> selectListByAchievementRateTop8() {
 		String sql = "select * from("
 				+ "	select rownum rn, TMP.* from("
 				+ "			select * from project_list pl "
@@ -234,7 +243,7 @@ public class ProjectDaoImpl implements ProjectDao{
 				+ "			order by achievement_rate desc"
 				+ "	)TMP"
 				+ ") where rn between 1 and 8";
-		return jdbcTemplate.query(sql, projectListMapper);
+		return jdbcTemplate.query(sql, projectListAttachMapper);
 	}
 	
 	//카테고리 별
@@ -245,4 +254,9 @@ public class ProjectDaoImpl implements ProjectDao{
 		return jdbcTemplate.query(sql, projectListMapper, data);
 	}
 	
+	@Override
+	public int countList(PaginationVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

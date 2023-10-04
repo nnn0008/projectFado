@@ -15,6 +15,7 @@ import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.ProjectDao;
 import com.kh.springsemi.dao.ProjectPhotoDao;
 import com.kh.springsemi.dto.MajorCategoryDto;
+import com.kh.springsemi.dto.ProjectListAttachDto;
 import com.kh.springsemi.dto.ProjectListDto;
 
 @Controller
@@ -36,9 +37,9 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String home(Model model) {
-		List<ProjectListDto> readCountList = projectDao.selectListByReadCountTop8();
-		List<ProjectListDto> likeCountList = projectDao.selectListByLikeCountTop8();
-		List<ProjectListDto> achievementList = projectDao.selectListByAchievementRateTop8();
+		List<ProjectListAttachDto> readCountList = projectDao.selectListByReadCountTop8();
+		List<ProjectListAttachDto> likeCountList = projectDao.selectListByLikeCount();
+		List<ProjectListAttachDto> achievementList = projectDao.selectListByAchievementRateTop8();
 		List<MajorCategoryDto> noSearch = majorCategoryDao.selectList();
 		model.addAttribute("noSearch", noSearch);
 		model.addAttribute("readCountList", readCountList);

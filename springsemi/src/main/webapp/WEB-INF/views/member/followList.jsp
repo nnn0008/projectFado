@@ -54,10 +54,10 @@ $(document).ready(function () {
     </div>
 
 	<c:forEach var="memberFollowDto" items="${list}">
-       <div class="row" style="display: flex; border: 1px solid #2c8de0; border-radius: 5px;">
+       <div class="row" style="display: flex; border: 1px solid #2c8de0; border-radius: 5px; 
+       margin-top:5px; margin-bottom:10px; padding-top:5px; padding-bottom:5px;">
         
           <div style="flex-grow: 1; justify-content: center; align-items: center;">
-                <img class="image image-circle" src="https://picsum.photos/id/2/100/100">
            </div>
             
            <div class="left ml-20" style="flex-grow: 3;"

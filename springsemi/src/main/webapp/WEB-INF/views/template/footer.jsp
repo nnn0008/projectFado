@@ -11,7 +11,7 @@
             </div>
 
 
-            <div class="right mt-70" style="font-size: 12px;">
+            <div class="right me-30" style="font-size: 12px;">
                 <i class="fa-brands fa-google 
                             me-10" style="color:coral ;"></i>
 
@@ -25,14 +25,14 @@
                         me-10" style="color: #ff0862;"></i>
 
                 <i class="fa-brands fa-youtube" style="color:red;"></i>
-                <div class="row flex-container ms-750 ">
-                    고객센터
+                <!-- <div class="row flex-container ms-900 "> -->
+                    <!-- 고객센터 -->
                     <!--  </div> --> 
                     <!--   <div class="row flex-container ms-700"> -->
-                    평일 09:00 ~ 18:00
+                    <!-- 평일 09:00 ~ 18:00 -->
                     <!--  </div> --> 
-                    <!--  <div class="row flex-container ms-700"> -->
-                    (12:00 ~ 14:00 제외)
+                    <!-- <div class="row flex-container ms-700"> -->
+                    <!-- (12:00 ~ 14:00 제외) -->
                 </div>
             </div>
         </div>

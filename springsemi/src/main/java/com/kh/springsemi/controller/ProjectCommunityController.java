@@ -97,7 +97,7 @@ public class ProjectCommunityController {
 //						@ModelAttribute ProjectCommunityDto projectCommunityDto) {
 //	
 //		int count = projectCommunityDao.countQnAList(vo);  //페이지 네이션 카운트 메소드
-//		int projectdNo = projectDto.getProjectNo();  //프로젝트 넘버 가져와서 리스트 뽑기 위한 메소드
+//		int projectNo = projectDto.getProjectNo();  //프로젝트 넘버 가져와서 리스트 뽑기 위한 메소드
 //		
 //		projectCommunityDto.setProjectNo(projectdNo);
 //		

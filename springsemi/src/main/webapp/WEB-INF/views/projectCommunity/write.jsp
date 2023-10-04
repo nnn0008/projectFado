@@ -62,10 +62,8 @@
    <input type="hidden" name="projectNo" value="${param.projectNo}">
 
    <div>
-      <input type="text" class="form-input1 w-100 mb-20" name="projectCommunityTitle" placeholder="제목을 입력해주세요.">
-   </div>
-   <div>
-      <textarea name="projectCommunityContent" class="form-input1 w-100" rows="15" style="resize:none;"></textarea>
+      <textarea name="projectCommunityContent" class="form-input1 w-100" rows="15" style="resize:none;"
+      placeholder="내용을 입력해주세요."></textarea>
    </div>
    <div class="right mt-10">
       <button class="btn btn-positive">작성하기</button>

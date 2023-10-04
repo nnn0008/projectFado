@@ -44,8 +44,8 @@ public class AdminController {
 	@RequestMapping("/member/list")
 	public String memberList(@ModelAttribute PaginationVO vo, Model model) {
 		int count = memberDao.countList(vo);
-		vo.setCount(count);
 		model.addAttribute("vo", vo);
+		vo.setCount(count);
 		
 //		List<MemberDto> list = memberDao.selectListByPage(vo);
 		List<MemberListDto> list =memberDao.selectListByPage2(vo);
@@ -58,14 +58,14 @@ public class AdminController {
 		@RequestMapping("/member/block")
 		public String memberBlock(@RequestParam String memberId) {
 			memberDao.insertBlock(memberId);
-			return "redirect:list";
+			return "redirect:/admin/member/list";
 		}
 //		차단 해제 
 		
 		@RequestMapping("/member/cancel")
 		public String memberCancel(@RequestParam String memberId) {
 			memberDao.deleteBlock(memberId);
-			return "redirect:list";
+			return "redirect:/admin/member/list";
 		}
 		
 //		관리자 상세 
@@ -149,13 +149,3 @@ public class AdminController {
 		
 		}
 }
-		
-		
-
-
-
-		
-
-		
-	
-

@@ -91,7 +91,7 @@ $(function(){
 					projectNo : projectNo
 				},
 				success:function(response){
-					window.location.href = "/project/list";
+					window.location.href = "/admin/project/list";
 				},
 			});
 		});

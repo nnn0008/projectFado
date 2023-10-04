@@ -457,7 +457,7 @@
             <%-- 관리자인 경우 추가 메뉴 출력 --%>
 								<c:if test="${sessionScope.level == '관리자'}">
 									<li>
-									<a class="ms-20" href="http://localhost:8080/admin/">관리자메뉴</a>
+									<a class="ms-20" href="http://localhost:8080/admin/home">관리자메뉴</a>
 									</li>
 								</c:if>
         	</ul>

@@ -163,7 +163,7 @@ $(function(){
 		<div class="row flex-container view-container">
 			<div class="w-75">
 				<div class="row left">
-					<h3 class="projectCommunityDto.getProjectCommunityWriterString()">작성자</h3>
+					<h3 class="projectReplyWriter">작성자</h3>
 				</div>
 				<div class="row left">
 					<pre class="projectReplyContent">내용</pre>
@@ -193,7 +193,7 @@ $(function(){
 		<input type="hidden" name="projectReplyNo" value="?">
 		<div class="row flex-container">
 			<div class="w-75">
-				<textarea name="projectReplyContent" class="form-input w-100" rows="4">어쩌구저쩌구</textarea>
+				<textarea name="projectReplyContent" class="form-input w-100" rows="4">?</textarea>
 			</div>
 			<div class="w-25">
 				<div class="row right">
@@ -251,6 +251,11 @@ $(function(){
 			<i class="fa-solid fa-trash"></i>
 			삭제
 		</a>
+		<a class="btn" href="/project/detail?projectNo=${projectCommunityDto.projectNo}">
+			<i class="fa-solid fa-bars"></i>
+			목록
+		</a>
+		
 		</c:if>
 		</c:if>
 		

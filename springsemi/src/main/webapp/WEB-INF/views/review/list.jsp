@@ -12,7 +12,7 @@
 	<hr>
 	</div>
 
-<div class="container w-800">
+	<div class="container w-800">
 
 	<div class="row">
 		<a class="btn" href="/projectCommunity/noticeList?projectNo=${projectDto.projectNo}">공지사항</a>
@@ -36,16 +36,24 @@
                <h2>서핑 후기</h2>
                <hr>
            </div>
-		<c:forEach var="reviewDto" items="${list}">
+		<c:forEach var="reviewListDto" items="${reviewList}">
            <div class="flex-container">
-               <img src="http://dummyimage.com/40X40/000/fff" width="40" height="40">
-               <h3>${reviewDto.getReviewWriterString()}</h3>
+           <c:choose>
+				<c:when test="${reviewDto.reviewPhoto}">           
+               		<img src="reviewPhoto?reviewNo=${reviewDto.reviewNo}" width="40" height="40">
+          		</c:when> 
+          		<c:otherwise>
+          			<img src="/images/smallfado.jpg" width="40" height="40">
+          		</c:otherwise>
+          		
+           </c:choose>
+               <h3>${reviewListDto.getReviewWriterString()}</h3>
            </div>
            <div>
-               ${reviewDto.reviewContent}
+               ${reviewListDto.reviewContent}
            </div>
            <div>
-           	${reviewDto.reviewRegDate}
+           	${reviewListDto.reviewRegDate}
            </div>
 
        </c:forEach>

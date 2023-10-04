@@ -437,7 +437,7 @@ $(function(){
                 <button class ="btn btn-prev">Q&A</button>
                 <button class ="btn btn-next">후기</button>
     
-			                <!-- 
+			           <!-- 
 			           !!!Q&A!!! 
 			           --> 
 			           <div class="container w-800 qnaPage">
@@ -489,14 +489,14 @@ $(function(){
 			                <!-- 
 			           !!!후기!!! 
 			           --> 
-			           <div class="container w-800 reviewPage">
-			            <c:if test="${sessionScope.name != null && sessionScope.level == '구매자'}">
-			          <div class="row right">
-			              <a href="/review/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
-			                  <i class="fa-solid fa-pen"></i>
-			                  글쓰기
-			              </a>
-			          </div>
+	           <div class="container w-800 reviewPage">
+	            <c:if test="${sessionScope.name != null && sessionScope.level == '구매자'}">
+	          <div class="row right">
+	              <a href="/review/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
+	                  <i class="fa-solid fa-pen"></i>
+	                  글쓰기
+	              </a>
+	          </div>
 			    </c:if>
 			      <div class="row">
 			          <hr class="hr">

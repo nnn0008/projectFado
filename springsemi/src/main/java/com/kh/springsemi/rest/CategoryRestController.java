@@ -45,22 +45,6 @@ public class CategoryRestController {
 		return minorList;
 	}
 	
-//	@PostMapping("/minorList")
-//	public Map <Integer, String> classifyCheck(@RequestParam String majorCategoryType){
-//		String replace = majorCategoryType.replaceAll("X", "");
-//		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(replace);
-//		List<MinorCategoryDto> list = minorCategoryDao.selectClassifyByNo(majorCategoryDto.getMajorCategoryNo()); // 대분류 번호를 jsp에서 받아서 dto값 넣었음
-//		Map <Integer, String> classify = new TreeMap<>(); 
-////		Set<Object> set = new TreeSet<>();
-////		MajorCategoryDto majorCategoryDto = new MajorCategoryDto();
-//		for(MinorCategoryDto minorCategoryDto : list) {
-////			set.add(minorCategoryDto.getMinorCategoryNo());
-////			set.add(minorCategoryDto.getMinorCategoryType());
-//			classify.put(minorCategoryDto.getMinorCategoryNo(),minorCategoryDto.getMinorCategoryType()); //Map에 소분류의 번호와 타입
-//		}	
-////		return set;
-//		return classify;
-//	}
 	
 	//대분류 추가
 	//기존 목록의 아래쪽으로 구현

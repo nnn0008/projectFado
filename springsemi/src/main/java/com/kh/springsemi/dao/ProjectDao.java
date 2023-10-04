@@ -2,8 +2,8 @@ package com.kh.springsemi.dao;
 
 import java.util.List;
 
-
 import com.kh.springsemi.dto.ProjectDto;
+import com.kh.springsemi.dto.ProjectListAttachDto;
 import com.kh.springsemi.dto.ProjectListDto;
 import com.kh.springsemi.vo.PaginationVO;
 
@@ -33,7 +33,7 @@ public interface ProjectDao {
 	//개수를 구하는 명령
 	int countList(); //목록일 때
 	int countList(String keyword); //검색일 때
-	
+	int countList(PaginationVO vo);
 	//검색
 	List<ProjectListDto> selectList(String keyword);
 	
@@ -44,7 +44,7 @@ public interface ProjectDao {
 	
 	//프로젝트 메인화면에 보여주는 기능(좋아요, 카테고리, 조회순)
 	List<ProjectListDto> selectListByMajorCategory(String majorCategory);
-	List<ProjectListDto> selectListByLikeCountTop8();
-	List<ProjectListDto> selectListByReadCountTop8();
-	List<ProjectListDto> selectListByAchievementRateTop8();
+	List<ProjectListAttachDto> selectListByLikeCount();
+	List<ProjectListAttachDto> selectListByReadCountTop8();
+	List<ProjectListAttachDto> selectListByAchievementRateTop8();
 }

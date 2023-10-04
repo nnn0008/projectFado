@@ -72,4 +72,11 @@ public class MajorCategoryDaoImpl implements MajorCategoryDao{
 		String sql = "update majorcategory set major_category_count = (select count(*) from majorcategory)";
 		return jdbcTemplate.update(sql);
 	}
+	
+	@Override
+	public List<MajorCategoryDto> selectListByMajorCategoryNo(int majorCategoryNo) {
+		String sql = "select * from majorcategory where major_category_no = ? order by major_category_no asc";
+		Object[] data = {majorCategoryNo};
+		return jdbcTemplate.query(sql, majorCategoryMapper, data);
+	}
 }

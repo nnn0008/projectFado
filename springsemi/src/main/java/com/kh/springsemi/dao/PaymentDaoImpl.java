@@ -32,9 +32,9 @@ public class PaymentDaoImpl implements PaymentDao{
 	}
 	
 	@Override
-	public boolean updatePaymentStatus(PaymentDto paymentDto) {
+	public boolean updatePaymentStatus(String status, int paymentNo) {
 		String sql = "update payment set payment_status = ? where payment_no = ?";
-		Object[] data = {paymentDto.getPaymentStatus(), paymentDto.getPaymentNo()};
+		Object[] data = {status, paymentNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 

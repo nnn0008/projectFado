@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <script>
@@ -159,125 +160,25 @@
         
 <!--                     </li> -->
 				
-   					<h1>조회수</h1>
+   					<p>조회수</p>
 
 					<c:forEach var="projectListDto" items="${readCountList}">
 	                    <li class="item">
+	                    <a href="/project/detail?projectNo=${projectListDto.projectNo}">
 	                        <div class="image">
 <%-- 								<img src="/rest/project/download?attachNo=${projectListDto.attachNo}"> --%>
 							</div>
 	                        <div class="cont">
 	                        	<p>${projectListDto.majorCategoryType} | ${projectListDto.minorCategoryType }</p>
 	                            <strong>${projectListDto.projectTitle}</strong>
-	                            <p>${projectListDto.achievementRate }</p>
-	                            <a href="#">바로가기</a>
+	                            <p><fmt:formatNumber value="${projectListDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
+<!-- 	                            <a href="#">바로가기</a> -->
 	                        </div>                
+	                    </a>
 	                    </li>
 					</c:forEach>
-
-                    <li class="item">
-        
-                        <div class="image">
-                            <!-- <i class="fa-light fa-heart" style="color: #dcdbdb;"></i> -->
-                        </div>
-        
-                        <div class="cont">
-                           <strong>
-                            제목
-                            </strong>
-                            
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-
-                    
-                    <h1>좋아요</h1>
+                 
+                    좋아요
 
                     <c:forEach var="projectListDto" items="${likeCountList}">
 	                    <li class="item">
@@ -287,28 +188,28 @@
 	                        <div class="cont">
 	                        	<p>${projectListDto.majorCategoryType} | ${projectListDto.minorCategoryType }</p>
 	                            <strong>${projectListDto.projectTitle}</strong>
-	                            <p>내용</p>
+	                            <p><fmt:formatNumber value="${projectListDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
 	                            <a href="#">바로가기</a>
 	                        </div>                
 	                    </li>
 					</c:forEach>
 				
 
-<!-- 					<h1>달성률</h1> -->
+					달성률
 
-<%--                 <c:forEach var="projectListDto" items="${achievementList}"> --%>
-<!-- 	                    <li class="item"> -->
-<!-- 	                        <div class="image"> -->
+                <c:forEach var="projectListDto" items="${achievementList}">
+	                    <li class="item">
+	                        <div class="image">
 <%-- 								<img src="/rest/project/download?attachNo=${projectListDto.attachNo}"> --%>
-<!-- 							</div> -->
-<!-- 	                        <div class="cont"> -->
-<%-- 	                        	<p>${projectListDto.majorCategoryType} | ${projectListDto.minorCategoryType }</p> --%>
-<%-- 	                            <strong>${projectListDto.projectTitle}</strong> --%>
-<!-- 	                            <p>내용</p> -->
-<!-- 	                            <a href="#">바로가기</a> -->
-<!-- 	                        </div>                 -->
-<!-- 	                    </li> -->
-<%-- 					</c:forEach>     --%>
+							</div>
+	                        <div class="cont">
+	                        	<p>${projectListDto.majorCategoryType} | ${projectListDto.minorCategoryType }</p>
+	                            <strong>${projectListDto.projectTitle}</strong>
+	                            <p><fmt:formatNumber value="${projectListDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
+	                            <a href="#">바로가기</a>
+	                        </div>                
+	                    </li>
+					</c:forEach>    
                     
                 </ul>
             </div>

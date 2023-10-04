@@ -17,7 +17,7 @@ public interface MajorCategoryDao {
 	
 	//목록
 	List<MajorCategoryDto> selectList();
-	
+	List<MajorCategoryDto> selectListByMajorCategoryNo(int majorCategoryNo);
 	//선택
 	MajorCategoryDto selectOne(int majorCategoryNo);
 	

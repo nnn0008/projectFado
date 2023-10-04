@@ -229,8 +229,9 @@ public class ProjectDaoImpl implements ProjectDao{
 	public List<ProjectListDto> selectListByAchievementRateTop8() {
 		String sql = "select * from("
 				+ "	select rownum rn, TMP.* from("
-				+ "			select * from project_list "
-				+ "			order by project_no desc"
+				+ "			select * from project_list pl "
+				+ "			left outer join project_photo pp on pl.project_no = pp.project_no "
+				+ "			order by achievement_rate desc"
 				+ "	)TMP"
 				+ ") where rn between 1 and 8";
 		return jdbcTemplate.query(sql, projectListMapper);

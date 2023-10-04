@@ -250,6 +250,26 @@
                 //이펙트(전환효과) 설정
                 effect: "slide",//(slide/fade/cube/coverflow/flip/creative/cards)
             });
+            
+            loadList();
+            //반복문을 통해 카테고리를 찍어주겠다
+            function loadList(){
+            	$(".majorCategory").empty();
+            	$.ajax({
+					url:"/rest/category/majorList",            		
+            		method:"post",
+            		data:{},
+            		success:function(response){
+            			for(var i = 0; i < response.length; i++){
+            				var aTag = $("<a>").attr("href", "http://localhost:8080/project/list?majorCategoryNo=" + response[i].majorCategoryNo).text(response[i].majorCategoryType);
+
+            				aTag.appendTo(".majorCategory");
+            			}
+            		}
+            	});
+            }
+            
+            
         });
         
         
@@ -363,16 +383,14 @@
                     <li style="display: flex; list-style: 
                                 none; padding: 0;">
                     <li><a href="/project/list">전체</a></li>
-                    <li><a href="#">의류</a></li>
-                    <li><a href="#">향수</a></li>
-                    <li><a href="#">반려동물</a></li>
-                    <li><a href="#">푸드</a></li>
-                    <li><a href="#">가전</a></li>
-                    <li><a href="#">디지털 게임</a></li>
-                    <li><a href="#">음악</a></li>
-                    <li><a href="#">주얼리</a></li>
-                    <li><a href="#">사진</a></li>
-                    <li><a href="#">예술</a></li>
+                    <li class="majorCategory">
+<%--                     <c:forEach var="majorCategoryDto" items="noSearch"> --%>
+                    <a href="/majorCategoryList?majorCategoryNo=${majorCategoryDto.majorCategoryNo}">
+                    ${majorCategoryDto.majorCategoryType}
+                    </a>
+<%--                     </c:forEach> --%>
+                    </li>
+ 
                     
 
                 </ul>

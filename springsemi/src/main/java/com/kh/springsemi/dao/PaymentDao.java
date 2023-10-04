@@ -10,7 +10,7 @@ public interface PaymentDao {
 	
 	int sequence();
 	void createPayment(PaymentDto paymentDto);
-	boolean updatePaymentStatus(PaymentDto paymentDto);
+	boolean updatePaymentStatus(String status, int paymentNo);
 	PaymentDto selectOne(int paymentNo);
 	List<PaymentDto> selectList();
 	boolean deletePayment(int paymentNo);

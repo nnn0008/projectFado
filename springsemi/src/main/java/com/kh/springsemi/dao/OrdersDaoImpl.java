@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.springsemi.dto.OrdersDto;
+import com.kh.springsemi.dto.OrdersListDto;
+import com.kh.springsemi.mapper.OrdersListMapper;
 import com.kh.springsemi.mapper.OrdersMapper;
 
 @Repository
@@ -17,6 +19,9 @@ public class OrdersDaoImpl implements OrdersDao{
 	
 	@Autowired
 	private OrdersMapper ordersMapper;
+	
+	@Autowired
+	private OrdersListMapper ordersListMapper;
 
 	@Override
 	public int sequence() {
@@ -58,9 +63,10 @@ public class OrdersDaoImpl implements OrdersDao{
 	}
 
 	@Override
-	public List<OrdersDto> selectList() {
-		String sql = "select * from orders_list where member_id =? order by orders_no desc";
-		return jdbcTemplate.query(sql, ordersMapper);
+	public List<OrdersListDto> selectListByOrdersPerson(String ordersPerson) {
+		String sql = "select * from orders_list where orders_person = ? order by orders_date desc";
+		Object[] data = {ordersPerson};
+		return jdbcTemplate.query(sql, ordersListMapper, data);
 	}
 	
 	@Override

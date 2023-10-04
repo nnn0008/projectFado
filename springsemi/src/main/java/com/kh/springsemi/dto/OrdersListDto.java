@@ -13,6 +13,7 @@ public class OrdersListDto {
 	private int ordersPrice;
 	private String ordersStatus;
 	private int projectNo;
+	private String projectTitle;
 	private String paymentStatus;
 	private Date paymentDate;
 	

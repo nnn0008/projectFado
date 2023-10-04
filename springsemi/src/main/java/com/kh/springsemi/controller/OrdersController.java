@@ -20,7 +20,6 @@ import com.kh.springsemi.dao.RewardDao;
 import com.kh.springsemi.dto.DeliveryDto;
 import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.OrdersDto;
-import com.kh.springsemi.dto.OrdersListDto;
 import com.kh.springsemi.dto.PaymentDto;
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.RewardDto;
@@ -70,16 +69,16 @@ public class OrdersController {
 //		System.out.println(rewardNo);
 //		System.out.println(deliveryNo);
 		int ordersNo = ordersDao.sequence();
-//		int paymentNo = paymentDao.sequence();
 		String memberId = (String)session.getAttribute("name");
 		RewardDto rewardDto = rewardDao.selectOne(rewardNo);
 		ordersDto.setOrdersNo(ordersNo);
-//		paymentDto.setPaymentNo(paymentNo);
 		ordersDto.setOrdersPerson(memberId);
 		ordersDto.setOrdersReward(rewardDto.getRewardType());
 		ordersDto.setOrdersPrice(rewardDto.getRewardPrice());
-		
 		ordersDao.createOrders(ordersDto);
+		
+//		int paymentNo = paymentDao.sequence();
+//		paymentDto.setPaymentNo(paymentNo);
 //		paymentDao.createPayment(paymentDto);
 		return "redirect:insertFinish";
 	}
@@ -92,7 +91,7 @@ public class OrdersController {
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
-
+		
 		
 		return "/WEB-INF/views/orders/list.jsp";
 	}

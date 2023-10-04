@@ -17,7 +17,7 @@ public interface OrdersDao {
 	//상세 조회
 	OrdersDto selectOne(int ordersNo);
 	//전체 조회
-	List<OrdersDto> selectList();
+	List<OrdersListDto> selectListByOrdersPerson(String ordersPerson);
 	//주문 삭제
 	boolean deleteOrders(int ordersNo);
 }

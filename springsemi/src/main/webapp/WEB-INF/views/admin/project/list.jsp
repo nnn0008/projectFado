@@ -34,7 +34,7 @@
 			<div class="me-20 mb-20">
 				<i class="fa-solid fa-eye"></i> ${projectListDto.projectReadcount}
 			</div>
-			<div>
+			<div class="me-20">
 				<i class="fa-solid fa-heart red"></i> ${projectListDto.projectLikecount}
 			</div>
 			<div>
@@ -77,7 +77,8 @@
 				
 		<br>
 		</div>
-			<!-- 페이지 네비게이터 출력 -->
+		<div class="row">
+		<!-- 페이지 네비게이터 출력 -->
 			<h3>
 			
 			<!-- 이전 버튼 : begin이 1이면 없다 -->
@@ -124,6 +125,8 @@
 				</c:choose>	 
 			</c:if>
 			</h3>
+		</div>
+			
 			
 			
 		<br>

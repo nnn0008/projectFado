@@ -261,15 +261,15 @@ $(function(){
 	<%-- 댓글과 관련된 화면이 작성될 위치 --%>
 	<div class="container w-1000">
 	<c:if test="${sessionScope.name != null}">
-	<div class="row left">
+	<div class="row left mt-100 ms-100 me-100">
 		<form class="projectReply-insert-form">
 			<input type="hidden" name="projectReplyOrigin" value="${projectCommunityDto.projectCommunityNo}">
 		
-			<div class="row">
-				<textarea name="projectReplyContent" class="form-input w-100" rows="4"></textarea>
+			<div class="row ms-100 me-100">
+				<textarea name="projectReplyContent" class="form-input w-100" rows="4" style="resize:none;"></textarea>
 			</div>
-			<div class="row">
-				<button class="btn btn-positive w-100">
+			<div class="row ms-100 me-100">
+				<button class="btn btn-positive w-30 mt-10">
 					<i class="fa-solid fa-pen"></i>
 					댓글등록
 				</button>

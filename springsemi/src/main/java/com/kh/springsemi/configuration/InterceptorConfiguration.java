@@ -61,6 +61,12 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 						"/project/list/Community/review"
 						
 						 );
+		
+		registry.addInterceptor(projectDefenderInterceptor)
+		.addPathPatterns("/project/detail");
+
+		registry.addInterceptor(projectOwnerInterceptor)
+		.addPathPatterns("/project/edit", "/project/delete");
 //	@Override
 //	public void addInterceptors(InterceptorRegistry registry) {
 //		
@@ -98,11 +104,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 //					);
 			
 		
-		registry.addInterceptor(projectDefenderInterceptor)
-				.addPathPatterns("/project/detail");
 		
-		registry.addInterceptor(projectOwnerInterceptor)
-		.addPathPatterns("/project/edit", "/project/delete");
 			
 	}
 }

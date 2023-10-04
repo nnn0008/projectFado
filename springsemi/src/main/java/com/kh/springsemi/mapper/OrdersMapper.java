@@ -17,6 +17,7 @@ public class OrdersMapper implements RowMapper<OrdersDto>{
 		ordersDto.setOrdersNo(rs.getInt("orders_no"));
 		ordersDto.setOrdersPerson(rs.getString("orders_person"));
 		ordersDto.setProjectNo(rs.getInt("project_no"));
+		ordersDto.setDeliveryNo(rs.getInt("delivery_no"));
 		ordersDto.setOrdersDate(rs.getDate("orders_date"));
 		ordersDto.setOrdersReward(rs.getString("orders_reward"));
 		ordersDto.setOrdersPrice(rs.getInt("orders_price"));

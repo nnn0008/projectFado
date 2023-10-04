@@ -1,7 +1,5 @@
 package com.kh.springsemi.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,32 +46,39 @@ public class OrdersController {
 	private RewardDao rewardDao;
 	
 	@GetMapping("/insert")
-	public String ordersInsert(@RequestParam int projectNo,HttpSession session, Model model) {
+	public String ordersInsert(@RequestParam int projectNo, @RequestParam int rewardNo, HttpSession session, Model model) {
 		String memberId = (String)session.getAttribute("name");
 		MemberDto memberDto = memberDao.selectOne(memberId);
-		List<DeliveryDto> deliveryList = deliveryDao.selectListByMemberId(memberId);
+		DeliveryDto deliveryDto = deliveryDao.selectOneByMemberId(memberId);
 		ProjectDto projectDto = projectDao.selectOne(projectNo);
-		RewardDto rewardDto = rewardDao.selectOne(projectNo);
+		RewardDto rewardDto = rewardDao.selectOne(rewardNo);
 		model.addAttribute("memberDto", memberDto);
-		model.addAttribute("deliveryList",deliveryList);
+		model.addAttribute("deliveryDto",deliveryDto);
 		model.addAttribute("projectDto",projectDto);
 		model.addAttribute("rewardDto",rewardDto);
 		return "/WEB-INF/views/orders/insert.jsp";
 	}
 	
 	@PostMapping("/insert")
-	public String ordersInsert(@ModelAttribute OrdersDto ordersDto, 
-										 @ModelAttribute PaymentDto paymentDto,
-										 HttpSession session ,Model model) {
+	public String ordersInsert(@RequestParam int rewardNo,
+											@RequestParam int deliveryNo,
+											@ModelAttribute OrdersDto ordersDto,
+											@ModelAttribute PaymentDto paymentDto,
+											Model model, HttpSession session) {
+//		System.out.println(rewardNo);
+//		System.out.println(deliveryNo);
 		int ordersNo = ordersDao.sequence();
-		int paymentNo = paymentDao.sequence();
+//		int paymentNo = paymentDao.sequence();
 		String memberId = (String)session.getAttribute("name");
+		RewardDto rewardDto = rewardDao.selectOne(rewardNo);
 		ordersDto.setOrdersNo(ordersNo);
-		paymentDto.setPaymentNo(paymentNo);
+//		paymentDto.setPaymentNo(paymentNo);
 		ordersDto.setOrdersPerson(memberId);
+		ordersDto.setOrdersReward(rewardDto.getRewardType());
+		ordersDto.setOrdersPrice(rewardDto.getRewardPrice());
 		
 		ordersDao.createOrders(ordersDto);
-		paymentDao.createPayment(paymentDto);
+//		paymentDao.createPayment(paymentDto);
 		return "redirect:insertFinish";
 	}
 	

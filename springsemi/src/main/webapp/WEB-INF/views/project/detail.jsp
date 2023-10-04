@@ -29,6 +29,32 @@
           padding: 20px;
           border-radius: 10px;
       }
+      
+      .box {
+          box-shadow: 0px 0px 3px 0px #2c8de0;
+            color: #202020;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+      .reward-btn {
+      	font-weight: normal;
+	    border-color: #2c8de0;
+	    background-color: white;
+	    color: #2c8de0;
+	    color: rgb(0, 0, 0);
+	    cursor: pointer;
+	    height:150px;
+	    width:300px;
+	    margin-bottom:1em;
+	    padding-left:15%;
+	    padding-right:15%;
+	    border-radius: 0.5em;
+      }
+	.reward-btn:hover { /*마우스가 버튼에 올라가면 배경을 조금 더 어둡게*/
+	    filter:brightness(98%);
+	}
+
 </style>
     <!--  프로젝트 디테일 스크립트 -->
 <!-- 타이머를 생성 및 카운트다운 -->
@@ -251,7 +277,7 @@ $(document).ready(function() {
     			<div class="w-50 left pt-50">
     				<div class="mb-20">
     					<span>모인금액</span>
-    					<span class="bold text-shadow" style="margin-left: 3px;">
+    					<span class="bold text-shadow" style="margin-left: 3px; font-size:20px;">
     						<fmt:formatNumber value="${projectDto.projectTotalPrice}" pattern="#,###"/>
     					</span>
     					<span style="font-size:12px; margin-left: 2px;">원</span>
@@ -273,7 +299,7 @@ $(document).ready(function() {
     				
     				<div class="mb-20">
     					<span class="bold">목표금액</span>
-    					<span class="bold text-shadow" style="margin-left: 3px;">
+    					<span class="bold text-shadow" style="margin-left: 3px; font-size:20px;">
     						<fmt:formatNumber value="${projectDto.projectGoalPrice}" pattern="#,###"/>
     					</span>
     					<span style="font-size:12px; margin-left: 2px;">원</span>
@@ -289,8 +315,8 @@ $(document).ready(function() {
     					<span style="margin-left: 3px;">목표 높이 달성 시 ${projectDto.projectEndDate}</span>
     				</div>
     				
-					<div>
-						<i class="fa-heart fa-regular fa-2x mb-20" style="color:#eeaeca;"></i> 
+					<div class="mb-30">
+						<i class="fa-heart fa-regular fa-2x mb-20" style="color:#fd79a8;"></i> 
 						<span class="me-10">?</span>
 						<button class="row btn btn-positive w-70 pt-10 pb-10 ps-60 pe-60" style="font-size:20px;">
 							후원하기
@@ -300,15 +326,13 @@ $(document).ready(function() {
     			</div>
     		</div>
     		<div class="row left">
-    		<label>프로젝트 계획</label> <label>업데이트</label> <label>커뮤니티</label> <label>추천</label>
-    		</div>
-    		<div class="flex-container">
-    			<div class="w-75 left">
-    				<img src="/rest/project/download?attachNo=${subAttachDto.attachNo}">
-    			</div>
-    				창작자 소개<br>
-    				${projectDto.projectOwner}<br>
-    			<div class="w-25">
+    		
+    		<div class="box flex-container w-70">
+    		<i class="fa-solid fa-user-tie fa-2x fado pt-10 pb-10 ps-30"></i>
+    			<span class="ps-10 me-20 pt-10 pb-10">
+    				창작자 소개  ${projectDto.projectOwner}
+    			</span>
+    			<div class="w-25 pt-10 pb-10">
     				<c:if test="${sessionScope.name != projectDto.projectOwner}">
     				<c:choose>
                         <c:when test="${isFollowing == 'true'}">
@@ -317,19 +341,58 @@ $(document).ready(function() {
                            </button>
                         </c:when>
                         <c:otherwise>
-                         <button class="btn follow-button"  data-followee="${memberFollowDto.followeeId}">
+                         <button class="btn follow-button"data-followee="${memberFollowDto.followeeId}">
                                 <i class="fa-solid fa-plus ic"></i> 팔로우
                             </button>
                         </c:otherwise>
                     </c:choose>
                     </c:if>
-    				<br>
-    				리워드1<br>
-    				리워드2<br>
-    				조회수 : ${projectDto.projectReadcount}<br>
     			</div>
     		</div>
-    	</div>
+    		
+    		</div>
+    		
+    		
+    		<div class="flex-container mt-40 w-1000" >
+        <div class="w-100 left me-100">
+            <img src="/rest/project/download?attachNo=${subAttachDto.attachNo}">
+        </div>
+
+        <div class="container w-700">
+            <div class="row bold">
+                파도 선택
+            </div>
+
+            <div class="row">
+                <c:forEach var="rewardDto" items="${rewardList}">
+                    <button class="btn reward-btn">
+                    <div class="container w-100 mt-10" >
+                        <div class="left bold" style="font-size:20px;">
+                            ${rewardDto.rewardPrice}원 +
+                        </div>
+                        <div class="left mt-10">
+                            ${rewardDto.rewardType}
+                        </div>
+                    </div>
+                    </button>
+                </c:forEach>
+
+                <div class="row">
+                    <button class="btn btn-positive order-btn ps-30 pe-30 pt-10 pb-10">
+                        <a class="link" href="/orders/write?projectNo=${projectDto.projectNo}"></a>
+                        주문하기
+                    </button>
+                </div>
+
+            </div>
+
+
+        </div>
+    		
+    		
+    		
+    		
+    		
     	<c:if test="${sessionScope.level == '관리자'}">
 	    	<div class="row">
 	    		<button class="btn btn-positive judge">승인완료</button> <button class="btn btn-negative judge" value="">승인거절</button>
@@ -340,38 +403,6 @@ $(document).ready(function() {
     <script>
 
     </script>
-    
-    <div class="container w-1000 flex-container">
-    	
-    	<div class="row w-200" style="background-color: #E0F2F7; flex-frow:1.5; border: 1px solid #E0F2F7; border-radius: 10px;">
-    	<div class="row">
-    		리워드 선택
-    	</div>
-    	<c:forEach var="rewardDto" items="${rewardList}">
-    		<button class="btn reward-btn" style="display: block">
-	    	<div class="container w-100 mt-10" >
-	    		<div class="row" style="display: block">
-	    			${rewardDto.rewardPrice}원
-	    		</div>
-	    		<div class="row" style="display: block">
-	    			${rewardDto.rewardType}
-	    		</div>
-	    	</div>
-	    	</button>
-    	</c:forEach>
-    	<div class="row">
-    		<button class="btn btn-positive order-btn">
-    			<a class="link" href="/orders/write?projectNo=${projectDto.projectNo}"></a>
-    			주문하기
-    		</button>
-    	</div>
-    	</div> 
-    </div>
-    
-    
-    
-    
-    
     
     
     <div class="left">

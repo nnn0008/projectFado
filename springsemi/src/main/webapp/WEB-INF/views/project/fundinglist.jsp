@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
@@ -87,26 +88,95 @@
             background: #dddddd32;
             color: #2c8ce053;
             
+            
+            
         }
+       
+      
+        
+        
         </style>
         
+        <div class="container">
+        	<div class="row right me-50">
+        	<a class="link" href="#">낮은가격순</a> |
+        	<a class="link" href="#">높은가격순</a> |
+        	<a class="link" href="#">인기순</a> |
+        	<a class="link" href="#">최신순</a>
+        	</div>
+        </div>
         
-		
-		
-         <div class="list_wrap">
+        <hr class="hr1">
+        
+        <div class="image">
+        
+        	<div class="container row flex" style="margin:100px;">
+        		 <div class="list_wrap">
                 <ul>
                     <li class="item">
         
                         <div class="image">
-                            <!-- <i class="fa-light fa-heart" style="color: #dcdbdb;"></i> -->
+                            <i class="fa-light fa-heart" style="color: #dcdbdb;"></i>
                         </div>
         
+        		
                         <div class="cont">
                             <strong>제목</strong>
                             <p>내용</p>
                             <a href="#">바로가기</a>
                         </div>
+        		<img src="https://picsum.photos/id/101/600/300" width="200px " height="200px">
+        		<img src="https://picsum.photos/id/101/600/300" width="200px " height="200px">
+        		<img src="https://picsum.photos/id/101/600/300" width="200px " height="200px">
+        	</div>
         
+        
+        </div>
+        
+        
+        
+        		<%-- <div>
+			      <c:forEach var="projectListDto" items="${projectList}">
+				
+					<div>${projectListDto.projectNo }</div>
+					<div>
+					<a class="link" href="detail?projectNo=${projectListDto.projectNo}">
+						${projectListDto.projectTitle}
+					</a>
+					</div>
+					<div>${projectListDto.projectOwner}</div>
+					<div>${projectListDto.projectRegDate}</divv>
+					<div>${projectListDto.projectStartDate }</div>
+					<div>${projectListDto.projectEndDate}</div>
+					<div>${projectListDto.projectGoalPrice }</div>
+					<div>${projectListDto.projectTotalPrice }</div>
+					<div>${projectListDto.projectReadcount}</div>
+					<div>${projectListDto.projectLikecount }</div>
+					<div>${projectListDto.majorCategoryType}</div>
+					<div>${projectListDto.minorCategoryType}</div>	
+					<div>${projectListDto.judgeDate}</div>
+					<div>${projectListDto.judgeStatus}</div>				
+				</div>
+				</c:forEach>
+       	</div>
+       	
+		
+    <div class="list_wrap">
+                <ul>
+                    <li class="item">
+        
+                        <div class="image">
+                            <i class="fa-light fa-heart" style="color: #dcdbdb;"></i>
+                        </div>
+        
+        		
+                        <div class="cont">
+                            <strong>제목</strong>
+                            <p>내용</p>
+                            <a href="#">바로가기</a>
+                        </div>
+
+        		
                     </li>
         
                     <li class="item">
@@ -195,6 +265,6 @@
                     
                     
                 </ul>
-            </div>
+            </div>  --%>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

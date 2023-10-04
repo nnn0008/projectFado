@@ -89,7 +89,7 @@
         }
         </style>
 
-	 <div class="container w-800">
+	 <div class="container w-600" >
             <div class="row">
                 <!-- Slider main container -->
                 <div class="swiper">
@@ -97,10 +97,10 @@
                     <div class="swiper-wrapper">
                         <!-- Slides -->
                         <div class="swiper-slide">
-                            <img src="https://picsum.photos/id/101/600/300" width="100% " height="100%">
+                            <img src="https://picsum.photos/id/101/600/300" width="100% " height="60%">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://picsum.photos/id/101/600/300" width="100%" height="100%">
+                            <img src="https://picsum.photos/id/101/600/300" width="100%" height="60%">
                         </div>
                         
                     </div>
@@ -113,12 +113,12 @@
 
                     <!-- If we need scrollbar -->
                     <!-- <div class="swiper-scrollbar"></div> -->
+                    
                 </div>
             </div>
         </div>
 
-
-
+		
             <!-- 펀딩목록 -->
 
        <!--  <div class="container-project">
@@ -148,7 +148,10 @@
                         </div>
         
                         <div class="cont">
-                            <strong>제목</strong>
+                           <strong>
+                            제목
+                            </strong>
+                            
                             <p>내용</p>
                             <a href="#">바로가기</a>
                         </div>

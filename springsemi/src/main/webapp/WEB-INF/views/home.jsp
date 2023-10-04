@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<script>
+
 	
+
+</script>
 	<style>
 	 ul,li{
             list-style: none;
@@ -43,7 +48,7 @@
         .list_wrap .item .image{
             width: 100%;
             height: 150px;
-            background: url(./image/noshowoff.jpg);
+/*             background: url(./image/noshowoff.jpg); */
             background-repeat: no-repeat;
             background-position: 50% 50%;
             background-size: cover;
@@ -101,20 +106,18 @@
                         </div>
                         <div class="swiper-slide">
                             <img src="https://picsum.photos/id/101/600/300" width="100%" height="100%">
-                        </div>
-                        
+                        </div>                      
                     </div>
                     <!-- If we need pagination -->
                     <div class="swiper-pagination"></div>
-
                     <!-- If we need navigation buttons -->
                     <div class="swiper-button-prev"></div>
                     <div class="swiper-button-next"></div>
-
                     <!-- If we need scrollbar -->
                     <!-- <div class="swiper-scrollbar"></div> -->
                 </div>
             </div>
+            
         </div>
 
 
@@ -141,107 +144,72 @@
         </div> -->
         <div class="list_wrap">
                 <ul>
-                    <li class="item">
+<!--                     <li class="item"> -->
         
-                        <div class="image">
-                            <!-- <i class="fa-light fa-heart" style="color: #dcdbdb;"></i> -->
-                        </div>
+<!--                         <div class="image"> -->
+                            
+<!--                         </div>     				 -->
+        				
+<!--                         <div class="cont"> -->
+<!--                             <strong>제목</strong> -->
+<!--                             <p>내용</p> -->
+<!--                             <a href="#">바로가기</a> -->
+<!--                         </div> -->
         
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
+<!--                     </li> -->
+				
+   					<h1>조회수</h1>
+
+					<c:forEach var="projectListDto" items="${readCountList}">
+	                    <li class="item">
+	                        <div class="image">
+<%-- 								<img src="/rest/project/download?attachNo=${projectListDto.attachNo}"> --%>
+							</div>
+	                        <div class="cont">
+	                        	<p>${projectListDto.majorCategoryType} | ${projectListDto.minorCategoryType }</p>
+	                            <strong>${projectListDto.projectTitle}</strong>
+	                            <p>${projectListDto.achievementRate }</p>
+	                            <a href="#">바로가기</a>
+	                        </div>                
+	                    </li>
+					</c:forEach>
                     
+                    <h1>좋아요</h1>
+
+                    <c:forEach var="projectListDto" items="${likeCountList}">
+	                    <li class="item">
+	                        <div class="image">
+<%-- 								<img src="/rest/project/download?attachNo=${projectListDto.attachNo}"> --%>
+							</div>
+	                        <div class="cont">
+	                        	<p>${projectListDto.majorCategoryType} | ${projectListDto.minorCategoryType }</p>
+	                            <strong>${projectListDto.projectTitle}</strong>
+	                            <p>내용</p>
+	                            <a href="#">바로가기</a>
+	                        </div>                
+	                    </li>
+					</c:forEach>
+				
+
+<!-- 					<h1>달성률</h1> -->
+
+<%--                 <c:forEach var="projectListDto" items="${achievementList}"> --%>
+<!-- 	                    <li class="item"> -->
+<!-- 	                        <div class="image"> -->
+<%-- 								<img src="/rest/project/download?attachNo=${projectListDto.attachNo}"> --%>
+<!-- 							</div> -->
+<!-- 	                        <div class="cont"> -->
+<%-- 	                        	<p>${projectListDto.majorCategoryType} | ${projectListDto.minorCategoryType }</p> --%>
+<%-- 	                            <strong>${projectListDto.projectTitle}</strong> --%>
+<!-- 	                            <p>내용</p> -->
+<!-- 	                            <a href="#">바로가기</a> -->
+<!-- 	                        </div>                 -->
+<!-- 	                    </li> -->
+<%-- 					</c:forEach>     --%>
                     
                 </ul>
             </div>
+
         
     </section>
 	

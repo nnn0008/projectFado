@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.kh.springsemi.dto.ProjectListDto;
 //일단 만들어 두긴 했는데 쓸지 잘 모르겠음
 @Component
-public class ProjectListMapper implements RowMapper<ProjectListDto>{
+public class ProjectMainListMapper implements RowMapper<ProjectListDto>{
 @Override
 public ProjectListDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 	ProjectListDto projectListDto = new ProjectListDto();
@@ -27,7 +27,7 @@ public ProjectListDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 	projectListDto.setMinorCategoryType(rs.getString("minor_category_type"));
 	projectListDto.setJudgeStatus(rs.getString("judge_status"));
 	projectListDto.setJudgeDate(rs.getDate("judge_date"));
-	projectListDto.setAchievementRate(rs.getDouble("achievement_rate"));
+	
 //	projectListDto.setProjectPeriod(rs.getInt("project_period"));
 //	projectListDto.setProjectContent(rs.getString("project_content"));
 //	projectListDto.setMinorCategoryNo(rs.getInt("minor_category_no"));

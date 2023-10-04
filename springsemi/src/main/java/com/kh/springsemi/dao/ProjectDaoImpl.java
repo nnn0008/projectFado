@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ProjectListDto;
@@ -163,6 +164,7 @@ public class ProjectDaoImpl implements ProjectDao{
 		String sql = "select * from project_list order by project_no desc";
 		return jdbcTemplate.query(sql, projectListMapper);
 	}
+	
 	@Override
 	public List<ProjectListDto> selectList(String keyword) {
 		String sql = "select * from project_list where "
@@ -195,6 +197,51 @@ public class ProjectDaoImpl implements ProjectDao{
 		String sql = "select attach_no from project_photo where project_no = ?";
 		Object[] data = {projectNo};
 		return jdbcTemplate.queryForObject(sql, Integer.class, data);
+	}
+	
+	//좋아요 순
+	@Override
+	public List<ProjectListDto> selectListByLikeCountTop8() {
+		String sql = "select * from("
+						+ "	select rownum rn, TMP.* from("
+						+ "			select * from project_list "
+						+ "			order by project_likecount desc"
+						+ "	)TMP"
+						+ ") where rn between 1 and 8";
+		return jdbcTemplate.query(sql, projectListMapper);
+	}
+	
+	//조회수 8위까지
+	@Override
+	public List<ProjectListDto> selectListByReadCountTop8() {
+		String sql = "select * from("
+				+ "	select rownum rn, TMP.* from("
+				+ "			select * from project_list pl "
+				+ "			left outer join project_photo pp on pl.project_no = pp.project_no "
+				+ "			order by project_readcount desc"
+				+ "	)TMP"
+				+ ") where rn between 1 and 8";
+		return jdbcTemplate.query(sql, projectListMapper);
+	}
+	
+	//달성률 순서
+	@Override
+	public List<ProjectListDto> selectListByAchievementRateTop8() {
+		String sql = "select * from("
+				+ "	select rownum rn, TMP.* from("
+				+ "			select * from project_list "
+				+ "			order by project_no desc"
+				+ "	)TMP"
+				+ ") where rn between 1 and 8";
+		return jdbcTemplate.query(sql, projectListMapper);
+	}
+	
+	//카테고리 별
+	@Override
+	public List<ProjectListDto> selectListByMajorCategory(String majorCategory) {
+		String sql = "select * from project_list where major_category = ? order by project_no desc";
+		Object[] data = {majorCategory}; 
+		return jdbcTemplate.query(sql, projectListMapper, data);
 	}
 	
 }

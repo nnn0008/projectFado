@@ -22,9 +22,11 @@ import com.kh.springsemi.dao.RewardDao;
 import com.kh.springsemi.dto.DeliveryDto;
 import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.OrdersDto;
+import com.kh.springsemi.dto.OrdersListDto;
 import com.kh.springsemi.dto.PaymentDto;
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.RewardDto;
+import com.kh.springsemi.error.NoTargetException;
 
 @Controller
 @RequestMapping("/orders")
@@ -80,5 +82,20 @@ public class OrdersController {
 	@RequestMapping("/insertFinish")
 	public String insertFinish() {
 		return "/WEB-INF/views/orders/insertFinish.jsp";
+	}
+	
+	
+	@RequestMapping("/list")
+	public String list(Model model) {
+
+		
+		return "/WEB-INF/views/orders/list.jsp";
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(@RequestParam int odersNo) {
+		boolean result = ordersDao.deleteOrders(odersNo);
+		if(result) return "redirect:list";
+		else throw new NoTargetException("주문 내역이 없습니다");
 	}
 }

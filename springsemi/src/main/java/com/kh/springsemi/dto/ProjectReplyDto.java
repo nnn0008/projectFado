@@ -11,4 +11,11 @@ public class ProjectReplyDto {
 	private String projectReplyContent;
 	private Date projectReplyTime;
 	private int projectReplyOrigin;
+	private String memberNickname;
+	
+	public String getProjectReplyWriterString() {
+		if(projectReplyWriter == null)
+			return "탈퇴한 사용자";
+		return memberNickname;
+	}
 }

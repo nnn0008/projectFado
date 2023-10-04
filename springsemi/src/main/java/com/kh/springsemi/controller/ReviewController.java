@@ -63,9 +63,9 @@ public class ReviewController {
 		int reviewNo = reviewDao.sequence();
 		int projectNo = projectDto.getProjectNo();
 		
+		reviewDto.setReviewNo(reviewNo);
 		reviewDto.setProjectNo(projectNo);
 		reviewDto.setReviewWriter(memberId);
-		reviewDto.setReviewNo(reviewNo);
 		
 		reviewDao.insert(reviewDto);
 		//첨부파일 등록
@@ -90,7 +90,7 @@ public class ReviewController {
 			reviewDao.connect(reviewNo, attachNo);
 		}
 		
-		return "redirect:list";
+		return "redirect:/project/detail?projectNo="+projectNo;
 	}
 	
 	
@@ -122,31 +122,34 @@ public class ReviewController {
 						  .body(resource);
 	}
 	
-//	//상세
-//	@RequestMapping("/detail")
-//	public String detail(@RequestParam int reviewNo, Model model) {
-//		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
-//		model.addAttribute("reviewDto", reviewDto);
-//		
-//		String reviewWriter = reviewDto.getReviewWriter();
-//		if(reviewWriter != null) {
-//			MemberDto memberDto = memberDao.selectOne(reviewWriter);
-//			model.addAttribute("reviewWriterDto", memberDto);
-//		}
-//		return "/WEB-INF/views/review/detail.jsp";
-//	}
+	//상세
+	@RequestMapping("/detail")
+	public String detail(@RequestParam int reviewNo, Model model) {
+		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
+		model.addAttribute("reviewDto", reviewDto);
+		
+		String reviewWriter = reviewDto.getReviewWriter();
+		if(reviewWriter != null) {
+			MemberDto memberDto = memberDao.selectOne(reviewWriter);
+			model.addAttribute("reviewWriterDto", memberDto);
+		}
+		return "/WEB-INF/views/review/detail.jsp";
+	}
 
 	
-	//목록
-	@RequestMapping("/list")
-	public String list(@RequestParam int projectNo, Model model) {
-		
-		
-		List <ReviewDto> reviewList = reviewDao.selectList(projectNo);
-		model.addAttribute("reviewList", reviewList);
-		
-		return "/WEB-INF/views/review/list.jsp";
-	}
+//	//목록
+//	@RequestMapping("/list")
+//	public String list(@ModelAttribute ProjectDto projectDto, Model model,
+//						@ModelAttribute ReviewDto reviewDto) {
+//		
+//		int projectNo = projectDto.getProjectNo();
+//		reviewDto.setProjectNo(projectNo);
+//		
+//		List <ReviewDto> reviewList = reviewDao.selectList(projectNo);
+//		model.addAttribute("reviewList", reviewList);
+//		
+//		return "/WEB-INF/views/review/list.jsp";
+//	}
 	
 	//수정
 	@GetMapping("/edit")
@@ -159,14 +162,20 @@ public class ReviewController {
 	
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute ReviewDto reviewDto,
-						@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+						@RequestParam MultipartFile attach,
+						@ModelAttribute ProjectDto projectDto) throws IllegalStateException, IOException {
 		reviewDao.update(reviewDto);
+		
+		
+		int projectNo = projectDto.getProjectNo();
+		
+		reviewDto.setProjectNo(projectNo);
 		
 		if(!attach.isEmpty()) { //파일이 있으면
 			//파익삭제
 			AttachDto attachDto = reviewDao.findReviewPhoto(reviewDto.getReviewNo());
 			String home = System.getProperty("user.home");
-			File dir = new File(home, "upload");
+			File dir = new File(home, "fado");
 			
 			if(attachDto != null) {
 				attachDao.delete(attachDto.getAttachNo());
@@ -190,23 +199,30 @@ public class ReviewController {
 			
 			reviewDao.connect(reviewDto.getReviewNo(), attachNo);
 		}
-		return "redirect:list";
+		return "redirect:/project/detail?projectNo="+projectNo;
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(@RequestParam int reviewNo) {
+	public String delete(@RequestParam int reviewNo,
+						@ModelAttribute ProjectDto projectDto,
+						@ModelAttribute ReviewDto reviewDto) {
+		
+		int projectNo = projectDto.getProjectNo();
+		reviewDto.setProjectNo(projectNo);
+		
+		
 		AttachDto attachDto = reviewDao.findReviewPhoto(reviewNo);
 		reviewDao.delete(reviewNo);
 		
 		if(attachDto != null) {
 			
 			String home = System.getProperty("user.home");
-			File dir = new File(home, "upload");
+			File dir = new File(home, "fado");
 			File target = new File(dir, String.valueOf(attachDto.getAttachNo()));
 			target.delete(); //실제 파일 삭제
 		}
 		
 		attachDao.delete(attachDto.getAttachNo()); //파일정보 삭제
-		return "redirect:list";
+		return "redirect:/project/detail?projectNo="+projectNo;
 	}
 }

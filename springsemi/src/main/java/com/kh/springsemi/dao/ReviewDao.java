@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.springsemi.dto.AttachDto;
 import com.kh.springsemi.dto.ReviewDto;
+import com.kh.springsemi.dto.ReviewListDto;
 import com.kh.springsemi.vo.PaginationVO;
 
 public interface ReviewDao {
@@ -13,7 +14,7 @@ public interface ReviewDao {
 	boolean delete(int reviewNo);
 	
 	ReviewDto selectOne(int reviewNo);
-	List<ReviewDto> selectList(int projectNo);
+	List<ReviewListDto> selectList(int projectNo);
 	
 	
 	 

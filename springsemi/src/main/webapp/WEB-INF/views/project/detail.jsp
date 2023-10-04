@@ -323,7 +323,7 @@ $(function(){
             <img src="/rest/project/download?attachNo=${subAttachDto.attachNo}">
         </div>
 
-        <div class="container w-700">
+        <div class="container">
             <div class="row bold">
                 파도 선택
             </div>
@@ -333,8 +333,8 @@ $(function(){
                 <c:forEach var="rewardDto" items="${rewardList}" varStatus="stat">
                 <c:choose>
                     <c:when test="${stat.first}">
-                    <label for ="reward-check1">
                         <div class="w-100 mt-10 reward">
+                    <label for ="reward-check1" class="w-100">
                             <input type="radio" name="rewardNo" value="${rewardDto.rewardNo}" checked class="mt-20"
                             id="reward-check1" > 
                             <div class="row left bold" style="font-size:20px;">
@@ -343,12 +343,13 @@ $(function(){
                             <div class="row left mt-10">
                                 ${rewardDto.rewardType}
                             </div>
-                        </div>
                     </label>
+                        </div>
                     </c:when>
                     <c:otherwise>
-                    	<label for ="reward-check2">
+                    	
                         <div class="w-100 mt-10 reward">
+                        	<label for ="reward-check2" style="width:100%;">
                             <input type="radio" name="rewardNo" value="${rewardDto.rewardNo}" class="mt-20"
                             id="reward-check2">
                             <div class="row left bold" style="font-size:20px;">
@@ -357,8 +358,9 @@ $(function(){
                             <div class="row left mt-10">
                                 ${rewardDto.rewardType}
                             </div>
+                            </label>
                         </div>
-						</label>
+						
                     </c:otherwise>
                 </c:choose>
             </c:forEach> 

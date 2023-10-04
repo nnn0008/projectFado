@@ -36,7 +36,7 @@ public class PaginationVO {
       return (count-1) / size +1;
    }
    public boolean isLast() {
-      return getEnd() > getPageCount();
+      return getEnd() >= getPageCount();
    }
    public String getNextQueryString() {
       if(isSearch()) {  //검색이면

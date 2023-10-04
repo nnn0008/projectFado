@@ -51,5 +51,13 @@ public class RewardDaoImpl implements RewardDao{
 		Object[] data = {projectNo};
 		return jdbcTemplate.query(sql, rewardMapper, data);
 	}
+	
+	@Override
+	public RewardDto selectOne(int rewardNo) {
+		String sql = "select * from reward where reward_no = ?";
+		Object[] data = {rewardNo};
+		List<RewardDto> list = jdbcTemplate.query(sql, rewardMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 
 }

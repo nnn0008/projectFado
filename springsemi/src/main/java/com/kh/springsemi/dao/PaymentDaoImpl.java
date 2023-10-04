@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.springsemi.dto.OrdersDto;
 import com.kh.springsemi.dto.PaymentDto;
 import com.kh.springsemi.mapper.PaymentMapper;
 
@@ -27,35 +26,37 @@ public class PaymentDaoImpl implements PaymentDao{
 
 	@Override
 	public void createPayment(PaymentDto paymentDto) {
-		String sql = "insert into payment";
-		Object[] data = {};
+		String sql = "insert into payment(payment_no, orders_no) values(?, ?)";
+		Object[] data = {paymentDto.getPaymentNo(), paymentDto.getOrdersNo()};
 		jdbcTemplate.update(sql, data);
 	}
-
 	
 	@Override
 	public boolean updatePaymentStatus(PaymentDto paymentDto) {
-		String sql = "update payment set payment_status=? where payment_no=?";
+		String sql = "update payment set payment_status = ? where payment_no = ?";
 		Object[] data = {paymentDto.getPaymentStatus(), paymentDto.getPaymentNo()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 
 	@Override
-	public OrdersDto selectOne(int paymentNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public PaymentDto selectOne(int paymentNo) {
+		String sql = "select * from payment where payment_no = ?";
+		Object[] data = {paymentNo};
+		List<PaymentDto> list = jdbcTemplate.query(sql, paymentMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
 
 	@Override
 	public List<PaymentDto> selectList() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from payment order by payment_no desc";
+		return jdbcTemplate.query(sql, paymentMapper);
 	}
 
 	@Override
 	public boolean deletePayment(int paymentNo) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql = "delete payment where paymentNo = ?";
+		Object[] data = {paymentNo};
+		return jdbcTemplate.update(sql, data) > 0;
 	}
 
 }

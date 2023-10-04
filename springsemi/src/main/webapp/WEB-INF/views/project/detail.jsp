@@ -73,8 +73,31 @@ $(function(){
 });	
 
 </script>
-
-<c:if test="${sessionScope.name != null}">
+<script>
+ 	//목표 : 버튼의 텍스트를 읽어 프로젝트의 승인완료/승인거절
+ 	$(function(){
+		$(".judge").click(function(){
+			var queryString = window.location.search;
+			var searchParams = new URLSearchParams(queryString);
+			var projectNo = searchParams.get("projectNo");
+			var buttonText = $(this).text();
+			console.log(projectNo);
+			console.log(buttonText);
+			$.ajax({
+				url:"/rest/judge",
+				method:"post",
+				data:{ 
+					judgeStatus : buttonText,
+					projectNo : projectNo
+				},
+				success:function(response){
+					window.location.href = "/project/list";
+				},
+			});
+		});
+		
+	});
+</script>
 
 <script>
 	$(function(){
@@ -115,8 +138,6 @@ $(function(){
 		});
 	});
 </script>
-
-</c:if>
 
 <script>
 	$(function(){
@@ -164,7 +185,6 @@ $(function(){
 	});
 </script>
 
-
 <script>
 //Q&A랑 후기 버튼으로 넘기기
     $(function(){
@@ -182,6 +202,39 @@ $(function(){
     });
 </script>
 
+<script>
+$(document).ready(function() {
+    var selectedReward = null; // 선택한 리워드 정보를 저장할 변수
+
+    // 리워드 버튼 클릭 시
+    $(".reward-btn").click(function() {
+        // 선택한 리워드 정보 가져오기
+        var price = $(this).find(".row:first-child").text().trim();
+        var type = $(this).find(".row:last-child").text().trim();
+
+        // 선택한 리워드 정보 저장
+        selectedReward = {
+            price: price,
+            type: type
+        };
+
+        // 리워드 버튼에 선택 표시 추가 (선택한 리워드에 따라 스타일링할 수 있음)
+        $(".reward-btn").removeClass("selected"); // 모든 리워드 버튼에서 선택 표시 제거
+        $(this).addClass("selected"); // 클릭한 리워드 버튼에 선택 표시 추가
+    });
+
+    // 주문하기 버튼 클릭 시
+    $(".order-btn").click(function() {
+        if (selectedReward) {
+            // 선택한 리워드 정보를 주문 페이지로 전달
+            var orderPageUrl = "/orders/insert?projectNo=" + projectDto.projectNo + "&price=" + selectedReward.price + "&type=" + selectedReward.type;
+            window.location.href = orderPageUrl;
+        } else {
+            alert("리워드를 선택하세요."); // 리워드를 선택하지 않았을 때 경고 메시지 표시
+        }
+    });
+});
+</script>
 
     <div class="container w-800">
     	<div class="row">
@@ -248,12 +301,12 @@ $(function(){
     		<label>프로젝트 계획</label> <label>업데이트</label> <label>커뮤니티</label> <label>추천</label>
     		</div>
     		<div class="flex-container">
-    			<div class="w-100 left">
+    			<div class="w-75 left">
     				<img src="/rest/project/download?attachNo=${subAttachDto.attachNo}">
     			</div>
     				창작자 소개<br>
     				${projectDto.projectOwner}<br>
-    			<div class="w-100">
+    			<div class="w-25">
     				<c:if test="${sessionScope.name != projectDto.projectOwner}">
     				<c:choose>
                         <c:when test="${isFollowing == 'true'}">
@@ -275,18 +328,18 @@ $(function(){
     			</div>
     		</div>
     	</div>
+    	<c:if test="${sessionScope.level == '관리자'}">
+	    	<div class="row">
+	    		<button class="btn btn-positive judge">승인완료</button> <button class="btn btn-negative judge" value="">승인거절</button>
+	    	</div>
+    	</c:if>
     </div>
-        
     <!--  커뮤니티 리스트 스크립트 -->
     <script>
 
     </script>
     
     <div class="container w-1000 flex-container">
-    
-    	<div class="row" style="flex-grow: 3.5;">
-    		<img src="https://picsum.photos/id/2/100/100">
-    	</div>
     	
     	<div class="row w-200" style="background-color: #E0F2F7; flex-frow:1.5; border: 1px solid #E0F2F7; border-radius: 10px;">
     	<div class="row">
@@ -305,7 +358,7 @@ $(function(){
 	    	</button>
     	</c:forEach>
     	<div class="row">
-    		<button class="btn btn-positive">
+    		<button class="btn btn-positive order-btn">
     			<a class="link" href="/orders/write?projectNo=${projectDto.projectNo}"></a>
     			주문하기
     		</button>

@@ -10,5 +10,5 @@ public interface RewardDao {
 	boolean updateInfo(RewardDto rewardDto);
 	boolean delete(int rewardNo);
 	List<RewardDto> selectListByProjectNo(int projectNo);
-
+	RewardDto selectOne(int rewardNo);
 }

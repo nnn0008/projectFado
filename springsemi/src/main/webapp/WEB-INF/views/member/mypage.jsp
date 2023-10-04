@@ -76,7 +76,7 @@ pageEncoding="UTF-8"%>
                 </label>
                 <hr class="w-50 mb-20">
                 <a class="btn" href="mypageDetail">
-                    프로필 편집
+                    내 정보 보기
                 </a>
             </div>
             

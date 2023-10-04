@@ -141,7 +141,7 @@ public class AdminController {
 			String memberLevel = (String) session.getAttribute("level");
 			if(memberLevel.equals("관리자")) {
 				projectDao.delete(projectNo);
-				return "redirect:project/list";
+				return "redirect:/admin/project/list";
 			}
 			else { 
 				throw new AuthorityException("찾을 수 없는 프로젝트 입니다");

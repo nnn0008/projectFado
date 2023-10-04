@@ -54,7 +54,7 @@
     				<td>${memberListDto.memberEmail }</td>
     				<td>${memberListDto.memberBirth }</td>
     				<td>${memberListDto.memberLevel }</td>
-    				<td>${memberListDto.block }</td>
+    				<td>${memberListDto.block}</td>
     			<td>
     			
     			
@@ -63,11 +63,10 @@
     			
     			<c:choose>
     				<c:when test="${memberListDto.block == 'Y'}">
-    					<a href="block?memberId=${memberListDto.memberId }">차단 </a>
+    				    <a href="cancel?memberId=${memberListDto.memberId}">해제 </a>
     				</c:when>
     				<c:otherwise>
-    				
-    					<a href="cancel?memberId=${memberListDto.memberId }">해제 </a>
+    					<a href="block?memberId=${memberListDto.memberId}">차단</a>
     				</c:otherwise>
     			</c:choose>
     			

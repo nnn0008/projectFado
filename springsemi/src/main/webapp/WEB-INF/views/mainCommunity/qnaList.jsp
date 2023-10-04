@@ -52,7 +52,7 @@
 
 
    	<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
-	   <c:if test="${sessionScope.name != null}">
+	   <c:if test="${sessionScope.name != null && sessionScope.level != '관리자'}">
 	   <div class="row right">
 	      <a href="write" class="btn btn-positive">
 	         <i class="fa-solid fa-pen"></i>

@@ -7,54 +7,79 @@
 
 <div class="container w-800">
 	<div class="row">
-		<table>
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>판매자</th>
-					<th>등록일</th>
-					<th>시작일</th>
-					<th>종료일</th>
-					<th>목표금액</th>
-					<th>모인금액</th>
-					<th>조회수</th>
-					<th>좋아요</th>
-					<th>대분류</th>
-					<th>소분류</th>
-					<th>심사일</th>
-					<th>심사단계</th>			
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="projectListDto" items="${projectList}">
-				<tr>
-					<td>${projectListDto.projectNo }</td>
-					<td>
-					<a class="link" href="detail?projectNo=${projectListDto.projectNo}">
-						${projectListDto.projectTitle}
-					</a>
-					</td>
-					<td>${projectListDto.projectOwner}</td>
-					<td>${projectListDto.projectRegDate}</td>
-					<td>${projectListDto.projectStartDate }</td>
-					<td>${projectListDto.projectEndDate}</td>
-					<td>${projectListDto.projectGoalPrice }</td>
-					<td>${projectListDto.projectTotalPrice }</td>
-					<td>${projectListDto.projectReadcount}</td>
-					<td>${projectListDto.projectLikecount }</td>
-					<td>${projectListDto.majorCategoryType}</td>
-					<td>${projectListDto.minorCategoryType}</td>	
-					<td>${projectListDto.judgeDate}</td>
-					<td>${projectListDto.judgeStatus}</td>				
-				</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		<div>
+			<hr>
+			<h1>펀딩 심사 목록</h1>
+			<hr class="mb-20">
+		</div>
+	<c:forEach var="projectListDto" items="${projectList}">
+	
+		<div class="left">
+			${projectListDto.majorCategoryType} > 
+			${projectListDto.minorCategoryType}
+		</div>
+		<div class="flex-container">
+			<div style="font-weight:bold; font-size:18px;">
+				${projectListDto.projectNo}
+			</div>
+			<div class="ms-20 me-10">
+				 <i class="fa-regular fa-window-minimize fa-rotate-90"></i>
+			</div>
+			<div class="me-20">
+				<a class="link" href="/project/detail?projectNo=${projectListDto.projectNo}"
+					style="font-weight:bold; font-size:18px;">
+				${projectListDto.projectTitle}
+				</a>
+			</div>
+			<div class="me-20 mb-20">
+				<i class="fa-solid fa-eye"></i> ${projectListDto.projectReadcount}
+			</div>
+			<div>
+				<i class="fa-solid fa-heart red"></i> ${projectListDto.projectLikecount}
+			</div>
+			<div>
+				<a href="delete?projectNo=${projectListDto.projectNo}">
+					<i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
+				</a>
+			</div>
+		</div>
+		<div class="flex-container auto-width left">
+			<div>
+				<div>
+					등록일 : ${projectListDto.projectRegDate}
+				</div>
+				<div>
+					시작일 : ${projectListDto.projectStartDate}
+				</div>
+				<div>
+					종료일 : ${projectListDto.projectEndDate}
+				</div>
+			</div>
+			<div>
+				<div>
+					목표금액 : ${projectListDto.projectGoalPrice}
+				</div>
+				<div>
+					모인금액 : ${projectListDto.projectTotalPrice}
+				</div>
+			</div>
+			<div>
+				<div>
+					심사일 : ${projectListDto.judgeDate}
+				</div>
+				<div>
+					심사단계 : ${projectListDto.judgeStatus}
+				</div>
+			</div>
+		</div>
+		<hr>		
+	</c:forEach>
+				
 		<br>
-			
+		</div>
 			<!-- 페이지 네비게이터 출력 -->
 			<h3>
+			
 			<!-- 이전 버튼 : begin이 1이면 없다 -->
 			<c:if test="${begin > 1}">
 			<!-- 링크는 검색과 목록을 따로 구현 -->
@@ -91,10 +116,10 @@
 				<!-- 링크는 검색과 목록을 따로 구현 -->
 				<c:choose>
 					<c:when test="${isSearch}">
-						<a href="list?page=${end+1}&keyword=${param.keyword}">&gt;</a>
+						<a href="/project/list?page=${end+1}&keyword=${param.keyword}">&gt;</a>
 					</c:when>
 					<c:otherwise>
-						<a href="list?page=${end+t}">&gt;</a> <!-- 다른 페이지라면 링크가 포함된 숫자를 보여주기 -->
+						<a href="/project/list?page=${end+t}">&gt;</a> <!-- 다른 페이지라면 링크가 포함된 숫자를 보여주기 -->
 					</c:otherwise>
 				</c:choose>	 
 			</c:if>
@@ -103,5 +128,4 @@
 			
 		<br>
 	</div>
-</div> 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

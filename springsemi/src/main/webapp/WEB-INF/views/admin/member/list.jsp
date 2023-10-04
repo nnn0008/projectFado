@@ -6,21 +6,21 @@
     <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
     
     
-    <div class="container w-700">
+    <div class="container w-800">
     <div class="row mv-40">
-    <h3>전체회원관리 </h3>
+    	<h3>전체회원관리 </h3>
     </div>
     
     <div class="row">
     <form action="list" method="get" >
 				
    
-   <select name="type" class="form-input" height="300" >
-	<option value="member_id">아이디 </option>
-	<option value="member_nickname">닉네임 </option>
-	<option value="member_contact">연락처 </option>
-	<option value="member_email">이메일  </option>
-	<option value="member_birth">생년월일 </option>
+   <select name="type" class="form-input">
+		<option value="member_id">아이디 </option>
+		<option value="member_nickname">닉네임 </option>
+		<option value="member_contact">연락처 </option>
+		<option value="member_email">이메일  </option>
+		<option value="member_birth">생년월일 </option>
     </select>
   
     
@@ -32,7 +32,7 @@
     
     <br>
     
-    <table border="1" width="700">
+    <table border="1" width="800">
     	<thead>
     		<tr>
     			<th>아이디 </th>
@@ -45,8 +45,8 @@
     			<th>메뉴</th>
     		</tr>
     		
-    		<tbody>
-    		<c:forEach var="memberListDto" items="${list }">
+    		<tbody align="center">
+    		<c:forEach var="memberListDto" items="${list}">
     			<tr>
     				<td>${memberListDto.memberId }</td>
     				<td>${memberListDto.memberNickname }</td>
@@ -58,8 +58,8 @@
     			<td>
     			
     			
-    			<a href="detail?memberId=${memberListDto.memberId }">상세 </a>
-    			<a href="edit?memberId=${memberListDto.memberId }">수정 </a>
+    			<a href="detail?memberId=${memberListDto.memberId}">상세 </a>
+    			<a href="edit?memberId=${memberListDto.memberId}">수정 </a>
     			
     			<c:choose>
     				<c:when test="${memberListDto.block == 'Y'}">
@@ -97,13 +97,8 @@
 			<a href="list?${vo.nextQueryString }">&gt;</a>
 			</c:if>
 			
-		<%-- 
-			 내가 팔로우 하는사람 
-    			 나를 팔로우 하는사람 
-    			 내가 좋아요 누른 상품 
-    			 성공한 펀딩 
-		--%>
 		
 	</h4>
+    </div>
     </div>
     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

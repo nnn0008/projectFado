@@ -174,7 +174,6 @@ textarea.form-input.fixed {
     border-color: #2c8de0;
     background-color: #2c8de0;
     color: white;
-    font-size: 10px;
 }
 .btn.btn-negative {
     border-color: #e17055;
@@ -319,6 +318,10 @@ textarea.form-input.fixed {
 .ps-30 {padding-left: 30px; }
 .ps-40 {padding-left: 40px; }
 .ps-50 {padding-left: 50px; }
+.ps-60 {padding-left: 60px; }
+.ps-70 {padding-left: 70px; }
+.ps-80 {padding-left: 80px; }
+.ps-90 {padding-left: 90px; }
 .ps-100 {padding-left: 100px; }
 
 .pe-10 {padding-right: 10px;}
@@ -326,6 +329,11 @@ textarea.form-input.fixed {
 .pe-30 {padding-right: 30px;}
 .pe-40 {padding-right: 40px;}
 .pe-50 {padding-right: 50px;}
+.pe-60 {padding-right: 60px;}
+.pe-70 {padding-right: 70px;}
+.pe-80 {padding-right: 80px;}
+.pe-90 {padding-right: 90px;}
+.pe-100 {padding-right: 100px;}
 
 
 

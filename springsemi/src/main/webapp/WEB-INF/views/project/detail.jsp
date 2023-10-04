@@ -290,9 +290,11 @@ $(document).ready(function() {
     				</div>
     				
 					<div>
-						<i class="fa-heart fa-regular red"></i> 
-						<span>?</span>
-						<button class="btn btn-positive w-70">이 프로젝트 후원하기</button>
+						<i class="fa-heart fa-regular fa-2x mb-20" style="color:#eeaeca;"></i> 
+						<span class="me-10">?</span>
+						<button class="row btn btn-positive w-70 pt-10 pb-10 ps-60 pe-60" style="font-size:20px;">
+							후원하기
+						</button>
 					</div>
     				
     			</div>

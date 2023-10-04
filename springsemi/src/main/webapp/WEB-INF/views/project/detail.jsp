@@ -37,9 +37,10 @@
             border-radius: 10px;
         }
         
-      .reward-btn {
+      .reward{
       	font-weight: normal;
-	    border-color: #2c8de0;
+	    box-shadow: 1px 1px 3px 0px #2c8de0;
+        color: #202020;
 	    background-color: white;
 	    color: #2c8de0;
 	    color: rgb(0, 0, 0);
@@ -51,7 +52,7 @@
 	    padding-right:15%;
 	    border-radius: 0.5em;
       }
-	.reward-btn:hover { /*마우스가 버튼에 올라가면 배경을 조금 더 어둡게*/
+	.reward:hover { /*마우스가 버튼에 올라가면 배경을 조금 더 어둡게*/
 	    filter:brightness(98%);
 	}
 
@@ -327,33 +328,48 @@ $(function(){
                 파도 선택
             </div>
 
+            <form action="/orders/insert"> 
+                <input type="hidden" name="projectNo" value="${projectDto.projectNo}">
+                <c:forEach var="rewardDto" items="${rewardList}" varStatus="stat">
+                <c:choose>
+                    <c:when test="${stat.first}">
+                    <label for ="reward-check1">
+                        <div class="w-100 mt-10 reward">
+                            <input type="radio" name="rewardNo" value="${rewardDto.rewardNo}" checked class="mt-20"
+                            id="reward-check1" > 
+                            <div class="row left bold" style="font-size:20px;">
+                                ${rewardDto.rewardPrice}원 +
+                            </div>
+                            <div class="row left mt-10">
+                                ${rewardDto.rewardType}
+                            </div>
+                        </div>
+                    </label>
+                    </c:when>
+                    <c:otherwise>
+                    	<label for ="reward-check2">
+                        <div class="w-100 mt-10 reward">
+                            <input type="radio" name="rewardNo" value="${rewardDto.rewardNo}" class="mt-20"
+                            id="reward-check2">
+                            <div class="row left bold" style="font-size:20px;">
+                                ${rewardDto.rewardPrice}원 +
+                            </div>
+                            <div class="row left mt-10">
+                                ${rewardDto.rewardType}
+                            </div>
+                        </div>
+						</label>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach> 
             <div class="row">
-                <c:forEach var="rewardDto" items="${rewardList}">
-                    <button class="btn reward-btn">
-                    <div class="container w-100 mt-10" >
-                        <div class="left bold" style="font-size:20px;">
-                            ${rewardDto.rewardPrice}원 +
-                        </div>
-                        <div class="left mt-10">
-                            ${rewardDto.rewardType}
-                        </div>
-                    </div>
-                    </button>
-                </c:forEach>
-
-                <div class="row">
-                    <button class="btn btn-positive order-btn ps-30 pe-30 pt-10 pb-10">
-                        <a class="link" href="/orders/write?projectNo=${projectDto.projectNo}"></a>
-                        주문하기
-                    </button>
-                </div>
-
+                <button class="btn btn-positive" type="submit">
+                    주문하기
+                </button>
             </div>
-
-
-        </div>
-    		
-    		
+            </form>
+            </div> 
+        </div> 
     		
     		
     		
@@ -364,36 +380,7 @@ $(function(){
     	</c:if>
     </div>
     
-<!--     <div class="container w-1000 flex-container"> -->
-    	
-<!--     	<div class="row w-200" style="background-color: #E0F2F7; flex-frow:1.5; border: 1px solid #E0F2F7; border-radius: 10px;"> -->
-<!--     	<div class="row"> -->
-<!--     		리워드 선택 -->
-<!--     	</div> -->
-<!--     	<form action="/orders/insert"> -->
-<%--     	<input type="hidden" name="projectNo" value="${projectDto.projectNo}"> --%>
-<%--     	<c:forEach var="rewardDto" items="${rewardList}" varStatus="stat"> --%>
-<%--     		<c:choose> --%>
-<%--     			<c:when test="${stat.first}"> --%>
-<%-- 		    		<input type="radio" name="rewardNo" value="${rewardDto.rewardNo}" checked>  --%>
-<%-- 		    		${rewardDto.rewardType} --%>
-<%-- 		    		${rewardDto.rewardPrice}원 --%>
-<%--     			</c:when> --%>
-<%--     			<c:otherwise> --%>
-<%--     				<input type="radio" name="rewardNo" value="${rewardDto.rewardNo}"> --%>
-<%--     				${rewardDto.rewardType} --%>
-<%--     				${rewardDto.rewardPrice} --%>
-<%--     			</c:otherwise> --%>
-<%--     		</c:choose> --%>
-<%--     	</c:forEach> --%>
-<!--     	<div class="row"> -->
-<!--     		<button class="btn btn-positive" type="submit"> -->
-<!--     			주문하기 -->
-<!--     		</button> -->
-<!--     	</div> -->
-<!--     	</form> -->
-<!--     	</div>  -->
-<!--     </div> -->
+
 	
 <div class="container">
     <!-- 

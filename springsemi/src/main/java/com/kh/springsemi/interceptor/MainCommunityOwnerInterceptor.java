@@ -28,7 +28,7 @@ public class MainCommunityOwnerInterceptor implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("name");
 		
-		//등급 저장
+		//등급 저장 
 		HttpSession session2 = request.getSession();
 		String memberLevel = (String)session2.getAttribute("level");
 		

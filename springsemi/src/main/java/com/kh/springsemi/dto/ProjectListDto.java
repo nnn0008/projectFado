@@ -20,6 +20,7 @@ public class ProjectListDto {
 	private String minorCategoryType;
 	private String judgeStatus;
 	private Date judgeDate;
+	private double achievementRate;
 //	private int projectPeriod;
 //	private int minorCategoryNo;
 }

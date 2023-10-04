@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.springsemi.configuration.FileUploadProperties;
 import com.kh.springsemi.dao.AttachDao;
 import com.kh.springsemi.dao.JudgeDao;
 import com.kh.springsemi.dao.MajorCategoryDao;
@@ -89,7 +91,19 @@ public class ProjectController {
 		minorModel.addAttribute("minorList", minorList);
 		return "/WEB-INF/views/project/write.jsp";
 	}
-
+	
+	//미리 작성해둔 커스텀 속성을 불러와서 디렉터리 객체까지 생성
+	@Autowired
+	private FileUploadProperties props;
+	
+	private File dir;
+		
+	@PostConstruct //모든 로딩이 끝나면 자동으로 실행되는 메소드
+	public void init() {
+		dir = new File(props.getHome());
+		dir.mkdirs();
+	}
+	
 	@PostMapping("/write")
 	public String write(@ModelAttribute ProjectDto projectDto, HttpSession session,
 			@ModelAttribute JudgeDto judgeDto, @ModelAttribute ProjectPhotoDto projectPhotoDto,
@@ -106,9 +120,6 @@ public class ProjectController {
 		projectSubPhotoDto.setProjectNo(projectNo);
 		projectSubPhotoDto.setAttachNo(subAttachNo);
 		
-		String home = System.getProperty("user.home");
-		File dir = new File(home, "upload");
-		dir.mkdirs();
 		File mainTarget = new File(dir, String.valueOf(mainAttachNo));
 		mainAttach.transferTo(mainTarget);
 		File subTarget = new File(dir, String.valueOf(subAttachNo));

@@ -53,5 +53,10 @@ public class AttachDaoImpl implements AttachDao{
 		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-
+	
+	@Override
+	public List<AttachDto> selectList() {
+		String sql = "select * from attach order by attach_no desc";
+		return jdbcTemplate.query(sql, attachMapper);
+	}
 }

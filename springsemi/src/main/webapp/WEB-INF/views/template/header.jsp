@@ -34,6 +34,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 	
 <style>
+		
 
 		a{
 		text-decoration: none;
@@ -283,23 +284,47 @@
         <div class="logo">
             <a href="http://localhost:8080/"><img src="/images/smallfado.jpg" style="height: 60px;" class="me-50"></a>
         </div>
-        <div class="title">
+        
+        <div class="title flex-container row">
+			<!--  <div class="backdrop"> -->
+        <form action ="/project/list" method="get">
+        	<div class="container w-900">
+	        	<div class="flex-container">
+					<div class="w-100">
+		           		<i class="fa-solid fa-magnifying-glass"></i>
+		        		<input type="search" class="pointer w-100 focus p-10" name="keyword" placeholder="검색어를 입력해주세요" value="" style="width:350px; height:50px; border-color:#2c8de0; box-shadow: 1px 1px 4px 0px #2d3436; ">
+					</div>
+					
+	        			<!-- <i class="fa-solid fa-x exit"></i>	 -->				
 
+	        	</div>
+
+					<!-- <hr> -->	        	
+
+	        	<!-- <div class="row left">
+	        		최근검색어
+	        		
+	        	</div>
+	        	<div class="row left">
+	        		파도 인기 검색어
+	        		
+	        	</div> -->
+        	</div>
+        </form>
         </div>
+        
+        
         <div class="etc">
         
-        	<a href="#">
-            <i class="me-10 fa-solid fa-heart" style="color: #fa7d90;"></i>
-			</a>
-			
-			<a href="#">
-            <i class="me-20 fa-solid fa-bell" style="color: #2c8de0;"></i>
+        	<a href="http://localhost:8080/project/write">
+        	<div style="font-size:14px" style="color:#2c8de0;">프로젝트업로드
+             <i class="fa-solid fa-pen" style="color:#2c8de0;"></i>
+             
 			</a>
 
 			
 				<!-- 로그인 버튼 관련 -->
-			
-					<a href="<c:choose>
+			<%-- <a href="<c:choose>
 			            <c:when test='${empty sessionScope.name}'>
 			                http://localhost:8080/member/login
 			            </c:when>
@@ -307,7 +332,7 @@
 			                http://localhost:8080/member/mypage
 			            </c:otherwise>
 			        </c:choose>"
-			   				class="btn btn-positive1">
+			   				class="btn btn-positive1" >
 			  		 <c:choose>
 			       <c:when test="${not empty sessionScope.name}">
 			           ${sessionScope.nickname}
@@ -322,28 +347,58 @@
 			
 						<c:choose>
 						    <c:when test="${not empty sessionScope.name}">
+						    
 						        <a href="http://localhost:8080/member/logout" class="mb-50">logout</a>
 						        
 						    </c:when>
 						    <c:otherwise>
 						        <!-- 로그인되지 않은 경우 아무것도 표시하지 않음 -->
 						    </c:otherwise>
-						</c:choose>
+						</c:choose> --%>
+						
+						<div class="row etc-menu custom-menu navy">
+						<span>
+						${sessionScope.nickname} <i class="fa-solid fa-angle-down"></i></span>
+							<div class="custom-service">
+								<a class="left" href="/member/mypage">마이페이지</a>
+								<a class="left" href="/mainCommunity/noticeList">공지사항</a>
+                                <!-- <a class="left" href="/member/logout">로그아웃</a> -->
+                                <a href="<c:choose>
+			            <c:when test='${empty sessionScope.name}'>
+			                http://localhost:8080/member/login
+			            </c:when>
+			            <c:otherwise>
+			                http://localhost:8080/member/mypage
+			            </c:otherwise>
+			        </c:choose>"
+			   				class="left" >
+			  		 <c:choose>
+			       <c:when test="${not empty sessionScope.name}">
+			           
+			       </c:when>
+			       <c:otherwise>
+			           Login
+			       </c:otherwise>
+			   </c:choose>
+			</a>
 			
+			<a href="http://localhost:8080/"></a>
+			
+						<c:choose>
+						    <c:when test="${not empty sessionScope.name}">
+						    
+						        <a href="http://localhost:8080/member/logout" class="left">logout</a>
+						        
+						    </c:when>
+						    <c:otherwise>
+						        <!-- 로그인되지 않은 경우 아무것도 표시하지 않음 -->
+						    </c:otherwise>
+						</c:choose> 
+							</div>
+						</div>
 						
-						
-				
-
-
-
-      <!--       <a href="http://localhost:8080/member/login" class="btn btn-positive" style="padding-left: 60px;
-             padding-right: 60px; height:40px; 
-             padding-bottom:38px;">
-             login
-            <a href="http://localhost:8080/member/login" class="link">login</a>    
-            </a> -->
-            
-        </div>
+            </div>
+        
        
 
     </header>
@@ -379,12 +434,12 @@
             </li>
 
             <li>
-                <a href="http://localhost:8080/" class="ms-20">홈</a>
+                <a href="/project/fundinglist" class="ms-30">펀딩+</a>
 
             </li>
 
             <li>
-                <a href="/project/fundinglist">프로젝트</a>
+                <a class="ms-20" href="/project/fundinglist">인기</a>
             </li>
 
             <!-- <li>
@@ -396,16 +451,17 @@
             </li> -->
 
             <li>
-                <a class="ms-20" href="http://localhost:8080/mainCommunity/noticeList">커뮤니티</a>
+                <a href="http://localhost:8080/mainCommunity/noticeList">커뮤니티</a>
             </li>
-            <!-- 검색창 -->
             
-            <a>
-            
-                <div class=" ms-660" style="width: 200px;">
-                    <i class="fa-solid fa-magnifying-glass" style="color: #2c8de0;"></i>
-                 <input type="search" class="pointer w-100 focus" name="keyword" placeholder="검색어를 입력해주세요" value="">
-                 </div>  
+            <%-- 관리자인 경우 추가 메뉴 출력 --%>
+								<c:if test="${sessionScope.level == '관리자'}">
+									<li>
+									<a class="ms-20" href="http://localhost:8080/admin/">관리자메뉴</a>
+									</li>
+								</c:if>
+        	</ul>
+           
 
 
 

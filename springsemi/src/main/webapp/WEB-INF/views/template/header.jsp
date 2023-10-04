@@ -262,7 +262,7 @@
             		data:{},
             		success:function(response){
             			for(var i = 0; i < response.length; i++){
-            				var aTag = $("<a>").attr("href", "http://localhost:8080/project/list?majorCategoryNo=" + response[i].majorCategoryNo).text(response[i].majorCategoryType);
+            				var aTag = $("<a>").attr("href", "http://localhost:8080/project/list?keyword=" + response[i].majorCategoryType).text(response[i].majorCategoryType);
 
             				aTag.appendTo(".majorCategory");
             			}

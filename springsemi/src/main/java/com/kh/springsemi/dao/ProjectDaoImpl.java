@@ -13,7 +13,7 @@ import com.kh.springsemi.dto.ProjectListDto;
 import com.kh.springsemi.mapper.ProjectListAttachMapper;
 import com.kh.springsemi.mapper.ProjectListMapper;
 import com.kh.springsemi.mapper.ProjectMapper;
-import com.kh.springsemi.vo.PaginationVO;
+import com.kh.springsemi.vo.PaginationListVO;
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao{
@@ -81,6 +81,14 @@ public class ProjectDaoImpl implements ProjectDao{
 		List<ProjectDto> list = jdbcTemplate.query(sql, projectMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
+	@Override
+	public ProjectListDto selectOneByProjectList(int projectNo) {
+		String sql = "select * from project_list where project_no = ?";
+		Object[] data = {projectNo};
+		List<ProjectListDto> list = jdbcTemplate.query(sql, projectListMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 
 	@Override
 	public boolean updateProjectReadcount(int projectNo) {
@@ -97,19 +105,48 @@ public class ProjectDaoImpl implements ProjectDao{
 	}
 	
 //	@Override
-//	public int countList(PaginationVO vo) {
-//		if(vo.isSearch()) {
-//			String sql = "select count(*) from project "
-//					+ "where instr("+vo.getType()+",?) > 0 "
-//							+ "and member_level != 관리자 ";
-//			Object[] data = {vo.getKeyword()};
-//			return jdbcTemplate.queryForObject(sql, int.class, data);
-//		}
-//		else {
-//			String sql = "select count(*) from project";
-//			return jdbcTemplate.queryForObject(sql, int.class);
-//		}
-//	}	
+//	public List<ProjectListAttachDto> selectList() {
+//		String sql = "select * from project_list order by project_no desc";
+//		return jdbcTemplate.query(sql, projectListAttachMapper);
+//	}
+//	
+//	@Override
+//	public List<ProjectListAttachDto> selectListByPage(int page) {
+//		int begin = page * 10 - 9;
+//		int end = page * 10;
+//		String sql = "select * from("
+//								+ "select rownum rn, TMP.* from("
+//									+	"select * from project_list "
+//									+ "order by project_no desc"
+//								+ ")TMP"
+//							+ ") where rn between ? and ? ";
+//		Object[] data = {begin, end};
+//		return jdbcTemplate.query(sql, projectListAttachMapper, data);
+//	}
+//	
+//	@Override
+//	public List<ProjectListAttachDto> selectListByPage(String keyword, int page) {
+//		int begin = page * 10 - 9;
+//		int end = page * 10;
+//		String sql = "select * from("
+//				+ "select rownum rn, TMP.* from("
+//					+	"select * from project_list where "
+//					+ "instr(minor_category_type, ?) > 0 or "
+//					+ "instr(project_owner, ?) > 0 or "
+//					+ "instr(project_title, ?) > 0 or "
+//					+ "instr(major_category_type, ?) > 0 "
+//					+ "order by project_no desc"
+//				+ ")TMP"
+//			+ ") where rn between ? and ?";
+//		Object[] data = {keyword, keyword, keyword, keyword, begin, end};
+//		return jdbcTemplate.query(sql, projectListAttachMapper, data);
+//	}
+	@Override
+	public List<ProjectListDto> selectList() {
+		String sql = "select * from project_list order by project_no desc";
+		return jdbcTemplate.query(sql, projectListMapper);
+	}
+	
 	@Override
 	public List<ProjectListDto> selectListByPage(int page) {
 		int begin = page * 10 - 9;
@@ -123,6 +160,20 @@ public class ProjectDaoImpl implements ProjectDao{
 		Object[] data = {begin, end};
 		return jdbcTemplate.query(sql, projectListMapper, data);
 	}
+	//프로젝트 리스트
+	
+	@Override
+	public List<ProjectListAttachDto> selectList(String keyword) {
+		String sql = "select * from project_list where "
+				+ "instr(minor_category_type, ?) > 0 or "
+				+ "instr(project_owner, ?) > 0 or "
+				+ "instr(project_title, ?) > 0 or "
+				+ "instr(major_category_type, ?) > 0 "
+				+ "order by project_no desc";
+		Object[] data = {keyword, keyword, keyword, keyword};
+		return jdbcTemplate.query(sql, projectListAttachMapper, data);
+	}
+	
 	@Override
 	public List<ProjectListDto> selectListByPage(String keyword, int page) {
 		int begin = page * 10 - 9;
@@ -136,16 +187,16 @@ public class ProjectDaoImpl implements ProjectDao{
 					+ "instr(major_category_type, ?) > 0 "
 					+ "order by project_no desc"
 				+ ")TMP"
-			+ ") where rn between ? and ? ";
+			+ ") where rn between ? and ?";
 		Object[] data = {keyword, keyword, keyword, keyword, begin, end};
 		return jdbcTemplate.query(sql, projectListMapper, data);
 	}
-	
 	@Override
 	public int countList() {
 		String sql = "select count (*) from project_list";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
+	
 	@Override
 	public int countList(String keyword) {
 		String sql = "select count(*) from project_list where "
@@ -161,25 +212,6 @@ public class ProjectDaoImpl implements ProjectDao{
 		String sql = "update project set project_likecount = project_likecount - 1 where project_no=?";
 		Object[] data = {projectNo};
 		return jdbcTemplate.update(sql, data) > 0;
-	}
-	
-	//프로젝트 리스트
-	@Override
-	public List<ProjectListDto> selectList() {
-		String sql = "select * from project_list order by project_no desc";
-		return jdbcTemplate.query(sql, projectListMapper);
-	}
-	
-	@Override
-	public List<ProjectListDto> selectList(String keyword) {
-		String sql = "select * from project_list where "
-				+ "instr(minor_category_type, ?) > 0 or "
-				+ "instr(project_owner, ?) > 0 or "
-				+ "instr(project_title, ?) > 0 or "
-				+ "instr(major_category_type, ?) > 0 "
-				+ "order by project_no desc";
-		Object[] data = {keyword, keyword, keyword, keyword};
-		return jdbcTemplate.query(sql, projectListMapper, data);
 	}
 	
 	//프로필 관련 기능
@@ -204,48 +236,6 @@ public class ProjectDaoImpl implements ProjectDao{
 		return jdbcTemplate.queryForObject(sql, Integer.class, data);
 	}
 	
-	//좋아요 순
-	@Override
-	public List<ProjectListAttachDto> selectListByLikeCount() {
-//		int begin = page * 10 - 9;
-//		int end = page * 10;
-		String sql = "select * from("
-						+ "	select rownum rn, TMP.* from("
-						+ "			select * from project_list pl "
-						+ "			left outer join project_photo pp on pl.project_no = pp.project_no "
-						+ "			order by project_likecount desc"
-						+ "	)TMP"
-						+ ") where rn between 1 and 8";
-//		Object[] data = {begin, end};
-		return jdbcTemplate.query(sql, projectListAttachMapper);
-	}
-	
-	//조회수 8위까지
-	@Override
-	public List<ProjectListAttachDto> selectListByReadCountTop8() {
-		String sql = "select * from("
-				+ "	select rownum rn, TMP.* from("
-				+ "			select * from project_list pl "
-				+ "			left outer join project_photo pp on pl.project_no = pp.project_no "
-				+ "			order by project_readcount desc"
-				+ "	)TMP"
-				+ ") where rn between 1 and 8";
-		return jdbcTemplate.query(sql, projectListAttachMapper);
-	}
-	
-	//달성률 순서
-	@Override
-	public List<ProjectListAttachDto> selectListByAchievementRateTop8() {
-		String sql = "select * from("
-				+ "	select rownum rn, TMP.* from("
-				+ "			select * from project_list pl "
-				+ "			left outer join project_photo pp on pl.project_no = pp.project_no "
-				+ "			order by achievement_rate desc"
-				+ "	)TMP"
-				+ ") where rn between 1 and 8";
-		return jdbcTemplate.query(sql, projectListAttachMapper);
-	}
-	
 	//카테고리 별
 	@Override
 	public List<ProjectListDto> selectListByMajorCategory(String majorCategory) {
@@ -255,8 +245,57 @@ public class ProjectDaoImpl implements ProjectDao{
 	}
 	
 	@Override
-	public int countList(PaginationVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int countList(PaginationListVO vo) {
+		if(vo.isSearch()) {
+			String sql = "select count(*) from project_list where instr(major_category_type, ?) > 0";
+			Object[] data = {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else {
+			String sql = "select count(*) from project_list";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
 	}
+	
+	//조회수
+	@Override
+	public List<ProjectListAttachDto> selectListByReadCount(PaginationListVO vo) {
+		String sql = "select * from("
+				+ "	select rownum rn, TMP.* from("
+				+ "			select * from project_list pl "
+				+ "			left outer join project_photo pp on pl.project_no = pp.project_no "
+				+ "			order by project_readcount desc"
+				+ "	)TMP"
+				+ ") where rn between ? and ?";
+		return jdbcTemplate.query(sql, projectListAttachMapper, vo.getStartRow(), vo.getFinishRow());
+	}
+	//좋아요
+	@Override
+	public List<ProjectListAttachDto> selectListByLikeCount(PaginationListVO vo) {
+//		int begin = vo.getPage() * 10 - 9;
+//		int end = vo.getPage() * 10;
+		String sql = "select * from("
+						+ "	select rownum rn, TMP.* from("
+						+ "			select * from project_list pl "
+						+ "			left outer join project_photo pp on pl.project_no = pp.project_no "
+						+ "			order by project_likecount desc"
+						+ "	)TMP"
+						+ ") where rn between ? and ?";
+//		Object[] data = {begin, end};
+		return jdbcTemplate.query(sql, projectListAttachMapper, vo.getStartRow(), vo.getFinishRow());
+	}
+	
+	//달성률 순서
+	@Override
+	public List<ProjectListAttachDto> selectListByAchievementRate(PaginationListVO vo) {
+		String sql = "select * from("
+				+ "	select rownum rn, TMP.* from("
+				+ "			select * from project_list pl "
+				+ "			left outer join project_photo pp on pl.project_no = pp.project_no "
+				+ "			order by achievement_rate desc"
+				+ "	)TMP"
+				+ ") where rn between ? and ?";
+		return jdbcTemplate.query(sql, projectListAttachMapper, vo.getStartRow(), vo.getFinishRow());
+	}
+		
 }

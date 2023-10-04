@@ -276,7 +276,7 @@ $(function(){
     				
     				<div class="mb-20">
     					<span class="bold">결제진행</span>
-    					<span style="margin-left: 3px;">목표 높이 달성 시 ${projectDto.projectEndDate}</span>
+    					<span style="margin-left: 3px;">목표 높이 달성 시 ${projectListDto.paymentDate} 결제</span>
     				</div>
     				
 					<div class="mb-30">

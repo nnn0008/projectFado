@@ -76,11 +76,9 @@
 				<input type="hidden" name="rewardNo" value="${rewardDto.rewardNo}">
 					<div class="row">
 						리워드 구성 : ${rewardDto.rewardType}
-						<input type="hidden" name="rewardType" value="${rewardDto.rewardType}">
 					</div>
 					<div class="row">
 						리워드 가격 : ${rewardDto.rewardPrice}원
-						<input type="hidden" name="rewardPrice" value="${rewardDto.rewardPrice}">
 					</div>
 					<hr>
 					서퍼 소개

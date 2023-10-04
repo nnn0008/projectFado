@@ -38,4 +38,10 @@ public class ProjectPhotoDaoImpl implements ProjectPhotoDao{
 		List<ProjectPhotoDto> list = jdbcTemplate.query(sql, projectPhotoMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
+	@Override
+	public List<ProjectPhotoDto> selectList() {
+		String sql = "select * from project_photo order by project_no desc";
+		return jdbcTemplate.query(sql, projectPhotoMapper);
+	}
 }

@@ -3,7 +3,7 @@
 
     <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
     
-    <div class="container w-700">
+    <div class="container w-800">
     	<div class="row">
     		<h3>${memberDto.memberId }서퍼님 회원정보 </h3>
     	</div>
@@ -94,6 +94,7 @@
     			
     		</table>
     	
+    </div>
     </div>
     
     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

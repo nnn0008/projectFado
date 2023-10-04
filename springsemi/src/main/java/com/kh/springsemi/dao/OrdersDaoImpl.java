@@ -59,13 +59,13 @@ public class OrdersDaoImpl implements OrdersDao{
 
 	@Override
 	public List<OrdersDto> selectList() {
-		String sql = "select * from orders order by orders_no desc";
+		String sql = "select * from orders_list where member_id =? order by orders_no desc";
 		return jdbcTemplate.query(sql, ordersMapper);
 	}
 	
 	@Override
 	public boolean deleteOrders(int ordersNo) {
-		String sql = "delete orders where orders_no = ?";
+		String sql = "delete orders_list where orders_no = ?";
 		Object[] data = {ordersNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}

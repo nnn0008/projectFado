@@ -3,6 +3,7 @@ package com.kh.springsemi.dao;
 import java.util.List;
 
 import com.kh.springsemi.dto.OrdersDto;
+import com.kh.springsemi.dto.OrdersListDto;
 
 public interface OrdersDao {
 	

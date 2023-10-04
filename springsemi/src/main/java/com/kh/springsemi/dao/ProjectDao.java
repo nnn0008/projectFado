@@ -41,4 +41,10 @@ public interface ProjectDao {
 	void insertPhoto(int projectNo, int attachNo);
 	boolean deletePhoto(int projectNo);
 	Integer findPhoto(int projectNo);
+	
+	//프로젝트 메인화면에 보여주는 기능(좋아요, 카테고리, 조회순)
+	List<ProjectListDto> selectListByMajorCategory(String majorCategory);
+	List<ProjectListDto> selectListByLikeCountTop8();
+	List<ProjectListDto> selectListByReadCountTop8();
+	List<ProjectListDto> selectListByAchievementRateTop8();
 }

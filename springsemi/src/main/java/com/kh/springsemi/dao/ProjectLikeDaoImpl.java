@@ -55,8 +55,8 @@ public class ProjectLikeDaoImpl implements ProjectLikeDao{
 	@Override
 	public List<ProjectDto> findByMemberId(String memberId) {
 		String sql = "select project.* "
-					+ "from board_like left outer join board on board_like.board_no = board.board_no "
-					+ "where board_like.member_id = ? order by board.board_no desc";
+					+ "from project_like left outer join project on project_like.project_no = project.project_no "
+					+ "where project_like.member_id = ? order by project.project_no desc";
 		Object[] data = {memberId};
 		return jdbcTemplate.query(sql, projectMapper, data);
 	}

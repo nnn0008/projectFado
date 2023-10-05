@@ -24,6 +24,7 @@ import com.kh.springsemi.dao.JudgeDao;
 import com.kh.springsemi.dao.MajorCategoryDao;
 import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.MinorCategoryDao;
+import com.kh.springsemi.dao.OrdersDao;
 import com.kh.springsemi.dao.ProjectCommunityDao;
 import com.kh.springsemi.dao.ProjectDao;
 import com.kh.springsemi.dao.ProjectPhotoDao;
@@ -45,7 +46,6 @@ import com.kh.springsemi.dto.ReviewListDto;
 import com.kh.springsemi.dto.RewardDto;
 import com.kh.springsemi.error.AuthorityException;
 import com.kh.springsemi.error.NoTargetException;
-import com.kh.springsemi.vo.PaginationListVO;
 
 @Controller
 @RequestMapping("/project")
@@ -83,6 +83,9 @@ public class ProjectController {
 	
 	@Autowired
 	private ProjectSubPhotoDao projectSubPhotoDao;
+	
+	@Autowired
+	private OrdersDao ordersDao;
 	
 	//프로젝트 등록
 	@GetMapping("/write")
@@ -158,17 +161,6 @@ public class ProjectController {
 		return "redirect:reward/write?projectNo="+projectNo;
 	}
 	
-//	@GetMapping("/reward/write")
-//	public String rewardWrite(@RequestParam int projectNo) {
-//		return "/WEB-INF/views/reward/write.jsp";
-//	}
-//	
-//	@PostMapping("/reward/write")
-//	public String rewardWrite(@ModelAttribute RewardDto rewardDto, 
-//											@RequestParam int projectNo) {
-//		return "redirect:detail?projectNo="+projectNo;
-//	}
-	
 	@RequestMapping("/reward/write")
 	public String write(@RequestParam int projectNo, Model model) {
 		ProjectDto projectDto = projectDao.selectOne(projectNo);
@@ -178,6 +170,7 @@ public class ProjectController {
 	
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int projectNo, HttpSession session, Model model) {
+		int ordersPersonCount = ordersDao.countByProjectNo(projectNo);
 		JudgeDto judgeDto = judgeDao.selectOneByProjectNo(projectNo);
 		String memberLevel = (String)session.getAttribute("level");
 		if(memberLevel != null && memberLevel.equals("관리자")) {
@@ -199,6 +192,7 @@ public class ProjectController {
 		model.addAttribute("mainAttachDto", mainAttachDto);
 		model.addAttribute("subAttachDto", subAttachDto);
 		model.addAttribute("projectListDto", projectListDto);
+		model.addAttribute("ordersPersonCount",ordersPersonCount);
 		
 		List<RewardDto> rewardList = rewardDao.selectListByProjectNo(projectNo);
 		model.addAttribute("rewardList", rewardList);
@@ -214,15 +208,8 @@ public class ProjectController {
 			model.addAttribute("OwnerDto", memberDto);
 		}
 		
-	
-		
-		
-		
 		List<ReviewListDto> reviewList = reviewDao.selectList(projectNo);
 		model.addAttribute("reviewList", reviewList);
-		
-		//이거 지워야돼!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		System.out.println("리뷰 리스트=" + reviewList);
 		
 		List<ProjectCommunityDto> noticeList = projectCommunityDao.selectNoticeList(projectNo);
 		model.addAttribute("noticeList", noticeList);

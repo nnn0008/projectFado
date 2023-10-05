@@ -20,4 +20,9 @@ public interface OrdersDao {
 	List<OrdersListDto> selectListByOrdersPerson(String ordersPerson);
 	//주문 삭제
 	boolean deleteOrders(int ordersNo);
+	
+	int countByProjectNo(int projectNo);
+	
+	
+
 }

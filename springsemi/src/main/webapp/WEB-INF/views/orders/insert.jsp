@@ -72,7 +72,10 @@
 
 		<div class="row">
 			<div class="flex-container">
-				<div class="w-50">사진</div>
+<%-- 				<div class="w-50">${projectPhotoDto.attachNo}</div> --%>
+				<div class="w-50">
+					<img src="/projectPhoto?projectNo=${projectListPhotoDto.projectNo}">
+				</div>
 				<div class="w-50">
 					<input type="hidden" name="projectNo"
 						value="${projectDto.projectNo}">
@@ -94,11 +97,11 @@
 							style="border: 1px solid #2c8de0; border-radius: 5px;">
 							<div class="row">배송지</div>
 							<input class="dN" type="hidden" name="deliveryNo" value="${deliveryDto.deliveryNo}"> 
-							<input class="dR" type="text" value="${deliveryDto.deliveryReceiver}" readonly>
-							<input class="dP" type="text" value="${deliveryDto.deliveryPost}" readonly> 
-							<input class="ad1" type="text" value="${deliveryDto.deliveryAddr1}" readonly> 
-							<input class="ad2" type="text" value="${deliveryDto.deliveryAddr2}" readonly> 
-							<input class="ct" type="text" value="${deliveryDto.deliveryContact}" readonly>
+							<input class="dR" type="text" value="${deliveryDto.deliveryReceiver}" >
+							<input class="dP" type="text" value="${deliveryDto.deliveryPost}" > 
+							<input class="ad1" type="text" value="${deliveryDto.deliveryAddr1}" > 
+							<input class="ad2" type="text" value="${deliveryDto.deliveryAddr2}" > 
+							<input class="ct" type="text" value="${deliveryDto.deliveryContact}" >
 							<div class="row">
 								<button type="button" class="btn change-delivery-btn">변경</button>
 							</div>

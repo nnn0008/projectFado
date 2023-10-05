@@ -256,7 +256,7 @@ $(function(){
     				
     				<div>
     					<span>후원자</span>
-    					<span style="margin-left: 3px;">n</span>
+    					<span style="margin-left: 3px;">${ordersPersonCount}</span>
     					<span>명</span>
     				</div>
     				

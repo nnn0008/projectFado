@@ -18,6 +18,7 @@ import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.OrdersDao;
 import com.kh.springsemi.dao.PaymentDao;
 import com.kh.springsemi.dao.ProjectDao;
+import com.kh.springsemi.dao.ProjectPhotoDao;
 import com.kh.springsemi.dao.RewardDao;
 import com.kh.springsemi.dto.DeliveryDto;
 import com.kh.springsemi.dto.MemberDto;
@@ -25,6 +26,7 @@ import com.kh.springsemi.dto.OrdersDto;
 import com.kh.springsemi.dto.OrdersListDto;
 import com.kh.springsemi.dto.PaymentDto;
 import com.kh.springsemi.dto.ProjectDto;
+import com.kh.springsemi.dto.ProjectPhotoDto;
 import com.kh.springsemi.dto.RewardDto;
 import com.kh.springsemi.error.NoTargetException;
 
@@ -49,6 +51,9 @@ public class OrdersController {
 	@Autowired
 	private RewardDao rewardDao;
 	
+	@Autowired
+	private ProjectPhotoDao projectPhotoDao;
+	
 	@GetMapping("/insert")
 	public String ordersInsert(@RequestParam int projectNo,
 										@RequestParam int rewardNo,
@@ -59,11 +64,14 @@ public class OrdersController {
 		List<DeliveryDto> deliveryList = deliveryDao.selectListByMemberId(memberId);
 		ProjectDto projectDto = projectDao.selectOne(projectNo);
 		RewardDto rewardDto = rewardDao.selectOne(rewardNo);
+		ProjectPhotoDto projectPhotoDto = projectPhotoDao.selectOne(projectNo);
+		
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("deliveryDto",deliveryDto);
 		model.addAttribute("deliveryList",deliveryList);
 		model.addAttribute("projectDto",projectDto);
 		model.addAttribute("rewardDto",rewardDto);
+		model.addAttribute("projectPhotoDto",projectPhotoDto);
 		
 		if(memberId != null) {
 			return "/WEB-INF/views/orders/insert.jsp";
@@ -82,7 +90,7 @@ public class OrdersController {
 										@ModelAttribute PaymentDto paymentDto,
 										HttpSession session, Model model) {
 		int ordersNo = ordersDao.sequence();
-		String memberId = (String)session.getAttribute("name");
+		String memberId = (String)session.getAttribute("name"); 
 		RewardDto rewardDto = rewardDao.selectOne(rewardNo);
 		ordersDto.setOrdersNo(ordersNo);
 		ordersDto.setOrdersPerson(memberId);

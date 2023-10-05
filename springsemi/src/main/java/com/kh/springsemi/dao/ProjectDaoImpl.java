@@ -77,7 +77,7 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public ProjectDto selectOne(int projectNo) {
 		String sql = "select * from project where project_no = ?";
-		Object[] data = {projectNo};
+		Object[] data = {projectNo}; 
 		List<ProjectDto> list = jdbcTemplate.query(sql, projectMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}

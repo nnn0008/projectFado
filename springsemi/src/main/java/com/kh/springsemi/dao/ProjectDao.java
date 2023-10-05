@@ -43,7 +43,7 @@ public interface ProjectDao {
 	
 	List<ProjectListAttachDto> selectList(String keyword);
 	//개수를 구하는 명령
-	int countList(); //목록일 때
+	int countList(); //목록일 때 
 	int countList(String keyword); //검색일 때
 	int countList(PaginationListVO vo);
 	//검색

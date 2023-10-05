@@ -84,11 +84,15 @@ public class OrdersController {
 		paymentDto.setPaymentNo(paymentNo);
 		paymentDto.setOrdersNo(ordersDto.getOrdersNo());
 		paymentDao.createPayment(paymentDto);
-		return "redirect:insertFinish";
+		return "redirect:insertFinish?ordersNo="+ordersDto.getOrdersNo();
 	}
 	
 	@RequestMapping("/insertFinish")
-	public String insertFinish() {
+	public String insertFinish(@ModelAttribute OrdersDto ordersDto, Model model, @ModelAttribute PaymentDto paymentDto) {
+		ordersDto = ordersDao.selectOne(ordersDto.getOrdersNo());
+		paymentDto = paymentDao.selectOneByOrdersNo(ordersDto.getOrdersNo());
+		model.addAttribute("ordersDto", ordersDto);
+		model.addAttribute("paymentDto", paymentDto);
 		return "/WEB-INF/views/orders/insertFinish.jsp";
 	}
 	

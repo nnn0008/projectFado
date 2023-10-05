@@ -536,20 +536,7 @@ $(function(){
 				            </div>
 							</div>
 							<div>
-							<c:if test="${sessionScope.name != null}">
-								<c:if test="${sessionScope.name == reviewDto.reviewWriter}">
-									<div class="right">
-									<a class="btn btn-negative" href="edit?reviewNo=${reviewDto.reviewNo}">
-										<i class="fa-solid fa-pen-to-square"></i>
-										수정
-									</a>
-									<a class="btn btn-negative" href="delete?reviewNo=${reviewDto.reviewNo}">
-										<i class="fa-solid fa-trash"></i>
-										삭제
-									</a>
-									</div>
-								</c:if>
-							</c:if>
+						
 							</div>
 						</div>
 			            </c:forEach>

@@ -17,6 +17,7 @@ import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.ProjectDao;
 import com.kh.springsemi.dao.ProjectPhotoDao;
 import com.kh.springsemi.dto.MajorCategoryDto;
+import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ProjectListAttachDto;
 import com.kh.springsemi.vo.PaginationListVO;
 

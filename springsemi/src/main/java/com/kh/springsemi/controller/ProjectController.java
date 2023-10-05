@@ -24,6 +24,7 @@ import com.kh.springsemi.dao.JudgeDao;
 import com.kh.springsemi.dao.MajorCategoryDao;
 import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.MinorCategoryDao;
+import com.kh.springsemi.dao.OrdersDao;
 import com.kh.springsemi.dao.ProjectCommunityDao;
 import com.kh.springsemi.dao.ProjectDao;
 import com.kh.springsemi.dao.ProjectPhotoDao;
@@ -83,6 +84,9 @@ public class ProjectController {
 	
 	@Autowired
 	private ProjectSubPhotoDao projectSubPhotoDao;
+	
+	@Autowired
+	private OrdersDao ordersDao;
 	
 	//프로젝트 등록
 	@GetMapping("/write")
@@ -167,6 +171,7 @@ public class ProjectController {
 	
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int projectNo, HttpSession session, Model model) {
+		int ordersPersonCount = ordersDao.countByProjectNo(projectNo);
 		JudgeDto judgeDto = judgeDao.selectOneByProjectNo(projectNo);
 		String memberLevel = (String)session.getAttribute("level");
 		if(memberLevel != null && memberLevel.equals("관리자")) {
@@ -188,6 +193,7 @@ public class ProjectController {
 		model.addAttribute("mainAttachDto", mainAttachDto);
 		model.addAttribute("subAttachDto", subAttachDto);
 		model.addAttribute("projectListDto", projectListDto);
+		model.addAttribute("ordersPersonCount",ordersPersonCount);
 		
 		List<RewardDto> rewardList = rewardDao.selectListByProjectNo(projectNo);
 		model.addAttribute("rewardList", rewardList);
@@ -202,16 +208,8 @@ public class ProjectController {
 			MemberDto memberDto = memberDao.selectOne(projectOwner);
 			model.addAttribute("OwnerDto", memberDto);
 		}
-		
-	
-		
-		
-		
 		List<ReviewDto> reviewList = reviewDao.selectList(projectNo);
 		model.addAttribute("reviewList", reviewList);
-		
-		//이거 지워야돼!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		System.out.println("리뷰 리스트=" + reviewList);
 		
 		List<ProjectCommunityDto> noticeList = projectCommunityDao.selectNoticeList(projectNo);
 		model.addAttribute("noticeList", noticeList);

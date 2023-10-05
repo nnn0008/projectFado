@@ -85,7 +85,7 @@
 		
 			<!-- 이미지 -->
 			<div class="row w-50">
-              	<img src="/rest/project/download?attatchNo=${projectListPhotoDto.attachNo}">
+              	<img style="height: 130px;" src="/rest/project/download?attachNo=${mainAttachDto.attachNo}">
            	</div>
            	
            	<!-- 상품 내용 시작-->

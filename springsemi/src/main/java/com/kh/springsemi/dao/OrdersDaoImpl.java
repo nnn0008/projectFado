@@ -75,4 +75,11 @@ public class OrdersDaoImpl implements OrdersDao{
 		Object[] data = {ordersNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
+	@Override
+	public int countByProjectNo(int projectNo) {
+		String sql ="select count(*) from orders where project_no = ?";
+		Object[] data = {projectNo};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
 }

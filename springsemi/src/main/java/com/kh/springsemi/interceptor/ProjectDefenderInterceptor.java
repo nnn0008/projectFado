@@ -21,6 +21,8 @@ public class ProjectDefenderInterceptor implements HandlerInterceptor{
 	@Autowired
 	private ProjectDao projectDao;
 	
+	
+	//조회수 방지
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {

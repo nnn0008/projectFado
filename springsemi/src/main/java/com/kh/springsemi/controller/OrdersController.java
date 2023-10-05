@@ -62,7 +62,15 @@ public class OrdersController {
 		model.addAttribute("deliveryDto",deliveryDto);
 		model.addAttribute("projectDto",projectDto);
 		model.addAttribute("rewardDto",rewardDto);
-		return "/WEB-INF/views/orders/insert.jsp";
+		
+		if(memberId != null) {
+			return "/WEB-INF/views/orders/insert.jsp";
+		}
+		else {
+			return "redirect:/member/login";
+		}
+
+		
 	}
 	
 	@PostMapping("/insert")

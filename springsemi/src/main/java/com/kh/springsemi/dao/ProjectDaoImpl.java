@@ -105,9 +105,9 @@ public class ProjectDaoImpl implements ProjectDao{
 	}
 	
 	@Override
-	public boolean plusProjectTotalPrice(int projectNo) {
-		String sql = "update project set project_total_price = project_total_price + orders_price where project_no = ?";
-		Object[] data = {projectNo};
+	public boolean plusProjectTotalPrice(int ordersPrice, int projectNo) {
+		String sql = "update project set project_total_price = project_total_price + ? where project_no = ?";
+		Object[] data = {ordersPrice, projectNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
@@ -116,38 +116,39 @@ public class ProjectDaoImpl implements ProjectDao{
 //		String sql = "select * from project_list order by project_no desc";
 //		return jdbcTemplate.query(sql, projectListAttachMapper);
 //	}
-//	
-//	@Override
-//	public List<ProjectListAttachDto> selectListByPage(int page) {
-//		int begin = page * 10 - 9;
-//		int end = page * 10;
-//		String sql = "select * from("
-//								+ "select rownum rn, TMP.* from("
-//									+	"select * from project_list "
-//									+ "order by project_no desc"
-//								+ ")TMP"
-//							+ ") where rn between ? and ? ";
-//		Object[] data = {begin, end};
-//		return jdbcTemplate.query(sql, projectListAttachMapper, data);
-//	}
-//	
-//	@Override
-//	public List<ProjectListAttachDto> selectListByPage(String keyword, int page) {
-//		int begin = page * 10 - 9;
-//		int end = page * 10;
-//		String sql = "select * from("
-//				+ "select rownum rn, TMP.* from("
-//					+	"select * from project_list where "
-//					+ "instr(minor_category_type, ?) > 0 or "
-//					+ "instr(project_owner, ?) > 0 or "
-//					+ "instr(project_title, ?) > 0 or "
-//					+ "instr(major_category_type, ?) > 0 "
-//					+ "order by project_no desc"
-//				+ ")TMP"
-//			+ ") where rn between ? and ?";
-//		Object[] data = {keyword, keyword, keyword, keyword, begin, end};
-//		return jdbcTemplate.query(sql, projectListAttachMapper, data);
-//	}
+
+	@Override
+	public List<ProjectListAttachDto> selectListByPageByAttach(int page) {
+		int begin = page * 10 - 9;
+		int end = page * 10;
+		String sql = "select * from ("
+							+ "select rownum rn, TMP.* from ("
+								+ "select * from project_list_attach "
+								+ "order by project_no desc"
+							+ ") TMP"
+						+ ") where rn between ? and ?";
+		Object[] data = {begin, end};
+		return jdbcTemplate.query(sql, projectListAttachMapper, data);
+	}
+	
+	@Override
+	public List<ProjectListAttachDto> selectListByPageByAttach(String keyword, int page) {
+		int begin = page * 10 - 9;
+		int end = page * 10;
+		String sql = "select * from("
+							+ "select rownum rn, TMP.* from( "
+								+ "select * from project_list_attach "
+								+ "where "
+								+ "instr(minor_category_type, ?) > 0 or "
+								+ "instr(project_owner, ?) > 0 or "
+								+ "instr(project_title, ?) > 0 or "
+								+ "instr(major_category_type, ?) > 0 "
+								+ "order by project_no desc"
+							+ ")TMP"
+						+ ") where rn between ? and ?";
+		Object[] data = {keyword, keyword, keyword, keyword, begin, end};
+		return jdbcTemplate.query(sql, projectListAttachMapper, data);
+	}
 	@Override
 	public List<ProjectListDto> selectList() {
 		String sql = "select * from project_list order by project_no desc";
@@ -160,25 +161,12 @@ public class ProjectDaoImpl implements ProjectDao{
 		int end = page * 10;
 		String sql = "select * from("
 								+ "select rownum rn, TMP.* from("
-									+	"select * from project_list "
+									+	"select * from project_list_attach "
 									+ "order by project_no desc"
 								+ ")TMP"
 							+ ") where rn between ? and ? ";
 		Object[] data = {begin, end};
 		return jdbcTemplate.query(sql, projectListMapper, data);
-	}
-	//프로젝트 리스트
-	
-	@Override
-	public List<ProjectListAttachDto> selectList(String keyword) {
-		String sql = "select * from project_list where "
-				+ "instr(minor_category_type, ?) > 0 or "
-				+ "instr(project_owner, ?) > 0 or "
-				+ "instr(project_title, ?) > 0 or "
-				+ "instr(major_category_type, ?) > 0 "
-				+ "order by project_no desc";
-		Object[] data = {keyword, keyword, keyword, keyword};
-		return jdbcTemplate.query(sql, projectListAttachMapper, data);
 	}
 	
 	@Override
@@ -198,6 +186,19 @@ public class ProjectDaoImpl implements ProjectDao{
 		Object[] data = {keyword, keyword, keyword, keyword, begin, end};
 		return jdbcTemplate.query(sql, projectListMapper, data);
 	}
+	
+	@Override
+	public List<ProjectListAttachDto> selectList(String keyword) {
+		String sql = "select * from project_list where "
+				+ "instr(minor_category_type, ?) > 0 or "
+				+ "instr(project_owner, ?) > 0 or "
+				+ "instr(project_title, ?) > 0 or "
+				+ "instr(major_category_type, ?) > 0 "
+				+ "order by project_no desc";
+		Object[] data = {keyword, keyword, keyword, keyword};
+		return jdbcTemplate.query(sql, projectListAttachMapper, data);
+	}
+	
 	@Override
 	public int countList() {
 		String sql = "select count (*) from project_list";

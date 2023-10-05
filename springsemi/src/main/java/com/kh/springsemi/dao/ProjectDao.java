@@ -21,23 +21,27 @@ public interface ProjectDao {
 	boolean updateProjectReadcount(int projectNo);
 	boolean plusProjectLikecount(int projectNo);
 	boolean minusProjectLikecount(int projectNo);
-	boolean plusProjectTotalPrice(int projectNo);
+	boolean plusProjectTotalPrice(int ordersPrice, int projectNo);
 	
 	//상세
 	ProjectDto selectOne(int projectNo);
 	ProjectListDto selectOneByProjectList(int projectNo);
 	
 //	//목록
+	List<ProjectListDto> selectList();
+	List<ProjectListDto> selectListByPage(int page);
+	List<ProjectListDto> selectListByPage(String keyword, int page);
+	
+	//사진이 포함된 목록
+//	List<ProjectListAttachDto> selectList();
+	List<ProjectListAttachDto> selectListByPageByAttach(int page);
+	List<ProjectListAttachDto> selectListByPageByAttach(String keyword, int page);
+	
 //	List<ProjectListDto> selectList();
 //	List<ProjectListDto> selectListByPage(int page);
 //	List<ProjectListDto> selectListByPage(String keyword, int page);
 	
-	//사진이 포함된 목록
-	List<ProjectListDto> selectList();
 	List<ProjectListAttachDto> selectList(String keyword);
-	List<ProjectListDto> selectListByPage(int page);
-	List<ProjectListDto> selectListByPage(String keyword, int page);
-	
 	//개수를 구하는 명령
 	int countList(); //목록일 때
 	int countList(String keyword); //검색일 때

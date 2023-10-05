@@ -43,7 +43,7 @@ public class HomeController {
 	public String home(Model model, @ModelAttribute(name="vo")PaginationListVO vo) {
 		int count = projectDao.countList(vo);
 		vo.setCount(count);
-		log.debug(String.valueOf(count));
+//		log.debug(String.valueOf(count));
 		
 		List<ProjectListAttachDto> likeCountList = projectDao.selectListByLikeCount(vo);
 		List<ProjectListAttachDto> readCountList = projectDao.selectListByReadCount(vo);

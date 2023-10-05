@@ -170,7 +170,6 @@
 
 
 
-
 <!--                     <li class="item"> -->
         
 <!--                         <div class="image"> -->
@@ -196,6 +195,7 @@
                			</div>
                		</li>
                		
+
 					<c:forEach var="ProjectListAttachDto" items="${readCountList}" end="7">
                     	<li class="item">
                     		<div>
@@ -284,6 +284,7 @@
 				
 			</ul>
          </div>
+
 
     </section>
     

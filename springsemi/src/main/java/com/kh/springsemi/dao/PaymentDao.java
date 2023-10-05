@@ -12,6 +12,7 @@ public interface PaymentDao {
 	void createPayment(PaymentDto paymentDto);
 	boolean updatePaymentStatus(String status, int paymentNo);
 	PaymentDto selectOne(int paymentNo);
+	PaymentDto selectOneByOrdersNo(int ordersNo);
 	List<PaymentDto> selectList();
 	boolean deletePayment(int paymentNo);
 }

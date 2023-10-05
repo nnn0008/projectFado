@@ -47,7 +47,7 @@ public class TestInterceptor implements HandlerInterceptor {
 		@Override
 		public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-			System.out.println("afterCompletion 실");
+			System.out.println("afterCompletion 실행");
 			System.out.println(ex);
 		}
 

@@ -42,6 +42,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		
+		
+		//member
 		registry.addInterceptor(memberInterceptor)
 				.addPathPatterns(
 						"/member/**",
@@ -49,17 +51,17 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 						)
 //				제외시킬 주소(비회원) 
 				.excludePathPatterns(
-						  "/member/join*",
-						  "/member/login*",
-						"/project/list/like*",
+						"/member/join*",
+						"/member/login*",
+						"/project/list/*",
 						"/project/list/lank*",
 						"/project/list/category*",
 						"/project/list/period*",
 						"/project/list/detail*",
 						"/project/list/Community/QnA*",
 						"/project/list/Community/notice*",
-						"/project/list/Community/review"
-						
+						"/project/list/Community/review",
+						"/project/detail*"
 						 );
 		
 		registry.addInterceptor(projectDefenderInterceptor)
@@ -67,42 +69,17 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 
 		registry.addInterceptor(projectOwnerInterceptor)
 		.addPathPatterns("/project/edit", "/project/delete");
-//	@Override
-//	public void addInterceptors(InterceptorRegistry registry) {
-//		
-//		registry.addInterceptor(memberInterceptor)
-//				.addPathPatterns(
-//						"/member/**",
-//						"/project/**"
-//						)
-////				제외시킬 주소(비회원) 
-//				.excludePathPatterns(
-//						  "/member/join*",
-//						  "/member/login*",
-//						"/project/list/like*",
-//						"/project/list/lank*",
-//						"/project/list/category*",
-//						"/project/list/period*",
-//						"/project/list/detail*",
-//						"/project/list/Community/QnA*",
-//						"/project/list/Community/notice*",
-//						"/project/list/Community/review"
-//						
-//						 );
 	
 				
 		
 		
 		
-		
-//	registry.addInterceptor(adminInterceptor)
-//			.addPathPatterns(
-//					"/admin/**"
-//					)
-//			.excludePathPatterns(
-//					"/admin/member/list*"
-//					);
-			
+		//admin
+		registry.addInterceptor(adminInterceptor)
+				.addPathPatterns(
+						"/admin/**"
+						);
+				
 		
 		
 			

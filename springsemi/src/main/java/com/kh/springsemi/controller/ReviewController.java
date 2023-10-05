@@ -100,7 +100,7 @@ public class ReviewController {
 	@RequestMapping("/image")
 	public ResponseEntity<ByteArrayResource> image(@RequestParam int reviewNo) throws IOException{
 		
-		AttachDto attachDto = reviewDao.findReviewPhoto(reviewNo);
+		AttachDto attachDto = reviewDao.findImage(reviewNo);
 		if(attachDto == null) {
 			return ResponseEntity.notFound().build();   //404반환
 		}
@@ -173,7 +173,7 @@ public class ReviewController {
 		
 		if(!attach.isEmpty()) { //파일이 있으면
 			//파익삭제
-			AttachDto attachDto = reviewDao.findReviewPhoto(reviewDto.getReviewNo());
+			AttachDto attachDto = reviewDao.findImage(reviewDto.getReviewNo());
 			String home = System.getProperty("user.home");
 			File dir = new File(home, "fado");
 			
@@ -211,7 +211,7 @@ public class ReviewController {
 		reviewDto.setProjectNo(projectNo);
 		
 		
-		AttachDto attachDto = reviewDao.findReviewPhoto(reviewNo);
+		AttachDto attachDto = reviewDao.findImage(reviewNo);
 		reviewDao.delete(reviewNo);
 		
 		if(attachDto != null) {

@@ -12,6 +12,7 @@ public class ReviewDto {
 	private String reviewContent;
 	private Date reviewRegDate; 
 	private String memberNickname; //작성자 닉네임
+	private boolean image;
 	
 	public String getReviewWriterString() {
 		if(reviewWriter == null)
@@ -19,5 +20,4 @@ public class ReviewDto {
 		return memberNickname;
 	}
 	
-	private boolean image;
 }

@@ -103,10 +103,10 @@
                     <div class="swiper-wrapper">
                         <!-- Slides -->
                         <div class="swiper-slide">
-                            <img src="https://picsum.photos/id/101/600/300" width="100% " height="60%">
+                            <img src="/images/fado1.jpg" width="100% " height="60%">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://picsum.photos/id/101/600/300" width="100%" height="100%">
+                            <img src="/images/fado2.jpg" width="100%" height="100%">
                         </div>                      
                     </div>
                     <!-- If we need pagination -->

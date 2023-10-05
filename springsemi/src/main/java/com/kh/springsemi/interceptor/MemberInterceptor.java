@@ -28,11 +28,7 @@ public class MemberInterceptor implements HandlerInterceptor{
 				return true;
 			}
 			else {
-//				비회원이면 차단+로그인페이지로 리다이렉트 
-//				response.sendRedirect("/member/login");
-				
-//				내가 만든 예외로 처리 
-				throw new AuthorityException("로그인 하세요 ");
+				throw new AuthorityException("로그인 후 이용해주세요");
 			}
 		
 		

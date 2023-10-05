@@ -21,7 +21,7 @@
 
         .list_wrap{
             /* 가로길이 고정 */
-            width: 90%;
+            width: 100%;
             /* 최소 가로길이 */
             min-width: 1000px;
             /* 최대 가로길이 */
@@ -29,12 +29,12 @@
             /* 가운데 정렬 */
             margin: 0 auto;
             padding: 40px;
-            margin-top: 15%;
+            margin-top: 5%;
         }
 
-        .list_wrap ul{
-            font-size: 0;
-        }
+        /* .list_wrap ul{
+            font-size: 5;
+        } */
 
         .list_wrap .item {
             width: 20%;
@@ -43,7 +43,7 @@
             margin-right: 2%;
             margin-top: 2%;
             margin-bottom: 2%;
-            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+            /* box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5); */
         }
 
         .list_wrap .item .image{
@@ -80,7 +80,7 @@
             /* 상하좌우 여백 */
             padding: 3px 6px;
             /* background: #2c8ce09e; */
-            border: 1px solid #2c8ce09e;
+           /*  border: 1px solid #2c8ce09e; */
             font-size: 12px;
             letter-spacing: -1px;
             margin-top: 5px;
@@ -88,11 +88,20 @@
             
         }
 
-        .list_wrap .item a:hover{
-            background: #dddddd32;
+        .item:hover{
             color: #2c8ce053;
             
         }
+        
+        .product {
+        height:210px;
+        width:210px;
+        margin: 0 auto;
+        overflow: hidden; /* 이미지가 넘치는 경우를 방지하기 위해 추가 */
+        display: flex;
+    	justify-content: center; /* 수평 가운데 정렬 */
+        }
+        
         </style>
 
 	 <div class="container w-600" >
@@ -160,35 +169,122 @@
 				
 
 
+
+
+<!--                     <li class="item"> -->
+        
+<!--                         <div class="image"> -->
+                            
+<!--                         </div>     				 -->
+        				
+<!--                         <div class="cont"> -->
+<!--                             <strong>제목</strong> -->
+<!--                             <p>내용</p> -->
+<!--                             <a href="#">바로가기</a> -->
+<!--                         </div> -->
+        
+<!--                     </li> -->
+				
+			<div class="list_wrap">
+               	<ul>
+               		
+               		<!-- 조회수순 -->
+               		<li class="ms-30 me-50 bold" style="color:#2c8de0; text-align: right;">
+               			<div class="flex-container auto-width">
+               				<h2 class="left">Hot펀딩</h2>
+               				<a href="#"  class="link right pt-50">전체보기 ></a>
+               			</div>
+               		</li>
+               		
 					<c:forEach var="ProjectListAttachDto" items="${readCountList}" end="7">
-						<div class="row">
-							<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
-							
-							
-								<div class="row"> <!-- 상품 하나  -->
-									 <div class="image">
-										<img src="/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
-									</div>
-										
-										<div class="row">
-											<p>${ProjectListAttachDto.majorCategoryType} | ${ProjectListAttachDto.minorCategoryType }</p>
-											<strong>${ProjectListAttachDto.projectTitle}</strong>
-											
-											<div class='flex-container auto-width'>
-												<p><fmt:formatNumber value="${ProjectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
-												<p>n일 남음</p>
-											</div>
-										</div>
-									
+                    	<li class="item">
+                    		<div>
+								<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
+									<img class="product w-100" src="/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
+								</a>
+							</div>
+                        	<div class="left me-10 ms-10">
+								<p>${ProjectListAttachDto.majorCategoryType} | ${ProjectListAttachDto.minorCategoryType }</p>
+								<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}" style=" margin: 0; padding: 0;">
+									<strong>${ProjectListAttachDto.projectTitle}</strong>
+								</a>
+								
+								<div class="flex-container">
+									<p><fmt:formatNumber value="${ProjectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
+									<p class="ms-10">n일 남음</p>
 								</div>
-							
-							
-							</a>
-						</div>
+							</div> 
+                    	</li>
 					</c:forEach>
-	                	
+					<li><hr class="hr-style"></li>
+					
+					<!-- 좋아요순 -->
+					<li class="ms-30 me-50 bold" style="color:#2c8de0; text-align: right;">
+               			<div class="flex-container auto-width">
+               				<h2 class="left">추천펀딩</h2>
+               				<a href="#"  class="link right pt-50">전체보기 ></a>
+               			</div>
+               		</li>
+					
+					
+					<c:forEach var="ProjectListAttachDto" items="${likeCountList}" end="7">
+                    	<li class="item">
+                    		
+                    		<div>
+                    			<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
+									<img class="product w-100" src="/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
+								</a>
+                    		</div>
+                        	<div class="left me-10 ms-10">
+                        		<p>${ProjectListAttachDto.majorCategoryType} | ${ProjectListAttachDto.minorCategoryType }</p>
+                            	<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}" style=" margin: 0; padding: 0;">
+									<strong>${ProjectListAttachDto.projectTitle}</strong>
+								</a>
+                            
+                            	<div class="flex-container">
+                            		<p><fmt:formatNumber value="${ProjectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
+									<p class="ms-10">n일 남음</p>
+							</div>		
+                        </div>     
+                                   
+                    	</li>
+					</c:forEach>
+					<li><hr class="hr-style"></li>
+					
+					
+					<!-- 달성률순 -->
+					<li class="ms-30 me-50 bold" style="color:#2c8de0; text-align: right;">
+               			<div class="flex-container auto-width">
+               				<h2 class="left">인기펀딩</h2>
+               				<a href="#"  class="link right pt-50">전체보기 ></a>
+               			</div>
+               		</li>
+					
+					<c:forEach var="ProjectListAttachDto" items="${achievementList}" end="7">
+                   		<li class="item">
+                       <div>
+                       	<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
+							<img class="product w-100" src="/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
+						</a>
+					</div>
+                       <div class="left me-10 ms-10">
+                       	<p>${ProjectListAttachDto.majorCategoryType} | ${ProjectListAttachDto.minorCategoryType }</p>
+                           <a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}" style=" margin: 0; padding: 0;">
+									<strong>${ProjectListAttachDto.projectTitle}</strong>
+							</a>
+                           
+                           <div class="flex-container">
+                            <p><fmt:formatNumber value="${ProjectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
+                        	<p class="ms-10">n일 남음</p>
+                        </div>		
+                       </div>       
+                                
+                   	</li>
+				</c:forEach> 
+				
+			</ul>
+         </div>
 
     </section>
-	
-
+    
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

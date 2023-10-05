@@ -126,7 +126,6 @@
 							
 							<div class="flex-container">
 								<p><fmt:formatNumber value="${projectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
-								<p class="ms-10">n일 남음</p>
 							</div>
 						</div> 
                    	</li>

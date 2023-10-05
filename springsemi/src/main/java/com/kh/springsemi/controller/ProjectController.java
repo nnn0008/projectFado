@@ -37,6 +37,7 @@ import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.MinorCategoryDto;
 import com.kh.springsemi.dto.ProjectCommunityDto;
 import com.kh.springsemi.dto.ProjectDto;
+import com.kh.springsemi.dto.ProjectListAttachDto;
 import com.kh.springsemi.dto.ProjectListDto;
 import com.kh.springsemi.dto.ProjectPhotoDto;
 import com.kh.springsemi.dto.ProjectSubPhotoDto;
@@ -156,17 +157,6 @@ public class ProjectController {
 		judgeDao.insert(judgeDto);
 		return "redirect:reward/write?projectNo="+projectNo;
 	}
-	
-//	@GetMapping("/reward/write")
-//	public String rewardWrite(@RequestParam int projectNo) {
-//		return "/WEB-INF/views/reward/write.jsp";
-//	}
-//	
-//	@PostMapping("/reward/write")
-//	public String rewardWrite(@ModelAttribute RewardDto rewardDto, 
-//											@RequestParam int projectNo) {
-//		return "redirect:detail?projectNo="+projectNo;
-//	}
 	
 	@RequestMapping("/reward/write")
 	public String write(@RequestParam int projectNo, Model model) {
@@ -305,12 +295,21 @@ public class ProjectController {
 		return "/WEB-INF/views/project/list.jsp";
 	}
 	
+	@RequestMapping("/readCountList")
+	public String readCountList(Model model, @ModelAttribute(name="vo") PaginationListVO vo) {
+		int count = projectDao.countList(vo);
+		vo.setCount(count);
+		List<ProjectListAttachDto> readCountList = projectDao.selectListByReadCount(vo);
+		model.addAttribute("readCountList", readCountList);
+		return "/WEB-INF/views/project/readCountList.jsp";
+	}
+	
 //	@RequestMapping("/list")
 //	public String list(Model model, @ModelAttribute(name="vo")PaginationListVO vo) {
 //		int count = projectDao.countList(vo);
 //		vo.setCount(count);
 //		System.out.println(vo);
-//		List<ProjectListAttachDto> list = projectDao.selectListByPageByVO(vo);
+//		List<ProjectListAttachDto> list = projectDao.selectListByPageByAttach(vo);
 //		
 //		model.addAttribute("list", list);
 //		return "/WEB-INF/views/project/list.jsp";

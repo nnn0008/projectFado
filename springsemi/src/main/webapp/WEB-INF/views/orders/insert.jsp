@@ -43,12 +43,12 @@
 
 		$(".delivery-btn").click(function() {
 			// 선택한 배송지의 정보를 JavaScript 변수에 저장
-			var deliveryNo = $(this).parents(".qwe").find("[name=deliveryNo]").val();
-			var deliveryReceiver = $(this).parents(".qwe").find("[name=cdR]").val();
-			var deliveryPost = $(this).parents(".qwe").find("[name=cdP]").val();
-			var deliveryAddr1 = $(this).parents(".qwe").find("[name=cad1]").val();
-			var deliveryAddr2 = $(this).parents(".qwe").find("[name=cad2]").val();
-			var deliveryContact = $(this).parents(".qwe").find("[name=cct]").val();
+			var deliveryNo = $(this).parents(".dList").find("[name=deliveryNo]").val();
+			var deliveryReceiver = $(this).parents(".dList").find("[name=cdR]").val();
+			var deliveryPost = $(this).parents(".dList").find("[name=cdP]").val();
+			var deliveryAddr1 = $(this).parents(".dList").find("[name=cad1]").val();
+			var deliveryAddr2 = $(this).parents(".dList").find("[name=cad2]").val();
+			var deliveryContact = $(this).parents(".dList").find("[name=cct]").val();
 			
 			// 각각의 필드에 저장한 정보를 설정
 			$(".dN").val(deliveryNo);
@@ -89,10 +89,10 @@
 				<div class="w-50">
 					<div class="row">연락처 : ${memberDto.memberContact}</div>
 					<div class="row">이메일 : ${memberDto.memberEmail}</div>
-					<div class="row">배송지</div>
 					<div class="row">
 						<div class="delivery-item mb-10"
 							style="border: 1px solid #2c8de0; border-radius: 5px;">
+							<div class="row">배송지</div>
 							<input class="dN" type="hidden" name="deliveryNo" value="${deliveryDto.deliveryNo}"> 
 							<input class="dR" type="text" value="${deliveryDto.deliveryReceiver}" readonly>
 							<input class="dP" type="text" value="${deliveryDto.deliveryPost}" readonly> 
@@ -111,7 +111,7 @@
 							<h2>새로운 배송지 선택</h2>
 							<div class="container w-400">
 								<c:forEach var="deliveryDto" items="${deliveryList}">
-									<div class="btn mt-10 qwe" style="display: block;">
+									<div class="btn mt-10 dList" style="display: block;">
 										<div class="row">
 											<input type="hidden" name="deliveryNo"
 												value="${deliveryDto.deliveryNo}">

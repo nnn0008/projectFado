@@ -143,8 +143,6 @@
 
         </div>
         </div> -->
-        <div class="list_wrap">
-                <ul>
 
 <!--                     <li class="item"> -->
         
@@ -163,59 +161,33 @@
 
 
 					<c:forEach var="ProjectListAttachDto" items="${readCountList}" end="7">
-	                    <li class="item">
-	                    <a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
-	                        <div class="image">
-								<img src="/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
-							</div>
-	                        <div class="cont">
-	                        	<p>${ProjectListAttachDto.majorCategoryType} | ${ProjectListAttachDto.minorCategoryType }</p>
-	                            <strong>${ProjectListAttachDto.projectTitle}</strong>
-	                            <p><fmt:formatNumber value="${ProjectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
-<!-- 	                            <a href="#">바로가기</a> --></a>
-	                        </div>                
-	                    </li>
-					</c:forEach>
-          
-
-
-					<c:forEach var="ProjectListAttachDto" items="${likeCountList}" end="7">
-	                    <li class="item">
-	                    <a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
-	                        <div class="image">
-								<img src="/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
-							</div>
-	                        <div class="cont">
-	                        	<p>${ProjectListAttachDto.majorCategoryType} | ${ProjectListAttachDto.minorCategoryType }</p>
-	                            <strong>${ProjectListAttachDto.projectTitle}</strong>
-	                            <p><fmt:formatNumber value="${ProjectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
-<!-- 	                            <a href="#">바로가기</a> --></a>
-	                        </div>                
-	                    </li>
-					</c:forEach>
-				
-
-
-
-                <c:forEach var="ProjectListAttachDto" items="${achievementList}" end="7">
-                    <li class="item">
-                    	<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
-                        <div class="image">
-							<img src="/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
+						<div class="row">
+							<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
+							
+							
+								<div class="row"> <!-- 상품 하나  -->
+									 <div class="image">
+										<img src="/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
+									</div>
+										
+										<div class="row">
+											<p>${ProjectListAttachDto.majorCategoryType} | ${ProjectListAttachDto.minorCategoryType }</p>
+											<strong>${ProjectListAttachDto.projectTitle}</strong>
+											
+											<div class='flex-container auto-width'>
+												<p><fmt:formatNumber value="${ProjectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
+												<p>n일 남음</p>
+											</div>
+										</div>
+									
+								</div>
+							
+							
+							</a>
 						</div>
-                        <div class="cont">
-                        	<p>${ProjectListAttachDto.majorCategoryType} | ${ProjectListAttachDto.minorCategoryType }</p>
-                            <strong>${ProjectListAttachDto.projectTitle}</strong>
-                            <p><fmt:formatNumber value="${ProjectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
-<!-- 	                            <a href="#">바로가기</a> --></a>
-                        </div>                
-                    </li>
-				</c:forEach>    
-                    
-                </ul>
-            </div>
+					</c:forEach>
+	                	
 
-        
     </section>
 	
 

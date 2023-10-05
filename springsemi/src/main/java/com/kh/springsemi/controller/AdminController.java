@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.springsemi.dao.DeliveryDao;
 import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.ProjectDao;
+import com.kh.springsemi.dto.DeliveryDto;
 import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.MemberListDto;
-import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ProjectListDto;
 import com.kh.springsemi.error.AuthorityException;
 import com.kh.springsemi.error.NoTargetException;
@@ -67,13 +68,20 @@ public class AdminController {
 			memberDao.deleteBlock(memberId);
 			return "redirect:/admin/member/list";
 		}
-		
+		@Autowired
+		DeliveryDao deliveryDao;
 //		관리자 상세 
 		@RequestMapping("/member/detail")
-		public String memberDetail(@RequestParam String memberId, Model model) {
+		public String memberDetail(@RequestParam String memberId, Model model, HttpSession session) {
 			
 			MemberDto memberDto = memberDao.selectOne(memberId);
 			model.addAttribute("memberDto", memberDto);
+			
+			//관리자에서 상세페이지 배송지 찍는 구문 구현 중
+//			String deliveryId = (String) session.getAttribute("name"); //세션으로 사용자 아이디 꺼내옴
+//			DeliveryDto deliveryDto = deliveryDao.selectOneByMemberId(deliveryId); //아이디로 정보조회
+//			model.addAttribute("deliveryDto",deliveryDto);
+//			model.addAttribute("delivery", deliveryDao.selectOneByMemberId(deliveryId));
 			
 			return "/WEB-INF/views/admin/member/detail.jsp";				
 			

@@ -94,6 +94,13 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 						);
 		
 		
+		//게시글 조회수 중복방지
+		registry.addInterceptor(projectDefenderInterceptor)
+				.addPathPatterns(
+						"/project/detail"
+						);
+		
+		
 		//member 로그인 or 비로그인 시 
 		registry.addInterceptor(memberInterceptor)
 				.addPathPatterns(
@@ -120,26 +127,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 						"/member/findPwFinish",
 						"/rest/mainReply/list",
 						"/rest/projectReply/list"
-						
 						);
-				
-		
-		
-
-//		
-//		registry.addInterceptor(projectDefenderInterceptor)
-//		.addPathPatterns("/project/detail");
-//
-
-	
-				
-		
-		
-		
-
-		
-		
-			
+							
 	}
 }
 

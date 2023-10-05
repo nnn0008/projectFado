@@ -6,8 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.springsemi.dto.PaymentCheckDto;
 import com.kh.springsemi.dto.PaymentDto;
+import com.kh.springsemi.mapper.PaymentCheckMapper;
 import com.kh.springsemi.mapper.PaymentMapper;
+import com.kh.springsemi.mapper.ServiceVOMapper;
+import com.kh.springsemi.vo.ServiceVO;
 
 @Repository
 public class PaymentDaoImpl implements PaymentDao{
@@ -17,6 +21,9 @@ public class PaymentDaoImpl implements PaymentDao{
 	
 	@Autowired
 	private PaymentMapper paymentMapper;
+	
+	@Autowired
+	private PaymentCheckMapper paymentCheckMapper;
 	
 	@Override
 	public int sequence() {
@@ -38,13 +45,13 @@ public class PaymentDaoImpl implements PaymentDao{
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 
-	@Override
-	public PaymentDto selectOne(int paymentNo) {
-		String sql = "select * from payment where payment_no = ?";
-		Object[] data = {paymentNo};
-		List<PaymentDto> list = jdbcTemplate.query(sql, paymentMapper, data);
-		return list.isEmpty() ? null : list.get(0);
-	}
+//	@Override
+//	public PaymentDto selectOne(int paymentNo) {
+//		String sql = "select * from payment where payment_no = ?";
+//		Object[] data = {paymentNo};
+//		List<PaymentDto> list = jdbcTemplate.query(sql, paymentMapper, data);
+//		return list.isEmpty() ? null : list.get(0);
+//	}
 	
 	@Override
 	public PaymentDto selectOneByOrdersNo(int ordersNo) {
@@ -66,5 +73,61 @@ public class PaymentDaoImpl implements PaymentDao{
 		Object[] data = {paymentNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-
+	
+//	@Override
+//	public PaymentCheckDto selectOne(int paymentNo) {
+//		String sql = "select * from payment_check where sysdate >= payment_date and payment_no = ?";
+//		Object[] data = {paymentNo};
+//		List<PaymentCheckDto> list = jdbcTemplate.query(sql, paymentCheckMapper, data);
+//		return list.isEmpty() ? null : list.get(0);
+//	}
+	
+	@Override
+	public List<PaymentCheckDto> selectListOverPaymentDate() {
+		String sql = "select * from payment_check where sysdate >= payment_date and payment_status = '결제전'";
+		return jdbcTemplate.query(sql, paymentCheckMapper);
+	}
+	
+	@Override
+	public boolean successPayment() {
+		String sql = "update set payment set payment_status = '결제완료' where payment_status = '결제전'";
+		return jdbcTemplate.update(sql) > 0;
+	}
+	
+	@Override
+	public boolean failPayment() {
+		String sql = "update set payment set payment_status = '결제실패' where payment_status = '결제전'";
+		return jdbcTemplate.update(sql) > 0;
+	}
+	
+	@Autowired
+	private ServiceVOMapper serviceVOMapper;
+		
+	@Override
+	public List<ServiceVO> selectListEnoughPointMember(int projectNo) {
+		String sql = "select * from member M "
+				+ "inner join orders O on M.member_id= O.orders_person "
+				+ "inner join project P on O.project_no = P.project_no "
+				+ "where "
+					+ "O.project_no = ? "
+					+ "and "
+					+ "O.orders_status = '펀딩참여중' "
+					+ "and "
+					+ "O.orders_price <= M.member_point "
+					+ "and "
+					+ "P.project_goal_price >= P.project_total_price";
+		Object[] data = {projectNo};
+		return jdbcTemplate.query(sql, serviceVOMapper, data);
+	}
+	
+	@Override
+	public void insert(int ordersNo) {
+		String sql = "insert into payment(payment_no, orders_no, payment_status, payment_date) values(payment_seq.nextval, ?, '결제완료', sysdate)";
+		Object[] data = {ordersNo};
+		jdbcTemplate.update(sql, data);
+	}
+	
+	
+	
+	
 }

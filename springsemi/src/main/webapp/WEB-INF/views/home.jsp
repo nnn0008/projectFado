@@ -29,7 +29,7 @@
             /* 가운데 정렬 */
             margin: 0 auto;
             padding: 40px;
-            margin-top: 5%;
+            margin-top: 50px;
         }
 
         /* .list_wrap ul{
@@ -104,7 +104,7 @@
         
         </style>
 
-	 <div class="container w-600" >
+	 <div class="container w-900" >
             <div class="row">
                 <!-- Slider main container -->
                 <div class="swiper">

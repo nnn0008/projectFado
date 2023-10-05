@@ -13,7 +13,9 @@ import com.kh.springsemi.dto.ProjectListDto;
 import com.kh.springsemi.mapper.ProjectListAttachMapper;
 import com.kh.springsemi.mapper.ProjectListMapper;
 import com.kh.springsemi.mapper.ProjectMapper;
+import com.kh.springsemi.mapper.ServiceVOMapper;
 import com.kh.springsemi.vo.PaginationListVO;
+import com.kh.springsemi.vo.ServiceVO;
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao{
@@ -277,6 +279,7 @@ public class ProjectDaoImpl implements ProjectDao{
 				+ ") where rn between ? and ?";
 		return jdbcTemplate.query(sql, projectListAttachMapper, vo.getStartRow(), vo.getFinishRow());
 	}
+	
 	//좋아요
 	@Override
 	public List<ProjectListAttachDto> selectListByLikeCount(PaginationListVO vo) {
@@ -305,5 +308,6 @@ public class ProjectDaoImpl implements ProjectDao{
 				+ ") where rn between ? and ?";
 		return jdbcTemplate.query(sql, projectListAttachMapper, vo.getStartRow(), vo.getFinishRow());
 	}
-		
+	
+	
 }

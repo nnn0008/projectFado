@@ -8,6 +8,7 @@ import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.MemberFollowDto;
 import com.kh.springsemi.dto.MemberListDto;
 import com.kh.springsemi.vo.PaginationVO;
+import com.kh.springsemi.vo.ServiceVO;
 
 public interface MemberDao {
 	//C - 회원 등록
@@ -66,4 +67,7 @@ public interface MemberDao {
 	List<MemberDto> findByFollowerId(String followerId);
 	List<MemberFollowDto> selectFollowingList(MemberFollowDto memberFollowDto);
 	boolean updateFollow(String followerId, String followeeId);
+	
+	//포인트차감 처리
+	boolean minusPoint(ServiceVO serviceVO);
 }

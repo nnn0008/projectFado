@@ -15,7 +15,9 @@ import com.kh.springsemi.mapper.MemberBlockMapper;
 import com.kh.springsemi.mapper.MemberFollowMapper;
 import com.kh.springsemi.mapper.MemberListMapper;
 import com.kh.springsemi.mapper.MemberMapper;
+import com.kh.springsemi.mapper.ServiceVOMapper;
 import com.kh.springsemi.vo.PaginationVO;
+import com.kh.springsemi.vo.ServiceVO;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
@@ -368,5 +370,15 @@ public class MemberDaoImpl implements MemberDao{
 		List<MemberBlockDto> list = 
 					jdbcTemplate.query(sql, memberBlockMapper, data);
 		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	@Autowired
+	private ServiceVOMapper serviceVOMapper;
+	
+	@Override
+	public boolean minusPoint(ServiceVO serviceVO) {
+		String sql = "update member set member_point = member_point - ? where member_id = ?";
+		Object[] data = {serviceVO.getOrdersPrice(), serviceVO.getMemberId()};
+		return jdbcTemplate.update(sql, data) > 0;
 	}
 }

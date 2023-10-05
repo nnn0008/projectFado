@@ -13,6 +13,7 @@ import com.kh.springsemi.dao.OrdersDao;
 import com.kh.springsemi.dao.PaymentDao;
 import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.OrdersDto;
+import com.kh.springsemi.dto.PaymentCheckDto;
 import com.kh.springsemi.dto.PaymentDto;
 
 @Controller
@@ -28,10 +29,12 @@ public class PaymentController {
 	private PaymentDao paymentDao;
 	
 	@GetMapping("/payCheck")
-	public String payCheck(Model model, @ModelAttribute OrdersDto ordersDto, @ModelAttribute MemberDto memberDto) {
+	public String payCheck(Model model, @ModelAttribute OrdersDto ordersDto, @ModelAttribute MemberDto memberDto,
+			@ModelAttribute PaymentCheckDto paymentCheckDto) {
 		ordersDto = ordersDao.selectOne(ordersDto.getOrdersNo());
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("ordersDto", ordersDto);
+		model.addAttribute("paymentCheckDto", paymentCheckDto);
 		return "/WEB-INF/views/payment/payCheck.jsp";
 	}
 	

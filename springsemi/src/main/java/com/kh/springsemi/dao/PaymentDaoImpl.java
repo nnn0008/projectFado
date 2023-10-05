@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.springsemi.dto.PaymentCheckDto;
 import com.kh.springsemi.dto.PaymentDto;
+import com.kh.springsemi.mapper.PaymentCheckMapper;
 import com.kh.springsemi.mapper.PaymentMapper;
 
 @Repository
@@ -17,6 +19,9 @@ public class PaymentDaoImpl implements PaymentDao{
 	
 	@Autowired
 	private PaymentMapper paymentMapper;
+	
+	@Autowired
+	private PaymentCheckMapper paymentCheckMapper;
 	
 	@Override
 	public int sequence() {
@@ -38,13 +43,13 @@ public class PaymentDaoImpl implements PaymentDao{
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 
-	@Override
-	public PaymentDto selectOne(int paymentNo) {
-		String sql = "select * from payment where payment_no = ?";
-		Object[] data = {paymentNo};
-		List<PaymentDto> list = jdbcTemplate.query(sql, paymentMapper, data);
-		return list.isEmpty() ? null : list.get(0);
-	}
+//	@Override
+//	public PaymentDto selectOne(int paymentNo) {
+//		String sql = "select * from payment where payment_no = ?";
+//		Object[] data = {paymentNo};
+//		List<PaymentDto> list = jdbcTemplate.query(sql, paymentMapper, data);
+//		return list.isEmpty() ? null : list.get(0);
+//	}
 	
 	@Override
 	public PaymentDto selectOneByOrdersNo(int ordersNo) {
@@ -66,5 +71,38 @@ public class PaymentDaoImpl implements PaymentDao{
 		Object[] data = {paymentNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-
+	
+//	@Override
+//	public PaymentCheckDto selectOne(int paymentNo) {
+//		String sql = "select * from payment_check where sysdate >= payment_date and payment_no = ?";
+//		Object[] data = {paymentNo};
+//		List<PaymentCheckDto> list = jdbcTemplate.query(sql, paymentCheckMapper, data);
+//		return list.isEmpty() ? null : list.get(0);
+//	}
+	
+	@Override
+	public List<PaymentCheckDto> selectListOverPaymentDate() {
+		String sql = "select * from payment_check where sysdate >= payment_date and payment_status = '결제전'";
+		return jdbcTemplate.query(sql, paymentCheckMapper);
+	}
+	
+	@Override
+	public boolean successPayment() {
+		String sql = "update set payment set payment_status = '결제완료' where payment_status = '결제전'";
+		return jdbcTemplate.update(sql) > 0;
+	}
+	
+	@Override
+	public boolean failPayment() {
+		String sql = "update set payment set payment_status = '결제실패' where payment_status = '결제전'";
+		return jdbcTemplate.update(sql) > 0;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

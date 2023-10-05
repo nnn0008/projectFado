@@ -16,7 +16,7 @@
 
         .list_wrap{
             /* 가로길이 고정 */
-            width: 90%;
+            width: 100%;
             /* 최소 가로길이 */
             min-width: 1000px;
             /* 최대 가로길이 */
@@ -24,12 +24,12 @@
             /* 가운데 정렬 */
             margin: 0 auto;
             padding: 40px;
-            margin-top: 15%;
+            margin-top: 5%;
         }
 
-        .list_wrap ul{
-            font-size: 0;
-        }
+        /* .list_wrap ul{
+            font-size: 5;
+        } */
 
         .list_wrap .item {
             width: 20%;
@@ -38,7 +38,7 @@
             margin-right: 2%;
             margin-top: 2%;
             margin-bottom: 2%;
-            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+            /* box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5); */
         }
 
         .list_wrap .item .image{
@@ -75,7 +75,7 @@
             /* 상하좌우 여백 */
             padding: 3px 6px;
             /* background: #2c8ce09e; */
-            border: 1px solid #2c8ce09e;
+           /*  border: 1px solid #2c8ce09e; */
             font-size: 12px;
             letter-spacing: -1px;
             margin-top: 5px;
@@ -83,33 +83,63 @@
             
         }
 
-        .list_wrap .item a:hover{
-            background: #dddddd32;
+        .item:hover{
             color: #2c8ce053;
             
         }
+        
+        .product {
+        height:210px;
+        width:210px;
+        margin: 0 auto;
+        overflow: hidden; /* 이미지가 넘치는 경우를 방지하기 위해 추가 */
+        display: flex;
+    	justify-content: center; /* 수평 가운데 정렬 */
+        }
+        
         </style>
-
-				
-
-<div class="list_wrap">
-	  <ul>
-		<c:forEach var="projectListAttachDto" items="${projectList}" end="7">
-		                <li class="item">
-		                <a href="/project/detail?projectNo=${projectListAttachDto.projectNo}">
-		                    <div class="image">
-							<img src="/rest/project/download?attachNo=${projectListAttachDto.attachNo}">
-				</div>
-		                    <div class="cont">
-		                    	<p>${projectListAttachDto.majorCategoryType} | ${projectListAttachDto.minorCategoryType }</p>
-		                        <strong>${projectListAttachDto.projectTitle}</strong>
-		                        <p><fmt:formatNumber value="${projectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
-						</a>
-		                    </div>                
-		                </li>
-		</c:forEach>
+        
+        
+        
+        
+                
+        <div class="container w-600">
+        	<div class="row mb-50 mt-50">
+            <h1 style="font-size:30px;">검색결과</h1>
+            <h4></h4>
+            <hr style="border-color:#2c8de0; border-width:0.5px;">
+        	</div>
+        </div>
+        
+        
+	<div class="list_wrap row">
+	<ul>
+	
+	
+	<c:forEach var="projectListAttachDto" items="${projectList}">
+                   	<li class="item">
+                   		<div>
+							<a href="/project/detail?projectNo=${projectListAttachDto.projectNo}">
+								<img class="product w-100" src="/rest/project/download?attachNo=${projectListAttachDto.attachNo}">
+							</a>
+						</div>
+                       	<div class="left me-10 ms-10">
+							<p>${projectListAttachDto.majorCategoryType} | ${projectListAttachDto.minorCategoryType }</p>
+							<a href="/project/detail?projectNo=${projectListAttachDto.projectNo}" style=" margin: 0; padding: 0;">
+								<strong>${projectListAttachDto.projectTitle}</strong>
+							</a>
+							
+							<div class="flex-container">
+								<p><fmt:formatNumber value="${projectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
+								<p class="ms-10">n일 남음</p>
+							</div>
+						</div> 
+                   	</li>
+	</c:forEach>
 	</ul>
-</div>
+	</div>
+        
+
 <!-- <div class="container w-800"> -->
 <!-- 	<div class="row"> -->
 <!-- 		<table> -->

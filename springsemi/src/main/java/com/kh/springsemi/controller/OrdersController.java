@@ -1,5 +1,7 @@
 package com.kh.springsemi.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import com.kh.springsemi.dao.RewardDao;
 import com.kh.springsemi.dto.DeliveryDto;
 import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.OrdersDto;
+import com.kh.springsemi.dto.OrdersListDto;
 import com.kh.springsemi.dto.PaymentDto;
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.RewardDto;
@@ -47,7 +50,9 @@ public class OrdersController {
 	private RewardDao rewardDao;
 	
 	@GetMapping("/insert")
-	public String ordersInsert(@RequestParam int projectNo, @RequestParam int rewardNo, HttpSession session, Model model) {
+	public String ordersInsert(@RequestParam int projectNo,
+										@RequestParam int rewardNo,
+										HttpSession session, Model model) {
 		String memberId = (String)session.getAttribute("name");
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		DeliveryDto deliveryDto = deliveryDao.selectOneByMemberId(memberId);
@@ -62,12 +67,10 @@ public class OrdersController {
 	
 	@PostMapping("/insert")
 	public String ordersInsert(@RequestParam int rewardNo,
-											@RequestParam int deliveryNo,
-											@ModelAttribute OrdersDto ordersDto,
-											@ModelAttribute PaymentDto paymentDto,
-											Model model, HttpSession session) {
-//		System.out.println(rewardNo);
-//		System.out.println(deliveryNo);
+										@RequestParam int deliveryNo,
+										@ModelAttribute OrdersDto ordersDto,
+										@ModelAttribute PaymentDto paymentDto,
+										HttpSession session, Model model) {
 		int ordersNo = ordersDao.sequence();
 		String memberId = (String)session.getAttribute("name");
 		RewardDto rewardDto = rewardDao.selectOne(rewardNo);
@@ -77,9 +80,10 @@ public class OrdersController {
 		ordersDto.setOrdersPrice(rewardDto.getRewardPrice());
 		ordersDao.createOrders(ordersDto);
 		
-//		int paymentNo = paymentDao.sequence();
-//		paymentDto.setPaymentNo(paymentNo);
-//		paymentDao.createPayment(paymentDto);
+		int paymentNo = paymentDao.sequence();
+		paymentDto.setPaymentNo(paymentNo);
+		paymentDto.setOrdersNo(ordersDto.getOrdersNo());
+		paymentDao.createPayment(paymentDto);
 		return "redirect:insertFinish";
 	}
 	
@@ -88,17 +92,17 @@ public class OrdersController {
 		return "/WEB-INF/views/orders/insertFinish.jsp";
 	}
 	
-	
 	@RequestMapping("/list")
-	public String list(Model model) {
-		
-		
+	public String list(HttpSession session, Model model) {
+		String ordersPerson = (String)session.getAttribute("name");
+		List<OrdersListDto> ordersList = ordersDao.selectListByOrdersPerson(ordersPerson);
+		model.addAttribute("ordersList",ordersList);
 		return "/WEB-INF/views/orders/list.jsp";
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(@RequestParam int odersNo) {
-		boolean result = ordersDao.deleteOrders(odersNo);
+	public String delete(@RequestParam int ordersNo) {
+		boolean result = ordersDao.deleteOrders(ordersNo);
 		if(result) return "redirect:list";
 		else throw new NoTargetException("주문 내역이 없습니다");
 	}

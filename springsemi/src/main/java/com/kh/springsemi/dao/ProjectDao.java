@@ -21,6 +21,7 @@ public interface ProjectDao {
 	boolean updateProjectReadcount(int projectNo);
 	boolean plusProjectLikecount(int projectNo);
 	boolean minusProjectLikecount(int projectNo);
+	boolean plusProjectTotalPrice(int projectNo);
 	
 	//상세
 	ProjectDto selectOne(int projectNo);

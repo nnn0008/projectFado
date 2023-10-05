@@ -153,8 +153,12 @@ public class ReviewController {
 	
 	//수정
 	@GetMapping("/edit")
-	public String edit(@RequestParam int reviewNo, Model model) {
+	public String edit(@RequestParam int reviewNo, Model model,
+						@ModelAttribute ProjectDto projectDto) {
+		int projectNo = projectDto.getProjectNo();
 		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
+		
+		reviewDto.setProjectNo(projectNo);
 		
 		model.addAttribute("reviewDto", reviewDto);
 		return "/WEB-INF/views/review/edit.jsp";

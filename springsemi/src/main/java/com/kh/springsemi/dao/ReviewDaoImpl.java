@@ -67,7 +67,7 @@ public class ReviewDaoImpl implements ReviewDao{
 		String sql = "select rl.*, rp.attach_no "
 				+ "from review_list rl "
 				+ "left outer join review_photo rp on rl.review_no = rp.review_no "
-				+ "where project_no = ? ";
+				+ "where project_no = ? order by rl.review_no desc";
 		Object[] data = {projectNo};
 		return jdbcTemplate.query(sql, reviewMapper, data);
 	}

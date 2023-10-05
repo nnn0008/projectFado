@@ -28,6 +28,7 @@ public ProjectListDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 	projectListDto.setJudgeStatus(rs.getString("judge_status"));
 	projectListDto.setJudgeDate(rs.getDate("judge_date"));
 	projectListDto.setAchievementRate(rs.getDouble("achievement_rate"));
+	projectListDto.setPaymentDate(rs.getDate("payment_date"));
 //	projectListDto.setProjectPeriod(rs.getInt("project_period"));
 //	projectListDto.setProjectContent(rs.getString("project_content"));
 //	projectListDto.setMinorCategoryNo(rs.getInt("minor_category_no"));

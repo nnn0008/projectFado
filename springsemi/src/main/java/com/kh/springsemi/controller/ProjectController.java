@@ -37,6 +37,7 @@ import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.MinorCategoryDto;
 import com.kh.springsemi.dto.ProjectCommunityDto;
 import com.kh.springsemi.dto.ProjectDto;
+import com.kh.springsemi.dto.ProjectListAttachDto;
 import com.kh.springsemi.dto.ProjectListDto;
 import com.kh.springsemi.dto.ProjectPhotoDto;
 import com.kh.springsemi.dto.ProjectSubPhotoDto;
@@ -189,12 +190,14 @@ public class ProjectController {
 		AttachDto mainAttachDto = attachDao.selectOne(projectPhotoDto.getAttachNo());
 		ProjectSubPhotoDto projectSubPhotoDto = projectSubPhotoDao.selectOne(projectNo);
 		AttachDto subAttachDto = attachDao.selectOne(projectSubPhotoDto.getAttachNo());
+		ProjectListDto projectListDto = projectDao.selectOneByProjectList(projectNo);
 		
 		model.addAttribute("projectDto", projectDto);
 		model.addAttribute("minorCategoryDto", minorCategoryDto);
 		model.addAttribute("majorCategoryDto", majorCategoryDto);
 		model.addAttribute("mainAttachDto", mainAttachDto);
 		model.addAttribute("subAttachDto", subAttachDto);
+		model.addAttribute("projectListDto", projectListDto);
 		
 		List<RewardDto> rewardList = rewardDao.selectListByProjectNo(projectNo);
 		model.addAttribute("rewardList", rewardList);

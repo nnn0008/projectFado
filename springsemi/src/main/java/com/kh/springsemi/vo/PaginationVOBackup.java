@@ -3,7 +3,7 @@ package com.kh.springsemi.vo;
 import lombok.Data;
 
 @Data
-public class PaginationVO{
+public class PaginationVOBackup {
    //검색 분류 및 키워드
    private String type, keyword; //검색 분류 및 키워드
    private int page = 1; //현재 페이지 번호  private in page = 1;  < 이런식으로 페이지 지정이 가능하다 (기본 : 1)

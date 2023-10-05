@@ -5,7 +5,7 @@ import java.util.List;
 import com.kh.springsemi.dto.ProjectDto;
 import com.kh.springsemi.dto.ProjectListAttachDto;
 import com.kh.springsemi.dto.ProjectListDto;
-import com.kh.springsemi.vo.PaginationVO;
+import com.kh.springsemi.vo.PaginationListVO;
 
 public interface ProjectDao {
 	//CRUD
@@ -24,18 +24,24 @@ public interface ProjectDao {
 	
 	//상세
 	ProjectDto selectOne(int projectNo);
+	ProjectListDto selectOneByProjectList(int projectNo);
 	
-	//목록
+//	//목록
+//	List<ProjectListDto> selectList();
+//	List<ProjectListDto> selectListByPage(int page);
+//	List<ProjectListDto> selectListByPage(String keyword, int page);
+	
+	//사진이 포함된 목록
 	List<ProjectListDto> selectList();
+	List<ProjectListAttachDto> selectList(String keyword);
 	List<ProjectListDto> selectListByPage(int page);
 	List<ProjectListDto> selectListByPage(String keyword, int page);
 	
 	//개수를 구하는 명령
 	int countList(); //목록일 때
 	int countList(String keyword); //검색일 때
-	int countList(PaginationVO vo);
+	int countList(PaginationListVO vo);
 	//검색
-	List<ProjectListDto> selectList(String keyword);
 	
 	//프로젝트 사진 관련 기능
 	void insertPhoto(int projectNo, int attachNo);
@@ -43,8 +49,10 @@ public interface ProjectDao {
 	Integer findPhoto(int projectNo);
 	
 	//프로젝트 메인화면에 보여주는 기능(좋아요, 카테고리, 조회순)
+//	List<ProjectListAttachDto> selectListByLikeCount(int page);
+//	List<ProjectListAttachDto> selectListByLikeCount(String keyword, int page);
+	List<ProjectListAttachDto> selectListByLikeCount(PaginationListVO vo);
+	List<ProjectListAttachDto> selectListByReadCount(PaginationListVO vo);
+	List<ProjectListAttachDto> selectListByAchievementRate(PaginationListVO vo);
 	List<ProjectListDto> selectListByMajorCategory(String majorCategory);
-	List<ProjectListAttachDto> selectListByLikeCount();
-	List<ProjectListAttachDto> selectListByReadCountTop8();
-	List<ProjectListAttachDto> selectListByAchievementRateTop8();
 }

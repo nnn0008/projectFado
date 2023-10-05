@@ -116,7 +116,7 @@ $(function () {
   });
 </script>
 
-<form action="write" method="post" enctype="multipart/form-data">
+<form action="write" method="post" enctype="multipart/form-data" autocomplete="off">
 
       <input type="hidden" name="projectOwner" value="${sessionScope.name}">
    <div class="container w-600">

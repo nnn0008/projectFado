@@ -273,14 +273,12 @@ public class ProjectController {
 			List<ProjectListAttachDto> projectList = projectDao.selectListByPageByAttach(keyword, page);
 			model.addAttribute("projectList", projectList);
 			model.addAttribute("isSearch", true);
-//			System.out.println(projectList);
 		}
 		else { //목록이라면
 //			List<ProjectListDto> projectList = projectDao.selectList();
 			List<ProjectListAttachDto> projectList = projectDao.selectListByPageByAttach(page);
 			model.addAttribute("projectList",projectList);
 			model.addAttribute("isSearch", false);
-			System.out.println(projectList);
 		}
 		return "/WEB-INF/views/project/list.jsp";
 	}

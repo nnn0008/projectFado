@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -311,15 +309,18 @@
 			<!--  <div class="backdrop"> -->
         <form action ="/project/list" method="get">
         	<div class="container">
-	        	<div class="flex-container">
+	        	<div class="flex-container" style="border: 3px solid #2c8de0; border-radius: 5px;">
 					<div class="w-100">
-		           		<i class="fa-solid fa-magnifying-glass"></i>
-		        		<input type="search" class="pointer w-100 focus p-10" name="keyword" placeholder="검색어를 입력해주세요" value="" style="width:350px; height:50px; border-color:#2c8de0; box-shadow: 1px 1px 4px 0px #2d3436; ">
+		        		<input type="search" class="pointer w-100 focus p-10" name="keyword" 
+		        		placeholder="검색어를 입력해주세요" value="" 
+		        		style="width:350px; height:50px; border:none;">
+					</div>     
+					<div class="me-20 mt-10 ms-10">
+		           	 	<i class="fa-solid fa-magnifying-glass fa-2x" style="color:#2c8de0;"></i>
 					</div>
+       		</div>
 					
 	        			<!-- <i class="fa-solid fa-x exit"></i>	 -->				
-
-	        	</div>
 
 					<!-- <hr> -->	        	
 
@@ -339,7 +340,7 @@
         <div class="etc">
         	<a class="me-50" href="/main">main</a>
         		<div style="font-size:14px" style="color:#2c8de0;">
-        					<c:choose>
+        			<c:choose>
         				<c:when test="${sessionScope.name != null }">
         			<a href="http://localhost:8080/project/write">프로젝트업로드
              		<i class="fa-solid fa-pen" style="color:#2c8de0;"></i></a>
@@ -388,7 +389,7 @@
 							<div class="custom-service">
 								
 								<a class="left" href="/member/join">회원가입</a>
-								<a class="left" href="/mainCommunity/qnaList">고객센터</a>
+								<a class="left" href="#">고객센터</a>
 							</div>	
 							
 							
@@ -407,9 +408,9 @@
 
     <nav>
         <!-- 애니메이션 추가하고싶음 -->
-        <ul class="menu">
+        <ul class="menu center flex-container">
             <li>
-                <div style="display: flex; align-items:center;">
+                <div style="display: flex; align-items:center;" class="ms-10">
                     <i class=" fa-solid fa-bars" style="color: #2a0779; 
                     padding-left: 10px;"></i>
                     <a>카테고리</a>
@@ -417,12 +418,11 @@
                 <ul>
                     <li style="display: flex; list-style: 
                                 none; padding: 0;">
-                    <li><a href="/project/list">전체</a></li>
                     <li class="majorCategory">
 <%--                     <c:forEach var="majorCategoryDto" items="noSearch"> --%>
-                   <a href="/majorCategoryList?majorCategoryNo=${majorCategoryDto.majorCategoryNo}">
+                    <a href="/majorCategoryList?majorCategoryNo=${majorCategoryDto.majorCategoryNo}">
                     ${majorCategoryDto.majorCategoryType}
-                    </a>  
+                    </a>
 <%--                     </c:forEach> --%>
                     </li>
  
@@ -430,14 +430,23 @@
 
                 </ul>
             </li>
-
+            
             <li>
-                <a href="/project/fundinglist" class="ms-30">펀딩+</a>
-					
+                <a href="/project/fundinglist" >펀딩 +</a>
             </li>
 
+
             <li>
-                <a class="ms-20" href="/project/fundinglist">인기</a>
+                <a href="http://localhost:8080/project/readCountList">Hot펀딩</a>
+            </li>
+
+
+            <li>
+                <a href="http://localhost:8080/project/likeCountList">추천펀딩</a>
+            </li>
+            
+            <li>
+                <a href="http://localhost:8080/project/achievementList">인기펀딩</a>
             </li>
 
             <!-- <li>

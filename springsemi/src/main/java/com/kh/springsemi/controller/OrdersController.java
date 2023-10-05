@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.springsemi.dao.AttachDao;
 import com.kh.springsemi.dao.DeliveryDao;
 import com.kh.springsemi.dao.MemberDao;
 import com.kh.springsemi.dao.OrdersDao;
@@ -20,6 +21,7 @@ import com.kh.springsemi.dao.PaymentDao;
 import com.kh.springsemi.dao.ProjectDao;
 import com.kh.springsemi.dao.ProjectPhotoDao;
 import com.kh.springsemi.dao.RewardDao;
+import com.kh.springsemi.dto.AttachDto;
 import com.kh.springsemi.dto.DeliveryDto;
 import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.OrdersDto;
@@ -54,6 +56,9 @@ public class OrdersController {
 	@Autowired
 	private ProjectPhotoDao projectPhotoDao;
 	
+	@Autowired
+	private AttachDao attachDao;
+	
 	@GetMapping("/insert")
 	public String ordersInsert(@RequestParam int projectNo,
 										@RequestParam int rewardNo,
@@ -65,13 +70,14 @@ public class OrdersController {
 		ProjectDto projectDto = projectDao.selectOne(projectNo);
 		RewardDto rewardDto = rewardDao.selectOne(rewardNo);
 		ProjectPhotoDto projectPhotoDto = projectPhotoDao.selectOne(projectNo);
+		AttachDto mainAttachDto = attachDao.selectOne(projectPhotoDto.getAttachNo());
 		
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("deliveryDto",deliveryDto);
 		model.addAttribute("deliveryList",deliveryList);
 		model.addAttribute("projectDto",projectDto);
 		model.addAttribute("rewardDto",rewardDto);
-		model.addAttribute("projectPhotoDto",projectPhotoDto);
+		model.addAttribute("mainAttachDto", mainAttachDto);
 		
 		if(memberId != null) {
 			return "/WEB-INF/views/orders/insert.jsp";

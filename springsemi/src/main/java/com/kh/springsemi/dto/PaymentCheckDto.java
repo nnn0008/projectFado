@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class PaymentCheckDto {
-	private String memberNickname;
+	private String memberId;
 	private int memberPoint;
 	private String memberEmail;
 	private String memberContact;

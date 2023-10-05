@@ -90,19 +90,19 @@ public class PaymentDaoImpl implements PaymentDao{
 	
 	@Override
 	public boolean successPayment() {
-		String sql = "update set payment set payment_status = '결제완료' where payment_status = '결제전'";
+		String sql = "update payment set payment_status = '결제완료', payment_date = sysdate where payment_status = '결제전'";
 		return jdbcTemplate.update(sql) > 0;
 	}
 	
 	@Override
 	public boolean failPayment() {
-		String sql = "update set payment set payment_status = '결제실패' where payment_status = '결제전'";
+		String sql = "update payment set payment_status = '결제실패', payment_date = sysdate where payment_status = '결제전'";
 		return jdbcTemplate.update(sql) > 0;
 	}
 	
 	@Autowired
 	private ServiceVOMapper serviceVOMapper;
-		
+	//특정 번호의 프로젝트에 참여중인 포인트가 충분한 사람 조회	
 	@Override
 	public List<ServiceVO> selectListEnoughPointMember(int projectNo) {
 		String sql = "select * from member M "

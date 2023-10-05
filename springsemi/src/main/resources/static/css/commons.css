@@ -896,6 +896,7 @@ header > .title{
 
 header > .etc{
     width: 25%;
+    
 }
 
 header > .logo,
@@ -957,14 +958,14 @@ section{
             display: inline-block;
         }
         .custom-service{
-            display: none;
+           display: none;
             position: absolute;
             z-index: 1;
         }
         .custom-service a {
             text-decoration: none;
             display:inline-block;
-            background-color: white;
+            background-color:#dfe6e900;
             color: #2a0779;
             padding: 5px 10px;
             width: 120px;
@@ -974,4 +975,4 @@ section{
         }
         .custom-menu:hover .custom-service{
             display: block;
-        } 
+        }

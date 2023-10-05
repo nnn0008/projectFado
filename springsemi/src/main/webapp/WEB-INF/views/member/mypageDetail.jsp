@@ -158,8 +158,8 @@ $(function(){
 	<hr class="hr-style">
 	
 	<div class="row">
-		<a href="/delivery/mydelivery" class="btn">
-			<i class="fa-regular fa-truck"></i>
+		<a href="/delivery/myDeliveryList" class="btn">
+			<i class="fa-solid fa-truck"></i>
 				배송지
 		</a>
 	</div>

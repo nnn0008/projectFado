@@ -56,13 +56,23 @@ public class OrdersController {
 		String memberId = (String)session.getAttribute("name");
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		DeliveryDto deliveryDto = deliveryDao.selectOneByMemberId(memberId);
+		List<DeliveryDto> deliveryList = deliveryDao.selectListByMemberId(memberId);
 		ProjectDto projectDto = projectDao.selectOne(projectNo);
 		RewardDto rewardDto = rewardDao.selectOne(rewardNo);
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("deliveryDto",deliveryDto);
+		model.addAttribute("deliveryList",deliveryList);
 		model.addAttribute("projectDto",projectDto);
 		model.addAttribute("rewardDto",rewardDto);
-		return "/WEB-INF/views/orders/insert.jsp";
+		
+		if(memberId != null) {
+			return "/WEB-INF/views/orders/insert.jsp";
+		}
+		else {
+			return "redirect:/member/login";
+		}
+
+		
 	}
 	
 	@PostMapping("/insert")

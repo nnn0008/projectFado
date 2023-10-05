@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.springsemi.dao.AttachDao;
@@ -62,5 +63,9 @@ public class HomeController {
 		model.addAttribute("search", search);
 		return "/WEB-INF/views/project/list.jsp";
 	}
-	
+	@RequestMapping("/main")
+	public String mainhome() {
+		System.out.println("mainhome");
+		return "/WEB-INF/views/mainhome.jsp";
+}
 }

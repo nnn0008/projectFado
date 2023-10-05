@@ -4,16 +4,53 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
-    .delivery-list {
-        display: none;
-    }
+        .delivery-item {
+            border: 1px solid #2c8de0;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
 
-    /* 선택한 배송지의 스타일 */
-/*     .selected-delivery { */
-/*         background-color: #2c8de0; */
-/*         color: white; */
-/*     } */
+        .modal {
+            position: absolute;
+			display: none;
+			padding: 0.5em 1em;;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);	
+			background: white;
+			box-shadow: 0 0 0 2px gray;
+			border-radius: 5px;
+        }
+
+        .close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+        }
 </style>
+    
+<script>
+$(function(){
+        $(".change-delivery-btn").click(function() {
+            $("#deliveryModal").show();
+        });
+
+        $(".close").click(function() {
+            $("#deliveryModal").hide()
+        });
+		
+        $(".delivery-btn").click(function(){
+        	$(".dR").val(".cdR");
+        	$(".dP").val(".cdP");
+        	$(".ad1").val(".cad1");
+        	$(".ad2").val(".cad2");
+        	$(".ct").val(".cct");
+        });
+});
+</script>
+    
 
 
 
@@ -57,16 +94,55 @@
 					<div class="row">
 			            <div class="delivery-item mb-10" style="border: 1px solid #2c8de0; border-radius: 5px;">
 			            	<input class="row" type="hidden" name="deliveryNo" value="${deliveryDto.deliveryNo}">
-			                <div class="row">${deliveryDto.deliveryReceiver}</div>
-			                <div class="row">${deliveryDto.deliveryPost}</div>
-			                <div class="row">${deliveryDto.deliveryAddr1}</div>
-			                <div class="row">${deliveryDto.deliveryAddr2}</div>
-			                <div class="row">${deliveryDto.deliveryContact}</div>
+			                <div class="row dR">${deliveryDto.deliveryReceiver}</div>
+			                <div class="row dP">${deliveryDto.deliveryPost}</div>
+			                <div class="row ad1">${deliveryDto.deliveryAddr1}</div>
+			                <div class="row ad2">${deliveryDto.deliveryAddr2}</div>
+			                <div class="row ct">${deliveryDto.deliveryContact}</div>
 			                <div class="row">
-			                	<button type="button" class="btn">변경</button>
+			                	<button type="button" class="btn change-delivery-btn">변경</button>
 			                </div>
 			            </div>
 					    </div>
+					   
+					   <div id="deliveryModal" class="modal">
+				        	<div class="modal-content">
+				            <span class="close">&times;</span>
+				            <h2>새로운 배송지 선택</h2>
+				            	<div class="container w-400" >
+								<c:forEach var="deliveryDto" items="${deliveryList}">
+<!-- 									<div class="row" style="border: 1px solid #2c8de0; border-radius: 10px;"> -->
+									<div class="btn mt-10"  style="display:block;">
+										<div class="row">
+											<input class="row" type="hidden" name="deliveryNo" value="${deliveryDto.deliveryNo}">
+										</div>
+										<div class="row cdR">
+											<input  type="text" value="${deliveryDto.deliveryReceiver}" readonly>
+										</div>
+										<div class="row cdP">
+											<input  type="text" value="${deliveryDto.deliveryPost}" readonly>
+										</div>
+										<div class="row cad1">
+											<input  type="text" value="${deliveryDto.deliveryAddr1}" readonly>
+										</div>
+										<div class="row cad2">
+											<input  type="text" value="${deliveryDto.deliveryAddr2}" readonly>
+										</div>
+										<div class="row cct">
+											<input  type="text" value="${deliveryDto.deliveryContact}" readonly>
+										</div>
+										<div class="row">
+											<button type="button" class="row btn delivery-btn">선택</button>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+				        	</div>
+				    	</div>
+					   
+					   
+					   
+					   
 					<div class="row">
 						결제수단
 						내가 보유한 포인트 : ${memberDto.memberPoint}

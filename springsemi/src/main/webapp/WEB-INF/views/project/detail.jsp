@@ -254,12 +254,6 @@ $(function(){
 						<label class="timer" style="margin-left: 3px;">0일 0시 0분 0초 남았습니다.</label>
     				</div>
     				
-    				<div>
-    					<span>후원자</span>
-    					<span style="margin-left: 3px;">n</span>
-    					<span>명</span>
-    				</div>
-    				
     				<hr class="hr">
     				
     				<div class="mb-20">

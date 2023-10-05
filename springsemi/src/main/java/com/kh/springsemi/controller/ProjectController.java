@@ -45,7 +45,6 @@ import com.kh.springsemi.dto.ReviewDto;
 import com.kh.springsemi.dto.RewardDto;
 import com.kh.springsemi.error.AuthorityException;
 import com.kh.springsemi.error.NoTargetException;
-import com.kh.springsemi.vo.PaginationListVO;
 
 @Controller
 @RequestMapping("/project")

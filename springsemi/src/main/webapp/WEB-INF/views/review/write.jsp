@@ -20,6 +20,22 @@
     line-height: 1.2em;
 }
 </style>
+ <script>
+        $(function(){
+            $(".form-input1").on("input", function(){
+                var content = $(this).val();
+                
+                $(this).next(".form-input-length").text(content.length);
+
+                if(content.length > 1000) {
+                    $(this).next(".form-input-length").addClass("red");
+                }
+                else {
+                    $(this).next(".form-input-length").removeClass("red");
+                }
+            });
+        });
+    </script>
 
 <div class="container center w-600 mb-50">
    	<hr>
@@ -35,6 +51,7 @@
 	</div>
 	<div>
 		<textarea name="reviewContent" class="form-input1 w-100" rows="15" style="resize:none;"></textarea>
+		<span class="form-input-length">0</span>/1000
 	</div>
 	<div class="right mt-10">
 		<button class="btn btn-positive">작성하기</button>

@@ -98,13 +98,13 @@
 		                <li class="item">
 		                <a href="/project/detail?projectNo=${projectListAttachDto.projectNo}">
 		                    <div class="image">
-					<img src="/rest/project/download?attachNo=${projectListAttachDto.attachNo}">
+							<img src="/rest/project/download?attachNo=${projectListAttachDto.attachNo}">
 				</div>
 		                    <div class="cont">
 		                    	<p>${projectListAttachDto.majorCategoryType} | ${projectListAttachDto.minorCategoryType }</p>
 		                        <strong>${projectListAttachDto.projectTitle}</strong>
 		                        <p><fmt:formatNumber value="${projectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
-		</a>
+						</a>
 		                    </div>                
 		                </li>
 		</c:forEach>

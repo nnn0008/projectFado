@@ -89,6 +89,7 @@ public class OrdersController {
 		ordersDto.setOrdersReward(rewardDto.getRewardType());
 		ordersDto.setOrdersPrice(rewardDto.getRewardPrice());
 		ordersDao.createOrders(ordersDto);
+		projectDao.plusProjectTotalPrice(ordersDto.getOrdersPrice(), ordersDto.getProjectNo());
 		
 		int paymentNo = paymentDao.sequence();
 		paymentDto.setPaymentNo(paymentNo);

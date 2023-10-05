@@ -105,9 +105,9 @@ public class ProjectDaoImpl implements ProjectDao{
 	}
 	
 	@Override
-	public boolean plusProjectTotalPrice(int projectNo) {
-		String sql = "update project set project_total_price = project_total_price + orders_price where project_no = ?";
-		Object[] data = {projectNo};
+	public boolean plusProjectTotalPrice(int ordersPrice, int projectNo) {
+		String sql = "update project set project_total_price = project_total_price + ? where project_no = ?";
+		Object[] data = {ordersPrice, projectNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	

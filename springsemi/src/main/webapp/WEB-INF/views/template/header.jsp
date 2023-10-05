@@ -396,9 +396,9 @@
 
     <nav>
         <!-- 애니메이션 추가하고싶음 -->
-        <ul class="menu">
+        <ul class="menu center">
             <li>
-                <div style="display: flex; align-items:center;">
+                <div style="display: flex; align-items:center;" class="ms-10">
                     <i class=" fa-solid fa-bars" style="color: #2a0779; 
                     padding-left: 10px;"></i>
                     <a>카테고리</a>
@@ -419,14 +419,21 @@
 
                 </ul>
             </li>
-
+            
             <li>
-                <a href="/project/fundinglist" class="ms-30">펀딩+</a>
-
+                <a href="/project/fundinglist" >펀딩 +</a>
             </li>
 
             <li>
-                <a class="ms-20" href="/project/fundinglist">인기</a>
+                <a href="/project/fundinglist">Hot펀딩</a>
+            </li>
+
+            <li>
+                <a href="/project/fundinglist">추천펀딩</a>
+            </li>
+            
+            <li>
+                <a href="/project/fundinglist">인기펀딩</a>
             </li>
 
             <!-- <li>

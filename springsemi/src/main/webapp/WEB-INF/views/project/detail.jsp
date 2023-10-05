@@ -63,6 +63,9 @@
           padding: 20px;
           border-radius: 10px;
       }
+      
+      
+      
 
 </style>
     <!--  프로젝트 디테일 스크립트 -->
@@ -490,11 +493,9 @@ $(function(){
 	              </a>
 	          </div>
 			        <c:forEach var="reviewDto" items="${reviewList}">
-			        
-			        
 						<!--큰틀 -->
 			      		<div class="mt-30 review-box flex-container">
-			            	<div class="ms-50">
+			            	<div class="ms-50 col-4">
 				                <c:choose>
 								<c:when test="${reviewDto.image}">
 									<img src="/review/image?reviewNo=${reviewDto.reviewNo}" width="150" height="150">
@@ -507,12 +508,12 @@ $(function(){
 							
 							<!-- 중간 -->
 							<div>
-							<div class="flex-container ms-50">
+							<div class="flex-container ms-50 me-50">
 								<div class="flex-container">
 								
 							</div>
 				               <div>
-				                	작성자  :  ${reviewDto.getReviewWriterString()}
+				                	작성자  :  ${reviewDto.reviewWriter}
 				               </div>
 				               
 				               <div class="ms-20 me-10">
@@ -524,9 +525,25 @@ $(function(){
 							</div>
 				               <!-- 후기 -->
 				            <div class="mt-20 mb-20 ms-50 left">
-								<hr class="row w-100">
+								<hr>
 				               		${reviewDto.reviewContent}
 				            </div>
+							</div>
+							<div>
+							<c:if test="${sessionScope.name != null}">
+								<c:if test="${sessionScope.name == reviewDto.reviewWriter}">
+									<div class="right">
+									<a class="btn btn-negative" href="edit?reviewNo=${reviewDto.reviewNo}">
+										<i class="fa-solid fa-pen-to-square"></i>
+										수정
+									</a>
+									<a class="btn btn-negative" href="delete?reviewNo=${reviewDto.reviewNo}">
+										<i class="fa-solid fa-trash"></i>
+										삭제
+									</a>
+									</div>
+								</c:if>
+							</c:if>
 							</div>
 						</div>
 			            </c:forEach>

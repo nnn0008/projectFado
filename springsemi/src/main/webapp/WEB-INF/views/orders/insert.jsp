@@ -29,6 +29,11 @@
 	top: 10px;
 	cursor: pointer;
 }
+
+.box{
+	border: 1px solid #2c8de0; 
+	border-radius: 5px;"
+}
 </style>
 
 <script>
@@ -69,41 +74,101 @@
 
 <form action="/orders/insert" method="post">
 	<div class="container w-800">
-
-		<div class="row">
-			<div class="flex-container">
-				<div class="w-50">사진</div>
-				<div class="w-50">
-					<input type="hidden" name="projectNo"
-						value="${projectDto.projectNo}">
-					<div class="row">대분류/소분류 : ?</div>
-					<div class="row">제목 : ${projectDto.projectTitle}</div>
-					<div class="row">모인금액 : ${projectDto.projectTotalPrice} / 달성률
-						: ?</div>
-					<div class="row">종료일자 : ${projectDto.projectEndDate}</div>
+	
+		<!-- 상품칸 -->
+		<div class="flex-container box">
+		
+			<!-- 이미지 -->
+			<div class="row w-50">
+              	<img src="/rest/project/download?attatchNo=${projectListPhotoDto.attachNo}">
+           	</div>
+           	
+           	<!-- 상품 내용 -->
+			<div class="left w-50">
+			
+				<input type="hidden" name="projectNo"
+					value="${projectDto.projectNo}">
+				<div class="mt-10 mb-10">
+					${projectDto.projectTitle}
 				</div>
+				
+				<div class="flex-container mt-10 mb-10">
+					<div class="me-20">
+						${projectDto.projectTotalPrice}원
+					</div>
+					<div>
+						n% 
+					</div>
+				</div>
+				
+				<div class="mt-10 mb-10">
+					${projectDto.projectEndDate}
+				</div>
+				
 			</div>
-		</div>
-		<div class="row">
-			<div class="flex-container">
-				<div class="w-50">
-					<div class="row">연락처 : ${memberDto.memberContact}</div>
-					<div class="row">이메일 : ${memberDto.memberEmail}</div>
-					<div class="row">
-						<div class="delivery-item mb-10"
-							style="border: 1px solid #2c8de0; border-radius: 5px;">
-							<div class="row">배송지</div>
+	
+	
+		<!-- 세 개의 정보 / 파도 정보 -->
+		<div class="flex-container">
+			
+			<!-- 세 개의 정보 -->
+			<div class="box">
+				
+				<!-- 구매자 정보 -->
+				<div class="row">
+					<div>구매자 정보</div>
+					<div>${memberDto.memberContact}</div>
+					<div> ${memberDto.memberEmail}</div>
+				</div>
+				
+				<!-- 배송지 정보 -->
+				<div class="row">
+					<div>배송지</div>
+					
+						<div class="delivery-item">
 							<input class="dN" type="hidden" name="deliveryNo" value="${deliveryDto.deliveryNo}"> 
 							<input class="dR" type="text" value="${deliveryDto.deliveryReceiver}" readonly>
 							<input class="dP" type="text" value="${deliveryDto.deliveryPost}" readonly> 
 							<input class="ad1" type="text" value="${deliveryDto.deliveryAddr1}" readonly> 
 							<input class="ad2" type="text" value="${deliveryDto.deliveryAddr2}" readonly> 
 							<input class="ct" type="text" value="${deliveryDto.deliveryContact}" readonly>
-							<div class="row">
-								<button type="button" class="btn change-delivery-btn">변경</button>
-							</div>
 						</div>
+						
+						<div class="row">
+							<button type="button" class="btn change-delivery-btn">변경</button>
+						</div>
+							
 					</div>
+				
+				<!-- 결제 정보 -->
+				<div class="row">
+					<div>결제 수단</div>
+					<div>내가 보유한 포인트 : ${memberDto.memberPoint}</div>
+				</div>
+				
+			</div>
+			
+			<!-- 파도 정보 -->
+			<div class="box">
+				
+				<div class="w-50">
+					<input type="hidden" name="rewardNo" value="${rewardDto.rewardNo}">
+					<div class="row">리워드 구성 : ${rewardDto.rewardType}</div>
+					<div class="row">리워드 가격 : ${rewardDto.rewardPrice}원</div>
+					<hr>
+					서퍼 소개 서퍼 내용
+					<hr>
+					개인정보 제공 동의 후원 유의사항 확인
+				</div>
+
+				<div class="row">
+					<button class="btn btn-positive" type="submit">주문하기</button>
+				</div>
+				
+			</div>
+			
+	</div>	
+		
 
 					<div id="deliveryModal" class="modal">
 						<div class="modal-content">
@@ -144,27 +209,8 @@
 							</div>
 						</div>
 					</div>
+					
 
-
-
-
-					<div class="row">결제수단 내가 보유한 포인트 : ${memberDto.memberPoint}</div>
-				</div>
-				<div class="w-50">
-					<input type="hidden" name="rewardNo" value="${rewardDto.rewardNo}">
-					<div class="row">리워드 구성 : ${rewardDto.rewardType}</div>
-					<div class="row">리워드 가격 : ${rewardDto.rewardPrice}원</div>
-					<hr>
-					서퍼 소개 서퍼 내용
-					<hr>
-					개인정보 제공 동의 후원 유의사항 확인
-				</div>
-
-				<div class="row">
-					<button class="btn btn-positive" type="submit">주문하기</button>
-				</div>
-			</div>
-		</div>
 
 	</div>
 </form>

@@ -135,39 +135,40 @@ $(function(){
 </div>
 </script>
 
-<div class="flex-container">
-<div class="row left reward-list"></div>
-
-<div class="container w-500">
-	<form class="reward-insert-form">
-		<div class="row">
-			<h1>${projectDto.projectTitle}의 리워드 등록하기</h1>
-		</div>
-		<div class="row">
-			<input type="hidden" name="projectNo" class="form-input w-100">
-		</div>
-		<div class="row">
-			<input type="text" name="rewardType" class="form-input w-100"
-			placeholder="리워드 구성을 입력하세요">
-		</div>
-		<div class="row">
-			<input type="number" name="rewardPrice" class="form-input w-100"
-			placeholder="리워드 가격을 입력하세요">
-		</div>
-		<div class="row me-10 w-100">
-			<button type="submit" class="btn btn-positive w-100">
-				<i class="fa-solid fa-plus"></i>
-				추가
+<div class="container center w-500">
+	
+	
+	<div class="row w-500">
+		<form class="reward-insert-form" autocomplete="off">
+			<div class="row">
+				<h1>${projectDto.projectTitle}의 리워드 등록하기</h1>
+			</div>
+			<div class="row">
+				<input type="hidden" name="projectNo" class="form-input w-100">
+			</div>
+			<div class="row">
+				<input type="text" name="rewardType" class="form-input w-100"
+				placeholder="리워드 구성을 입력하세요">
+			</div>
+			<div class="row">
+				<input type="number" name="rewardPrice" class="form-input w-100"
+				placeholder="리워드 가격을 입력하세요">
+			</div>
+			<div class="row me-10 w-100">
+				<button type="submit" class="btn btn-positive w-100">
+					<i class="fa-solid fa-plus"></i>
+					추가
+				</button>
+			</div>
+		</form>
+		<div class="row w-100">
+			<button class="btn btn-positive w-100">
+				<a class="link" href="http://localhost:8080/project/detail?projectNo=${projectDto.projectNo}">
+					프로젝트 작성 완료하기
+				</a>
 			</button>
 		</div>
-	</form>
-	<div class="row w-100">
-		<button class="btn btn-positive w-100">
-			<a class="link" href="http://localhost:8080/project/detail?projectNo=${projectDto.projectNo}">
-				프로젝트 페이지로 가기
-			</a>
-		</button>
 	</div>
-</div>
+	<div class="center row reward-list w-500"></div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>      

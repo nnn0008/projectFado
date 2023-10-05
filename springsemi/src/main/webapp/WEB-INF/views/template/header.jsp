@@ -406,7 +406,6 @@
                 <ul>
                     <li style="display: flex; list-style: 
                                 none; padding: 0;">
-                    <li><a href="/project/list">전체</a></li>
                     <li class="majorCategory">
 <%--                     <c:forEach var="majorCategoryDto" items="noSearch"> --%>
                     <a href="/majorCategoryList?majorCategoryNo=${majorCategoryDto.majorCategoryNo}">
@@ -421,12 +420,8 @@
             </li>
 
             <li>
-                <a href="/project/fundinglist" class="ms-30">펀딩+</a>
+                <a href="/project/list" class="ms-30">펀딩+</a>
 
-            </li>
-
-            <li>
-                <a class="ms-20" href="/project/fundinglist">인기</a>
             </li>
 
             <!-- <li>

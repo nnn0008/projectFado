@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.springsemi.dto.OrdersDto;
 import com.kh.springsemi.dto.PaymentCheckDto;
 import com.kh.springsemi.dto.PaymentDto;
+import com.kh.springsemi.vo.ServiceVO;
 
 
 public interface PaymentDao {
@@ -20,4 +21,10 @@ public interface PaymentDao {
 	List<PaymentCheckDto> selectListOverPaymentDate();
 	boolean successPayment();
 	boolean failPayment();
+	
+	List<ServiceVO> selectListEnoughPointMember(int projectNo);
+	
+	//결제등록
+	void insert(int ordersNo);
+	
 }

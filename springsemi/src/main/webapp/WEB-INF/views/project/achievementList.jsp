@@ -100,7 +100,7 @@
 <div class="list_wrap">
 	<ul>
 	
-	<c:forEach var="projectListAttachDto" items="${readCountList}">
+	<c:forEach var="projectListAttachDto" items="${achievementList}">
                    	<li class="item">
                    		<div>
 							<a href="/project/detail?projectNo=${projectListAttachDto.projectNo}">

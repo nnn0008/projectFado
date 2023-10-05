@@ -10,6 +10,8 @@ import com.kh.springsemi.dto.PaymentCheckDto;
 import com.kh.springsemi.dto.PaymentDto;
 import com.kh.springsemi.mapper.PaymentCheckMapper;
 import com.kh.springsemi.mapper.PaymentMapper;
+import com.kh.springsemi.mapper.ServiceVOMapper;
+import com.kh.springsemi.vo.ServiceVO;
 
 @Repository
 public class PaymentDaoImpl implements PaymentDao{
@@ -98,9 +100,32 @@ public class PaymentDaoImpl implements PaymentDao{
 		return jdbcTemplate.update(sql) > 0;
 	}
 	
+	@Autowired
+	private ServiceVOMapper serviceVOMapper;
+		
+	@Override
+	public List<ServiceVO> selectListEnoughPointMember(int projectNo) {
+		String sql = "select * from member M "
+				+ "inner join orders O on M.member_id= O.orders_person "
+				+ "inner join project P on O.project_no = P.project_no "
+				+ "where "
+					+ "O.project_no = ? "
+					+ "and "
+					+ "O.orders_status = '펀딩참여중' "
+					+ "and "
+					+ "O.orders_price <= M.member_point "
+					+ "and "
+					+ "P.project_goal_price >= P.project_total_price";
+		Object[] data = {projectNo};
+		return jdbcTemplate.query(sql, serviceVOMapper, data);
+	}
 	
-	
-	
+	@Override
+	public void insert(int ordersNo) {
+		String sql = "insert into payment(payment_no, orders_no, payment_status, payment_date) values(payment_seq.nextval, ?, '결제완료', sysdate)";
+		Object[] data = {ordersNo};
+		jdbcTemplate.update(sql, data);
+	}
 	
 	
 	

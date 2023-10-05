@@ -14,10 +14,10 @@
 </script>
 	
 <div class="container w-800">
+
 	<div class="row fado mb-50">
 		<h2>주문이 완료되었습니다.</h2>
 	</div>
-	
 	
 	<div class="flex-container box ps-50 pe-50 pt-30 pb-30">
 		
@@ -73,10 +73,6 @@
 		
 	</div>
 		
-
-	
-	<a href="detail?ordersNo=${ordersDto.ordersNo}"></a>
-
 </div>
 	
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

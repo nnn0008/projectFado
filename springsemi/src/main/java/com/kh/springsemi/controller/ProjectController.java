@@ -359,7 +359,11 @@ public class ProjectController {
 //	
 
 	@RequestMapping("/fundinglist")
-	public String fundinglist () {
+	public String fundinglist (Model model, @ModelAttribute(name="vo") PaginationListVO vo) {
+		int count = projectDao.countList(vo);
+		vo.setCount(count);
+		List<ProjectListAttachDto> fundingList = projectDao.selectList(vo);
+		model.addAttribute("fundingList", fundingList);
 		return "/WEB-INF/views/project/fundinglist.jsp";
 	}
 	

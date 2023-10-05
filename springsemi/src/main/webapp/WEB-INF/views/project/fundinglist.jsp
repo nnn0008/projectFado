@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
 <style>
 	 ul,li{
             list-style: none;
@@ -17,7 +15,7 @@
 
         .list_wrap{
             /* 가로길이 고정 */
-            width: 90%;
+            width: 100%;
             /* 최소 가로길이 */
             min-width: 1000px;
             /* 최대 가로길이 */
@@ -25,12 +23,12 @@
             /* 가운데 정렬 */
             margin: 0 auto;
             padding: 40px;
-            margin-top: 15%;
+            margin-top: 5%;
         }
 
-        .list_wrap ul{
-            font-size: 0;
-        }
+        /* .list_wrap ul{
+            font-size: 5;
+        } */
 
         .list_wrap .item {
             width: 20%;
@@ -39,13 +37,13 @@
             margin-right: 2%;
             margin-top: 2%;
             margin-bottom: 2%;
-            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+            /* box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5); */
         }
 
         .list_wrap .item .image{
             width: 100%;
             height: 150px;
-            background: url(../images/fado.jpg);
+/*             background: url(./image/noshowoff.jpg); */
             background-repeat: no-repeat;
             background-position: 50% 50%;
             background-size: cover;
@@ -76,7 +74,7 @@
             /* 상하좌우 여백 */
             padding: 3px 6px;
             /* background: #2c8ce09e; */
-            border: 1px solid #2c8ce09e;
+           /*  border: 1px solid #2c8ce09e; */
             font-size: 12px;
             letter-spacing: -1px;
             margin-top: 5px;
@@ -84,197 +82,85 @@
             
         }
 
-        .list_wrap .item a:hover{
-            background: #dddddd32;
+        .item:hover{
             color: #2c8ce053;
             
-            
-            
         }
-       
-      
         
+        .product {
+        height:210px;
+        width:210px;
+        margin: 0 auto;
+        overflow: hidden; /* 이미지가 넘치는 경우를 방지하기 위해 추가 */
+        display: flex;
+    	justify-content: center; /* 수평 가운데 정렬 */
+        }
         
         </style>
         
-        <!-- <div class="container">
-        	<div class="row right me-50">
-        	<a class="link" href="#">낮은가격순</a> |
-        	<a class="link" href="#">높은가격순</a> |
-        	<a class="link" href="#">인기순</a> |
-        	<a class="link" href="#">최신순</a>
-        	</div>
-        </div> -->
-        
-        <div class="container">
-        	<div class="row">
-        	<i class="fa-solid fa-border-all">전체</i>
-        	<i class="fa-solid fa-gamepad">게임</i>
-        	<i class="fa-solid fa-bowl-food">푸드</i>
-        	<i class="fa-solid fa-music">음악</i>
+        <div class="container w-600">
+        	<div class="row mb-50 mt-50">
+            <h1 style="font-size:30px;">펀딩 + </h1>
+            <h4>전체 펀딩 리스트</h4>
+            <hr style="border-color:#2c8de0; border-width:0.5px;">
         	</div>
         </div>
-        
-        
-        <hr class="hr1">
-        
-        <div class="image">
-        
-        	<div class="container row flex" style="margin:100px;">
-        		 <div class="list_wrap">
-                <ul>
-                    <li class="item">
-        
-                        <div class="image">
-                            <i class="fa-light fa-heart" style="color: #dcdbdb;"></i>
-                        </div>
-        
-        		
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-        		<img src="https://picsum.photos/id/101/600/300" width="200px " height="200px">
-        		<img src="https://picsum.photos/id/101/600/300" width="200px " height="200px">
-        		<img src="https://picsum.photos/id/101/600/300" width="200px " height="200px">
-        	</div>
-        
-        
-        </div>
-        
-        
-        
-        		<%-- <div>
-			      <c:forEach var="projectListDto" items="${projectList}">
-				
-					<div>${projectListDto.projectNo }</div>
-					<div>
-					<a class="link" href="detail?projectNo=${projectListDto.projectNo}">
-						${projectListDto.projectTitle}
-					</a>
-					</div>
-					<div>${projectListDto.projectOwner}</div>
-					<div>${projectListDto.projectRegDate}</divv>
-					<div>${projectListDto.projectStartDate }</div>
-					<div>${projectListDto.projectEndDate}</div>
-					<div>${projectListDto.projectGoalPrice }</div>
-					<div>${projectListDto.projectTotalPrice }</div>
-					<div>${projectListDto.projectReadcount}</div>
-					<div>${projectListDto.projectLikecount }</div>
-					<div>${projectListDto.majorCategoryType}</div>
-					<div>${projectListDto.minorCategoryType}</div>	
-					<div>${projectListDto.judgeDate}</div>
-					<div>${projectListDto.judgeStatus}</div>				
-				</div>
-				</c:forEach>
-       	</div>
-       	
+	<div class="list_wrap">
+	<ul>
+	
+	
+	<c:forEach var="projectListAttachDto" items="${fundingList}">
+                   	<li class="item">
+                   		<div>
+							<a href="/project/detail?projectNo=${projectListAttachDto.projectNo}">
+								<img class="product w-100" src="/rest/project/download?attachNo=${projectListAttachDto.attachNo}">
+							</a>
+						</div>
+                       	<div class="left me-10 ms-10">
+							<p>${projectListAttachDto.majorCategoryType} | ${projectListAttachDto.minorCategoryType }</p>
+							<a href="/project/detail?projectNo=${projectListAttachDto.projectNo}" style=" margin: 0; padding: 0;">
+								<strong>${projectListAttachDto.projectTitle}</strong>
+							</a>
+							
+							<div class="flex-container">
+								<p><fmt:formatNumber value="${projectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
+								<p class="ms-10">n일 남음</p>
+							</div>
+						</div> 
+                   	</li>
+	</c:forEach>
+	
+	</ul>
+</div>
+	<div class="container w-600">
+		<div class="row page-navigator mv-30">
+		<!-- 이전 버튼 -->
+		<c:if test="${!vo.first}">
+			<a href="readCountList?${vo.prevQueryString}">
+				<i class="fa-solid fa-angle-left"></i>
+			</a>
+		</c:if>
 		
-    <div class="list_wrap">
-                <ul>
-                    <li class="item">
-        
-                        <div class="image">
-                            <i class="fa-light fa-heart" style="color: #dcdbdb;"></i>
-                        </div>
-        
-        		
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
+		<!-- 숫자 버튼 -->
+		<c:forEach var="i" begin="${vo.begin}" end="${vo.end}" step="1">
+			<c:choose>
+				<c:when test="${vo.page == i}">
+					<a class="on">${i}</a>
+				</c:when>
+				<c:otherwise>
+					<a href="readCountList?${vo.getQueryString(i)}">${i}</a> 
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		
+		<!-- 다음 버튼 -->
+		<c:if test="${!vo.last}">
+			<a href="readCountList?${vo.nextQueryString}">
+				<i class="fa-solid fa-angle-right"></i>
+			</a>
+		</c:if>
+	</div>
+</div> 
 
-        		
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-        
-                    <li class="item">
-        
-                        <div class="image">사진</div>
-        
-                        <div class="cont">
-                            <strong>제목</strong>
-                            <p>내용</p>
-                            <a href="#">바로가기</a>
-                        </div>
-                        
-                    </li>
-                    
-                    
-                </ul>
-            </div>  --%>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

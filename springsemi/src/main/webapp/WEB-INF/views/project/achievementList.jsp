@@ -97,6 +97,18 @@
         }
         
         </style>
+        
+        
+        
+                <div class="container w-600">
+        	<div class="row mb-50 mt-50">
+            <h1 style="font-size:30px;">인기 펀딩</h1>
+            <h4>달성률 높은 펀딩</h4>
+            <hr style="border-color:#2c8de0; border-width:0.5px;">
+        	</div>
+        </div>
+        
+        
 <div class="list_wrap">
 	<ul>
 	
@@ -127,7 +139,7 @@
 		<div class="row page-navigator mv-30">
 		<!-- 이전 버튼 -->
 		<c:if test="${!vo.first}">
-			<a href="readCountList?${vo.prevQueryString}">
+			<a href="achievementList?${vo.prevQueryString}">
 				<i class="fa-solid fa-angle-left"></i>
 			</a>
 		</c:if>
@@ -139,14 +151,14 @@
 					<a class="on">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="readCountList?${vo.getQueryString(i)}">${i}</a> 
+					<a href="achievementList?${vo.getQueryString(i)}">${i}</a> 
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
 		<!-- 다음 버튼 -->
 		<c:if test="${!vo.last}">
-			<a href="readCountList?${vo.nextQueryString}">
+			<a href="achievementList?${vo.nextQueryString}">
 				<i class="fa-solid fa-angle-right"></i>
 			</a>
 		</c:if>

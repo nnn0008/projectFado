@@ -97,6 +97,17 @@
         }
         
         </style>
+        
+        
+        <div class="container w-600">
+        	<div class="row mb-50 mt-50">
+            <h1 style="font-size:30px;">Hot 펀딩</h1>
+            <h4>조회수 높은 펀딩</h4>
+            <hr style="border-color:#2c8de0; border-width:0.5px;">
+        	</div>
+        </div>
+        
+        
 <div class="list_wrap">
 	<ul>
 	

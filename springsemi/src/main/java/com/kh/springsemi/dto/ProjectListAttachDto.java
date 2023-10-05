@@ -21,6 +21,7 @@ public class ProjectListAttachDto {
 	private String judgeStatus;
 	private Date judgeDate;
 	private double achievementRate;
+	private Date paymentDate;
 	private int attachNo;
 //	private int projectPeriod;
 //	private int minorCategoryNo;

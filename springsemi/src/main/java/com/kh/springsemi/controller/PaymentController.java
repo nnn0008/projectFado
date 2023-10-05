@@ -32,7 +32,7 @@ public class PaymentController {
 		ordersDto = ordersDao.selectOne(ordersDto.getOrdersNo());
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("ordersDto", ordersDto);
-		return "/WEB-INF/views/payment/payCheck";
+		return "/WEB-INF/views/payment/payCheck.jsp";
 	}
 	
 	@PostMapping("/payCheck")

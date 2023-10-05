@@ -45,7 +45,15 @@ public class PaymentDaoImpl implements PaymentDao{
 		List<PaymentDto> list = jdbcTemplate.query(sql, paymentMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-
+	
+	@Override
+	public PaymentDto selectOneByOrdersNo(int ordersNo) {
+		String sql = "select * from payment where orders_no = ?";
+		Object[] data = {ordersNo};
+		List<PaymentDto> list = jdbcTemplate.query(sql, paymentMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
 	@Override
 	public List<PaymentDto> selectList() {
 		String sql = "select * from payment order by payment_no desc";

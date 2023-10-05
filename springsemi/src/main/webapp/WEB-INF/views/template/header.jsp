@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -27,21 +25,21 @@
     <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 
     <!-- jquery cdn -->
-	<script src="/js/easytimer.min.js"></script>
+   <script src="/js/easytimer.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/moment-duration-format@2.3.2/lib/moment-duration-format.min.js"></script>
-	<!-- swiper cdn -->
-	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-	
+   <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/moment-duration-format@2.3.2/lib/moment-duration-format.min.js"></script>
+   <!-- swiper cdn -->
+   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+   
 <style>
-		
+      
 
-		a{
-		text-decoration: none;
-		   color: #2c8de0;;
-		}
+      a{
+      text-decoration: none;
+         color: #2c8de0;;
+      }
             
         .btn .btn-positive1 {
             width: 150px;
@@ -158,42 +156,42 @@
             
             /* 검색창 */
             /* 초기에 숨겨진 검색창 */
-			/* .backdrop {
-			    display: none;
-			    position: fixed;
-			    top: 0;
-			    left: 0;
-			    width: 100%;
-			    height: 100%;
-			    background-color: rgba(0, 0, 0, 0.7);
-			    z-index: 999;
-			} */
-			
-			/* 확장된 검색창 스타일 */
-			/* .container.w-900 {
-			    position: fixed;
-			    top: 50%;
-			    left: 50%;
-			    transform: translate(-50%, -50%);
-			    background-color: #fff;
-			    padding: 20px;
-			    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-			    z-index: 1000;
-			} */
-			
-			/* 검색창 확장 시 스타일 */
-			/* .search-expanded .backdrop {
-			    display: block;
-			} */
-			
-			/* 검색창 닫힘 시 스타일 */
-			/* .search-collapsed .backdrop {
-			    display: none;
-			}
+         /* .backdrop {
+             display: none;
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             background-color: rgba(0, 0, 0, 0.7);
+             z-index: 999;
+         } */
+         
+         /* 확장된 검색창 스타일 */
+         /* .container.w-900 {
+             position: fixed;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             background-color: #fff;
+             padding: 20px;
+             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+             z-index: 1000;
+         } */
+         
+         /* 검색창 확장 시 스타일 */
+         /* .search-expanded .backdrop {
+             display: block;
+         } */
+         
+         /* 검색창 닫힘 시 스타일 */
+         /* .search-collapsed .backdrop {
+             display: none;
+         }
         } */
     </style>
     
-	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -257,19 +255,19 @@
             loadList();
             //반복문을 통해 카테고리를 찍어주겠다
             function loadList(){
-            	$(".majorCategory").empty();
-            	$.ajax({
-					url:"/rest/category/majorList",            		
-            		method:"post",
-            		data:{},
-            		success:function(response){
-            			for(var i = 0; i < response.length; i++){
-            				var aTag = $("<a>").attr("href", "http://localhost:8080/project/list?keyword=" + response[i].majorCategoryType).text(response[i].majorCategoryType);
+               $(".majorCategory").empty();
+               $.ajax({
+               url:"/rest/category/majorList",                  
+                  method:"post",
+                  data:{},
+                  success:function(response){
+                     for(var i = 0; i < response.length; i++){
+                        var aTag = $("<a>").attr("href", "http://localhost:8080/project/list?keyword=" + response[i].majorCategoryType).text(response[i].majorCategoryType);
 
-            				aTag.appendTo(".majorCategory");
-            			}
-            		}
-            	});
+                        aTag.appendTo(".majorCategory");
+                     }
+                  }
+               });
             }
             
             
@@ -308,95 +306,89 @@
         </div>
         
         <div class="title flex-container row">
-			<!--  <div class="backdrop"> -->
+         <!--  <div class="backdrop"> -->
         <form action ="/project/list" method="get">
-        	<div class="container">
-	        	<div class="flex-container">
-					<div class="w-100">
-		           		<i class="fa-solid fa-magnifying-glass"></i>
-		        		<input type="search" class="pointer w-100 focus p-10" name="keyword" placeholder="검색어를 입력해주세요" value="" style="width:350px; height:50px; border-color:#2c8de0; box-shadow: 1px 1px 4px 0px #2d3436; ">
-					</div>
-					
-	        			<!-- <i class="fa-solid fa-x exit"></i>	 -->				
+           <div class="container">
+              <div class="flex-container" style="border: 3px solid #2c8de0; border-radius: 5px;">
+               <div class="w-100">
+                    <input type="search" class="pointer w-100 focus p-10" name="keyword" 
+                    placeholder="검색어를 입력해주세요" value="" 
+                    style="width:350px; height:50px; border:none;">
+               </div>     
+               <div class="me-20 mt-10 ms-10">
+                        <i class="fa-solid fa-magnifying-glass fa-2x" style="color:#2c8de0;"></i>
+               </div>
+             </div>
+               
+                    <!-- <i class="fa-solid fa-x exit"></i>    -->            
 
-	        	</div>
+               <!-- <hr> -->              
 
-					<!-- <hr> -->	        	
-
-	        	<!-- <div class="row left">
-	        		최근검색어
-	        		
-	        	</div>
-	        	<div class="row left">
-	        		파도 인기 검색어
-	        		
-	        	</div> -->
-        	</div>
+              <!-- <div class="row left">
+                 최근검색어
+                 
+              </div>
+              <div class="row left">
+                 파도 인기 검색어
+                 
+              </div> -->
+           </div>
         </form>
         </div>
         
         
         <div class="etc">
-        	<a class="me-50" href="/main">main</a>
-        		<div style="font-size:14px" style="color:#2c8de0;">
-        					<c:choose>
-        				<c:when test="${sessionScope.name != null }">
-        			<a href="http://localhost:8080/project/write">프로젝트업로드
-             		<i class="fa-solid fa-pen" style="color:#2c8de0;"></i></a>
-             		</c:when>
-             		
-             		<c:otherwise>
-	             		<a href="http://localhost:8080/error">프로젝트업로드
-	             		<i class="fa-solid fa-pen" style="color:#2c8de0;"></i></a>
-             		</c:otherwise>
-             		</c:choose>
-				</div>
-			
-			
-				
-				
-				
-				<!-- 로그인 버튼 관련 -->
-						
-						<div class="row etc-menu custom-menu navy ms-30">
-						<c:choose>
-							<c:when test="${sessionScope.name != null }">
-						
-								
-									<span>
-										 
-										<a class="left" href="/member/logout">로그아웃</a>	
-									</span>
-									
-								<div class="custom-service">
-									<a class="left" href="/member/mypage">마이페이지</a>
-									<a class="left" href="/mainCommunity/noticeList">공지사항</a>
-									
-									
-									<c:if test="${sessionScope.level == '관리자'}">
-										<a href="/admin/home">관리자메뉴</a>
-									</c:if>
-								</div>
-								
-							</c:when>
-						
-						<c:otherwise>
-							
-								<span>
-									<a href="/member/login">로그인<i class="fa-solid fa-angle-down"></i></a>
-								</span>
-							<div class="custom-service">
-								
-								<a class="left" href="/member/join">회원가입</a>
-								<a class="left" href="/mainCommunity/qnaList">고객센터</a>
-							</div>	
-							
-							
-							
-						</c:otherwise>
-						</c:choose>
-						</div>
-						
+           <a class="me-50" href="/main">main</a>
+              <div style="font-size:14px" style="color:#2c8de0;">
+                 <a href="http://localhost:8080/project/write">프로젝트업로드
+                   <i class="fa-solid fa-pen" style="color:#2c8de0;"></i></a>
+            </div>
+         
+         
+            
+            
+            
+            <!-- 로그인 버튼 관련 -->
+                  
+                  <div class="row etc-menu custom-menu navy ms-30">
+                  <c:choose>
+                     <c:when test="${sessionScope.name != null }">
+                  
+                        
+                           <span>
+                               
+                              <a class="left" href="/member/logout">로그아웃</a>   
+                           </span>
+                           
+                        <div class="custom-service">
+                           <a class="left" href="/member/mypage">마이페이지</a>
+                           <a class="left" href="/mainCommunity/noticeList">공지사항</a>
+                           
+                           
+                           <c:if test="${sessionScope.level == '관리자'}">
+                              <a href="/admin/home">관리자메뉴</a>
+                           </c:if>
+                        </div>
+                        
+                     </c:when>
+                  
+                  <c:otherwise>
+                     
+                        <span>
+                           <a href="/member/login">로그인<i class="fa-solid fa-angle-down"></i></a>
+                        </span>
+                     <div class="custom-service">
+                        
+                        <a class="left" href="/member/join">회원가입</a>
+                        <a class="left" href="#">고객센터</a>
+                     </div>   
+                     
+                     
+                     
+                  </c:otherwise>
+                  </c:choose>
+                  </div>
+                  
             </div>
         
        
@@ -407,9 +399,9 @@
 
     <nav>
         <!-- 애니메이션 추가하고싶음 -->
-        <ul class="menu">
+        <ul class="menu center flex-container">
             <li>
-                <div style="display: flex; align-items:center;">
+                <div style="display: flex; align-items:center;" class="ms-10">
                     <i class=" fa-solid fa-bars" style="color: #2a0779; 
                     padding-left: 10px;"></i>
                     <a>카테고리</a>
@@ -417,12 +409,11 @@
                 <ul>
                     <li style="display: flex; list-style: 
                                 none; padding: 0;">
-                    <li><a href="/project/list">전체</a></li>
                     <li class="majorCategory">
 <%--                     <c:forEach var="majorCategoryDto" items="noSearch"> --%>
-                   <a href="/majorCategoryList?majorCategoryNo=${majorCategoryDto.majorCategoryNo}">
+                    <a href="/majorCategoryList?majorCategoryNo=${majorCategoryDto.majorCategoryNo}">
                     ${majorCategoryDto.majorCategoryType}
-                    </a>  
+                    </a>
 <%--                     </c:forEach> --%>
                     </li>
  
@@ -430,14 +421,23 @@
 
                 </ul>
             </li>
-
+            
             <li>
-                <a href="/project/fundinglist" class="ms-30">펀딩+</a>
-					
+                <a href="/project/fundinglist" >펀딩 +</a>
             </li>
 
+
             <li>
-                <a class="ms-20" href="/project/fundinglist">인기</a>
+                <a href="http://localhost:8080/project/readCountList">Hot펀딩</a>
+            </li>
+
+
+            <li>
+                <a href="http://localhost:8080/project/likeCountList">추천펀딩</a>
+            </li>
+            
+            <li>
+                <a href="http://localhost:8080/project/achievementList">인기펀딩</a>
             </li>
 
             <!-- <li>
@@ -453,47 +453,47 @@
             </li>
             
             <%-- 관리자인 경우 추가 메뉴 출력 --%>
-								<c:if test="${sessionScope.level == '관리자'}">
-									<li>
-									<a class="ms-20" href="http://localhost:8080/admin/home">관리자메뉴</a>
-									</li>
-								</c:if>
-        	</ul>
+                        <c:if test="${sessionScope.level == '관리자'}">
+                           <li>
+                           <a class="ms-20" href="http://localhost:8080/admin/home">관리자메뉴</a>
+                           </li>
+                        </c:if>
+           </ul>
            
 
 
 
 
-				<!-- 조장님이 만든 검색창  -->
+            <!-- 조장님이 만든 검색창  -->
 
-		<!-- <div class="backdrop">
+      <!-- <div class="backdrop">
         <form action ="/project/list" method="get">
-        	<div class="container w-900">
-	        	<div class="flex-container">
-					<div class="w-100">
-		           		<i class="fa-solid fa-magnifying-glass"></i>
-		        		<input type="search" class="pointer w-100 focus" name="keyword" placeholder="검색어를 입력해주세요" value="">
-					</div>
-					
-	        			<i class="fa-solid fa-x exit"></i>					
+           <div class="container w-900">
+              <div class="flex-container">
+               <div class="w-100">
+                       <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="search" class="pointer w-100 focus" name="keyword" placeholder="검색어를 입력해주세요" value="">
+               </div>
+               
+                    <i class="fa-solid fa-x exit"></i>               
 
-	        	</div>
+              </div>
 
-					<hr>	        	
+               <hr>              
 
-	        	<div class="row left">
-	        		최근검색어
-	        		
-	        	</div>
-	        	<div class="row left">
-	        		파도 인기 검색어
-	        		
-	        	</div>
-        	</div>
+              <div class="row left">
+                 최근검색어
+                 
+              </div>
+              <div class="row left">
+                 파도 인기 검색어
+                 
+              </div>
+           </div>
         </form>
         </div>  -->
-		
-	        	 
+      
+               
             </a>
 
         </ul>

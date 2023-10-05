@@ -311,8 +311,10 @@
         	<div class="container">
 	        	<div class="flex-container">
 					<div class="w-100">
-		           		<i class="fa-solid fa-magnifying-glass"></i>
-		        		<input type="search" class="pointer w-100 focus p-10" name="keyword" placeholder="검색어를 입력해주세요" value="" style="width:350px; height:50px; border-color:#2c8de0; box-shadow: 1px 1px 4px 0px #2d3436; ">
+		        		<input type="search" class="pointer w-100 focus p-10" name="keyword" 
+		        		placeholder="검색어를 입력해주세요" value="" 
+		        		style="width:350px; height:50px; border-color:#2c8de0; box-shadow: 1px 1px 4px 0px #2d3436; ">
+		           		<i class="fa-solid fa-magnifying-glass fa-2x" style="color:#2c8de0;"></i>
 					</div>
 					
 	        			<!-- <i class="fa-solid fa-x exit"></i>	 -->				
@@ -396,7 +398,7 @@
 
     <nav>
         <!-- 애니메이션 추가하고싶음 -->
-        <ul class="menu center">
+        <ul class="menu center flex-container">
             <li>
                 <div style="display: flex; align-items:center;" class="ms-10">
                     <i class=" fa-solid fa-bars" style="color: #2a0779; 

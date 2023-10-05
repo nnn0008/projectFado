@@ -37,11 +37,10 @@ import com.kh.springsemi.dto.MemberDto;
 import com.kh.springsemi.dto.MinorCategoryDto;
 import com.kh.springsemi.dto.ProjectCommunityDto;
 import com.kh.springsemi.dto.ProjectDto;
-import com.kh.springsemi.dto.ProjectListAttachDto;
 import com.kh.springsemi.dto.ProjectListDto;
 import com.kh.springsemi.dto.ProjectPhotoDto;
 import com.kh.springsemi.dto.ProjectSubPhotoDto;
-import com.kh.springsemi.dto.ReviewListDto;
+import com.kh.springsemi.dto.ReviewDto;
 import com.kh.springsemi.dto.RewardDto;
 import com.kh.springsemi.error.AuthorityException;
 import com.kh.springsemi.error.NoTargetException;
@@ -217,7 +216,7 @@ public class ProjectController {
 		
 		
 		
-		List<ReviewListDto> reviewList = reviewDao.selectList(projectNo);
+		List<ReviewDto> reviewList = reviewDao.selectList(projectNo);
 		model.addAttribute("reviewList", reviewList);
 		
 		//이거 지워야돼!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

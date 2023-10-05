@@ -488,9 +488,9 @@ $(function(){
 			                <button class ="btn btn-prev">Q&A</button>
 			                <button class ="btn btn-next">후기</button>
 			    
-			                <!-- 
-			           !!!후기!!! 
-			           --> 
+               <!-- 
+	           !!!후기!!! 
+	           --> 
 	           <div class="container w-800 reviewPage">
 	            <c:if test="${sessionScope.name != null && sessionScope.level == '구매자'}">
 	          <div class="row right">
@@ -505,9 +505,17 @@ $(function(){
 			          <h3 class="fado">서핑 후기</h3>
 			          <hr class="hr">
 			      </div>
+			      <div>
 			      <c:forEach var="reviewDto" items="${reviewList}">
 			          <div class="flex-container">
-			               <img src="http://dummyimage.com/40X40/000/fff" width="40" height="40">
+						<c:choose>
+							<c:when test="${reviewDto.image}">
+								<img src="/review/image?reviewNo=${reviewDto.reviewNo}" width="50" height="50">
+							</c:when>
+							<c:otherwise>
+								<img src="https://dummyimage.com/50x50/000/fff">
+							</c:otherwise>
+						</c:choose>
 			               <h3>${reviewDto.getReviewWriterString()}</h3>
 			           </div>
 			       <div>

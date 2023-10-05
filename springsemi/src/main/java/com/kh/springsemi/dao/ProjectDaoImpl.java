@@ -308,6 +308,16 @@ public class ProjectDaoImpl implements ProjectDao{
 				+ ") where rn between ? and ?";
 		return jdbcTemplate.query(sql, projectListAttachMapper, vo.getStartRow(), vo.getFinishRow());
 	}
-	
+
+	@Override
+	public List<ProjectListAttachDto> selectList(PaginationListVO vo) {
+		String sql = "select * from("
+				+ "	select rownum rn, TMP.* from("
+				+ "			select * from project_list pl "
+				+ "			left outer join project_photo pp on pl.project_no = pp.project_no "
+				+ "	)TMP"
+				+ ") where rn between ? and ?";
+		return jdbcTemplate.query(sql, projectListAttachMapper, vo.getStartRow(), vo.getFinishRow());
+	}
 	
 }

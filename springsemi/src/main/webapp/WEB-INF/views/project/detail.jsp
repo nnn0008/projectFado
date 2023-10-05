@@ -485,18 +485,18 @@ $(function(){
 	           !!!후기!!! 
 	           --> 
 	           <div class="container w-800 reviewPage">
-	            <c:if test="${sessionScope.name != null && sessionScope.level == '구매자'}">
-			    </c:if>
 			      <div class="row">
 			          <hr class="hr">
 			          <h3 class="fado">서핑 후기</h3>
 			          <hr class="hr">
 			      </div>
 	          <div class="row right">
+	            <c:if test="${sessionScope.name != null && sessionScope.level == '구매자'}">
 	              <a href="/review/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
 	                  <i class="fa-solid fa-pen"></i>
 	                  글쓰기
 	              </a>
+			    </c:if>
 	          </div>
 			        <c:forEach var="reviewDto" items="${reviewList}">
 						<!--큰틀 -->

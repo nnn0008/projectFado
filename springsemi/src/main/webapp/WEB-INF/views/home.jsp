@@ -191,7 +191,7 @@
                		<li class="ms-30 me-50 bold" style="color:#2c8de0; text-align: right;">
                			<div class="flex-container auto-width">
                				<h2 class="left">Hot펀딩</h2>
-               				<a href="#"  class="link right pt-50">전체보기 ></a>
+               				<a href="/project/readCountList"  class="link right pt-50">전체보기 ></a>
                			</div>
                		</li>
                		
@@ -222,7 +222,7 @@
 					<li class="ms-30 me-50 bold" style="color:#2c8de0; text-align: right;">
                			<div class="flex-container auto-width">
                				<h2 class="left">추천펀딩</h2>
-               				<a href="#"  class="link right pt-50">전체보기 ></a>
+               				<a href="/project/likeCountList"  class="link right pt-50">전체보기 ></a>
                			</div>
                		</li>
 					
@@ -256,7 +256,7 @@
 					<li class="ms-30 me-50 bold" style="color:#2c8de0; text-align: right;">
                			<div class="flex-container auto-width">
                				<h2 class="left">인기펀딩</h2>
-               				<a href="#"  class="link right pt-50">전체보기 ></a>
+               				<a href="/project/achievementList"  class="link right pt-50">전체보기 ></a>
                			</div>
                		</li>
 					

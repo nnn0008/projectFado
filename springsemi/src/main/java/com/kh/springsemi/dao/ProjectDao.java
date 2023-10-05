@@ -60,5 +60,5 @@ public interface ProjectDao {
 	List<ProjectListAttachDto> selectListByReadCount(PaginationListVO vo);
 	List<ProjectListAttachDto> selectListByAchievementRate(PaginationListVO vo);
 	List<ProjectListDto> selectListByMajorCategory(String majorCategory);
-	
+	List<ProjectListAttachDto> selectList(PaginationListVO vo);
 }

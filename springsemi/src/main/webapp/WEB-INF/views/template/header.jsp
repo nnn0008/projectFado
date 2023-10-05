@@ -428,16 +428,16 @@
 
 
             <li>
-                <a href="/project/fundinglist">Hot펀딩</a>
+                <a href="http://localhost:8080/project/readCountList">Hot펀딩</a>
             </li>
 
 
             <li>
-                <a href="/project/fundinglist">추천펀딩</a>
+                <a href="http://localhost:8080/project/likeCountList">추천펀딩</a>
             </li>
             
             <li>
-                <a href="/project/fundinglist">인기펀딩</a>
+                <a href="http://localhost:8080/project/achievementList">인기펀딩</a>
             </li>
 
             <!-- <li>

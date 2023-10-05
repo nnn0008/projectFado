@@ -232,33 +232,25 @@ public class ProjectController {
 	
 	//목록+검색(keyword의 차이)
 	//페이징 관련 처리
-//	@RequestMapping("/list")
-//	public String list(Model model, @RequestParam(required = false) String keyword
+//	@RequestMapping("/readCountList")
+//	public String readCountList(Model model, @RequestParam(required = false) String keyword
 //			,@RequestParam(required = false, defaultValue="1") int page) {
-//		boolean isSearch = keyword != null;
 //		
 //		//페이징과 관련된 값들을 계산하여 JSP로 전달 
 //		int begin = (page - 1) / 10 * 10 + 1;
 //		int end = begin + 9;
-//		int count = isSearch ? projectDao.countList(keyword) : projectDao.countList(); //목록 개수 or 검색 결과 수를 모름
+//		int count = projectDao.countList(); //목록 개수 or 검색 결과 수를 모름
 //		int pageCount = (count - 1) / 10 * 1 + 1;
 //		model.addAttribute("page", page);
 //		model.addAttribute("begin", begin);
 //		model.addAttribute("end", Math.min(pageCount, end)); //둘 중에 작은 값이 페이지의 마지막이 되어야 한다
 //		model.addAttribute("pageCount", pageCount);
-//				
-//		if(isSearch) { //검색이라면
-//			//List<ProjectListDto> projectList = projectDao.selectList(keyword);
-//			List<ProjectListDto> projectList = projectDao.selectListByPage(keyword, page);
-//			model.addAttribute("projectList", projectList);
-//			model.addAttribute("isSearch", true);
-//		}
-//		else { //목록이라면
-////			List<ProjectListDto> projectList = projectDao.selectList();
-//			List<ProjectListDto> projectList = projectDao.selectListByPage(page);
-//			model.addAttribute("projectList",projectList);
-//			model.addAttribute("isSearch", false);
-//		}
+//	
+//		//목록이라면
+////		List<ProjectListDto> projectList = projectDao.selectList();
+//		List<ProjectListDto> projectList = projectDao.selectListByPage(page);
+//		model.addAttribute("projectList", projectList);
+//		model.addAttribute("isSearch", false);
 //		return "/WEB-INF/views/project/list.jsp";
 //	}
 	
@@ -303,16 +295,24 @@ public class ProjectController {
 		return "/WEB-INF/views/project/readCountList.jsp";
 	}
 	
-//	@RequestMapping("/list")
-//	public String list(Model model, @ModelAttribute(name="vo")PaginationListVO vo) {
-//		int count = projectDao.countList(vo);
-//		vo.setCount(count);
-//		System.out.println(vo);
-//		List<ProjectListAttachDto> list = projectDao.selectListByPageByAttach(vo);
-//		
-//		model.addAttribute("list", list);
-//		return "/WEB-INF/views/project/list.jsp";
-//	}
+	@RequestMapping("/likeCountList")
+	public String LikeCountList(Model model, @ModelAttribute(name="vo") PaginationListVO vo) {
+		int count = projectDao.countList(vo);
+		vo.setCount(count);
+		List<ProjectListAttachDto> likeCountList = projectDao.selectListByLikeCount(vo);
+		model.addAttribute("likeCountList", likeCountList);
+		return "/WEB-INF/views/project/likeCountList.jsp";
+	}
+	
+	@RequestMapping("/achievementList")
+	public String achievementList(Model model, @ModelAttribute(name="vo") PaginationListVO vo) {
+		int count = projectDao.countList(vo);
+		vo.setCount(count);
+		List<ProjectListAttachDto> achievementList = projectDao.selectListByAchievementRate(vo);
+		model.addAttribute("achievementList", achievementList);
+		return "/WEB-INF/views/project/achievementList.jsp";
+	}
+	
 	
 	
 	

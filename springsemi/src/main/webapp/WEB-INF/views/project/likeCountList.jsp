@@ -100,7 +100,7 @@
 <div class="list_wrap">
 	<ul>
 	
-	<c:forEach var="projectListAttachDto" items="${readCountList}">
+	<c:forEach var="projectListAttachDto" items="${likeCountList}">
                    	<li class="item">
                    		<div>
 							<a href="/project/detail?projectNo=${projectListAttachDto.projectNo}">
@@ -127,7 +127,7 @@
 		<div class="row page-navigator mv-30">
 		<!-- 이전 버튼 -->
 		<c:if test="${!vo.first}">
-			<a href="readCountList?${vo.prevQueryString}">
+			<a href="likeCountList?${vo.prevQueryString}">
 				<i class="fa-solid fa-angle-left"></i>
 			</a>
 		</c:if>
@@ -139,14 +139,14 @@
 					<a class="on">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="readCountList?${vo.getQueryString(i)}">${i}</a> 
+					<a href="likeCountList?${vo.getQueryString(i)}">${i}</a> 
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
 		<!-- 다음 버튼 -->
 		<c:if test="${!vo.last}">
-			<a href="readCountList?${vo.nextQueryString}">
+			<a href="likeCountList?${vo.nextQueryString}">
 				<i class="fa-solid fa-angle-right"></i>
 			</a>
 		</c:if>

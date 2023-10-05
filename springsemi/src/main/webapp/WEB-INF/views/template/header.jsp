@@ -262,7 +262,7 @@
             		data:{},
             		success:function(response){
             			for(var i = 0; i < response.length; i++){
-            				var aTag = $("<a>").attr("href", "http://localhost:8080/project/list?majorCategoryNo=" + response[i].majorCategoryNo).text(response[i].majorCategoryType);
+            				var aTag = $("<a>").attr("href", "http://localhost:8080/project/list?keyword=" + response[i].majorCategoryType).text(response[i].majorCategoryType);
 
             				aTag.appendTo(".majorCategory");
             			}
@@ -308,7 +308,7 @@
         <div class="title flex-container row">
 			<!--  <div class="backdrop"> -->
         <form action ="/project/list" method="get">
-        	<div class="container w-900">
+        	<div class="container">
 	        	<div class="flex-container">
 					<div class="w-100">
 		           		<i class="fa-solid fa-magnifying-glass"></i>
@@ -335,86 +335,55 @@
         
         
         <div class="etc">
-        
-        	<a href="http://localhost:8080/project/write">
-        	<div style="font-size:14px" style="color:#2c8de0;">프로젝트업로드
-             <i class="fa-solid fa-pen" style="color:#2c8de0;"></i>
-             
-			</a>
-
+        	<a class="me-50" href="/main">main</a>
+        		<div style="font-size:14px" style="color:#2c8de0;">
+        			<a href="http://localhost:8080/project/write">프로젝트업로드
+             		<i class="fa-solid fa-pen" style="color:#2c8de0;"></i></a>
+				</div>
 			
+			
+				
+				
+				
 				<!-- 로그인 버튼 관련 -->
-			<%-- <a href="<c:choose>
-			            <c:when test='${empty sessionScope.name}'>
-			                http://localhost:8080/member/login
-			            </c:when>
-			            <c:otherwise>
-			                http://localhost:8080/member/mypage
-			            </c:otherwise>
-			        </c:choose>"
-			   				class="btn btn-positive1" >
-			  		 <c:choose>
-			       <c:when test="${not empty sessionScope.name}">
-			           ${sessionScope.nickname}
-			       </c:when>
-			       <c:otherwise>
-			           Login
-			       </c:otherwise>
-			   </c:choose>
-			</a>
-			
-			<a href="http://localhost:8080/"></a>
-			
-						<c:choose>
-						    <c:when test="${not empty sessionScope.name}">
-						    
-						        <a href="http://localhost:8080/member/logout" class="mb-50">logout</a>
-						        
-						    </c:when>
-						    <c:otherwise>
-						        <!-- 로그인되지 않은 경우 아무것도 표시하지 않음 -->
-						    </c:otherwise>
-						</c:choose> --%>
 						
-						<div class="row etc-menu custom-menu navy">
-						<span>
-						${sessionScope.nickname} <i class="fa-solid fa-angle-down"></i></span>
-							<div class="custom-service">
-								<a class="left" href="/member/mypage">마이페이지</a>
-								<a class="left" href="/mainCommunity/noticeList">공지사항</a>
-                                <!-- <a class="left" href="/member/logout">로그아웃</a> -->
-                                <a href="<c:choose>
-			            <c:when test='${empty sessionScope.name}'>
-			                http://localhost:8080/member/login
-			            </c:when>
-			            <c:otherwise>
-			                http://localhost:8080/member/mypage
-			            </c:otherwise>
-			        </c:choose>"
-			   				class="left" >
-			  		 <c:choose>
-			       <c:when test="${not empty sessionScope.name}">
-			           
-			       </c:when>
-			       <c:otherwise>
-			           Login
-			       </c:otherwise>
-			   </c:choose>
-			</a>
-			
-			<a href="http://localhost:8080/"></a>
-			
+						<div class="row etc-menu custom-menu navy ms-30">
 						<c:choose>
-						    <c:when test="${not empty sessionScope.name}">
-						    
-						        <a href="http://localhost:8080/member/logout" class="left">logout</a>
-						        
-						    </c:when>
-						    <c:otherwise>
-						        <!-- 로그인되지 않은 경우 아무것도 표시하지 않음 -->
-						    </c:otherwise>
-						</c:choose> 
-							</div>
+							<c:when test="${sessionScope.name != null }">
+						
+								
+									<span>
+										 
+										<a class="left" href="/member/logout">로그아웃</a>	
+									</span>
+									
+								<div class="custom-service">
+									<a class="left" href="/member/mypage">마이페이지</a>
+									<a class="left" href="/mainCommunity/noticeList">공지사항</a>
+									
+									
+									<c:if test="${sessionScope.level == '관리자'}">
+										<a href="/admin/home">관리자메뉴</a>
+									</c:if>
+								</div>
+								
+							</c:when>
+						
+						<c:otherwise>
+							
+								<span>
+									<a href="/member/login">로그인<i class="fa-solid fa-angle-down"></i></a>
+								</span>
+							<div class="custom-service">
+								
+								<a class="left" href="/member/join">회원가입</a>
+								<a class="left" href="#">고객센터</a>
+							</div>	
+							
+							
+							
+						</c:otherwise>
+						</c:choose>
 						</div>
 						
             </div>

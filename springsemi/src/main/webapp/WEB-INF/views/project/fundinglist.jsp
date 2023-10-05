@@ -97,14 +97,24 @@
         
         </style>
         
-        <div class="container">
+        <!-- <div class="container">
         	<div class="row right me-50">
         	<a class="link" href="#">낮은가격순</a> |
         	<a class="link" href="#">높은가격순</a> |
         	<a class="link" href="#">인기순</a> |
         	<a class="link" href="#">최신순</a>
         	</div>
+        </div> -->
+        
+        <div class="container">
+        	<div class="row">
+        	<i class="fa-solid fa-border-all">전체</i>
+        	<i class="fa-solid fa-gamepad">게임</i>
+        	<i class="fa-solid fa-bowl-food">푸드</i>
+        	<i class="fa-solid fa-music">음악</i>
+        	</div>
         </div>
+        
         
         <hr class="hr1">
         

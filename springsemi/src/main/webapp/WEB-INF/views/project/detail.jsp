@@ -283,9 +283,11 @@ $(function(){
 					<div class="mb-30">
 						<i class="fa-heart fa-regular fa-2x mb-20" style="color:#fd79a8;"></i> 
 						<span class="me-10">?</span>
+						<a href="#area" >
 						<button class="row btn btn-positive w-70 pt-10 pb-10 ps-60 pe-60" style="font-size:20px;">
 							후원하기
 						</button>
+						</a>
 					</div>
     				
     			</div>
@@ -323,7 +325,7 @@ $(function(){
             <img src="/rest/project/download?attachNo=${subAttachDto.attachNo}">
         </div>
 
-        <div class="container">
+        <div class="container" id="area">
             <div class="row bold">
                 파도 선택
             </div>
@@ -349,9 +351,9 @@ $(function(){
                     <c:otherwise>
                     	
                         <div class="w-100 mt-10 reward">
-                        	<label for ="reward-check2" style="width:100%;">
+                        	<label for ="reward-check${stat.index + 1}" style="width:100%;">
                             <input type="radio" name="rewardNo" value="${rewardDto.rewardNo}" class="mt-20"
-                            id="reward-check2">
+                            id="reward-check${stat.index + 1}">
                             <div class="row left bold" style="font-size:20px;">
                                 ${rewardDto.rewardPrice}원 +
                             </div>

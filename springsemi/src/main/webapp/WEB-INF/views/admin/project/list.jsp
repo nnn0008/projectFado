@@ -8,9 +8,9 @@
 <div class="container w-800">
 	<div class="row">
 		<div>
-			<hr>
-			<h1>펀딩 심사 목록</h1>
-			<hr class="mb-20">
+			<hr class="hr-style">
+		<h1 class="fado">펀딩심사목록 </h1>
+		<hr class="hr-style mb-20">
 		</div>
 	<c:forEach var="projectListDto" items="${projectList}">
 	

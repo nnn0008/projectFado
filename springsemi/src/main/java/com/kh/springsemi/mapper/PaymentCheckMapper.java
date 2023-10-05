@@ -13,7 +13,7 @@ public class PaymentCheckMapper implements RowMapper<PaymentCheckDto>{
 	@Override
 	public PaymentCheckDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		PaymentCheckDto paymentCheckDto = new PaymentCheckDto();
-		paymentCheckDto.setMemberNickname(rs.getString("member_nickname"));
+		paymentCheckDto.setMemberId(rs.getString("member_id"));
 		paymentCheckDto.setMemberPoint(rs.getInt("member_point"));
 		paymentCheckDto.setMemberEmail(rs.getString("member_email"));
 		paymentCheckDto.setMemberContact(rs.getString("member_contact"));

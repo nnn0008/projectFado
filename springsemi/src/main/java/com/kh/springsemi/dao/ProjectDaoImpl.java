@@ -141,16 +141,17 @@ public class ProjectDaoImpl implements ProjectDao{
 							+ "select rownum rn, TMP.* from( "
 								+ "select * from project_list_attach "
 								+ "where "
+								+ "instr(major_category_type, ?) > 0 or "
 								+ "instr(minor_category_type, ?) > 0 or "
 								+ "instr(project_owner, ?) > 0 or "
-								+ "instr(project_title, ?) > 0 or "
-								+ "instr(major_category_type, ?) > 0 "
+								+ "instr(project_title, ?) > 0  "
 								+ "order by project_no desc"
 							+ ")TMP"
 						+ ") where rn between ? and ?";
 		Object[] data = {keyword, keyword, keyword, keyword, begin, end};
 		return jdbcTemplate.query(sql, projectListAttachMapper, data);
 	}
+	
 	@Override
 	public List<ProjectListDto> selectList() {
 		String sql = "select * from project_list order by project_no desc";

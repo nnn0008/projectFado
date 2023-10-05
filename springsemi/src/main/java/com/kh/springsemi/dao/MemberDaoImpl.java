@@ -371,14 +371,16 @@ public class MemberDaoImpl implements MemberDao{
 					jdbcTemplate.query(sql, memberBlockMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-	
+
 	@Autowired
 	private ServiceVOMapper serviceVOMapper;
 	
 	@Override
-	public boolean minusPoint(ServiceVO serviceVO) {
+	public boolean minusPoint(int point, String memberId) {
 		String sql = "update member set member_point = member_point - ? where member_id = ?";
-		Object[] data = {serviceVO.getOrdersPrice(), serviceVO.getMemberId()};
+		Object[] data = {point, memberId};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
+	
 }

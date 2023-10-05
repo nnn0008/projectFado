@@ -69,5 +69,5 @@ public interface MemberDao {
 	boolean updateFollow(String followerId, String followeeId);
 	
 	//포인트차감 처리
-	boolean minusPoint(ServiceVO serviceVO);
+	boolean minusPoint(int point, String memberId);
 }

@@ -14,6 +14,7 @@ public class OrdersListDto {
 	private String ordersStatus;
 	private int projectNo;
 	private String projectTitle;
+	private int paymentNo;
 	private String paymentStatus;
 	private Date paymentDate;
 	

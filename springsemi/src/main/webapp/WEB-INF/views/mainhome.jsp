@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -105,7 +105,7 @@ a{
         
         </style>
 
-	   <header class="main">
+	   <!-- <header class="main">
         <h1><a href="/mainhome" style="font-size: 30px; color:#004fff; text-transform: none;">fado</a></h1>
        
             <nav class="main-navigation">
@@ -114,13 +114,16 @@ a{
                 <a href="/project/fundinglist">신규</a>
                 <a class="btn ghost-btn" href="/member/login">로그인</a>
              </nav>
-        </header>
+        </header> -->
 
 
 
         <div class="video-wrap">
+
             <video src="/images/smallpado.mp4" autoplay muted loop
-            		style="height: 100vh; width: 100vw;"></video>
+            		style="height: 100vh; width: 100vw;">
+            		
+            		</video>
 					                <!--  poster="../image/pado.poster.png">
                     해당 영상의 경로가 올바르지 않습니다.
                     해당 확장자는 지원하지 않습니다. -->
@@ -133,17 +136,18 @@ a{
                     <p>이것부터 저것까지 <br>없는게없는
                     펀딩 사이트임</p>
                     <div class="btn-wrap">
-                        <a class="btn" href="/project/write" style="margin-right: 6px;">등록하기</a>
-                        <a class="btn " href="/member/join">가입하기</a>
+                        <a class="btn" href="/mainCommunity/noticeList" style="margin-right: 6px;">공지사항</a>
+                        <a class="btn " href="/member/join" style="margin-right: 6px;">가입하기</a>
+                        <a class="btn " href="/">홈</a>
                     </div>
                 </div>
             
-       <footer>
+       <!-- <footer>
         <div class="sns-wrap">
             <a href="#" class="icon icon-facebook"></a>
         </div>
        </footer>
-	
+	 -->
         
     </section>
 	

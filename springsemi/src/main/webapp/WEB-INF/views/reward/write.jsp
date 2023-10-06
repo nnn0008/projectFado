@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
+<script src="/js/reward.js"></script>
 <script>
 $(function(){
 	$(".reward-insert-form").submit(function(e){
@@ -15,12 +15,9 @@ $(function(){
 		
 		var rewardType = $("[name=rewardType]").val();
 		var rewardPrice = $("[name=rewardPrice]").val();
-// 		console.log(rewardType);
-// 		console.log(rewardPrice);
 		$.ajax({
 			url: "/rest/reward/insert",
 			method: "post",
-// 			data: $(e.target).serialize(),
 			data: {
 				projectNo : no,
 				rewardType : rewardType,
@@ -28,7 +25,9 @@ $(function(){
 				},
 			success: function(response){
 				$("[name=rewardType]").val("");
+				$("[name=rewardType]").removeClass("success fail");
 				$("[name=rewardPrice]").val("");
+				$("[name=rewardPrice]").removeClass("success fail");
 				loadList();
 			}
 		});
@@ -45,7 +44,6 @@ $(function(){
 			method: "post",
 			data: {projectNo : projectNo},
 			success: function(response){
-// 				console.log(response);
 				$(".reward-list").empty();
 				
 				for(var i=0; i < response.length; i++) {

@@ -44,12 +44,7 @@ public class ProjectDefenderInterceptor implements HandlerInterceptor{
 			history = new HashSet<>();
 		}
 		
-		System.out.println("history: " + history);
-		
 		boolean isRead = history.contains(projectNo);
-		
-	    System.out.println("projectNo: " + projectNo);
-	    System.out.println("isRead: " + isRead);
 		
 	    boolean isOwner = projectDto.getProjectOwner() != null
 	    		&& memberId != null && projectDto.getProjectOwner().equals(memberId);
@@ -60,8 +55,6 @@ public class ProjectDefenderInterceptor implements HandlerInterceptor{
 			projectDao.updateProjectReadcount(projectNo);
 		}
 		
-	    System.out.println("isOwner: " + isOwner);
-	    
 		return true;
 	}
 }

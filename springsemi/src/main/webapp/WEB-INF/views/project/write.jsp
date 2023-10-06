@@ -9,6 +9,7 @@
 <!-- Lightpick  CDN -->
 <link rel="stylesheet" href="/css/lightpick.css">
 <script src="/js/lightpick.js"></script>
+<script src="/js/project.js"></script>
 
 <script>
 $(function () {
@@ -116,7 +117,7 @@ $(function () {
   });
 </script>
 
-<form action="write" method="post" enctype="multipart/form-data" autocomplete="off">
+<form class="project-insert-form" action="write" method="post" enctype="multipart/form-data" autocomplete="off">
 
       <input type="hidden" name="projectOwner" value="${sessionScope.name}">
    <div class="container w-600">
@@ -124,7 +125,7 @@ $(function () {
          <h1>fado 프로젝트 등록하기</h1>            
       </div>
       <div class="row left">
-      	<input type="file" class="file-chooser-main" accept="image/*" name="mainAttach">
+      	<input type="file" class="file-chooser-main form-input" accept="image/*" name="mainAttach">
       </div>
       <div class="row">
       	
@@ -176,7 +177,7 @@ $(function () {
          </div>
       <div class="row left">
       		내용사진을 입력하세요
-         <input type="file" class="file-chooser-sub" accept="image/*" name="subAttach"> 	
+         <input type="file" class="form-input file-chooser-sub" accept="image/*" name="subAttach"> 	
       </div>
       <div class="row">
          <button type="submit" class="btn btn-positive w-100">작성하기</button>

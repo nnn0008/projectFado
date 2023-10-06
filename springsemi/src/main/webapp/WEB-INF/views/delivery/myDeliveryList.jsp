@@ -260,7 +260,7 @@ $(function(){
 			
 <div class="container w-500">
 	<div class="row left">
-	<form class="delivery-insert-form insert-area w-500">
+	<form class="delivery-insert-form insert-area w-500" autocomplete="off">
 <%-- 		<input type="hidden" name="deliveryNo" value="${deliveryDto.deliveryNo}"> --%>
 <%-- 		<input type="hidden" name="memberId" value="${deliveryDto.memberId}"> --%>
 		<div class="row">

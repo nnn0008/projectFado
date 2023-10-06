@@ -38,19 +38,19 @@
         }
         
       .reward{
-      	font-weight: normal;
-	    box-shadow: 1px 1px 3px 0px #2c8de0;
+         font-weight: normal;
+       box-shadow: 1px 1px 3px 0px #2c8de0;
         color: #202020;
-	    background-color: white;
-	    color: #2c8de0;
-	    color: rgb(0, 0, 0);
-	    cursor: pointer;
-	    height:150px;
-	    width:300px;
-	    margin-bottom:1em;
-	    padding-left:15%;
-	    padding-right:15%;
-	    border-radius: 0.5em;
+       background-color: white;
+       color: #2c8de0;
+       color: rgb(0, 0, 0);
+       cursor: pointer;
+       height:170px;
+       width:300px;
+       margin-bottom:1em;
+       padding-left:15%;
+       padding-right:15%;
+       border-radius: 0.5em;
       }
 	.reward:hover { /*마우스가 버튼에 올라가면 배경을 조금 더 어둡게*/
 	    filter:brightness(98%);

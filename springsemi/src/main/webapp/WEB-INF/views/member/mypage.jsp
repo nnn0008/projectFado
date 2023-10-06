@@ -102,9 +102,6 @@ pageEncoding="UTF-8"%>
                     <div class="left mb-10">
                         <a href="follow/list" class="link">팔로잉</a>
                     </div>
-                    <div class="left">
-                        <a href="#" class="link">좋아요</a>
-                    </div>
                 </div>
 
                 <div class= "container">

@@ -338,20 +338,18 @@
         
         
         <div class="etc">
-        	<a class="me-50" href="/main">main</a>
-        		<div style="font-size:14px" style="color:#2c8de0;">
-        			<c:choose>
-        				<c:when test="${sessionScope.name != null }">
-        			<a href="http://localhost:8080/project/write">프로젝트업로드
-             		<i class="fa-solid fa-pen" style="color:#2c8de0;"></i></a>
-             		</c:when>
-             		
-             		<c:otherwise>
-	             		<a href="http://localhost:8080/error">프로젝트업로드
-	             		<i class="fa-solid fa-pen" style="color:#2c8de0;"></i></a>
-             		</c:otherwise>
-             		</c:choose>
-				</div>
+           <a class="me-50" href="/main">main</a>
+              <div style="font-size:14px" style="color:#2c8de0;">
+                 <c:choose>
+                    <c:when test="${sessionScope.name != null }">
+                 <a href="http://localhost:8080/project/write">프로젝트업로드
+                   <i class="fa-solid fa-pen" style="color:#2c8de0;"></i></a>
+                   </c:when>
+                   
+                   <c:otherwise>
+                   </c:otherwise>
+                   </c:choose>
+            </div>
 			
 			
 				

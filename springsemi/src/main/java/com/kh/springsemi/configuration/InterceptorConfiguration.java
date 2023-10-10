@@ -14,7 +14,7 @@ import com.kh.springsemi.interceptor.ProjectOwnerInterceptor;
 import com.kh.springsemi.interceptor.ReviewOwnerInterceptor;
 import com.kh.springsemi.interceptor.TestInterceptor;
 
-//@Configuration//등록 
+@Configuration//등록 
 public class InterceptorConfiguration implements WebMvcConfigurer {
 	
 	@Autowired

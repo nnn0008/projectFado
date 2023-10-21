@@ -126,6 +126,7 @@ public class ProjectDaoImpl implements ProjectDao{
 		String sql = "select * from ("
 							+ "select rownum rn, TMP.* from ("
 								+ "select * from project_list_attach "
+								+ "where judge_status = '승인완료' "
 								+ "order by project_no desc"
 							+ ") TMP"
 						+ ") where rn between ? and ?";
@@ -141,10 +142,11 @@ public class ProjectDaoImpl implements ProjectDao{
 							+ "select rownum rn, TMP.* from( "
 								+ "select * from project_list_attach "
 								+ "where "
+								+ "judge_status = '승인완료' and "
 								+ "instr(major_category_type, ?) > 0 or "
 								+ "instr(minor_category_type, ?) > 0 or "
 								+ "instr(project_owner, ?) > 0 or "
-								+ "instr(project_title, ?) > 0  "
+								+ "instr(project_title, ?) > 0 "
 								+ "order by project_no desc"
 							+ ")TMP"
 						+ ") where rn between ? and ?";
@@ -165,6 +167,7 @@ public class ProjectDaoImpl implements ProjectDao{
 		String sql = "select * from("
 								+ "select rownum rn, TMP.* from("
 									+	"select * from project_list_attach "
+									+ "where judge_status = '승인완료' "
 									+ "order by project_no desc"
 								+ ")TMP"
 							+ ") where rn between ? and ? ";
@@ -179,6 +182,7 @@ public class ProjectDaoImpl implements ProjectDao{
 		String sql = "select * from("
 				+ "select rownum rn, TMP.* from("
 					+	"select * from project_list where "
+					+ "judge_status = '승인완료' and "
 					+ "instr(minor_category_type, ?) > 0 or "
 					+ "instr(project_owner, ?) > 0 or "
 					+ "instr(project_title, ?) > 0 or "
@@ -193,6 +197,7 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public List<ProjectListAttachDto> selectList(String keyword) {
 		String sql = "select * from project_list where "
+				+ "judge_status = '승인완료' and "
 				+ "instr(minor_category_type, ?) > 0 or "
 				+ "instr(project_owner, ?) > 0 or "
 				+ "instr(project_title, ?) > 0 or "
@@ -275,6 +280,7 @@ public class ProjectDaoImpl implements ProjectDao{
 				+ "	select rownum rn, TMP.* from("
 				+ "			select * from project_list pl "
 				+ "			left outer join project_photo pp on pl.project_no = pp.project_no "
+				+ "			where pl.judge_status = '승인완료' "
 				+ "			order by project_readcount desc"
 				+ "	)TMP"
 				+ ") where rn between ? and ?";
@@ -290,6 +296,7 @@ public class ProjectDaoImpl implements ProjectDao{
 						+ "	select rownum rn, TMP.* from("
 						+ "			select * from project_list pl "
 						+ "			left outer join project_photo pp on pl.project_no = pp.project_no "
+						+ "			where pl.judge_status = '승인완료' "
 						+ "			order by project_likecount desc"
 						+ "	)TMP"
 						+ ") where rn between ? and ?";
@@ -304,6 +311,7 @@ public class ProjectDaoImpl implements ProjectDao{
 				+ "	select rownum rn, TMP.* from("
 				+ "			select * from project_list pl "
 				+ "			left outer join project_photo pp on pl.project_no = pp.project_no "
+				+ "			where pl.judge_status = '승인완료' "
 				+ "			order by achievement_rate desc"
 				+ "	)TMP"
 				+ ") where rn between ? and ?";
@@ -316,6 +324,7 @@ public class ProjectDaoImpl implements ProjectDao{
 				+ "	select rownum rn, TMP.* from("
 				+ "			select * from project_list pl "
 				+ "			left outer join project_photo pp on pl.project_no = pp.project_no "
+				+ "			where pl.judge_status = '승인완료' "
 				+ "	)TMP"
 				+ ") where rn between ? and ?";
 		return jdbcTemplate.query(sql, projectListAttachMapper, vo.getStartRow(), vo.getFinishRow());

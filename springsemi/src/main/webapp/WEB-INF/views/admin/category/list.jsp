@@ -8,40 +8,6 @@
 	$(function(){
 		refreshMajor();
 		
-// 		//대분류 반복문으로 구현
-// 		$(".category-main").empty();
-// 		$.ajax({
-// 			url:"/rest/category/majorList",
-// 			method:"post",
-// // 			data:{},<i class="fa-solid fa-x"></i>
-// 			success:function(response){
-// // 				console.log(response);]
-// 				for(var i = 0; i < response.length; i++){
-// 					var div = $("<div>").addClass("p-10 row left major").text(response[i].majorCategoryType);
-// 					var xBtn = $("<button>").addClass("btn-main fas fa-x").attr("type","button").click(function(){						
-// 						//x버튼 눌렀을 때 분류 삭제되도록 구현
-// 						var confirmed = confirm("관련된 소분류가 모두 삭제될 수 있습니다. 정말 삭제하시겠습니까?");						
-// 						if(confirmed){
-// 							$.ajax({
-// 									url:"/rest/category/majorDelete",
-// 									method:"post",
-// 									data: {majorCategoryType : $(this).parent().text()},
-// 									success:function(response){
-// 										$(".major").remove();
-// 										refreshMajor(); //목록 갱신
-// 									},
-// 							});							
-// 						}
-// 						else{
-// 							alert("삭제가 취소되었습니다");
-// 						}
-// 					});	
-// 					div.append(xBtn).appendTo(".category-main");
-// 				}
-// 			},
-// 		});
-		
-		
 // 		대분류를 클릭했을 때, 관련 소분류를 로딩하기
 		$(".category-main").click("div", function(e){
             var majorCategoryType = $(e.target).text();
@@ -134,7 +100,7 @@
 						$(e.target).removeClass("success fail fail2");
 						if(response == "Y"){
 							$(e.target).addClass("success");
-							$(".minor-check").text("등록이 가능합니다");
+							$(".minor-check").text("등록이 가능합니다!");
 						}
 						else if (response == "N"){
 							$(e.target).addClass("fail");
@@ -258,18 +224,24 @@
 					for(var i = 0; i < response.length; i++){
 						var div = $("<div>").addClass("p-10 row left minor").text(response[i].minorCategoryType);
 						var xBtn = $("<button>").addClass("btn-main fas fa-x").attr("type","button").click(function(){
-							//x버튼 눌렀을 때 분류 삭제되도록 구현
-							$.ajax({
-								url:"/rest/category/minorDelete",
-								method:"post",
-								data: {
-									minorCategoryType : $(this).parent().text()
-								},
-								success:function(response){
-									$(".minor").remove();
-									refreshMinor();
-								},								
-							});
+							var confirmed = confirm("관련된 프로젝트가 모두 삭제될 수 있습니다. 정말 삭제하시겠습니까?");
+							if(confirmed){
+								//x버튼 눌렀을 때 분류 삭제되도록 구현
+								$.ajax({
+									url:"/rest/category/minorDelete",
+									method:"post",
+									data: {
+										minorCategoryType : $(this).parent().text()
+									},
+									success:function(response){
+										$(".minor").remove();
+										refreshMinor();
+									},								
+								});	
+							}
+							else{
+								alert("삭제가 취소되었습니다");
+							}
 						});
 					 div.append(xBtn).appendTo(".category-detail");
 					}					

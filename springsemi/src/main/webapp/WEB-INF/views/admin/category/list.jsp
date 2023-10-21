@@ -100,7 +100,7 @@
 						$(e.target).removeClass("success fail fail2");
 						if(response == "Y"){
 							$(e.target).addClass("success");
-							$(".minor-check").text("등록이 가능합니다");
+							$(".minor-check").text("등록이 가능합니다!");
 						}
 						else if (response == "N"){
 							$(e.target).addClass("fail");

@@ -376,11 +376,19 @@ public class MemberDaoImpl implements MemberDao{
 	private ServiceVOMapper serviceVOMapper;
 	
 	@Override
-	public boolean minusPoint(int point, String memberId) {
+	public boolean minusPoint(int memberPoint, String memberId) {
 		String sql = "update member set member_point = member_point - ? where member_id = ?";
-		Object[] data = {point, memberId};
+		Object[] data = {memberPoint, memberId};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
+	
+	//포인트 충전 처리
+	@Override
+	public boolean updateoPoint(int memberPoint, String memberId) {
+		String sql = "update member set member_point = member_point + ? where member_id = ?";
+		Object[] data = {memberPoint, memberId};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
 	
 }

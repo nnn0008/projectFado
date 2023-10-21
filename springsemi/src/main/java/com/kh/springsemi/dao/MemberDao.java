@@ -70,4 +70,7 @@ public interface MemberDao {
 	
 	//포인트차감 처리
 	boolean minusPoint(int point, String memberId);
+	
+	//포인트 충전 처리
+	boolean updateoPoint(int memberPoint, String memberId);
 }

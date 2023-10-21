@@ -92,6 +92,14 @@ pageEncoding="UTF-8"%>
                             <fmt:formatNumber value="${memberDto.memberPoint}" 
                             pattern="#,##0"></fmt:formatNumber> pt 
                             
+                            
+                             <div class="mt-30">
+					        	<a href="pointPlus">
+						        	<button type="button" class="btn">
+						        		포인트 충전 <i class="fa-solid fa-coins" style="color: #508fe0;"></i>
+						        	</button>
+				        		</a>
+	       					 </div>
                         </div>
                     </div>
 

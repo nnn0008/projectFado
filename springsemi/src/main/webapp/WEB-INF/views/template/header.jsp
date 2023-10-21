@@ -338,6 +338,13 @@
         
         
         <div class="etc">
+	        <div class="me-20">
+	        	<a href="/member/pointPlus">
+		        	<button type="button" class="btn">
+		        		포인트 충전 <i class="fa-solid fa-coins" style="color: #508fe0;"></i>
+		        	</button>
+        		</a>
+	        </div>
            <a class="me-50" href="/main">main</a>
               <div style="font-size:14px" style="color:#2c8de0;">
                  <c:choose>
@@ -349,7 +356,7 @@
                    <c:otherwise>
                    </c:otherwise>
                    </c:choose>
-            </div>
+            	</div>
 			
 			
 				

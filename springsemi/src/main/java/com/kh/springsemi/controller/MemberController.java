@@ -255,4 +255,26 @@ public class MemberController {
 		return "/WEB-INF/views/member/findPwFinish.jsp";
 	}
 
+	
+	
+	//포인트 충전 처리
+	@GetMapping("/pointPlus")
+	public String pointPlus(HttpSession session, Model model) {
+		String memberId = (String)session.getAttribute("name"); 
+		MemberDto memberDto = memberDao.selectOne(memberId); 
+		model.addAttribute("memberDto", memberDto); 
+		return "/WEB-INF/views/member/pointPlus.jsp";
+	}
+	
+	@PostMapping("/pointPlus")
+	public String pointPlus(HttpSession session, @RequestParam int memberPoint, Model model) {
+		String memberId = (String) session.getAttribute("name");
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		
+		model.addAttribute("memberDto", memberDto);
+		
+		memberDao.updateoPoint(memberPoint, memberId);
+		
+		return "redirect:mypage";
+	}
 }

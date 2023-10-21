@@ -167,12 +167,19 @@
 				<div class="left box mb-30 ps-20 pe-20 pt-10 pb-10"  style="height: 200px;">
 					<div class="row fado bold">결제수단</div>
 					
-					<div class="flex-container mt-10 mb-10">
+					<div class="flex-container mt-10 mb-10 row">
 						<div class="me-10">내가 보유한 포인트</div>
 						<div style="background-color:lightgray; border-radius:3px;" class="me-10">${memberDto.memberPoint}</div>
 						<div> pt</div>
 					</div>
 					<div style="color:gray; font-size:12px; ">* 포인트 부족 시 결제를 진행할 수 없습니다.</div>
+						<div class="mt-30 row">
+					        	<a href="/member/pointPlus">
+						        	<button type="button" class="btn">
+						        		포인트 충전 <i class="fa-solid fa-coins" style="color: #508fe0;"></i>
+						        	</button>
+				        		</a>
+	       					 </div>
 				</div>
 				
 				<!-- 리워드 정보  -->

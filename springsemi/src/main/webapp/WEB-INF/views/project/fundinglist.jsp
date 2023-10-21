@@ -135,7 +135,7 @@
 		<div class="row page-navigator mv-30">
 		<!-- 이전 버튼 -->
 		<c:if test="${!vo.first}">
-			<a href="readCountList?${vo.prevQueryString}">
+			<a href="fundinglist?${vo.prevQueryString}">
 				<i class="fa-solid fa-angle-left"></i>
 			</a>
 		</c:if>
@@ -147,14 +147,14 @@
 					<a class="on">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="readCountList?${vo.getQueryString(i)}">${i}</a> 
+					<a href="fundinglist?${vo.getQueryString(i)}">${i}</a> 
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
 		<!-- 다음 버튼 -->
 		<c:if test="${!vo.last}">
-			<a href="readCountList?${vo.nextQueryString}">
+			<a href="fundinglist?${vo.nextQueryString}">
 				<i class="fa-solid fa-angle-right"></i>
 			</a>
 		</c:if>

@@ -167,7 +167,6 @@ public class ProjectDaoImpl implements ProjectDao{
 		String sql = "select * from("
 								+ "select rownum rn, TMP.* from("
 									+	"select * from project_list_attach "
-									+ "where judge_status = '승인완료' "
 									+ "order by project_no desc"
 								+ ")TMP"
 							+ ") where rn between ? and ? ";
@@ -182,7 +181,6 @@ public class ProjectDaoImpl implements ProjectDao{
 		String sql = "select * from("
 				+ "select rownum rn, TMP.* from("
 					+	"select * from project_list where "
-					+ "judge_status = '승인완료' and "
 					+ "instr(minor_category_type, ?) > 0 or "
 					+ "instr(project_owner, ?) > 0 or "
 					+ "instr(project_title, ?) > 0 or "

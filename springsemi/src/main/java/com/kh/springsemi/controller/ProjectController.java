@@ -261,7 +261,7 @@ public class ProjectController {
 		//페이징과 관련된 값들을 계산하여 JSP로 전달 
 		int begin = (page - 1) / 10 * 10 + 1;
 		int end = begin + 9;
-		int count = isSearch ? projectDao.countList(keyword) : projectDao.countList(); //목록 개수 or 검색 결과 수를 모름
+		int count = isSearch ? projectDao.countListJudgePass(keyword) : projectDao.countListJudgePass(); //목록 개수 or 검색 결과 수를 모름
 		int pageCount = (count - 1) / 10 * 1 + 1;
 		model.addAttribute("page", page);
 		model.addAttribute("begin", begin);
@@ -285,7 +285,7 @@ public class ProjectController {
 	
 	@RequestMapping("/readCountList")
 	public String readCountList(Model model, @ModelAttribute(name="vo") PaginationListVO vo) {
-		int count = projectDao.countList(vo);
+		int count = projectDao.countListJudgePass(vo);
 		vo.setCount(count);
 		List<ProjectListAttachDto> readCountList = projectDao.selectListByReadCount(vo);
 		model.addAttribute("readCountList", readCountList);
@@ -294,7 +294,7 @@ public class ProjectController {
 	
 	@RequestMapping("/likeCountList")
 	public String LikeCountList(Model model, @ModelAttribute(name="vo") PaginationListVO vo) {
-		int count = projectDao.countList(vo);
+		int count = projectDao.countListJudgePass(vo);
 		vo.setCount(count);
 		List<ProjectListAttachDto> likeCountList = projectDao.selectListByLikeCount(vo);
 		model.addAttribute("likeCountList", likeCountList);
@@ -303,7 +303,7 @@ public class ProjectController {
 	
 	@RequestMapping("/achievementList")
 	public String achievementList(Model model, @ModelAttribute(name="vo") PaginationListVO vo) {
-		int count = projectDao.countList(vo);
+		int count = projectDao.countListJudgePass(vo);
 		vo.setCount(count);
 		List<ProjectListAttachDto> achievementList = projectDao.selectListByAchievementRate(vo);
 		model.addAttribute("achievementList", achievementList);
@@ -358,7 +358,7 @@ public class ProjectController {
 
 	@RequestMapping("/fundinglist")
 	public String fundinglist (Model model, @ModelAttribute(name="vo") PaginationListVO vo) {
-		int count = projectDao.countList(vo);
+		int count = projectDao.countListJudgePass(vo);
 		vo.setCount(count);
 		List<ProjectListAttachDto> fundingList = projectDao.selectList(vo);
 		model.addAttribute("fundingList", fundingList);

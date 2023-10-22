@@ -170,7 +170,7 @@ public class MemberController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("name");
-//		session.removeAttribute("level");/확인받아야
+		session.removeAttribute("level");//확인받아야
 		return "redirect:/";
 	}
 	

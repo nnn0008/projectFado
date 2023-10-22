@@ -211,7 +211,7 @@
 								
 								<div class="flex-container">
 									<p><fmt:formatNumber value="${ProjectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
-									<p class="ms-10">n일 남음</p>
+<!-- 									<p class="ms-10">n일 남음</p> -->
 								</div>
 							</div> 
                     	</li>
@@ -243,7 +243,7 @@
                             
                             	<div class="flex-container">
                             		<p><fmt:formatNumber value="${ProjectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
-									<p class="ms-10">n일 남음</p>
+<!-- 									<p class="ms-10">n일 남음</p> -->
 							</div>		
                         </div>     
                                    
@@ -275,7 +275,7 @@
                            
                            <div class="flex-container">
                             <p><fmt:formatNumber value="${ProjectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p>
-                        	<p class="ms-10">n일 남음</p>
+<!--                         	<p class="ms-10">n일 남음</p> -->
                         </div>		
                        </div>       
                                 

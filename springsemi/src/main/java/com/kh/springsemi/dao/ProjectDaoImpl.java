@@ -166,7 +166,7 @@ public class ProjectDaoImpl implements ProjectDao{
 		int end = page * 10;
 		String sql = "select * from("
 								+ "select rownum rn, TMP.* from("
-									+	"select * from project_list_attach "
+									+	"select * from project_list "
 									+ "order by project_no desc"
 								+ ")TMP"
 							+ ") where rn between ? and ? ";
@@ -205,6 +205,39 @@ public class ProjectDaoImpl implements ProjectDao{
 		return jdbcTemplate.query(sql, projectListAttachMapper, data);
 	}
 	
+	//심사가 통과된 프로젝트 개수
+	@Override
+	public int countListJudgePass() {
+		String sql = "select count (*) from project_list where judge_status='승인완료'";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	@Override
+	public int countListJudgePass(String keyword) {
+		String sql = "select count(*) from project_list where "
+				+ "judge_status='승인완료' and "
+				+ "instr(minor_category_type, ?) > 0 or "
+				+ "instr(project_owner, ?) > 0 or "
+				+ "instr(project_title, ?) > 0 or "
+				+ "instr(major_category_type, ?) > 0";
+		Object[] data = {keyword, keyword, keyword, keyword};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
+	
+	@Override
+	public int countListJudgePass(PaginationListVO vo) {
+		if(vo.isSearch()) {
+			String sql = "select count(*) from project_list where judge_status = '승인완료' and instr(major_category_type, ?) > 0";
+			Object[] data = {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else {
+			String sql = "select count(*) from project_list where judge_status = '승인완료'";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+	
+	//관리자가 사용하는 프로젝트 개수
 	@Override
 	public int countList() {
 		String sql = "select count (*) from project_list";

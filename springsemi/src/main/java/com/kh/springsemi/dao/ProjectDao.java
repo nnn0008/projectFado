@@ -42,7 +42,12 @@ public interface ProjectDao {
 //	List<ProjectListDto> selectListByPage(String keyword, int page);
 	
 	List<ProjectListAttachDto> selectList(String keyword);
-	//개수를 구하는 명령
+	//심사를 통과한 프로젝트 개수
+	int countListJudgePass();
+	int countListJudgePass(String keyword);
+	int countListJudgePass(PaginationListVO vo);
+	
+	//개수를 구하는 명령 - 관리자가 사용하는
 	int countList(); //목록일 때 
 	int countList(String keyword); //검색일 때
 	int countList(PaginationListVO vo);

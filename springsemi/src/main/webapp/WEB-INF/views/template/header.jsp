@@ -220,6 +220,7 @@
 
 
         $(function () {
+            loadList();
             var swiper = new Swiper('.swiper', {
                 //direction: 'vertical',//슬라이드 방향
                 loop: true,//슬라이드의 순환 설정
@@ -252,7 +253,6 @@
                 effect: "slide",//(slide/fade/cube/coverflow/flip/creative/cards)
             });
             
-            loadList();
             //반복문을 통해 카테고리를 찍어주겠다
             function loadList(){
             	$(".majorCategory").empty();
@@ -262,7 +262,7 @@
             		data:{},
             		success:function(response){
             			for(var i = 0; i < response.length; i++){
-            				var aTag = $("<a>").attr("href", "http://localhost:8080/project/list?keyword=" + response[i].majorCategoryType).text(response[i].majorCategoryType);
+            				var aTag = $("<a>").attr("href", "http://localhost:8080/project/list?keyword="+response[i].majorCategoryType).text(response[i].majorCategoryType);
 
             				aTag.appendTo(".majorCategory");
             			}

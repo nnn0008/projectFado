@@ -72,6 +72,7 @@ public class OrdersController {
 		ProjectPhotoDto projectPhotoDto = projectPhotoDao.selectOne(projectNo);
 		AttachDto mainAttachDto = attachDao.selectOne(projectPhotoDto.getAttachNo());
 		
+		
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("deliveryDto",deliveryDto);
 		model.addAttribute("deliveryList",deliveryList);

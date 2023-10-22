@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
@@ -12,7 +13,7 @@
 }
 
 .modal {
-	position: absolute;
+	position: fixed;
 	display: none;
 	padding: 0.5em 1em;;
 	top: 50%;
@@ -35,10 +36,6 @@
 	border-radius: 5px;"
 }
 
-.left-box,
-.light-box {
-
-}
 </style>
 
 <script>
@@ -74,7 +71,18 @@
 	});
 </script>
 
-
+<script>
+    // 문서가 로드될 때 실행할 JavaScript 코드
+    document.addEventListener("DOMContentLoaded", function () {
+        // "배송지 추가" 버튼을 클릭했을 때 이벤트 처리
+        var deliveryAddButton = document.getElementById("deliveryAddButton");
+        if (deliveryAddButton) {
+            deliveryAddButton.addEventListener("click", function () {
+                window.location.href = "http://localhost:8080/delivery/myDeliveryList";
+            });
+        }
+    });
+</script>
 
 
 <form action="/orders/insert" method="post">
@@ -101,9 +109,9 @@
 					<div class="me-10">
 						${projectDto.projectTotalPrice} 원
 					</div>
-					<div class="red">
-						n% 
-					</div>
+<!-- 					<div class="red"> -->
+<%-- 						<p><fmt:formatNumber value="${ProjectListAttachDto.achievementRate * 100}" pattern="0.#"/>% 달성</p> --%>
+<!-- 					</div> -->
 				</div>
 				
 				<div class="mt-10 mb-10 text-shadow">
@@ -149,11 +157,14 @@
 						<br> 
 						<input class="ct form-input" type="text" value="${deliveryDto.deliveryContact}" readonly>
 					</div>
-					
-					<div class="row mb-10">
-						<button type="button" class="btn change-delivery-btn">변경</button>
-					</div>
-							
+					<div class="row" style="display: flex; justify-content: center;">
+						<div class="row">
+							<button type="button" class="btn change-delivery-btn">변경</button>
+						</div>
+						<div class="row">
+							 <button type="button" class="btn" id="deliveryAddButton">배송지 추가</button>
+						</div>
+					</div>	
 				</div>
 				<!-- 배송지 정보 끝 -->
 				
@@ -183,7 +194,7 @@
 				</div>
 				
 				<!-- 리워드 정보  -->
-				<div class="left box mb-30 ps-20 pe-20 pt-10 pb-10"  style="height: 350px;">
+				<div class="left box mb-30 ps-20 pe-20 pt-10 pb-10" style="height: 350px;">
 					<div class="row fado bold">파도 정보</div>
 					<div class="row mt-70">
 						<input type="hidden" name="rewardNo" value="${rewardDto.rewardNo}">
@@ -211,10 +222,10 @@
 				<span class="close">&times;</span>
 				<h2>새로운 배송지 선택</h2>
 				
-				<div class="container w-400">
+				<div class="container w-100" style="display: flex;">
 				
 					<c:forEach var="deliveryDto" items="${deliveryList}">
-						<div class="btn mt-10 dList" style="display: block;">
+						<div class="btn dList" style="display: block;">
 						
 							<div class="row">
 								<input type="hidden" name="deliveryNo"
@@ -222,24 +233,25 @@
 							</div>
 							<div class="row">
 								<input type="text" name="cdR" value="${deliveryDto.deliveryReceiver}"
-									readonly class="form-input">
+									readonly class="form-input form-underline">
 							</div>
 							<div class="row">
 								<input type="text" name="cdP" value="${deliveryDto.deliveryPost}"
-									readonly class="form-input">
+									readonly class="form-input form-underline">
 							</div>
 							<div class="row">
 								<input type="text" name="cad1" value="${deliveryDto.deliveryAddr1}"
-									readonly class="form-input">
+									readonly class="form-input form-underline">
 							</div>
 							<div class="row">
 								<input  type="text" name="cad2" value="${deliveryDto.deliveryAddr2}"
-									readonly class="form-input">
+									readonly class="form-input form-underline">
 							</div>
 							<div class="row">
 								<input type="text" name="cct" value="${deliveryDto.deliveryContact}"
-									readonly class="form-input">
+									readonly class="form-input form-underline">
 							</div>
+							
 							<div class="row">
 								<button type="button" class="row btn delivery-btn">선택</button>
 							</div>

@@ -6,6 +6,8 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <script src="/js/reward.js"></script>
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
+
 $(function(){
 	$(".reward-insert-form").submit(function(e){
 		e.preventDefault();
@@ -16,7 +18,7 @@ $(function(){
 		var rewardType = $("[name=rewardType]").val();
 		var rewardPrice = $("[name=rewardPrice]").val();
 		$.ajax({
-			url: "/rest/reward/insert",
+			url: window.contextPath+"/rest/reward/insert",
 			method: "post",
 			data: {
 				projectNo : no,
@@ -40,7 +42,7 @@ $(function(){
 		var projectNo = params.get("projectNo");
 		
 		$.ajax({
-			url: "/rest/reward/list",
+			url: window.contextPath+"/rest/reward/list",
 			method: "post",
 			data: {projectNo : projectNo},
 			success: function(response){
@@ -60,7 +62,7 @@ $(function(){
 											.click(function(e){
 												var rewardNo = $(this).attr("data-reward-no");
 												$.ajax({
-													url:"/rest/reward/delete",
+													url:window.contextPath+"/rest/reward/delete",
 													method:"post",
 													data:{rewardNo : rewardNo},
 													success:function(response){
@@ -95,7 +97,7 @@ $(function(){
 							e.preventDefault();
 							
 							$.ajax({
-								url:"/rest/reward/edit",
+								url:window.contextPath+"/rest/reward/edit",
 								method:"post",
 								data : $(e.target).serialize(),
 								success:function(response){
@@ -161,7 +163,7 @@ $(function(){
 		</form>
 		<div class="row w-100">
 			<button class="btn btn-positive w-100">
-				<a class="link" href="http://localhost:8080/project/detail?projectNo=${projectDto.projectNo}">
+				<a class="link" href="${pageContext.request.contextPath}/project/detail?projectNo=${projectDto.projectNo}">
 					프로젝트 작성 완료하기
 				</a>
 			</button>

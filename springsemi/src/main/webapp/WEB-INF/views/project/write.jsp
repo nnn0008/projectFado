@@ -52,7 +52,7 @@ $(function () {
 	    	var majorNo = $(this).val();
 	    	
 	    	$.ajax({
-	    		url:"/rest/project/classifyCheck",
+	    		url:${pageContext.request.contextPath}"/rest/project/classifyCheck",
 	    		method:"post",
 	    		data:{
 	    			majorCategoryNo : majorNo

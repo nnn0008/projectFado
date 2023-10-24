@@ -51,12 +51,14 @@ $(function(){
 <c:if test="${sessionScope.name != null}">
 
 <script>
+
+window.contextPath = "${pageContext.request.contextPath}";
 	$(function(){
 		var params = new URLSearchParams(location.search);
 		var projectNo = params.get("projectNo");
 	
 		$.ajax({
-			url:"/rest/like/check",
+			url:window.contextPath+"/rest/like/check",
 			method:"post",
 			data:{projectNo : projectNo},
 			success:function(response) {
@@ -73,7 +75,7 @@ $(function(){
 		
 		$(".fa-heart").click(function(){
 			$.ajax({
-				url:"/rest/like/action",
+				url:window.contextPath+"/rest/like/action",
 				method:"post",
 				data: {projectNo : projectNo},
 				success:function(response){
@@ -93,6 +95,8 @@ $(function(){
 </c:if>1
 
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
+
 	$(function(){
 		var followButton = $(this);
 		var btn = followButton.closest("button");
@@ -101,7 +105,7 @@ $(function(){
 		var projectNo = params.get("projectNo");
 	
 		$.ajax({
-			url:"/rest/follow/check",
+			url:window.contextPath+"/rest/follow/check",
 			method:"post",
 			data:{
 				followeeId : followeeId,
@@ -119,7 +123,7 @@ $(function(){
 		
 		$(".follow-button").click(function(){
 			$.ajax({
-				url:"/rest/follow/action",
+				url:window.contextPath+"/rest/follow/action",
 				method:"post",
 				data:{
 					followeeId : followeeId,

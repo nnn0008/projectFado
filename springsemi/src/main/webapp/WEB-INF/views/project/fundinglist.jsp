@@ -113,7 +113,7 @@
                    	<li class="item">
                    		<div>
 							<a href="/project/detail?projectNo=${projectListAttachDto.projectNo}">
-								<img class="product w-100" src="/rest/project/download?attachNo=${projectListAttachDto.attachNo}">
+								<img class="product w-100" src="${pageContext.request.contextPath}/rest/project/download?attachNo=${projectListAttachDto.attachNo}">
 							</a>
 						</div>
                        	<div class="left me-10 ms-10">

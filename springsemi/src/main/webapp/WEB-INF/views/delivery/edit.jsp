@@ -5,6 +5,8 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
+
 $(function(){
 	$(htmlTemplate).find(".btn-edit")
 							.attr("data-delivery-no", delivery.deliveryNo)
@@ -38,7 +40,7 @@ $(function(){
 									e.preventDefault();
 									
 									$.ajax({
-										url:"/rest/delivery/edit",
+										url:window.contextPath+"/rest/delivery/edit",
 										method:"post",
 										data : $(e.target).serialize(),
 										success:function(response){

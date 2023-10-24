@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
 
 	$(function(){
 		refreshMajor();
@@ -14,7 +15,7 @@
 //       	    console.log(majorCategoryType);
 			if(majorCategoryType.length == 0) return;
 			$.ajax({
-				url:"/rest/category/minorList",
+				url:window.contextPath+"/rest/category/minorList",
 				method:"post",
 				data: {majorCategoryType : majorCategoryType},
 				success:function(response){
@@ -25,7 +26,7 @@
 						var xBtn = $("<button>").addClass("btn-main fas fa-x").attr("type","button").click(function(){
 							//x버튼 눌렀을 때 분류 삭제되도록 구현
 							$.ajax({
-								url:"/rest/category/minorDelete",
+								url:window.contextPath+"/rest/category/minorDelete",
 								method:"post",
 								data: {
 									minorCategoryType : $(this).parent().text()
@@ -54,7 +55,7 @@
 			}
 			if(isValid){
 				$.ajax({
-					url:"/rest/category/majorCheck",
+					url:window.contextPath+"/rest/category/majorCheck",
 					method:"post",
 					data:{majorCategoryType : major},
 					success:function(response){
@@ -91,7 +92,7 @@
 			}
 			if(isValid){
 				$.ajax({
-					url:"/rest/category/minorCheck",
+					url:window.contextPath+"/rest/category/minorCheck",
 					method:"post",
 					data:{
 						minorCategoryType : minor
@@ -129,7 +130,7 @@
 				return;
 			}		
 			$.ajax({
-				url:"/rest/category/majorInsert",
+				url:window.contextPath+"/rest/category/majorInsert",
 				method:"post",
 				data: $(e.target).serialize(),
 				success:function(response){
@@ -158,7 +159,7 @@
 			//소분류는 내가 입력한 값을 불러와야 한다
 			var minorCategoryType = $("[name=minorCategoryType]").val();
 			$.ajax({
-				url:"/rest/category/minorInsert",
+				url:window.contextPath+"/rest/category/minorInsert",
 				method:"post",
 				data: {
 					majorCategoryType : majorCategoryType,
@@ -176,7 +177,7 @@
 		function refreshMajor(){
 			$(".category-main").empty();
 			$.ajax({
-				url:"/rest/category/majorList",
+				url:window.contextPath+"/rest/category/majorList",
 				method:"post",
 //	 			data:{},<i class="fa-solid fa-x"></i>
 				success:function(response){
@@ -188,7 +189,7 @@
 							var confirmed = confirm("관련된 소분류가 모두 삭제될 수 있습니다. 정말 삭제하시겠습니까?");						
 							if(confirmed){
 								$.ajax({
-									url:"/rest/category/majorDelete",
+									url:window.contextPath+"/rest/category/majorDelete",
 									method:"post",
 									data: {majorCategoryType : $(this).parent().text()},
 									success:function(response){
@@ -215,7 +216,7 @@
 //   	    console.log(majorCategoryType);
 			if(majorCategoryType.length == 0) return;
 			$.ajax({
-				url:"/rest/category/minorList",
+				url:window.contextPath+"/rest/category/minorList",
 				method:"post",
 				data: {majorCategoryType : majorCategoryType},
 				success:function(response){
@@ -228,7 +229,7 @@
 							if(confirmed){
 								//x버튼 눌렀을 때 분류 삭제되도록 구현
 								$.ajax({
-									url:"/rest/category/minorDelete",
+									url:window.contextPath+"/rest/category/minorDelete",
 									method:"post",
 									data: {
 										minorCategoryType : $(this).parent().text()

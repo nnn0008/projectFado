@@ -8,6 +8,8 @@
 </style>
 
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
+
 $(document).ready(function () {
     $(".link").click(function (e) {
         e.preventDefault(); // 기본 링크 동작 방지
@@ -20,7 +22,7 @@ $(document).ready(function () {
 
         // AJAX 요청
         $.ajax({
-            url: isFollowing ? "/member/follow/unfollowing" : "/member/follow/following",
+            url: isFollowing ? window.contextPath+"/member/follow/unfollowing" : window.contextPath+"/member/follow/following",
             type: "POST", // 또는 "GET" 등
             data: {
                 followerId: followerId,

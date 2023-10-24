@@ -200,7 +200,7 @@
                     	<li class="item">
                     		<div>
 								<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
-									<img class="product w-100" src="/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
+									<img class="product w-100" src="${pageContext.request.contextPath}/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
 								</a>
 							</div>
                         	<div class="left me-10 ms-10">
@@ -232,7 +232,7 @@
                     		
                     		<div>
                     			<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
-									<img class="product w-100" src="/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
+									<img class="product w-100" src="${pageContext.request.contextPath}/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
 								</a>
                     		</div>
                         	<div class="left me-10 ms-10">
@@ -264,7 +264,7 @@
                    		<li class="item">
                        <div>
                        	<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
-							<img class="product w-100" src="/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
+							<img class="product w-100" src="${pageContext.request.contextPath}/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
 						</a>
 					</div>
                        <div class="left me-10 ms-10">

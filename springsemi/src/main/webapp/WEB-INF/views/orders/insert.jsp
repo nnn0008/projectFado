@@ -39,6 +39,8 @@
 </style>
 
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
+
 	$(function() {
 		$(".change-delivery-btn").click(function() {
 			$("#deliveryModal").show();
@@ -78,7 +80,7 @@
         var deliveryAddButton = document.getElementById("deliveryAddButton");
         if (deliveryAddButton) {
             deliveryAddButton.addEventListener("click", function () {
-                window.location.href = "http://localhost:8080/delivery/myDeliveryList";
+                window.location.href = window.contextPath+"/delivery/myDeliveryList";
             });
         }
     });
@@ -93,7 +95,7 @@
 		
 			<!-- 이미지 -->
 			<div class="row w-50">
-              	<img style="height: 130px;" src="/rest/project/download?attachNo=${mainAttachDto.attachNo}">
+              	<img style="height: 130px;" src="${pageContext.request.contextPath}/rest/project/download?attachNo=${mainAttachDto.attachNo}">
            	</div>
            	
            	<!-- 상품 내용 시작-->

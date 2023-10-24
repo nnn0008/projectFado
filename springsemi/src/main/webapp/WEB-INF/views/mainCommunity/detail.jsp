@@ -47,13 +47,15 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
+
 $(function(){
    
    $(".mainReply-insert-form").submit(function(e){
       e.preventDefault();
       
       $.ajax({
-         url:"/rest/mainReply/insert",
+         url:window.contextPath+"/rest/mainReply/insert",
          method:"post",
          data : $(e.target).serialize(),
          success:function(response){
@@ -73,7 +75,7 @@ $(function(){
       
       //비동기 통신으로 화면 갱신
       $.ajax({
-         url:"/rest/mainReply/list",
+         url:window.contextPath+"/rest/mainReply/list",
          method:"post",
          data:{ mainReplyOrigin : no },
          success:function(response){
@@ -101,7 +103,7 @@ $(function(){
                               .click(function(e){
                   var mainReplyNo = $(this).attr("data-mainReply-no");
                   $.ajax({
-                     url:"/rest/mainReply/delete",
+                     url:window.contextPath+"/rest/mainReply/delete",
                      method:"post",
                      data:{mainReplyNo : mainReplyNo},
                      success:function(response){
@@ -138,7 +140,7 @@ $(function(){
                      e.preventDefault();
                      
                      $.ajax({
-                        url:"/rest/mainReply/edit",
+                        url:window.contextPath+"/rest/mainReply/edit",
                         method:"post",
                         data : $(e.target).serialize(),
                         success:function(response){

@@ -8,6 +8,8 @@
 </style>
 
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
+
 $(function(){
 	//상태 객체
 	var status = {
@@ -29,7 +31,7 @@ $(function(){
         if(isValid) {//형식 통과
 
             $.ajax({
-                url:"http://localhost:8080/rest/member/nicknameCheck",
+                url:window.contextPath"/rest/member/nicknameCheck",
                 method:"post",
                 data : { memberNickname : $(e.target).val() },
                 success : function(response){

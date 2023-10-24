@@ -46,13 +46,14 @@
 
 
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
 $(function(){
 	
 	$(".projectReply-insert-form").submit(function(e){
 		e.preventDefault();
 		
 		$.ajax({
-			url:"/rest/projectReply/insert",
+			url:window.contextPath+"/rest/projectReply/insert",
 			method:"post",
 			data : $(e.target).serialize(),
 			success:function(response){
@@ -72,7 +73,7 @@ $(function(){
 		
 		//비동기 통신으로 화면 갱신
 		$.ajax({
-			url:"/rest/projectReply/list",
+			url:window.contextPath+"/rest/projectReply/list",
 			method:"post",
 			data:{ projectReplyOrigin : no },
 			success:function(response){
@@ -100,7 +101,7 @@ $(function(){
 										.click(function(e){
 						var projectReplyNo = $(this).attr("data-projectReply-no");
 						$.ajax({
-							url:"/rest/projectReply/delete",
+							url:window.contextPath+"/rest/projectReply/delete",
 							method:"post",
 							data:{projectReplyNo : projectReplyNo},
 							success:function(response){
@@ -137,7 +138,7 @@ $(function(){
 							e.preventDefault();
 							
 							$.ajax({
-								url:"/rest/projectReply/edit",
+								url:window.contextPath+"/rest/projectReply/edit",
 								method:"post",
 								data : $(e.target).serialize(),
 								success:function(response){

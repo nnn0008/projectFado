@@ -112,6 +112,8 @@ $(function(){
 
 </script>
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
+
  	//목표 : 버튼의 텍스트를 읽어 프로젝트의 승인완료/승인거절
  	$(function(){
 		$(".judge").click(function(){
@@ -122,14 +124,14 @@ $(function(){
 			console.log(projectNo);
 			console.log(buttonText);
 			$.ajax({
-				url:"/rest/judge",
+				url:window.contextPath+"/rest/judge",
 				method:"post",
 				data:{ 
 					judgeStatus : buttonText,
 					projectNo : projectNo
 				},
 				success:function(response){
-					window.location.href = "/admin/project/list";
+					window.location.href = window.contextPath+"/admin/project/list";
 				},
 			});
 		});
@@ -138,12 +140,14 @@ $(function(){
 </script>
 
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
+
 	$(function(){
 		var params = new URLSearchParams(location.search);
 		var projectNo = params.get("projectNo");
 	
 		$.ajax({
-			url:"/rest/like/check",
+			url:window.contextPath+"/rest/like/check",
 			method:"post",
 			data:{projectNo : projectNo},
 			success:function(response) {
@@ -160,7 +164,7 @@ $(function(){
 		
 		$(".fa-heart").click(function(){
 			$.ajax({
-				url:"/rest/like/action",
+				url:window.contextPath+"/rest/like/action",
 				method:"post",
 				data: {projectNo : projectNo},
 				success:function(response){
@@ -178,6 +182,8 @@ $(function(){
 </script>
 
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
+
 	$(function(){
 		var followButton = $(this);
 		var btn = followButton.closest("button");
@@ -186,7 +192,7 @@ $(function(){
 		var projectNo = params.get("projectNo");
 	
 		$.ajax({
-			url:"/rest/follow/check",
+			url:window.contextPath+"/rest/follow/check",
 			method:"post",
 			data:{
 				followeeId : followeeId,
@@ -204,7 +210,7 @@ $(function(){
 		
 		$(".follow-button").click(function(){
 			$.ajax({
-				url:"/rest/follow/action",
+				url:window.contextPath+"/rest/follow/action",
 				method:"post",
 				data:{
 					followeeId : followeeId,
@@ -234,7 +240,7 @@ $(function(){
     	<div class="row">
     		<div class="flex-container">
     			<div class="w-75 left">
-    				<img src="/rest/project/download?attachNo=${mainAttachDto.attachNo}"  width="400px" height="400px">
+    				<img src="${pageContext.request.contextPath}/rest/project/download?attachNo=${mainAttachDto.attachNo}"  width="400px" height="400px">
     			</div>
     			<div class="w-50 left pt-50">
     				<div class="mb-20">
@@ -319,7 +325,7 @@ $(function(){
     		
     		<div class="flex-container mt-40 w-1000" >
         <div class="w-100 left me-100">
-            <img src="/rest/project/download?attachNo=${subAttachDto.attachNo}">
+            <img src="${pageContext.request.contextPath}/rest/project/download?attachNo=${subAttachDto.attachNo}">
         </div>
 
         <div class="container" id="area">

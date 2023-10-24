@@ -199,6 +199,7 @@
 
     <!-- javascript 작성 공간 -->
     <script>
+    window.contextPath = "${pageContext.request.contextPath}";
         // 목표 : 버튼을 누르면 안녕! 이라는 alert이 뜨게 해보자!
         // 단, onclick 안쓰고 해야됨
 
@@ -257,12 +258,12 @@
             function loadList(){
             	$(".majorCategory").empty();
             	$.ajax({
-					url:"/rest/category/majorList",            		
+					url:window.contextPath+"/rest/category/majorList",            		
             		method:"post",
             		data:{},
             		success:function(response){
             			for(var i = 0; i < response.length; i++){
-            				var aTag = $("<a>").attr("href", "http://localhost:8080/project/list?keyword="+response[i].majorCategoryType).text(response[i].majorCategoryType);
+            				var aTag = $("<a>").attr("href", window.contextPath+"/project/list?keyword="+response[i].majorCategoryType).text(response[i].majorCategoryType);
 
             				aTag.appendTo(".majorCategory");
             			}
@@ -302,7 +303,7 @@
 
     <header>
         <div class="logo">
-            <a href="http://localhost:8080/"><img src="/images/smallfado.jpg" style="height: 60px;" class="me-50"></a>
+            <a href="${pageContext.request.contextPath}/"><img src="/images/smallfado.jpg" style="height: 60px;" class="me-50"></a>
         </div>
         
         <div class="title flex-container row">
@@ -349,7 +350,7 @@
               <div style="font-size:14px" style="color:#2c8de0;">
                  <c:choose>
                     <c:when test="${sessionScope.name != null }">
-                 <a href="http://localhost:8080/project/write">프로젝트업로드
+                 <a href="${pageContext.request.contextPath}/project/write">프로젝트업로드
                    <i class="fa-solid fa-pen" style="color:#2c8de0;"></i></a>
                    </c:when>
                    
@@ -442,16 +443,16 @@
 
 
             <li>
-                <a href="http://localhost:8080/project/readCountList">Hot펀딩</a>
+                <a href="${pageContext.request.contextPath}/project/readCountList">Hot펀딩</a>
             </li>
 
 
             <li>
-                <a href="http://localhost:8080/project/likeCountList">추천펀딩</a>
+                <a href="${pageContext.request.contextPath}/project/likeCountList">추천펀딩</a>
             </li>
             
             <li>
-                <a href="http://localhost:8080/project/achievementList">인기펀딩</a>
+                <a href="${pageContext.request.contextPath}/project/achievementList">인기펀딩</a>
             </li>
 
             <!-- <li>
@@ -463,13 +464,13 @@
             </li> -->
 
             <li>
-                <a href="http://localhost:8080/mainCommunity/noticeList">커뮤니티</a>
+                <a href="${pageContext.request.contextPath}/mainCommunity/noticeList">커뮤니티</a>
             </li>
             
             <%-- 관리자인 경우 추가 메뉴 출력 --%>
 								<c:if test="${sessionScope.level == '관리자'}">
 									<li>
-									<a class="ms-20" href="http://localhost:8080/admin/home">관리자메뉴</a>
+									<a class="ms-20" href="${pageContext.request.contextPath}/admin/home">관리자메뉴</a>
 									</li>
 								</c:if>
         	</ul>

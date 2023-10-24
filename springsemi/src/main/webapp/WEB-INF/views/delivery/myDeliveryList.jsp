@@ -20,6 +20,8 @@
 </style>
 
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
+
 $(function(){
 	
 	$(".btn-add").click(function(){
@@ -44,7 +46,7 @@ $(function(){
 		e.preventDefault();
 		
 		$.ajax({
-			url: "/rest/delivery/insert",
+			url: window.contextPath+"/rest/delivery/insert",
 			method: "post",
 			data: $(e.target).serialize(),
 			success: function(response){
@@ -68,7 +70,7 @@ $(function(){
 	
 	function loadList() {
 		$.ajax({
-			url:"/rest/delivery/list",
+			url:window.contextPath+"/rest/delivery/list",
 			method:"post",
 			success: function(response){
 				$(".delivery-list").empty();
@@ -89,7 +91,7 @@ $(function(){
 											.click(function(e){
 												var deliveryNo = $(this).attr("data-delivery-no");
 											$.ajax({
-												url:"/rest/delivery/delete",
+												url:window.contextPath+"/rest/delivery/delete",
 												method:"post",
 												data:{deliveryNo : deliveryNo},
 												success:function(response){
@@ -133,7 +135,7 @@ $(function(){
 							e.preventDefault();
 							
 							$.ajax({
-								url:"/rest/delivery/edit",
+								url:window.contextPath+"/rest/delivery/edit",
 								method:"post",
 								data : $(e.target).serialize(),
 								success:function(response){

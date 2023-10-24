@@ -9,6 +9,8 @@
 </style>
 
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
+
 $(function(){
 	$(".delivery-insert-form").submit(function(e){
 		//this == e.terget == 폼(form)
@@ -18,7 +20,7 @@ $(function(){
 		
 		//비동기 통신 발생
 		$.ajax({
-			url:"/rest/delivery/insert",
+			url:window.contextPath+"/rest/delivery/insert",
 			method:"post",
 			data : $(e.target).serialize(),
 			success:function(response){
@@ -48,7 +50,7 @@ $(function(){
 		
 		//비동기 통신으로 화면 갱신
 		$.ajax({
-			url:"/rest/delivery/list",
+			url:window.contextPath+"/rest/delivery/list",
 			method:"post",
 			data:{deliveryNo : no},
 			success:function(response){
@@ -78,7 +80,7 @@ $(function(){
 											.click(function(e){
 												var deliveryNo = $(this).attr("data-delivery-no");
 											$.ajax({
-												url:"/rest/delivery/delete",
+												url:window.contextPath+"/rest/delivery/delete",
 												method:"post",
 												data:{deliveryNo : deliveryNo},
 												success:function(response){
@@ -133,7 +135,7 @@ $(function(){
 							e.preventDefault();
 							
 							$.ajax({
-								url:"/rest/delivery/edit",
+								url:window.contextPath+"/rest/delivery/edit",
 								method:"post",
 								data : $(e.target).serialize(),
 								success:function(response){

@@ -12,6 +12,8 @@ height:100px;
 </style>
 
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
+
 $(function(){
 	//파일이 바뀌면 프로필을 업로드하고 이미지 교체
 	$(".profile-chooser").change(function(){
@@ -24,13 +26,13 @@ $(function(){
 		form.append("attach", input.files[0]);
 		
 		$.ajax({
-			url:"/rest/member/upload",
+			url:window.contextPath+"/rest/member/upload",
 			method:"post",
 			processData:false, //ajax가 기본으로 설정하는 걸 막아줌
 			contentType:false, //ajax가 기본으로 설정하는 걸 막아줌
 			data:form, //준비한 form data
 			success:function(response){
-				$(".profile-image").attr("src", "/rest/member/download?attachNo="+response.attachNo);
+				$(".profile-image").attr("src", window.contextPath+"/rest/member/download?attachNo="+response.attachNo);
 			},
 			error:function(){
 				window.alert("통신 오류가 발생했습니다.\n잠시 후 다시 시도해주세요.");
@@ -46,7 +48,7 @@ $(function(){
 		
 		//삭제요청
 		$.ajax({
-			url:"/rest/member/delete",
+			url:window.contextPath+"/rest/member/delete",
 			method:"post",
 			success:function(response){
 				$(".profile-image").attr("src","/images/user.png");
@@ -76,7 +78,7 @@ $(function(){
 				class="image image-circle image-border profile-image" >
 			</c:when>
 			<c:otherwise>
-			<img src ="/rest/member/download?attachNo=${profile}"
+			<img src ="${pageContext.request.contextPath}/rest/member/download?attachNo=${profile}"
 				class="image image-circle image-border profile-image" >
 			</c:otherwise>
 		</c:choose>

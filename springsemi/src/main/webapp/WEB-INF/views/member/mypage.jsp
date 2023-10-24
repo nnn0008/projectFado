@@ -66,7 +66,7 @@ pageEncoding="UTF-8"%>
                         class="image image-circle image-border profile-image" >
                     </c:when>
                     <c:otherwise>
-                    <img src ="/rest/member/download?attachNo=${profile}" width="100" height ="100" 
+                    <img src ="${pageContext.request.contextPath}/rest/member/download?attachNo=${profile}" width="100" height ="100" 
                         class="image image-circle image-border profile-image" >
                     </c:otherwise>
                 </c:choose>
@@ -119,14 +119,14 @@ pageEncoding="UTF-8"%>
                         <span>
                         내가 서핑한 파도
                         <br>
-                        <i class="fa-regular fa-hand-point-right"></i><a href="http://localhost:8080/orders/list" class="link"> 보러가기</a>
+                        <i class="fa-regular fa-hand-point-right"></i><a href="${pageContext.request.contextPath}/orders/list" class="link"> 보러가기</a>
                         </span>
                     </div>
                     <div class="left mt-100 mb-10">
                         <span class="bold">고객센터</span>
                     </div>
                     <div class="left mb-10">
-                        <a href="http://localhost:8080/mainCommunity/noticeList" class="link">공지사항</a>
+                        <a href="${pageContext.request.contextPath}/mainCommunity/noticeList" class="link">공지사항</a>
                     </div>
                 </div>
 

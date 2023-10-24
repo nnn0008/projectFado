@@ -10,6 +10,8 @@
 <script src="/js/multipage.js"></script>
 
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
+
 $(function () {
 	
       //최초 게이지 계산
@@ -76,7 +78,7 @@ $(function () {
 	    	var majorNo = $(this).val();
 	    	
 	    	$.ajax({
-	    		url:"/rest/project/classifyCheck",
+	    		url:window.contextPath+"/rest/project/classifyCheck",
 	    		method:"post",
 	    		data:{
 	    			majorCategoryNo : majorNo
@@ -108,12 +110,13 @@ $(function () {
   });
 </script>
 <script>
+window.contextPath = "${pageContext.request.contextPath}";
 $(function(){
 	$(".reward-insert-form").submit(function(e){
 		e.preventDefault();
 		
 		$.ajax({
-			url: "/rest/reward/insert",
+			url: window.contextPath+"/rest/reward/insert",
 			method: "post",
 			data: $(e.target).serialize(),
 			success: function(response){
@@ -128,7 +131,7 @@ $(function(){
 	function loadList() {
 		
 		$.ajax({
-			url: "/rest/reward/list",
+			url: window.contextPath+"/rest/reward/list",
 			method: "post",
 			success: function(response){
 				

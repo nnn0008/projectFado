@@ -66,4 +66,9 @@ public interface ProjectDao {
 	List<ProjectListAttachDto> selectListByAchievementRate(PaginationListVO vo);
 	List<ProjectListDto> selectListByMajorCategory(String majorCategory);
 	List<ProjectListAttachDto> selectList(PaginationListVO vo);
+	
+	//프로젝트 기간이 끝났을 때, 펀딩 성공 / 실패를 보여주기
+	boolean fundingSuccess();
+	boolean fundingFail();
+	
 }

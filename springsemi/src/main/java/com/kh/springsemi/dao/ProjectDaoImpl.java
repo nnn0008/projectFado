@@ -360,5 +360,16 @@ public class ProjectDaoImpl implements ProjectDao{
 				+ ") where rn between ? and ?";
 		return jdbcTemplate.query(sql, projectListAttachMapper, vo.getStartRow(), vo.getFinishRow());
 	}
+	//펀딩 성공/실패
+	@Override
+	public boolean fundingSuccess() {
+		String sql = "update project set project_status='펀딩성공' where project_end_date <= sysdate and project_total_price >= project_goal_price";
+		return jdbcTemplate.update(sql) > 0;
+	}
 	
+	@Override
+	public boolean fundingFail() {
+		String sql = "update project set project_status='펀딩실패' where project_end_date <= sysdate and project_total_price < project_goal_price";
+		return jdbcTemplate.update(sql) > 0;
+	}
 }

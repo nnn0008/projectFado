@@ -5,7 +5,6 @@
  
  <div class="container row">
  
-<h3 style="color:red;">오류 페이지 수정 예정</h3>
 <h3 style="color:red;">일시적인 오류가 발생했습니다</h3>
 <h3 style="color:red;">잠시 후 다시 시도해 주세요</h3>
 

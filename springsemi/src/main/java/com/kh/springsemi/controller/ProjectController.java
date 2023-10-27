@@ -165,7 +165,7 @@ public class ProjectController {
 	@RequestMapping("/reward/write")
 	public String write(@RequestParam int projectNo, Model model) {
 		ProjectDto projectDto = projectDao.selectOne(projectNo);
-		model.addAttribute("projectDto",projectDto);
+		model.addAttribute("projectDto", projectDto);
 		return "/WEB-INF/views/reward/write.jsp";
 	}
 	
@@ -174,50 +174,61 @@ public class ProjectController {
 		int ordersPersonCount = ordersDao.countByProjectNo(projectNo);
 		JudgeDto judgeDto = judgeDao.selectOneByProjectNo(projectNo);
 		String memberLevel = (String)session.getAttribute("level");
-		if(memberLevel != null && memberLevel.equals("관리자")) {
+		if(memberLevel != null && memberLevel.equals("관리자") && judgeDto.getJudgeStatus().equals("등록완료")){
 			judgeDto.setJudgeStatus("심사진행중");
 			judgeDao.update(judgeDto);
 		}
-		ProjectDto projectDto = projectDao.selectOne(projectNo);
-		MinorCategoryDto minorCategoryDto = minorCategoryDao.selectOne(projectDto.getMinorCategoryNo());
-		MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(minorCategoryDto.getMajorCategoryNo());
-		ProjectPhotoDto projectPhotoDto = projectPhotoDao.selectOne(projectNo);
-		AttachDto mainAttachDto = attachDao.selectOne(projectPhotoDto.getAttachNo());
-		ProjectSubPhotoDto projectSubPhotoDto = projectSubPhotoDao.selectOne(projectNo);
-		AttachDto subAttachDto = attachDao.selectOne(projectSubPhotoDto.getAttachNo());
-		ProjectListDto projectListDto = projectDao.selectOneByProjectList(projectNo);
 		
-		model.addAttribute("projectDto", projectDto);
-		model.addAttribute("minorCategoryDto", minorCategoryDto);
-		model.addAttribute("majorCategoryDto", majorCategoryDto);
-		model.addAttribute("mainAttachDto", mainAttachDto);
-		model.addAttribute("subAttachDto", subAttachDto);
-		model.addAttribute("projectListDto", projectListDto);
-		model.addAttribute("ordersPersonCount",ordersPersonCount);
-		
-		List<RewardDto> rewardList = rewardDao.selectListByProjectNo(projectNo);
-		model.addAttribute("rewardList", rewardList);
-		
-		Date currentTime = new Date();
-		Date endTime = projectDto.getProjectEndDate();
-		long difference = endTime.getTime() - currentTime.getTime();
-		model.addAttribute("difference", difference);
-		
-		String projectOwner = projectDto.getProjectOwner();
-		if(projectOwner != null) {
-			MemberDto memberDto = memberDao.selectOne(projectOwner);
-			model.addAttribute("OwnerDto", memberDto);
+		boolean isOpened = judgeDto.getJudgeStatus().equals("승인완료") || memberLevel.equals("관리자");
+		if(isOpened) {		
+			ProjectDto projectDto = projectDao.selectOne(projectNo);
+			MinorCategoryDto minorCategoryDto = minorCategoryDao.selectOne(projectDto.getMinorCategoryNo());
+			MajorCategoryDto majorCategoryDto = majorCategoryDao.selectOne(minorCategoryDto.getMajorCategoryNo());
+			ProjectPhotoDto projectPhotoDto = projectPhotoDao.selectOne(projectNo);
+			AttachDto mainAttachDto = attachDao.selectOne(projectPhotoDto.getAttachNo());
+			ProjectSubPhotoDto projectSubPhotoDto = projectSubPhotoDao.selectOne(projectNo);
+			AttachDto subAttachDto = attachDao.selectOne(projectSubPhotoDto.getAttachNo());
+			ProjectListDto projectListDto = projectDao.selectOneByProjectList(projectNo);
+			
+			model.addAttribute("projectDto", projectDto);
+			model.addAttribute("minorCategoryDto", minorCategoryDto);
+			model.addAttribute("majorCategoryDto", majorCategoryDto);
+			model.addAttribute("mainAttachDto", mainAttachDto);
+			model.addAttribute("subAttachDto", subAttachDto);
+			model.addAttribute("projectListDto", projectListDto);
+			model.addAttribute("ordersPersonCount",ordersPersonCount);
+			
+			List<RewardDto> rewardList = rewardDao.selectListByProjectNo(projectNo);
+			model.addAttribute("rewardList", rewardList);
+			
+			Date currentTime = new Date();
+			Date endTime = projectDto.getProjectEndDate();
+			long difference = endTime.getTime() - currentTime.getTime();
+			model.addAttribute("difference", difference);
+			
+			String projectOwner = projectDto.getProjectOwner();
+			if(projectOwner != null) {
+				MemberDto memberDto = memberDao.selectOne(projectOwner);
+				model.addAttribute("OwnerDto", memberDto);
+			}
+			List<ReviewDto> reviewList = reviewDao.selectList(projectNo);
+			model.addAttribute("reviewList", reviewList);
+			
+			List<ProjectCommunityDto> noticeList = projectCommunityDao.selectNoticeList(projectNo);
+			model.addAttribute("noticeList", noticeList);
+			
+			List<ProjectCommunityDto> qnaList = projectCommunityDao.selectQnAList(projectNo);
+			model.addAttribute("qnaList", qnaList);
+			
+			return "/WEB-INF/views/project/detail.jsp";
 		}
-		List<ReviewDto> reviewList = reviewDao.selectList(projectNo);
-		model.addAttribute("reviewList", reviewList);
-		
-		List<ProjectCommunityDto> noticeList = projectCommunityDao.selectNoticeList(projectNo);
-		model.addAttribute("noticeList", noticeList);
-		
-		List<ProjectCommunityDto> qnaList = projectCommunityDao.selectQnAList(projectNo);
-		model.addAttribute("qnaList", qnaList);
-		
-		return "/WEB-INF/views/project/detail.jsp";
+//		else if (memberLevel == null){
+//			throw new AuthorityException("권한이 부족합니다");
+//		}
+		else {
+			throw new AuthorityException("권한이 부족합니다");
+		}
+			
 	}
 	
 
@@ -309,10 +320,7 @@ public class ProjectController {
 		model.addAttribute("achievementList", achievementList);
 		return "/WEB-INF/views/project/achievementList.jsp";
 	}
-	
-	
-	
-	
+
 	@GetMapping("/edit")
 	public String edit(@RequestParam int projectNo, Model model) {
 		ProjectDto projectDto = projectDao.selectOne(projectNo);

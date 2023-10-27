@@ -6,8 +6,7 @@
 
 <div class="container row">
 
-<h3 style="color:red;">오류 페이지 수정 예정</h3>
-<h3 style="color:red;">대상이 존재하지 않습니다</h3>
+<h3 style="color:red;">페이지가 존재하지 않습니다</h3>
 <h3 style="color:red;">다시 확인 후 이용해주세요</h3>
 
 </div>

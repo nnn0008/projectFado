@@ -187,7 +187,7 @@ window.contextPath = "${pageContext.request.contextPath}";
 					</div>
 					<div style="color:gray; font-size:12px; ">* 포인트 부족 시 결제를 진행할 수 없습니다.</div>
 						<div class="mt-30 row">
-					        	<a href="/member/pointPlus">
+					        	<a href="${pageContext.request.contextPath}/member/pointPlus">
 						        	<button type="button" class="btn">
 						        		포인트 충전 <i class="fa-solid fa-coins" style="color: #508fe0;"></i>
 						        	</button>

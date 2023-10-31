@@ -21,11 +21,11 @@
 
     <!-- 내가 만든 CSS 파일-->
     <!-- <link rel="stylesheet" type="text/css" href="/css/reset.css"> -->
-    <link rel="stylesheet" type="text/css" href="/css/commons.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
     <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 
     <!-- jquery cdn -->
-	<script src="/js/easytimer.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/easytimer.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/moment-duration-format@2.3.2/lib/moment-duration-format.min.js"></script>
@@ -303,7 +303,7 @@
 
     <header>
         <div class="logo">
-            <a href="${pageContext.request.contextPath}/"><img src="/images/smallfado.jpg" style="height: 60px;" class="me-50"></a>
+            <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/smallfado.jpg" style="height: 60px;" class="me-50"></a>
         </div>
         
         <div class="title flex-container row">
@@ -340,13 +340,13 @@
         
         <div class="etc">
 	        <div class="me-20">
-	        	<a href="/member/pointPlus">
+	        	<a href="${pageContext.request.contextPath}/member/pointPlus">
 		        	<button type="button" class="btn">
 		        		포인트 충전 <i class="fa-solid fa-coins" style="color: #508fe0;"></i>
 		        	</button>
         		</a>
 	        </div>
-           <a class="me-50" href="/main">main</a>
+           <a class="me-50" href="${pageContext.request.contextPath}/main">main</a>
               <div style="font-size:14px" style="color:#2c8de0;">
                  <c:choose>
                     <c:when test="${sessionScope.name != null }">
@@ -372,16 +372,16 @@
 								
 									<span>
 										 
-										<a class="left" href="/member/logout">로그아웃</a>	
+										<a class="left" href="${pageContext.request.contextPath}/member/logout">로그아웃</a>	
 									</span>
 									
 								<div class="custom-service">
-									<a class="left" href="/member/mypage">마이페이지</a>
-									<a class="left" href="/mainCommunity/noticeList">공지사항</a>
+									<a class="left" href="${pageContext.request.contextPath}/member/mypage">마이페이지</a>
+									<a class="left" href="${pageContext.request.contextPath}/mainCommunity/noticeList">공지사항</a>
 									
 									
 									<c:if test="${sessionScope.level == '관리자'}">
-										<a href="/admin/home">관리자메뉴</a>
+										<a href="${pageContext.request.contextPath}/admin/home">관리자메뉴</a>
 									</c:if>
 								</div>
 								
@@ -390,12 +390,12 @@
 						<c:otherwise>
 							
 								<span>
-									<a href="/member/login">로그인<i class="fa-solid fa-angle-down"></i></a>
+									<a href="${pageContext.request.contextPath}/member/login">로그인<i class="fa-solid fa-angle-down"></i></a>
 								</span>
 							<div class="custom-service">
 								
-								<a class="left" href="/member/join">회원가입</a>
-								<a class="left" href="#">고객센터</a>
+								<a class="left" href="${pageContext.request.contextPath}/member/join">회원가입</a>
+
 							</div>	
 							
 							

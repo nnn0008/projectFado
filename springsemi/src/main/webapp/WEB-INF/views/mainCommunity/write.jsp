@@ -58,7 +58,7 @@
         });
     </script>
     
-<script src="/js/boardWrite.js"></script>
+<script src="${pageContext.request.contextPath}/js/boardWrite.js"></script>
 
 <script>
 

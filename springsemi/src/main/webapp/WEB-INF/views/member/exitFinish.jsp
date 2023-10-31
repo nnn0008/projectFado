@@ -12,11 +12,11 @@
 
 <div class = "row fado">
 
-	<a href="/"><img src="/images/fado.jpg" width="200" height="180" ></a>
+	<a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/fado.jpg" width="200" height="180" ></a>
 </div>
 
 <div class="row">
-	 <img src="/images/thankyou.png" width="700" height="700"  class="image image-round">
+	 <img src="${pageContext.request.contextPath}/images/thankyou.png" width="700" height="700"  class="image image-round">
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

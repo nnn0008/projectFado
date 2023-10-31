@@ -112,10 +112,10 @@
                     <div class="swiper-wrapper">
                         <!-- Slides -->
                         <div class="swiper-slide">
-                            <img src="/images/fado1.jpg" width="100% " height="60%">
+                            <img src="${pageContext.request.contextPath}/images/fado1.jpg" width="100% " height="60%">
                         </div>
                         <div class="swiper-slide">
-                            <img src="/images/fado2.jpg" width="100%" height="100%">
+                            <img src="${pageContext.request.contextPath}/images/fado2.jpg" width="100%" height="100%">
                         </div>                      
                     </div>
                     <!-- If we need pagination -->
@@ -191,7 +191,7 @@
                		<li class="ms-30 me-50 bold" style="color:#2c8de0; text-align: right;">
                			<div class="flex-container auto-width">
                				<h2 class="left">Hot펀딩</h2>
-               				<a href="/project/readCountList"  class="link right pt-50">전체보기 ></a>
+               				<a href="${pageContext.request.contextPath}/project/readCountList"  class="link right pt-50">전체보기 ></a>
                			</div>
                		</li>
                		
@@ -199,13 +199,13 @@
 					<c:forEach var="ProjectListAttachDto" items="${readCountList}" end="7">
                     	<li class="item">
                     		<div>
-								<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
+								<a href="${pageContext.request.contextPath}/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
 									<img class="product w-100" src="${pageContext.request.contextPath}/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
 								</a>
 							</div>
                         	<div class="left me-10 ms-10">
 								<p>${ProjectListAttachDto.majorCategoryType} | ${ProjectListAttachDto.minorCategoryType }</p>
-								<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}" style=" margin: 0; padding: 0;">
+								<a href="${pageContext.request.contextPath}/project/detail?projectNo=${ProjectListAttachDto.projectNo}" style=" margin: 0; padding: 0;">
 									<strong>${ProjectListAttachDto.projectTitle}</strong>
 								</a>
 								
@@ -222,7 +222,7 @@
 					<li class="ms-30 me-50 bold" style="color:#2c8de0; text-align: right;">
                			<div class="flex-container auto-width">
                				<h2 class="left">추천펀딩</h2>
-               				<a href="/project/likeCountList"  class="link right pt-50">전체보기 ></a>
+               				<a href="${pageContext.request.contextPath}/project/likeCountList"  class="link right pt-50">전체보기 ></a>
                			</div>
                		</li>
 					
@@ -231,13 +231,13 @@
                     	<li class="item">
                     		
                     		<div>
-                    			<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
+                    			<a href="${pageContext.request.contextPath}/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
 									<img class="product w-100" src="${pageContext.request.contextPath}/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
 								</a>
                     		</div>
                         	<div class="left me-10 ms-10">
                         		<p>${ProjectListAttachDto.majorCategoryType} | ${ProjectListAttachDto.minorCategoryType }</p>
-                            	<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}" style=" margin: 0; padding: 0;">
+                            	<a href="${pageContext.request.contextPath}/project/detail?projectNo=${ProjectListAttachDto.projectNo}" style=" margin: 0; padding: 0;">
 									<strong>${ProjectListAttachDto.projectTitle}</strong>
 								</a>
                             
@@ -256,20 +256,20 @@
 					<li class="ms-30 me-50 bold" style="color:#2c8de0; text-align: right;">
                			<div class="flex-container auto-width">
                				<h2 class="left">인기펀딩</h2>
-               				<a href="/project/achievementList"  class="link right pt-50">전체보기 ></a>
+               				<a href="${pageContext.request.contextPath}/project/achievementList"  class="link right pt-50">전체보기 ></a>
                			</div>
                		</li>
 					
 					<c:forEach var="ProjectListAttachDto" items="${achievementList}" end="7">
                    		<li class="item">
                        <div>
-                       	<a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
+                       	<a href="${pageContext.request.contextPath}/project/detail?projectNo=${ProjectListAttachDto.projectNo}">
 							<img class="product w-100" src="${pageContext.request.contextPath}/rest/project/download?attachNo=${ProjectListAttachDto.attachNo}">
 						</a>
 					</div>
                        <div class="left me-10 ms-10">
                        	<p>${ProjectListAttachDto.majorCategoryType} | ${ProjectListAttachDto.minorCategoryType }</p>
-                           <a href="/project/detail?projectNo=${ProjectListAttachDto.projectNo}" style=" margin: 0; padding: 0;">
+                           <a href="${pageContext.request.contextPath}/project/detail?projectNo=${ProjectListAttachDto.projectNo}" style=" margin: 0; padding: 0;">
 									<strong>${ProjectListAttachDto.projectTitle}</strong>
 							</a>
                            

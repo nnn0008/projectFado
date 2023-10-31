@@ -26,7 +26,7 @@
 				 <i class="fa-regular fa-window-minimize fa-rotate-90"></i>
 			</div>
 			<div class="me-20">
-				<a class="link" href="/project/detail?projectNo=${projectListDto.projectNo}"
+				<a class="link" href="${pageContext.request.contextPath}/project/detail?projectNo=${projectListDto.projectNo}"
 					style="font-weight:bold; font-size:18px;">
 				${projectListDto.projectTitle}
 				</a>
@@ -117,10 +117,10 @@
 				<!-- 링크는 검색과 목록을 따로 구현 -->
 				<c:choose>
 					<c:when test="${isSearch}">
-						<a href="/project/list?page=${end+1}&keyword=${param.keyword}">&gt;</a>
+						<a href="${pageContext.request.contextPath}/project/list?page=${end+1}&keyword=${param.keyword}">&gt;</a>
 					</c:when>
 					<c:otherwise>
-						<a href="/project/list?page=${end+t}">&gt;</a> <!-- 다른 페이지라면 링크가 포함된 숫자를 보여주기 -->
+						<a href="${pageContext.request.contextPath}/project/list?page=${end+t}">&gt;</a> <!-- 다른 페이지라면 링크가 포함된 숫자를 보여주기 -->
 					</c:otherwise>
 				</c:choose>	 
 			</c:if>

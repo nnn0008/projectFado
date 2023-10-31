@@ -244,15 +244,15 @@ $(function(){
 	<c:if test="${sessionScope.name != null}">
 		<%-- 수정/삭제는 소유자일 경우만 나와야 한다 --%>
 		<c:if test="${sessionScope.name == projectCommunityDto.projectCommunityWriter}">
-		<a class="btn btn-negative" href="edit?projectCommunityNo=${projectCommunityDto.projectCommunityNo}">
+		<a class="btn btn-negative" href="${pageContext.request.contextPath}edit?projectCommunityNo=${projectCommunityDto.projectCommunityNo}">
 			<i class="fa-solid fa-pen-to-square"></i>
 			수정
 		</a>
-		<a class="btn btn-negative" href="delete?projectCommunityNo=${projectCommunityDto.projectCommunityNo}">
+		<a class="btn btn-negative" href="${pageContext.request.contextPath}delete?projectCommunityNo=${projectCommunityDto.projectCommunityNo}">
 			<i class="fa-solid fa-trash"></i>
 			삭제
 		</a>
-		<a class="btn" href="/project/detail?projectNo=${projectCommunityDto.projectNo}">
+		<a class="btn" href="${pageContext.request.contextPath}/project/detail?projectNo=${projectCommunityDto.projectNo}">
 			<i class="fa-solid fa-bars"></i>
 			목록
 		</a>

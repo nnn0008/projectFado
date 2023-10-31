@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<script src="/js/reward.js"></script>
+<script src="${pageContext.request.contextPath}/js/reward.js"></script>
 <script>
 window.contextPath = "${pageContext.request.contextPath}";
 

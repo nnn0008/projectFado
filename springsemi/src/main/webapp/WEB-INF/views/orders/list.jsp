@@ -24,7 +24,7 @@
 				<div>
 					<label>주문번호 ${ordersListDto.ordersNo}</label>
 				</div>
-					<a href="/project/detail?projectNo=${ordersListDto.projectNo}" 
+					<a href="${pageContext.request.contextPath}/project/detail?projectNo=${ordersListDto.projectNo}" 
 					class="right " style="font-size:15px; color:#b2bec3;"> > 보러가기 </a>
 			</div>
 			<div class="bold" style="font-size:21px">

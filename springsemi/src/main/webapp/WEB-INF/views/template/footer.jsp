@@ -6,7 +6,7 @@
     <footer style="height: 40px;">
         <div class="row flex-container auto-width ">
             <div class="left">
-                <img style="width:120px;height:40px;" src="/images/smallfado.jpg">
+                <img style="width:120px;height:40px;" src="${pageContext.request.contextPath}/images/smallfado.jpg">
 				
             </div>
 

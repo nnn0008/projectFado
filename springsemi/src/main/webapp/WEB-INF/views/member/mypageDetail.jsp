@@ -74,7 +74,7 @@ $(function(){
 
 		<c:choose>
 			<c:when test= "${profile == null}">
-				<img src ="/images/user.png"
+				<img src ="${pageContext.request.contextPath}/images/user.png"
 				class="image image-circle image-border profile-image" >
 			</c:when>
 			<c:otherwise>
@@ -160,7 +160,7 @@ $(function(){
 	<hr class="hr-style">
 	
 	<div class="row">
-		<a href="/delivery/myDeliveryList" class="btn">
+		<a href="${pageContext.request.contextPath}/delivery/myDeliveryList" class="btn">
 			<i class="fa-solid fa-truck"></i>
 				배송지
 		</a>

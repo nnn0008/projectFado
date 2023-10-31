@@ -7,9 +7,9 @@
 <!-- moment.js -->
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
 <!-- Lightpick  CDN -->
-<link rel="stylesheet" href="/css/lightpick.css">
-<script src="/js/lightpick.js"></script>
-<script src="/js/project.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/lightpick.css">
+<script src="${pageContext.request.contextPath}/js/lightpick.js"></script>
+<script src="${pageContext.request.contextPath}/js/project.js"></script>
 
 <script>
 $(function () {

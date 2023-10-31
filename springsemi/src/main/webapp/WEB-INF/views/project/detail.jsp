@@ -402,7 +402,7 @@ window.contextPath = "${pageContext.request.contextPath}";
     <div class="container w-800 noticePage">
 		<c:if test="${sessionScope.name != null && sessionScope.level == '판매자'}">
 		    <div class="row right">
-		        <a href="/projectCommunity/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
+		        <a href="${pageContext.request.contextPath}/projectCommunity/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
 		            <i class="fa-solid fa-pen"></i>
 		            글쓰기
 		        </a>
@@ -413,7 +413,7 @@ window.contextPath = "${pageContext.request.contextPath}";
        <div class="mt-30" >
            <c:forEach var="projectCommunityDto" items="${noticeList}">
            <div class="notice-box">
-               <a class="link" href="/projectCommunity/detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}"
+               <a class="link" href="${pageContext.request.contextPath}/projectCommunity/detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}"
                   style="font-weight:bold; font-size:16px;">
                         ${projectCommunityDto.projectCommunityContent}</a>
            </div>
@@ -453,7 +453,7 @@ window.contextPath = "${pageContext.request.contextPath}";
 	           <div class="container w-800 qnaPage">
 	            <c:if test="${sessionScope.name != null && sessionScop.level != '관리자'}">
 	             <div class="row right">
-	                 <a href="/projectCommunity/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
+	                 <a href="${pageContext.request.contextPath}/projectCommunity/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
 	                     <i class="fa-solid fa-pen"></i>
 	                     글쓰기
 	                 </a>
@@ -462,7 +462,7 @@ window.contextPath = "${pageContext.request.contextPath}";
 	            <div class="mt-30">
 	            <c:forEach var="projectCommunityDto" items="${qnaList}">
 	            <div class="qna-box left">
-	                <a class="link" href="/projectCommunity/detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}"
+	                <a class="link" href="${pageContext.request.contextPath}/projectCommunity/detail?projectCommunityNo=${projectCommunityDto.projectCommunityNo}"
 	                   style="font-weight:bold; font-size:16px;">
 	                         ${projectCommunityDto.projectCommunityContent}</a>
 	            </div>
@@ -498,7 +498,7 @@ window.contextPath = "${pageContext.request.contextPath}";
 			      </div>
 	          <div class="row right">
 	            <c:if test="${sessionScope.name != null && sessionScope.level == '구매자'}">
-	              <a href="/review/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
+	              <a href="${pageContext.request.contextPath}/review/write?projectNo=${projectDto.projectNo}" class="btn btn-positive">
 	                  <i class="fa-solid fa-pen"></i>
 	                  글쓰기
 	              </a>
@@ -510,7 +510,7 @@ window.contextPath = "${pageContext.request.contextPath}";
 			            	<div class="ms-50 col-4">
 				                <c:choose>
 								<c:when test="${reviewDto.image}">
-									<img src="/review/image?reviewNo=${reviewDto.reviewNo}" width="150" height="150">
+									<img src="${pageContext.request.contextPath}/review/image?reviewNo=${reviewDto.reviewNo}" width="150" height="150">
 								</c:when>
 								<c:otherwise>
 									<img src="https://dummyimage.com/50x50/000/fff">

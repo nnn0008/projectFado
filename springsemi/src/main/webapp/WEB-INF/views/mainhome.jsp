@@ -120,7 +120,7 @@ a{
 
         <div class="video-wrap">
 
-            <video src="/images/smallpado.mp4" autoplay muted loop
+            <video src="${pageContext.request.contextPath}/images/smallpado.mp4" autoplay muted loop
             		style="height: 100vh; width: 100vw;">
             		
             		</video>
@@ -136,9 +136,9 @@ a{
                     <p>이것부터 저것까지 <br>없는게없는
                     펀딩 사이트임</p>
                     <div class="btn-wrap">
-                        <a class="btn" href="/mainCommunity/noticeList" style="margin-right: 6px;">공지사항</a>
-                        <a class="btn " href="/member/join" style="margin-right: 6px;">가입하기</a>
-                        <a class="btn " href="/">홈</a>
+                        <a class="btn" href="${pageContext.request.contextPath}/mainCommunity/noticeList" style="margin-right: 6px;">공지사항</a>
+                        <a class="btn " href="${pageContext.request.contextPath}/member/join" style="margin-right: 6px;">가입하기</a>
+                        <a class="btn " href="${pageContext.request.contextPath}/">홈</a>
                     </div>
                 </div>
             

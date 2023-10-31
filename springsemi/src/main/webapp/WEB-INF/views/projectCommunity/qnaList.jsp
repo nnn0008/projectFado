@@ -15,9 +15,9 @@
 <div class="container w-800">
 
 	<div class="row">
-		<a class="btn" href="/projectCommunity/noticeList?projectNo=${projectDto.projectNo}">공지사항</a>
-		<a class="btn" href="/projectCommunity/qnaList?projectNo=${projectDto.projectNo}">Q & A</a>
-		<a class="btn" href="/review/list?projectNo=${projectDto.projectNo}">후기</a>
+		<a class="btn" href="${pageContext.request.contextPath}/projectCommunity/noticeList?projectNo=${projectDto.projectNo}">공지사항</a>
+		<a class="btn" href="${pageContext.request.contextPath}/projectCommunity/qnaList?projectNo=${projectDto.projectNo}">Q & A</a>
+		<a class="btn" href="${pageContext.request.contextPath}/review/list?projectNo=${projectDto.projectNo}">후기</a>
 	</div>
 	<%-- 글쓰기는 로그인 상태인 경우에만 출력 --%>
 	<c:if test="${sessionScope.name != null && sessionScop.level != '관리자'}">

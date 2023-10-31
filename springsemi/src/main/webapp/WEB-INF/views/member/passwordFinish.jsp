@@ -9,7 +9,7 @@
                     <span style="font-weight: bold;">비밀번호 변경이 완료 되었습니다.</span>
                 </div>
                 <div class = "row mb-10 mt-30">
-                    <a href ="/" class="btn btn-positive me-10" style="font-size:15px;">파도 메인으로 가기</a>
+                    <a href ="${pageContext.request.contextPath}/" class="btn btn-positive me-10" style="font-size:15px;">파도 메인으로 가기</a>
                 </div>
             </div>
         </div>

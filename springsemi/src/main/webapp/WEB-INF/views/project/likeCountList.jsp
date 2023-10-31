@@ -113,13 +113,13 @@
 	<c:forEach var="projectListAttachDto" items="${likeCountList}">
                    	<li class="item">
                    		<div>
-							<a href="/project/detail?projectNo=${projectListAttachDto.projectNo}">
+							<a href="${pageContext.request.contextPath}/project/detail?projectNo=${projectListAttachDto.projectNo}">
 								<img class="product w-100" src="${pageContext.request.contextPath}/rest/project/download?attachNo=${projectListAttachDto.attachNo}">
 							</a>
 						</div>
                        	<div class="left me-10 ms-10">
 							<p>${projectListAttachDto.majorCategoryType} | ${projectListAttachDto.minorCategoryType }</p>
-							<a href="/project/detail?projectNo=${projectListAttachDto.projectNo}" style=" margin: 0; padding: 0;">
+							<a href="${pageContext.request.contextPath}/project/detail?projectNo=${projectListAttachDto.projectNo}" style=" margin: 0; padding: 0;">
 								<strong>${projectListAttachDto.projectTitle}</strong>
 							</a>
 							

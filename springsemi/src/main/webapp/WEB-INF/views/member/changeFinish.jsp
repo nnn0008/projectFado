@@ -11,7 +11,7 @@
                     <span style="font-weight: bold;">회원정보 변경이 완료 되었습니다.</span>
                 </div>
                 <div class = "row mb-10">
-                    <a href ="/" class="btn btn-positive" style="font-size:15px;">메인으로 가기</a>
+                    <a href ="${pageContext.request.contextPath}/" class="btn btn-positive" style="font-size:15px;">메인으로 가기</a>
                 </div>
             </div>
         </div>

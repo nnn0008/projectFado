@@ -62,7 +62,7 @@ pageEncoding="UTF-8"%>
 
                 <c:choose>
                     <c:when test= "${profile == null}">
-                        <img src ="/images/user.png" width="100" height ="100" 
+                        <img src ="${pageContext.request.contextPath}/images/user.png" width="100" height ="100" 
                         class="image image-circle image-border profile-image" >
                     </c:when>
                     <c:otherwise>

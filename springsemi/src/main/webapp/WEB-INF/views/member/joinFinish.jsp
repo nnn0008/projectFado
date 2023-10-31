@@ -13,11 +13,11 @@
 	</div>
 	
 	<div class="row fado">
-		<h3><a href="/" class="btn">파도 홈으로 가기</a></h3>
+		<h3><a href="${pageContext.request.contextPath}/" class="btn">파도 홈으로 가기</a></h3>
 	</div>
 	
 	<div class="row">
-	 <img src="/images/thankyou.png" width="500" height="500"  class="image image-round">
+	 <img src="${pageContext.request.contextPath}/images/thankyou.png" width="500" height="500"  class="image image-round">
 </div>
 
 </div>
